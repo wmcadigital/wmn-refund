@@ -10,8 +10,9 @@ function App() {
       <h1 className="wmnds-col-1 wmnds-col-md-3-4">
         Apply for a ticket refund due to Coronavirus (COVID-19)
       </h1>
-      <Introduction />
-      <Form />
+      {/* If form isn't started, show intro...else show form */}
+      {!isFormStarted && <Introduction setIsFormStarted={setIsFormStarted} />}
+      {isFormStarted && <Form />}
     </div>
   );
 }
