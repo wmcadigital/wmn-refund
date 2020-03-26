@@ -4,7 +4,7 @@ import Icon from 'components/shared/Icon/Icon';
 
 const Step1 = ({ setCurrentStep }) => {
   return (
-    <div className="wmnds-col-1 wmnds-col-sm-3-5">
+    <div className="wmnds-col-1 wmnds-col-md-3-4">
       <p>Use this service to:</p>
       <ul>
         <li>
