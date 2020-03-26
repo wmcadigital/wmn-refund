@@ -9,13 +9,13 @@ const Form = () => {
   const [currentStep, setCurrentStep] = useState(1);
 
   return (
-    <>
-      <ProgressIndicator />
-      <div className={`wmnds-col-1 wmnds-col-md-3-4 wmnds-p-lg ${s.formWrapper}`}>
+    <div className="wmnds-col-1 wmnds-col-md-3-4 ">
+      <ProgressIndicator currentStep={currentStep} />
+      <div className={`wmnds-p-lg ${s.formWrapper}`}>
         {currentStep === 1 && <Step1 setCurrentStep={setCurrentStep} />}
         {currentStep === 2 && <Step2 setCurrentStep={setCurrentStep} />}
       </div>
-    </>
+    </div>
   );
 };
 
