@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Step1 from 'components/Step1/Step1';
+import Step1 from 'components/Form/Step1/Step1';
 
 const Form = () => {
   const [currentStep, setCurrentStep] = useState(1);
