@@ -14,7 +14,6 @@ const Form = () => {
     <div className="wmnds-col-1 wmnds-col-md-3-4 ">
       <ProgressIndicator currentStep={currentStep} />
       <div className={`wmnds-p-lg ${s.formWrapper}`}>
-        <h2>Tell us about your ticket</h2>
         {currentStep === 1 && <Step1 setCurrentStep={setCurrentStep} />}
         {currentStep === 2 && <Step2 setCurrentStep={setCurrentStep} />}
         {currentStep === 3 && <Step3 setCurrentStep={setCurrentStep} />}
@@ -24,7 +23,7 @@ const Form = () => {
         {currentStep <= 4 && (
           <button
             type="button"
-            className="wmnds-btn wmnds-col-1"
+            className="wmnds-btn wmnds-col-1 wmnds-m-t-md"
             onClick={() => setCurrentStep(currentStep + 1)}
           >
             Continue
