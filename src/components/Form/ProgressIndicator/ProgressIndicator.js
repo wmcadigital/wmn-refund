@@ -1,34 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Icon from 'components/shared/Icon/Icon';
+import ProgressIndicatorStep from './ProgressIndicatorStep/ProgressIndicatorStep';
 
 const ProgressIndicator = ({ currentStep }) => {
   return (
     <ul className="wmnds-progress-indicator wmnds-grid wmnds-grid--justify-between">
-      <li className="wmnds-col-1 wmnds-col-md-1-5">
-        <div className="wmnds-progress-indicator__item wmnds-progress-indicator__item--success">
-          <Icon className="wmnds-progress-indicator__icon" iconName="general-success" />
-          <span className="wmnds-progress-indicator__title">Ticket type</span>
-        </div>
-      </li>
-      <li className="wmnds-col-1 wmnds-col-md-1-5">
-        <div className="wmnds-progress-indicator__item wmnds-progress-indicator__item--success">
-          <Icon className="wmnds-progress-indicator__icon" iconName="general-success" />
-          <span className="wmnds-progress-indicator__title">Payment</span>
-        </div>
-      </li>
-      <li className="wmnds-col-1 wmnds-col-md-1-5">
-        <div className="wmnds-progress-indicator__item wmnds-progress-indicator__item--success">
-          <Icon className="wmnds-progress-indicator__icon" iconName="general-success" />
-          <span className="wmnds-progress-indicator__title">Ticket details</span>
-        </div>
-      </li>
-      <li className="wmnds-col-1 wmnds-col-md-1-5">
-        <div className="wmnds-progress-indicator__item">
-          <Icon className="wmnds-progress-indicator__icon" iconName="general-circle-hollow" />
-          <span className="wmnds-progress-indicator__title">Personal details</span>
-        </div>
-      </li>
+      <ProgressIndicatorStep title="Ticket type" stepNumber={1} currentStep={currentStep} />
+      <ProgressIndicatorStep title="Payment" stepNumber={2} currentStep={currentStep} />
+      <ProgressIndicatorStep title="Ticket details" stepNumber={3} currentStep={currentStep} />
+      <ProgressIndicatorStep title="Personal details" stepNumber={4} currentStep={currentStep} />
     </ul>
   );
 };
