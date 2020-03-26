@@ -14,6 +14,14 @@ const Form = () => {
       <div className={`wmnds-p-lg ${s.formWrapper}`}>
         {currentStep === 1 && <Step1 setCurrentStep={setCurrentStep} />}
         {currentStep === 2 && <Step2 setCurrentStep={setCurrentStep} />}
+
+        <button
+          type="button"
+          className="wmnds-btn wmnds-col-1"
+          onClick={() => setCurrentStep(currentStep + 1)}
+        >
+          Continue
+        </button>
       </div>
     </div>
   );
