@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Icon from 'components/shared/Icon/Icon';
 
-const Step1 = () => {
+const Step1 = ({ setCurrentStep }) => {
   return (
     <div className="wmnds-col-1 wmnds-col-sm-3-5">
       <p>Use this service to:</p>
@@ -35,12 +36,20 @@ const Step1 = () => {
       </p>
       <p>If you have a paper ticket, you will need this ticket as proof.</p>
 
-      <button type="button" className="wmnds-btn wmnds-btn--start">
+      <button
+        type="button"
+        className="wmnds-btn wmnds-btn--start"
+        onClick={() => setCurrentStep(2)}
+      >
         Start now
         <Icon className="wmnds-btn__icon wmnds-btn__icon--right" iconName="general-chevron-right" />
       </button>
     </div>
   );
+};
+
+Step1.propTypes = {
+  setCurrentStep: PropTypes.func.isRequired,
 };
 
 export default Step1;

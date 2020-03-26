@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Step1 from 'components/Step1/Step1';
 
 const Form = () => {
-  return <Step1 />;
+  const [currentStep, setCurrentStep] = useState(1);
+
+  return <>{currentStep === 1 && <Step1 setCurrentStep={setCurrentStep} />}</>;
 };
 
 export default Form;
