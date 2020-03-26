@@ -33,6 +33,16 @@ const Step1 = () => {
         with <strong>6</strong> and is shown next to every payment to WMCA on your bank statement.
       </p>
       <p>If you have a paper ticket, you will need this ticket as proof.</p>
+
+      <button type="button" className="wmnds-btn wmnds-btn--start">
+        Start now
+        <svg className="wmnds-btn__icon wmnds-btn__icon--right">
+          <use
+            xlinkHref="/img/wmnds-sprite.min.svg#wmnds-general-chevron-right"
+            href="/img/wmnds-sprite.min.svg#wmnds-general-chevron-right"
+          />
+        </svg>
+      </button>
     </div>
   );
 };
