@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Step4 = () => {
-  return <h2>Tell us about your ticket</h2>;
+  return <>Step 4</>;
 };
 
 export default Step4;

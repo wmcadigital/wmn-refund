@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Step1 = () => {
-  return <h2>Tell us about your ticket</h2>;
+  return <>Step 1</>;
 };
 
 export default Step1;
