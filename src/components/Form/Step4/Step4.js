@@ -1,4 +1,5 @@
 import React from 'react';
+import Input from 'components/shared/FormElements/Input/Input';
 
 const Step4 = () => {
   return (
@@ -10,15 +11,11 @@ const Step4 = () => {
       </p>
 
       <h3>What company or organisation do you work for?</h3>
-      <div className="wmnds-fe-input">
-        <label htmlFor="hello" className="fe-title">
-          Company or organisation name
-        </label>
-        <input type="text" name="hello" id="hello" />
-      </div>
+      <Input label="Company or organisation name" name="CompanyName" />
       <h3>What is your date of birth?</h3>
 
       <h3>What is your home address?</h3>
+
       <h3>What is your email address?</h3>
       <h3>What is your telephone number?</h3>
     </>
