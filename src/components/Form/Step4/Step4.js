@@ -9,18 +9,18 @@ const Step4 = () => {
         information
       </p>
 
-      <h4>What company or organisation do you work for?</h4>
+      <h3>What company or organisation do you work for?</h3>
       <div className="wmnds-fe-input">
         <label htmlFor="hello" className="fe-title">
           Company or organisation name
         </label>
         <input type="text" name="hello" id="hello" />
       </div>
-      <h4>What is your date of birth?</h4>
+      <h3>What is your date of birth?</h3>
 
-      <h4>What is your home address?</h4>
-      <h4>What is your email address?</h4>
-      <h4>What is your telephone number?</h4>
+      <h3>What is your home address?</h3>
+      <h3>What is your email address?</h3>
+      <h3>What is your telephone number?</h3>
     </>
   );
 };
