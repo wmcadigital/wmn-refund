@@ -1,5 +1,5 @@
 import React from 'react';
-import Step1 from 'components/Step1/Step1';
+import Form from 'components/Form/Form';
 
 function App() {
   return (
@@ -7,7 +7,7 @@ function App() {
       <h1 className="wmnds-col-1 wmnds-col-sm-3-5">
         Apply for a ticket refund due to Coronavirus (COVID-19)
       </h1>
-      <Step1 />
+      <Form />
     </div>
   );
 }

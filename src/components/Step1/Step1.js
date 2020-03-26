@@ -37,12 +37,6 @@ const Step1 = () => {
 
       <button type="button" className="wmnds-btn wmnds-btn--start">
         Start now
-        {/* <svg className="wmnds-btn__icon wmnds-btn__icon--right">
-          <use
-            xlinkHref="/img/wmnds-sprite.min.svg#wmnds-general-chevron-right"
-            href="/img/wmnds-sprite.min.svg#wmnds-general-chevron-right"
-          />
-        </svg> */}
         <Icon className="wmnds-btn__icon wmnds-btn__icon--right" iconName="general-chevron-right" />
       </button>
     </div>
