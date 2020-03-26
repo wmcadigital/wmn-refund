@@ -2,11 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
     <meta name="description" content="Web site created using create-react-app" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+
+    <!-- Favicons -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="%PUBLIC_URL%/favicons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="%PUBLIC_URL%/favicons/favicon-16x16.png"
+    />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+
+    <meta name="theme-color" content="#3c1053" />
+    <!-- Windows phones -->
+    <meta name="msapplication-navbutton-color" content="#3c1053" />
+    <meta name="msapplication-TileColor" content="#3c1053" />
+    <meta name="msapplication-config" content="%PUBLIC_URL%/favicons/browserconfig.xml" />
+    <!-- iOS -->
+    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png" />
+    <link rel="mask-icon" href="%PUBLIC_URL%/favicons/safari-pinned-tab.svg" color="#3c1053" />
+    <link rel="apple-touch-startup-image" href="%PUBLIC_URL%/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -21,407 +46,135 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
-
-    <!-- NWM Styles -->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="//static.centro.org.uk/nwmAssets/wmn-css/screen.css?v=0.2"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="//static.centro.org.uk/nwmAssets/wmn-css/nwm-custom.css?v=0.2"
-    />
-
-    <!-- CSS for WMN Design System -->
+    <!-- WMN Style links-->
     <link rel="stylesheet" href="https://wmnetwork.netlify.com/css/wmnds-components.min.css" />
+
+    <title>Ticket refund - West Midlands Network</title>
   </head>
+
   <body>
+    <!-- Style for template -->
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #3c1053;
+      }
+
+      #wmn-direct-debit-form-app {
+        background-color: #f3f2f1;
+      }
+    </style>
+
     <noscript>You need to enable JavaScript to run this app.</noscript>
-
-    <!-- NWM HEADER -->
-    <div class="navbar">
-      <div class="wrap">
-        <a class="navbar__logo netwm-logo" href="/">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 137.59 52.84">
-            <g class="layer-icon" fill="#fff">
-              <path
-                d="M8.15 43.54a1.1 1.1 0 0 1-.42.53 1.18 1.18 0 0 1-1.3 0 1 1 0 0 1-.43-.53L.23 28a4.67 4.67 0 0 1 0-2.91L6 9.57A1.14 1.14 0 0 1 6.47 9a1.18 1.18 0 0 1 1.3 0 1 1 0 0 1 .42.54L14 25.1a4.72 4.72 0 0 1 0 2.9zM17.94 17.29a1.12 1.12 0 0 1-.42.54 1.18 1.18 0 0 1-1.3 0 1 1 0 0 1-.42-.54L10 1.76c0-.08 0-.15-.08-.23a1.06 1.06 0 0 1 0-.31A1.21 1.21 0 0 1 11.07 0h11.58a1.23 1.23 0 0 1 1.22 1.22.65.65 0 0 1 0 .31 2 2 0 0 1-.07.23zM37.46 17.29a1.14 1.14 0 0 1-1.72.54 1 1 0 0 1-.42-.54L29.54 1.76c0-.08 0-.15-.08-.23a1.06 1.06 0 0 1 0-.31A1.23 1.23 0 0 1 30.65 0H42.2a1.23 1.23 0 0 1 1.22 1.22.65.65 0 0 1 0 .31 2 2 0 0 1-.07.23zM27.7 43.54a1.1 1.1 0 0 1-.42.53 1.18 1.18 0 0 1-1.3 0 1 1 0 0 1-.42-.53L19.78 28a4.72 4.72 0 0 1 0-2.91L25.6 9.57A1.12 1.12 0 0 1 26 9a1.18 1.18 0 0 1 1.3 0 1 1 0 0 1 .42.54l5.83 15.56a4.72 4.72 0 0 1 0 2.91zM47.29 43.54a1.12 1.12 0 0 1-.42.54 1.22 1.22 0 0 1-1.3 0 1 1 0 0 1-.42-.54L39.33 28a4.51 4.51 0 0 1-.23-1.46 4.23 4.23 0 0 1 .23-1.45l5.82-15.56a1.12 1.12 0 0 1 .42-.53 1.22 1.22 0 0 1 1.3 0 1 1 0 0 1 .42.54l5.81 15.52a4.25 4.25 0 0 1 .23 1.46A4 4 0 0 1 53.1 28zM17.94 35.55a1.12 1.12 0 0 0-.42-.54 1.18 1.18 0 0 0-1.3 0 1 1 0 0 0-.42.54L10 51.08c0 .08 0 .15-.08.23a1.06 1.06 0 0 0 0 .31 1.24 1.24 0 0 0 1.23 1.22h11.5a1.23 1.23 0 0 0 1.22-1.22.65.65 0 0 0 0-.31c0-.07 0-.15-.07-.23zM37.46 35.55a1.14 1.14 0 0 0-1.72-.55 1 1 0 0 0-.42.54L29.5 51.08c0 .08 0 .15-.08.23a1.06 1.06 0 0 0 0 .31 1.24 1.24 0 0 0 1.23 1.22h11.51a1.22 1.22 0 0 0 1.22-1.22.8.8 0 0 0 0-.31c0-.07 0-.15-.08-.23z"
-              ></path>
-            </g>
-            <g class="layer-text" fill="#fff">
-              <path
-                d="M63.32 32.45H60.8l3.52-12.74h2.56l2.91 9.06 2.91-9.06h2.6l3.56 12.74h-2.64l-2.34-8.8-2.83 8.8h-2.56l-2.83-8.8zM81.34 19.21a1.47 1.47 0 1 1 0 2.94 1.48 1.48 0 0 1-1.49-1.45 1.52 1.52 0 0 1 1.49-1.49m-1.18 4.4h2.41v8.84h-2.41zM93.36 30.84c0 .61 0 1.22.07 1.6h-2.3a5.88 5.88 0 0 1-.07-1 2.79 2.79 0 0 1-2.48 1.23 4.37 4.37 0 0 1-4.34-4.39 2.62 2.62 0 0 1 0-.28 4.33 4.33 0 0 1 4-4.62h.22c1.53 0 2.26.61 2.49 1.11v-5h2.37zm-4.48-.3a2.24 2.24 0 0 0 2.2-2.28 2.29 2.29 0 0 0 0-.25 2.18 2.18 0 0 0-1.91-2.43h-.27a2.51 2.51 0 0 0 0 5M102.62 27.36l2.18-.31c.5-.08.65-.3.65-.61 0-.61-.5-1.15-1.49-1.15a1.58 1.58 0 0 0-1.69 1.44l-2.1-.46a3.52 3.52 0 0 1 3.83-2.89c2.79 0 3.86 1.57 3.86 3.37v4.36a8.3 8.3 0 0 0 .12 1.41h-2.18a7.59 7.59 0 0 1-.08-1.07 3 3 0 0 1-2.6 1.3 2.77 2.77 0 0 1-3-2.52.81.81 0 0 1 0-.16c-.08-1.6 1.07-2.48 2.56-2.71m2.83 1.53v-.39l-2 .31a1.11 1.11 0 0 0-1.11 1.11 1 1 0 0 0 1 1h.11a1.83 1.83 0 0 0 2-1.66 1.76 1.76 0 0 0 0-.4M112.41 32.45H110v-8.84h2.34v1.11a2.93 2.93 0 0 1 2.56-1.34c2.18 0 3.22 1.57 3.22 3.52v5.58h-2.42v-5.2a1.55 1.55 0 0 0-1.34-1.75 1.51 1.51 0 0 0-.3 0 1.66 1.66 0 0 0-1.66 1.67v.17zM128.79 30.84c0 .61 0 1.22.08 1.6h-2.3a5.88 5.88 0 0 1-.08-1 2.79 2.79 0 0 1-2.49 1.2 4.37 4.37 0 0 1-4.34-4.39v-.28a4.33 4.33 0 0 1 4-4.62h.22c1.53 0 2.26.61 2.49 1.11v-5h2.37zm-4.48-.3a2.24 2.24 0 0 0 2.2-2.28 2.29 2.29 0 0 0 0-.25 2.18 2.18 0 0 0-1.91-2.43h-.27a2.51 2.51 0 0 0 0 5M132.5 29.54a1.46 1.46 0 0 0 1.57 1.34c.8 0 1.18-.42 1.18-.88s-.26-.73-.95-.88l-1.19-.27c-1.72-.38-2.49-1.42-2.49-2.64A3.12 3.12 0 0 1 134 23.3c2.53 0 3.37 1.61 3.48 2.57l-2 .45a1.34 1.34 0 0 0-1.48-1.18c-.61 0-1.15.38-1.15.88s.31.69.8.8l1.27.27c1.76.34 2.64 1.41 2.64 2.71 0 1.46-1.11 2.91-3.45 2.91-2.68 0-3.6-1.72-3.67-2.72zM76 2.49h2.57L75 15.23h-2.57l-3-9.07-2.91 9.07H64L60.45 2.49h2.64l2.34 8.76 2.83-8.76h2.56l2.83 8.8zM86.89 12.7a4 4 0 0 1-4 2.8 4.49 4.49 0 0 1-4.56-4.43v-.32a4.46 4.46 0 0 1 4.25-4.66h.11c2.72 0 4.37 1.76 4.37 4.6v.72h-6.4a2.14 2.14 0 0 0 2.22 2 2 2 0 0 0 2-1.34zm-2.25-2.9A1.8 1.8 0 0 0 82.81 8h-.16a1.93 1.93 0 0 0-2 1.76zM90 12.32a1.45 1.45 0 0 0 1.57 1.34c.8 0 1.18-.42 1.18-.88s-.26-.73-1-.88l-1.19-.27c-1.72-.38-2.49-1.41-2.49-2.64a3.13 3.13 0 0 1 3.32-2.91c2.61 0 3.46 1.61 3.61 2.57l-2 .46a1.35 1.35 0 0 0-1.46-1.19c-.61 0-1.15.38-1.15.88s.31.69.8.8l1.27.27c1.76.34 2.64 1.42 2.64 2.72s-1.11 2.9-3.45 2.9C89 15.49 88 13.77 88 12.78zM99.79 6.39h1.8v2.1h-1.8v3.71c0 .77.34 1 1 1a3 3 0 0 0 .73-.07v2a3.86 3.86 0 0 1-1.34.23 2.55 2.55 0 0 1-2.79-2.29 3.12 3.12 0 0 1 0-.43V8.49h-1.6v-2.1h.46a1.3 1.3 0 0 0 1.38-1.21 1.27 1.27 0 0 0 0-.2V3.75h2.15zM69.83 50.12l-7-10.63v10.63H61v-13h2.4l6.5 10v-10h1.8v13zM82.19 47.6a4 4 0 0 1-4 2.79A4.72 4.72 0 0 1 78 41c2.71 0 4.24 1.87 4.24 4.63a1.87 1.87 0 0 1 0 .53h-6.67a2.64 2.64 0 0 0 2.6 2.68h.08A2.41 2.41 0 0 0 80.73 47zm-1.76-2.8a2.24 2.24 0 0 0-2.23-2.26H78a2.37 2.37 0 0 0-2.41 2.25zM86.74 41.28h1.91v1.57h-1.91v4.59c0 .8.34 1.23 1.22 1.23a3.17 3.17 0 0 0 .69-.08v1.46a4.71 4.71 0 0 1-1.18.15A2.3 2.3 0 0 1 85 48.08a1.88 1.88 0 0 1 0-.41v-4.82h-1.67v-1.57h.5a1.24 1.24 0 0 0 1.38-1.1 1.22 1.22 0 0 0 0-.27v-1.46h1.57v2.83zM97.91 41.29l2.3 6.65 2-6.65H104l-2.87 8.83h-1.8L97 43.39l-2.3 6.73h-1.84L90 41.29h1.92l1.95 6.65 2.33-6.65zM113.87 45.68a4.52 4.52 0 1 1-4.52-4.7 4.44 4.44 0 0 1 4.52 4.38v.32m-1.76 0a2.78 2.78 0 1 0-5.51 0c0 2.07 1.3 3.18 2.75 3.18s2.76-1.11 2.76-3.18M121 43a4.83 4.83 0 0 0-.76 0c-1.46 0-2.45.76-2.45 2.71v4.4h-1.72v-8.82h1.68v1.53a2.75 2.75 0 0 1 2.64-1.69h.57V43zM127 45l3.86 5.09h-2.18l-2.87-3.9-1.26 1.27v2.64h-1.68V36.81h1.68v8.38l3.83-3.9h2.41zM95.81 19.44h2.41v13.01h-2.41z"
-              ></path>
-            </g>
-          </svg>
-        </a>
-        <a href="/swift/" class="logo-wrapper swift-logo">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350.5 128">
-            <style type="text/css">
-              .st0 {
-                fill: #3c1053;
-              }
-            </style>
-            <path
-              class="st0"
-              d="M121.1 86.4c3.4 0 5.7-0.5 7-1.4 1.3-1 1.9-2 1.9-3.1 0-0.7-0.1-1.4-0.3-1.9 -0.2-0.5-0.6-1-1.1-1.5 -0.5-0.5-1.3-0.9-2.2-1.4 -0.9-0.5-2.1-1.1-3.6-1.7 -1.7-0.7-3.2-1.5-4.7-2.3 -1.5-0.8-2.7-1.8-3.8-3 -1.1-1.2-2-2.5-2.6-4 -0.6-1.5-0.9-3.3-0.9-5.3 0-5.4 2-9.6 5.9-12.7 3.9-3.1 9.7-4.7 17.2-4.7 3.6 0 6.8 0.4 9.5 1.2 2.8 0.8 5 1.7 6.8 2.6l-5.1 11c-1.4-0.7-3.2-1.4-5.4-2.1 -2.2-0.7-4.3-1-6.5-1 -0.9 0-1.8 0-2.7 0.1 -0.9 0.1-1.7 0.3-2.5 0.6 -0.8 0.3-1.4 0.8-1.8 1.4 -0.5 0.6-0.7 1.4-0.7 2.4 0 1.3 0.5 2.3 1.5 3 1 0.7 2.5 1.5 4.3 2.4 2.6 1.3 4.7 2.4 6.5 3.5 1.7 1.1 3.1 2.2 4.1 3.4 1 1.2 1.8 2.6 2.2 4.1 0.5 1.5 0.7 3.3 0.7 5.4 0 2.1-0.4 4.2-1.3 6.3 -0.9 2.1-2.3 3.9-4.2 5.5 -1.9 1.6-4.4 2.9-7.4 3.9 -3 1-6.6 1.5-10.7 1.5 -2.6 0-4.9-0.2-7-0.5 -2.1-0.3-3.9-0.7-5.5-1.2 -1.6-0.5-2.9-1-4-1.5 -1.1-0.5-1.9-1-2.5-1.3l5.1-11.3c1.1 0.7 2.9 1.5 5.3 2.5C114.8 85.9 117.7 86.4 121.1 86.4z"
-            ></path>
-            <path
-              class="st0"
-              d="M191.9 66.3c-1.3 2.7-2.7 5.5-4.2 8.3 -1.6 2.8-3.1 5.6-4.8 8.2 -1.6 2.7-3.2 5.2-4.7 7.7 -1.5 2.4-2.9 4.6-4.1 6.4h-11.5c-0.5-2.8-1.1-6.1-1.6-9.9 -0.6-3.8-1.1-8-1.6-12.6 -0.5-4.5-1-9.3-1.4-14.4 -0.4-5.1-0.7-10.2-0.9-15.4h14.5c0 2.4 0 5 0 7.8 0 2.8 0.1 5.7 0.2 8.6 0.1 3 0.2 6 0.4 9.1 0.2 3.1 0.5 6.2 0.8 9.2 1.7-2.8 3.3-5.7 4.9-8.7 1.6-3 3.2-6 4.7-9 1.5-3 2.9-6 4.2-8.9 1.3-2.9 2.4-5.6 3.4-8.1h12.3c0 4.8 0.1 10.1 0.2 16 0.2 5.9 0.6 12.2 1.2 18.8 1.8-3 3.4-6 5-9.2 1.5-3.1 2.9-6.2 4.2-9.3 1.3-3 2.5-6 3.5-8.7 1-2.8 1.9-5.3 2.7-7.6h15.7c-1.3 3.3-2.9 7-4.7 11.2 -1.8 4.1-3.9 8.5-6.3 13.1 -2.4 4.6-5.1 9.2-8 14 -3 4.8-6.3 9.4-9.9 14h-11.5c-0.8-5.4-1.4-10.6-1.8-15.6C192.3 76.4 192.1 71.4 191.9 66.3z"
-            ></path>
-            <path
-              class="st0"
-              d="M246.7 96.9H232l12.4-52.3h14.8L246.7 96.9zM253.8 38.3c-2.1 0-3.9-0.6-5.6-1.8 -1.7-1.2-2.5-3.1-2.5-5.6 0-1.4 0.3-2.7 0.8-3.9 0.6-1.2 1.3-2.3 2.2-3.2 0.9-0.9 2-1.6 3.2-2.1 1.2-0.5 2.5-0.8 3.9-0.8 2.1 0 3.9 0.6 5.6 1.8 1.7 1.2 2.5 3.1 2.5 5.6 0 1.4-0.3 2.7-0.8 3.9 -0.6 1.2-1.3 2.3-2.2 3.2 -0.9 0.9-2 1.6-3.2 2.1C256.5 38 255.2 38.3 253.8 38.3z"
-            ></path>
-            <path
-              class="st0"
-              d="M286.2 44.7l0.6-2.6c0.7-2.8 1.9-5.1 3.6-7 1.8-1.9 4.5-2.8 8.1-2.8 1.3 0 2.8 0.1 4.3 0.4 1.2 0.2 2.4 0.6 3.4 1l3-12.3c-0.7-0.2-1.4-0.5-2.3-0.7 -2.2-0.6-4.8-0.9-7.8-0.9 -7.8 0-13.9 1.9-18.2 5.8 -4.3 3.8-7.3 9.3-8.9 16.3l-13.9 58.3c-0.7 2.8-1.9 5.1-3.6 7 -1.8 1.9-4.5 2.8-8.1 2.8 -1.3 0-2.8-0.1-4.3-0.4 -1.5-0.3-2.9-0.7-4.1-1.3l-3 12.4c0.9 0.3 1.8 0.6 3 0.9 2.2 0.6 4.8 0.9 7.8 0.9 7.8 0 13.9-1.9 18.2-5.8 4.3-3.8 7.3-9.3 8.9-16.3l10.3-43.3 -6 25.1 6.1-25.3h17.4l0.7-3 2.2-9.1H286.2z"
-            ></path>
-            <path
-              class="st0"
-              d="M314.9 31.8l-9.7 41c-0.8 3.4-1.3 6.6-1.4 9.6 -0.1 3 0.3 5.7 1.4 8.1 1.1 2.4 2.8 4.2 5.4 5.6 2.5 1.4 6.1 2 10.6 2 3.2 0 5.9-0.3 8.2-0.8 2.3-0.5 4.5-1.2 6.5-1.9l-1.1-11.3c-1.5 0.5-3 0.9-4.5 1.2 -1.5 0.3-3 0.4-4.6 0.4 -1.9 0-3.3-0.3-4.4-0.8 -1.1-0.5-1.8-1.3-2.2-2.2 -0.4-1-0.6-2.1-0.5-3.4 0.1-1.3 0.3-2.7 0.7-4.3l4.4-18.3h16.4l3-12.1h-16.5l3.1-12.8H314.9z"
-            ></path>
-            <polygon class="st1" points="303.7 44.7 301.5 53.8 303.7 44.7 "></polygon>
-            <path
-              class="st1"
-              d="M46 80.6c-13.4 0-26.1-5.2-35.6-14.7l-3.4-3.4L63.6 6l38.9 38.9L81.6 65.9C72.1 75.4 59.4 80.6 46 80.6zM20.7 62.3l1 0.7c7 5.2 15.4 8 24.3 8 10.9 0 21.1-4.2 28.8-11.9L89 44.9 63.6 19.4 20.7 62.3z"
-            ></path>
-            <path
-              class="st1"
-              d="M62.1 45.7c-1.4 0-2.7-0.4-3.8-1.3 -1.1-0.8-1.7-2.1-1.7-3.8 0-1 0.2-1.8 0.6-2.7 0.4-0.8 0.9-1.6 1.5-2.2 0.6-0.6 1.4-1.1 2.2-1.5 0.8-0.4 1.7-0.5 2.7-0.5 1.4 0 2.7 0.4 3.8 1.3 1.1 0.8 1.7 2.1 1.7 3.8 0 1-0.2 1.8-0.6 2.7 -0.4 0.8-0.9 1.6-1.5 2.2 -0.6 0.6-1.4 1.1-2.2 1.5C64 45.5 63.1 45.7 62.1 45.7z"
-            ></path>
-          </svg>
-        </a>
-
-        <div class="navbar__topright">
-          <div class="navbar__controls">
-            <button
-              data-controls=".navbar__menu"
-              type="button"
-              class="navbar__burger"
-              aria-expanded="false"
-              aria-controls="aria-target-4"
-            >
-              <span>Menu</span>
-              <b><b></b><b></b><b></b></b>
-            </button>
-          </div>
-          <ul class="navbar__usermenu"></ul>
-
-          <button
-            data-controls=".navbar__search"
-            type="button"
-            class="navbar__search-btn search-bar-icon"
-            aria-expanded="false"
-            aria-controls="aria-target-3"
+    <!-- Header -->
+    <header class="wmnds-header wmnds-header--mobile-app">
+      <div class="wmnds-container wmnds-grid wmnds-grid--align-center wmnds-grid--justify-between">
+        <div class="wmnds-header__vertical-align wmnds-col-auto">
+          <!-- Logo -->
+          <a
+            class="wmnds-header__logo-link"
+            href="//wmnetwork.co.uk"
+            title="West Midlands Network Home"
           >
-            <span>Search</span>
-          </button>
-          <form
-            id="search-bar"
-            class="float--right search-bar-desktop"
-            action="/search/"
-            novalidate="novalidate"
+            <img
+              class="wmnds-header__logo"
+              alt="West Midlands Network logo"
+              src="//wmnetwork.netlify.com/img/logo.svg"
+            />
+          </a>
+          <!-- Phase indicator -->
+          <a
+            href="//wmnetwork.co.uk"
+            target="_self"
+            class="wmnds-phase-indicator"
+            title="Beta homepage of West Midlands Network Home"
           >
-            <input type="search" placeholder="Search NWM..." name="q" value="" />
-          </form>
+            Beta
+          </a>
         </div>
-      </div>
-
-      <div class="container hide-desktop">
-        <div class="row">
-          <form id="search-form-mobile" class="col-xs-12" action="/search/" novalidate="novalidate">
-            <input type="search" placeholder="Search NWM..." class="search-bar-mobile" name="q" />
-            <div class="search-submit-mobile">
-              <input class="" type="submit" value="go" />
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <nav role="navigation">
-        <!-- Menu  -->
-        <div class="wrap">
-          <ul class="navbar__menu collapsed" id="aria-target-4">
-            <li class="dropdown parent">
+        <!-- Nav items -->
+        <nav class="wmnds-header__vertical-align wmnds-col-auto">
+          <ul class="wmnds-header__links wmnds-header__main-links">
+            <li class="wmnds-header__link">
               <a
-                href="/plan-your-journey/"
-                class="dropdown-toggle"
-                data-toggle="dropdown"
-                role="button"
-                aria-expanded="false"
-                >Plan your journey<span class="caret"></span
-              ></a>
-              <button
-                type="button"
-                class="navbar__menu-toggle"
-                aria-expanded="false"
-                aria-controls="aria-target-0"
+                href="//wmnetwork.co.uk/plan-your-journey/"
+                title="Plan your journey page"
+                target="_self"
+                class="wmnds-link"
               >
-                <span>Toggle</span>
-              </button>
-              <ul id="aria-target-0" class="collapsed">
-                <li>
-                  <a class="" href="/plan-your-journey/network-overview/">Network Overview</a>
-                </li>
-                <li><a class="" href="/plan-your-journey/journey-planner/">Journey planner</a></li>
-                <li><a class="" href="/plan-your-journey/timetables/">Timetables</a></li>
-                <li class="dropdown-submenu">
-                  <a class="" href="/plan-your-journey/disruptions/">Disruptions</a>
-                </li>
-                <li class="dropdown-submenu">
-                  <a class="" href="/plan-your-journey/major-roadworks-and-events/"
-                    >Major roadworks and events</a
-                  >
-                </li>
-                <li class="dropdown-submenu">
-                  <a class="" href="/plan-your-journey/west-midlands-transport-guides/"
-                    >West Midlands Transport Guides</a
-                  >
-                </li>
-                <li class="dropdown-submenu">
-                  <a class="" href="/plan-your-journey/map-and-guides/">Map and Guides</a>
-                </li>
-                <li class="dropdown-submenu">
-                  <a class="" href="/plan-your-journey/travelling-to-hospital/"
-                    >Travelling to hospital</a
-                  >
-                </li>
-                <li><a class="" href="/plan-your-journey/our-apps/">Our Apps</a></li>
-                <li>
-                  <a class="" href="/plan-your-journey/last-services-home/">Last Services Home</a>
-                </li>
-                <li class="dropdown-submenu">
-                  <a class="" href="/plan-your-journey/discover-the-west-midlands/"
-                    >Discover the West Midlands</a
-                  >
-                </li>
-              </ul>
+                Plan your journey
+              </a>
             </li>
-            <li class="dropdown parent">
+            <li class="wmnds-header__link">
               <a
-                href="/ways-to-travel/"
-                class="dropdown-toggle"
-                data-toggle="dropdown"
-                role="button"
-                aria-expanded="false"
-                >Ways to travel<span class="caret"></span
-              ></a>
-              <button
-                type="button"
-                class="navbar__menu-toggle"
-                aria-expanded="false"
-                aria-controls="aria-target-0"
+                href="//wmnetwork.co.uk/ways-to-travel/"
+                title="Ways to travel page"
+                target="_self"
+                class="wmnds-link"
               >
-                <span>Toggle</span>
-              </button>
-              <ul id="aria-target-0" class="collapsed">
-                <li class="dropdown-submenu"><a class="" href="/ways-to-travel/bus/">Bus</a></li>
-                <li class="dropdown-submenu">
-                  <a class="" href="/ways-to-travel/train/">Train</a>
-                </li>
-                <li class="dropdown-submenu">
-                  <a class="" href="/ways-to-travel/metro/">Metro</a>
-                </li>
-                <li><a class="" href="/ways-to-travel/ring-and-ride/">Ring and Ride</a></li>
-                <li class="dropdown-submenu">
-                  <a class="" href="/ways-to-travel/cycling/">Cycling</a>
-                </li>
-                <li><a class="" href="/ways-to-travel/walking/">Walking</a></li>
-                <li class="dropdown-submenu">
-                  <a class="" href="/ways-to-travel/coach/">Coach</a>
-                </li>
-                <li class="dropdown-submenu">
-                  <a class="" href="/ways-to-travel/driving/">Driving</a>
-                </li>
-                <li class="dropdown-submenu">
-                  <a class="" href="/ways-to-travel/flying/">Flying</a>
-                </li>
-                <li class="dropdown-submenu">
-                  <a class="" href="/ways-to-travel/travelling-safely/">Travelling safely</a>
-                </li>
-              </ul>
+                Ways to travel
+              </a>
             </li>
-            <li class="dropdown parent">
+            <li class="wmnds-header__link">
               <a
-                href="/tickets-and-passes/"
-                class="dropdown-toggle"
-                data-toggle="dropdown"
-                role="button"
-                aria-expanded="false"
-                >Tickets and passes<span class="caret"></span
-              ></a>
-              <button
-                type="button"
-                class="navbar__menu-toggle"
-                aria-expanded="false"
-                aria-controls="aria-target-0"
+                href="//www.networkwestmidlands.com/tickets-and-passes/"
+                title="Tickets and passes page"
+                target="_self"
+                class="wmnds-link"
               >
-                <span>Toggle</span>
-              </button>
-              <ul id="aria-target-0" class="collapsed">
-                <li><a class="" href="/tickets-and-passes/ticket-finder/">Ticket finder</a></li>
-                <li><a class="" href="/tickets-and-passes/adult/">Adult</a></li>
-                <li class="dropdown-submenu">
-                  <a class="" href="/tickets-and-passes/child/">Child</a>
-                </li>
-                <li><a class="" href="/tickets-and-passes/students/">Students</a></li>
-                <li>
-                  <a class="" href="/tickets-and-passes/day-family-and-group/"
-                    >Day, Family and Group</a
-                  >
-                </li>
-                <li class="dropdown-submenu">
-                  <a class="" href="/tickets-and-passes/older-persons-pass/">Older person's pass</a>
-                </li>
-                <li>
-                  <a class="" href="/tickets-and-passes/disabled-persons-pass/"
-                    >Disabled Person's Pass</a
-                  >
-                </li>
-                <li class="dropdown-submenu">
-                  <a class="" href="/tickets-and-passes/jobseekers/">Jobseekers</a>
-                </li>
-              </ul>
-            </li>
-            <li class="dropdown parent">
-              <a
-                href="/offers/"
-                class="dropdown-toggle"
-                data-toggle="dropdown"
-                role="button"
-                aria-expanded="false"
-                >Offers<span class="caret"></span
-              ></a>
-              <button
-                type="button"
-                class="navbar__menu-toggle"
-                aria-expanded="false"
-                aria-controls="aria-target-0"
-              >
-                <span>Toggle</span>
-              </button>
-              <ul id="aria-target-0" class="collapsed">
-                <li class="dropdown-submenu">
-                  <a class="" href="/offers/discount-vouchers/">Discount Vouchers</a>
-                </li>
-              </ul>
-            </li>
-            <li class="dropdown parent">
-              <a
-                href="/about-us/"
-                class="dropdown-toggle"
-                data-toggle="dropdown"
-                role="button"
-                aria-expanded="false"
-                >About us<span class="caret"></span
-              ></a>
-              <button
-                type="button"
-                class="navbar__menu-toggle"
-                aria-expanded="false"
-                aria-controls="aria-target-0"
-              >
-                <span>Toggle</span>
-              </button>
-              <ul id="aria-target-0" class="collapsed">
-                <li><a class="" href="/about-us/what-we-do/">What we do</a></li>
-                <li><a class="" href="/about-us/infrastructure/">Infrastructure</a></li>
-                <li><a class="" href="/about-us/rebrand/">Rebrand</a></li>
-              </ul>
-            </li>
-            <li class="dropdown parent">
-              <a
-                href="/get-in-touch/"
-                class="dropdown-toggle"
-                data-toggle="dropdown"
-                role="button"
-                aria-expanded="false"
-                >Get in touch<span class="caret"></span
-              ></a>
-              <button
-                type="button"
-                class="navbar__menu-toggle"
-                aria-expanded="false"
-                aria-controls="aria-target-0"
-              >
-                <span>Toggle</span>
-              </button>
-              <ul id="aria-target-0" class="collapsed">
-                <li><a class="" href="/get-in-touch/contact-us/">Contact Us</a></li>
-                <li><a class="" href="/get-in-touch/report-a-problem/">Report a problem</a></li>
-                <li><a class="" href="/get-in-touch/direct-debit/">Direct Debit</a></li>
-                <li><a class="" href="/get-in-touch/swift-card-support/">Swift card support</a></li>
-                <li><a class="" href="/get-in-touch/lost-property/">Lost property</a></li>
-                <li><a class="" href="/get-in-touch/operators/">Operators</a></li>
-                <li><a class="" href="/get-in-touch/have-your-say/">Have your say</a></li>
-                <li><a class="" href="/get-in-touch/stay-up-to-date/">Stay up to date</a></li>
-                <li class="dropdown-submenu">
-                  <a class="" href="/get-in-touch/travel-centres/">Travel Centres</a>
-                </li>
-                <li><a class="" href="/get-in-touch/refunds/">Refunds</a></li>
-                <li>
-                  <a class="" href="/get-in-touch/replacing-lost-tickets-passes/"
-                    >Replacing lost tickets &amp; passes</a
-                  >
-                </li>
-                <li><a class="" href="/get-in-touch/make-a-payment/">Make a payment</a></li>
-                <li><a class="" href="/get-in-touch/petitions-protocol/">Petitions Protocol</a></li>
-                <li>
-                  <a class="" href="/get-in-touch/complaints-handling-procedure/"
-                    >Complaints Handling Procedure</a
-                  >
-                </li>
-              </ul>
+                Tickets and passes
+              </a>
             </li>
           </ul>
-        </div>
-        <!--/.nav-collapse -->
-      </nav>
-    </div>
-    <!-- END NWM HEADER -->
+          <!-- Back button -->
+          <ul class="wmnds-header__links wmnds-header__back-btn">
+            <li class="wmnds-header__link">
+              <a
+                href="#"
+                title="Go back to previous page"
+                target="_self"
+                class="wmnds-link"
+                onClick="goBack(event);"
+              >
+                Back
+              </a>
+            </li>
+          </ul>
+          <script>
+            // Function that sends user to previous page they were on,
+            // This can be included in your local javascript file
+            function goBack(e) {
+              e.preventDefault();
+              window.history.back();
+            }
+          </script>
+          <!-- End back button -->
+        </nav>
+      </div>
+    </header>
+    <!-- End header -->
 
+    <!-- Start app here -->
     <div id="wmn-direct-debit-form-app"></div>
 
-    <!-- NWM FOOTER -->
-    <footer class="footer">
-      <div class="wrap wrap--padded">
-        <div class="boxin">
-          <h3>Information for...</h3>
-          <ul class="footbtns bare-list bare-list--horizontal">
-            <li><a class="btn align--center" href="/information-for/jobcentres/">Jobcentres</a></li>
-            <li><a class="btn align--center" href="/information-for/companies/">Companies</a></li>
-            <li>
-              <a class="btn align--center" href="/information-for/teaching-professionals/"
-                >Teaching professionals</a
-              >
-            </li>
-          </ul>
+    <!-- Footer -->
+    <footer class="wmnds-footer wmnds-footer--mobile-app">
+      <div class="wmnds-container wmnds-grid">
+        <div class="wmnds-col-1 wmnds-col-md-1-2">
+          Copyright West Midlands Network &copy; 2020
         </div>
-
-        <a href="#" class="mobile-acc__trigger" data-slidetarget="#footwrap">More</a>
-        <div id="footwrap" class="mobile-acc__wrap">
-          <ul class="footlinks boxin bare-list bare-list--horizontal">
-            <li><a href="/accessibility/">Accessibility</a></li>
-            <li><a href="/terms-conditions/">Terms &amp; Conditions</a></li>
-            <li><a href="https://jobs.wmca.org.uk/Login.aspx">Jobs</a></li>
-            <li><a href="https://www.tfwm.org.uk/news/" target="_blank">Media</a></li>
-            <li>
-              <a href="/privacy-cookies-policy/" target="_blank">Privacy &amp; Cookie Policy</a>
-            </li>
-            <li><a href="/get-in-touch/">Contact</a></li>
-            <li>
-              <div id="__ba_panel"></div>
-            </li>
-            <li class="copyright">© West Midlands Combined Authority</li>
-          </ul>
+        <div class="wmnds-col-1 wmnds-col-md-1-2">
+          <a
+            href="https://github.com/wmcadigital"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="wmnds-footer__link wmnds-link"
+            >Created by WMCA Design Team</a
+          >
         </div>
       </div>
     </footer>
-    <!-- END NWM FOOTER -->
+    <!-- End footer -->
   </body>
 </html>
