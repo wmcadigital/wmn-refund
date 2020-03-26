@@ -15,13 +15,16 @@ const Form = () => {
         {currentStep === 1 && <Step1 setCurrentStep={setCurrentStep} />}
         {currentStep === 2 && <Step2 setCurrentStep={setCurrentStep} />}
 
-        <button
-          type="button"
-          className="wmnds-btn wmnds-col-1"
-          onClick={() => setCurrentStep(currentStep + 1)}
-        >
-          Continue
-        </button>
+        {/* Only show continue button if we are not on the summary page */}
+        {currentStep <= 4 && (
+          <button
+            type="button"
+            className="wmnds-btn wmnds-col-1"
+            onClick={() => setCurrentStep(currentStep + 1)}
+          >
+            Continue
+          </button>
+        )}
       </div>
     </div>
   );
