@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 const Input = ({ label, name }) => {
   return (
-    <div className="wmnds-fe-input">
-      <label htmlFor={name} className="fe-title">
+    <div className="wmnds-fe-group">
+      <label className="wmnds-fe-label" htmlFor={name}>
         {label}
       </label>
-      <input type="text" name={name} id={name} />
+      <input className="wmnds-fe-input" id={name} name={name} type="text" />
     </div>
   );
 };
