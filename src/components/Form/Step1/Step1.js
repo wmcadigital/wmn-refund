@@ -8,7 +8,12 @@ const Step1 = ({ currentStep, setCurrentStep, handleFormData }) => {
 
   const handleContinue = () => {
     handleFormData('CustomerType', CustomerType);
-    setCurrentStep(currentStep + 1);
+    // classpass, swiftOnMobile, scratchcard
+    if (CustomerType !== null) {
+      setCurrentStep(currentStep + 2); // Skip two steps as customerType has been set
+    } else {
+      setCurrentStep(currentStep + 1); // Go to next step so we can set customerType
+    }
   };
 
   return (
@@ -24,13 +29,13 @@ const Step1 = ({ currentStep, setCurrentStep, handleFormData }) => {
               name="CustomerType"
               text="Swift card"
               value="SwiftPortal"
-              onChange={(e) => setCustomerType(e.target.value)}
+              onChange={() => setCustomerType(null)}
             />
             <Radio
               name="CustomerType"
               text="Paper ticket"
               value="SwiftCard"
-              onChange={(e) => setCustomerType(e.target.value)}
+              onChange={() => setCustomerType(null)}
             />
             <Radio
               name="CustomerType"
