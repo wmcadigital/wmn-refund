@@ -2,11 +2,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Radio = ({ name, text, value }) => {
+const Radio = ({ name, onChange, text, value }) => {
   return (
     <label className="wmnds-fe-radios__container">
       {text}
-      <input className="wmnds-fe-radios__input" value={value} name={name} type="radio" />
+      <input
+        className="wmnds-fe-radios__input"
+        value={value}
+        name={name}
+        type="radio"
+        onChange={onChange}
+      />
       <span className="wmnds-fe-radios__checkmark" />
     </label>
   );
@@ -14,8 +20,13 @@ const Radio = ({ name, text, value }) => {
 
 Radio.propTypes = {
   name: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
   text: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+};
+
+Radio.defaultProps = {
+  onChange: null,
 };
 
 export default Radio;
