@@ -12,7 +12,8 @@ const Form = () => {
   const [formData, setFormData] = useState({});
 
   const handleFormData = (item, value) => {
-    setFormData((state) => ({ ...state, item: value }));
+    console.log(item);
+    setFormData((state) => ({ ...state, [item]: value }));
   };
 
   return (
