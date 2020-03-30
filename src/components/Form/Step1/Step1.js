@@ -1,10 +1,10 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+// Import components
 import Radio from 'components/shared/FormElements/Radio/Radio';
 
-// eslint-disable-next-line react/prop-types
-const Step1 = ({ formData, setFormData }) => {
-  console.log(formData);
+const Step1 = ({ currentStep, setCurrentStep, setFormData }) => {
+  const [CustomerType, setCustomerType] = useState(null);
 
   return (
     <>
@@ -48,8 +48,21 @@ const Step1 = ({ formData, setFormData }) => {
           </div>
         </fieldset>
       </div>
+      <button
+        type="button"
+        className="wmnds-btn wmnds-col-1 wmnds-m-t-md"
+        onClick={() => setCurrentStep(currentStep + 1)}
+      >
+        Continue
+      </button>
     </>
   );
+};
+
+Step1.propTypes = {
+  currentStep: PropTypes.number.isRequired,
+  setCurrentStep: PropTypes.func.isRequired,
+  setFormData: PropTypes.func.isRequired,
 };
 
 export default Step1;

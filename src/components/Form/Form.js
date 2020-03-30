@@ -11,24 +11,41 @@ const Form = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({});
 
+  const handleFormData = (item, value) => {
+    setFormData((state) => ({ ...state, item: value }));
+  };
+
   return (
     <div className="wmnds-col-1 wmnds-col-md-3-4 ">
       <ProgressIndicator currentStep={currentStep} />
       <div className={`wmnds-p-lg ${s.formWrapper}`}>
-        {currentStep === 1 && <Step1 setFormData={setFormData} formData={formData} />}
-        {currentStep === 2 && <Step2 setFormData={setFormData} />}
-        {currentStep === 3 && <Step3 setFormData={setFormData} />}
-        {currentStep === 4 && <Step4 setFormData={setFormData} />}
-
-        {/* Only show continue button if we are not on the summary page */}
-        {currentStep <= 4 && (
-          <button
-            type="button"
-            className="wmnds-btn wmnds-col-1 wmnds-m-t-md"
-            onClick={() => setCurrentStep(currentStep + 1)}
-          >
-            Continue
-          </button>
+        {currentStep === 1 && (
+          <Step1
+            handleFormData={handleFormData}
+            setCurrentStep={setCurrentStep}
+            currentStep={currentStep}
+          />
+        )}
+        {currentStep === 2 && (
+          <Step2
+            handleFormData={handleFormData}
+            setCurrentStep={setCurrentStep}
+            currentStep={currentStep}
+          />
+        )}
+        {currentStep === 3 && (
+          <Step3
+            handleFormData={handleFormData}
+            setCurrentStep={setCurrentStep}
+            currentStep={currentStep}
+          />
+        )}
+        {currentStep === 4 && (
+          <Step4
+            handleFormData={handleFormData}
+            setCurrentStep={setCurrentStep}
+            currentStep={currentStep}
+          />
         )}
       </div>
     </div>
