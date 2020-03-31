@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+// Import components
 import Icon from 'components/shared/Icon/Icon';
+import s from './UploadTicket.module.scss';
 
 const UploadTicket = () => {
+  const [isFileInputFocused, setIsFileInputFocused] = useState(false);
+  const [fileName, setFileName] = useState('Upload photo');
+
   const handleFileSelected = (e) => {
+    setFileName(e.name);
     console.log(e);
   };
 
@@ -18,22 +24,25 @@ const UploadTicket = () => {
             process the refund
           </p>
         </legend>
-        {/* <button type="button">
-          Upload photo
-
-        </button> */}
-        <label htmlFor="file" className="wmnds-btn wmnds-btn--primary">
-          Upload photo
+        <label
+          htmlFor="fileUpload"
+          className={`wmnds-btn wmnds-btn--primary ${
+            isFileInputFocused ? s.fileUploadLabelFocused : ''
+          }`}
+        >
+          {fileName}
           <Icon
             className="wmnds-btn__icon wmnds-btn__icon--right"
             iconName="general-paperclip"
           />
           <input
             type="file"
-            name="file"
-            id="file"
+            name="fileUpload"
+            id="fileUpload"
+            onFocus={() => setIsFileInputFocused(true)}
+            onBlur={() => setIsFileInputFocused(false)}
             onChange={(e) => handleFileSelected(e.target.files[0])}
-            hidden
+            className={s.fileUpload}
           />
         </label>
       </fieldset>
