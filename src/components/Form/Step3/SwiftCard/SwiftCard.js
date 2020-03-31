@@ -1,9 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+// Import contexts
+import { FormContext } from 'globalState/FormContext';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
-const SwiftCard = ({ setCardNumber }) => {
+const SwiftCard = () => {
+  const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+
   return (
     <div className="wmnds-fe-group">
       <fieldset className="wmnds-fe-fieldset">
@@ -19,16 +22,17 @@ const SwiftCard = ({ setCardNumber }) => {
             name="CardNumber"
             label="Swift card number"
             inputmode="numeric"
-            onChange={(e) => setCardNumber(e.target.value)}
+            onChange={(e) =>
+              formDispatch({
+                type: 'UPDATE_FORM_DATA',
+                payload: { CardNumber: e.target.value },
+              })
+            }
           />
         </div>
       </fieldset>
     </div>
   );
-};
-
-SwiftCard.propTypes = {
-  setCardNumber: PropTypes.func.isRequired,
 };
 
 export default SwiftCard;
