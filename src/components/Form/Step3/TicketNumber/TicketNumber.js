@@ -1,9 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+// Import contexts
+import { FormContext } from 'globalState/FormContext';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
-const TicketNumber = ({ setTicketNumber }) => {
+const TicketNumber = () => {
+  const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+
   return (
     <div className="wmnds-fe-group">
       <fieldset className="wmnds-fe-fieldset">
@@ -19,16 +22,17 @@ const TicketNumber = ({ setTicketNumber }) => {
             name="TicketNumber"
             label="Ticket number"
             inputmode="numeric"
-            onChange={(e) => setTicketNumber(e.target.value)}
+            onChange={(e) =>
+              formDispatch({
+                type: 'UPDATE_FORM_DATA',
+                payload: { TicketNumber: e.target.value },
+              })
+            }
           />
         </div>
       </fieldset>
     </div>
   );
-};
-
-TicketNumber.propTypes = {
-  setTicketNumber: PropTypes.func.isRequired,
 };
 
 export default TicketNumber;
