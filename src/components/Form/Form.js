@@ -31,7 +31,9 @@ const Form = () => {
           <Step4 setCurrentStep={setCurrentStep} currentStep={currentStep} />
         )}
       </div>
-      <pre className="wmnds-p-md">{JSON.stringify(formState, null, 2)}</pre>
+      <pre className="wmnds-p-md" style={{ overflowX: 'auto' }}>
+        {JSON.stringify(formState, null, 2)}
+      </pre>
     </div>
   );
 };
