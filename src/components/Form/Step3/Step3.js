@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 // Import components
-import DirectDebit from './DirectDebit';
-import SwiftCard from './SwiftCard';
-import TicketNumber from './TicketNumber';
-import UploadTicket from './UploadTicket';
+import DirectDebit from './DirectDebit/DirectDebit';
+import SwiftCard from './SwiftCard/SwiftCard';
+import TicketNumber from './TicketNumber/TicketNumber';
+import UploadTicket from './UploadTicket/UploadTicket';
 
 const Step3 = ({
   currentStep,
