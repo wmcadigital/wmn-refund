@@ -11,7 +11,7 @@ const Step3 = () => {
             <h3 className="wmnds-fe-question">What is your Direct Debit reference?</h3>
           </legend>
           <div className="wmnds-col-1-2 wmnds-col-sm-1-5">
-            <Input name="DirectDebitNumber" label="Direct Debit reference" />
+            <Input name="DirectDebitNumber" label="Direct Debit reference" inputmode="numeric" />
           </div>
         </fieldset>
       </div>

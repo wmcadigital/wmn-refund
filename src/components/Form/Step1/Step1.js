@@ -8,10 +8,11 @@ const Step1 = ({ currentStep, setCurrentStep, handleFormData }) => {
 
   const handleContinue = () => {
     handleFormData('CustomerType', CustomerType);
-    // classpass, swiftOnMobile, scratchcard
     if (CustomerType === 'SwiftPortal' || CustomerType === 'SwiftCard') {
       setCurrentStep(currentStep + 1); // Go to next step so we can set customerType
-    } else {
+    }
+    // classpass, swiftOnMobile, scratchcard
+    else {
       setCurrentStep(currentStep + 2); // Skip two steps as customerType has been set
     }
   };
