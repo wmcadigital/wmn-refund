@@ -7,9 +7,18 @@ const UploadTicket = () => {
   const [isFileInputFocused, setIsFileInputFocused] = useState(false);
   const [fileName, setFileName] = useState('Upload photo');
 
-  const handleFileSelected = (e) => {
-    setFileName(e.name);
-    console.log(e);
+  const handleFileSelected = (file) => {
+    setFileName(file.name);
+    console.log(file);
+
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      // Since it contains the Data URI, we should remove the prefix and keep only Base64 string
+      const b64 = reader.result.replace(/^data:.+;base64,/, '');
+    };
+
+    reader.readAsDataURL(file);
   };
 
   return (

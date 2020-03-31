@@ -41,7 +41,7 @@ const Step3 = ({
         <TicketNumber setTicketNumber={setTicketNumber} />
       )}
 
-      <UploadTicket />
+      <UploadTicket handleFormData={handleFormData} />
 
       <button
         type="button"
