@@ -23,7 +23,9 @@ const Step1 = ({ currentStep, setCurrentStep, handleFormData }) => {
       <div className="wmnds-fe-group">
         <fieldset className="wmnds-fe-fieldset">
           <legend className="wmnds-fe-fieldset__legend">
-            <h3 className="wmnds-fe-question">Which best describes your ticket?</h3>
+            <h3 className="wmnds-fe-question">
+              Which best describes your ticket?
+            </h3>
           </legend>
           <div className="wmnds-fe-radios">
             <Radio
