@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 // Import components
 import DirectDebit from './DirectDebit';
+import SwiftCard from './SwiftCard';
 
 const Step3 = ({
   currentStep,
@@ -21,10 +22,10 @@ const Step3 = ({
     <>
       <h2>Tell us about your ticket</h2>
       {customerType === 'DirectDebit' && (
-        <DirectDebit
-          setDirectDebitNumber={setDirectDebitNumber}
-          setCardNumber={setCardNumber}
-        />
+        <DirectDebit setDirectDebitNumber={setDirectDebitNumber} />
+      )}
+      {(customerType === 'DirectDebit' || customerType === 'Workwise') && (
+        <SwiftCard setCardNumber={setCardNumber} />
       )}
       <button
         type="button"
