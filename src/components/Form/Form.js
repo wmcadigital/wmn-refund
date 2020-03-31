@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+// Import contexts
+import { FormContext } from 'globalState/FormContext';
+// Import components
 import Step1 from 'components/Form/Step1/Step1';
 import Step2 from 'components/Form/Step2/Step2';
 import Step3 from 'components/Form/Step3/Step3';
@@ -9,6 +12,7 @@ import s from './Form.module.scss';
 
 const Form = () => {
   const [currentStep, setCurrentStep] = useState(1);
+  const [formState] = useContext(FormContext); // Get the state of form data from FormContext
 
   return (
     <div className="wmnds-col-1 wmnds-col-md-3-4 ">
@@ -27,6 +31,7 @@ const Form = () => {
           <Step4 setCurrentStep={setCurrentStep} currentStep={currentStep} />
         )}
       </div>
+      <pre className="wmnds-p-md">{JSON.stringify(formState, null, 2)}</pre>
     </div>
   );
 };
