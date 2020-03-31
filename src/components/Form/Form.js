@@ -12,8 +12,17 @@ const Form = () => {
   const [formData, setFormData] = useState({});
 
   const handleFormData = (item, value) => {
-    console.log(item);
-    setFormData((state) => ({ ...state, [item]: value }));
+    // If item is CustomerType then only update that
+    if (item === 'CustomerType') {
+      setFormData((state) => ({ ...state, [item]: value }));
+    }
+    // Else if it's anything else then update the item/value pair within the Application object
+    else {
+      setFormData((state) => ({
+        ...state,
+        Application: { ...state.Application, [item]: value },
+      }));
+    }
   };
 
   return (
@@ -37,6 +46,7 @@ const Form = () => {
         {currentStep === 3 && (
           <Step3
             handleFormData={handleFormData}
+            customerType={formData.CustomerType}
             setCurrentStep={setCurrentStep}
             currentStep={currentStep}
           />
