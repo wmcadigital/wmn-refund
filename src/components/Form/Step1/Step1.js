@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 import Radio from 'components/shared/FormElements/Radio/Radio';
 
 const Step1 = ({ currentStep, setCurrentStep, handleFormData }) => {
-  const [CustomerType, setCustomerType] = useState(null);
+  const [CustomerType, setCustomerType] = useState();
 
   const handleContinue = () => {
     handleFormData('CustomerType', CustomerType);
     // classpass, swiftOnMobile, scratchcard
-    if (CustomerType !== null) {
-      setCurrentStep(currentStep + 2); // Skip two steps as customerType has been set
-    } else {
+    if (CustomerType === 'SwiftPortal' || CustomerType === 'SwiftCard') {
       setCurrentStep(currentStep + 1); // Go to next step so we can set customerType
+    } else {
+      setCurrentStep(currentStep + 2); // Skip two steps as customerType has been set
     }
   };
 
@@ -29,13 +29,13 @@ const Step1 = ({ currentStep, setCurrentStep, handleFormData }) => {
               name="CustomerType"
               text="Swift card"
               value="SwiftPortal"
-              onChange={() => setCustomerType(null)}
+              onChange={(e) => setCustomerType(e.target.value)}
             />
             <Radio
               name="CustomerType"
               text="Paper ticket"
               value="SwiftCard"
-              onChange={() => setCustomerType(null)}
+              onChange={(e) => setCustomerType(e.target.value)}
             />
             <Radio
               name="CustomerType"
@@ -60,8 +60,9 @@ const Step1 = ({ currentStep, setCurrentStep, handleFormData }) => {
       </div>
       <button
         type="button"
-        className="wmnds-btn wmnds-col-1 wmnds-m-t-md"
+        className="wmnds-btn wmnds-col-1 wmnds-m-t-md wmnds-btn--disabled"
         onClick={() => handleContinue()}
+        disabled={!CustomerType}
       >
         Continue
       </button>
