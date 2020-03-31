@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+// Import contexts
+import { FormContext } from 'globalState/FormContext';
 // Import components
 import Radio from 'components/shared/FormElements/Radio/Radio';
 
-const Step2 = ({ currentStep, setCurrentStep, handleFormData }) => {
-  const [CustomerType, setCustomerType] = useState(null);
+const Step2 = ({ currentStep, setCurrentStep }) => {
+  const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
 
+  // Update customerType on radio button change
+  const handleRadioChange = (e) =>
+    formDispatch({
+      type: 'UPDATE_CUSTOMER_TYPE',
+      payload: e.target.value,
+    });
+
+  // Goto next step on continue
   const handleContinue = () => {
-    handleFormData('CustomerType', CustomerType);
     setCurrentStep(currentStep + 1);
   };
 
@@ -24,37 +33,37 @@ const Step2 = ({ currentStep, setCurrentStep, handleFormData }) => {
               name="CustomerType"
               text="I pay monthly by Direct Debit"
               value="DirectDebit"
-              onChange={(e) => setCustomerType(e.target.value)}
+              onChange={handleRadioChange}
             />
             <Radio
               name="CustomerType"
               text="I bought it from the West Midlands Network or Swift website"
               value="SwiftPortal"
-              onChange={(e) => setCustomerType(e.target.value)}
+              onChange={handleRadioChange}
             />
             <Radio
               name="CustomerType"
               text="I pay for it through my company"
               value="Corporate"
-              onChange={(e) => setCustomerType(e.target.value)}
+              onChange={handleRadioChange}
             />
             <Radio
               name="CustomerType"
               text="I am on the Workwise scheme"
               value="Workwise"
-              onChange={(e) => setCustomerType(e.target.value)}
+              onChange={handleRadioChange}
             />
             <Radio
               name="CustomerType"
               text="I bought it from a Swift ticket machine"
               value="SwiftPortal"
-              onChange={(e) => setCustomerType(e.target.value)}
+              onChange={handleRadioChange}
             />
             <Radio
               name="CustomerType"
               text="I bought it from a ticket office, West Midlands Network travel shop or Payzone shop"
               value="Shop"
-              onChange={(e) => setCustomerType(e.target.value)}
+              onChange={handleRadioChange}
             />
           </div>
         </fieldset>
@@ -63,7 +72,7 @@ const Step2 = ({ currentStep, setCurrentStep, handleFormData }) => {
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
         onClick={() => handleContinue()}
-        disabled={!CustomerType}
+        disabled={formState.CustomerType === 'Step2'}
       >
         Continue
       </button>
@@ -74,7 +83,6 @@ const Step2 = ({ currentStep, setCurrentStep, handleFormData }) => {
 Step2.propTypes = {
   currentStep: PropTypes.number.isRequired,
   setCurrentStep: PropTypes.func.isRequired,
-  handleFormData: PropTypes.func.isRequired,
 };
 
 export default Step2;
