@@ -1,9 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+// Import contexts
+import { FormContext } from 'globalState/FormContext';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
-const DirectDebit = ({ setDirectDebitNumber }) => {
+const DirectDebit = () => {
+  const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+
   return (
     <>
       <div className="wmnds-fe-group">
@@ -18,17 +21,18 @@ const DirectDebit = ({ setDirectDebitNumber }) => {
               name="DirectDebitNumber"
               label="Direct Debit reference"
               inputmode="numeric"
-              onChange={(e) => setDirectDebitNumber(e.target.value)}
+              onChange={(e) =>
+                formDispatch({
+                  type: 'UPDATE_FORM_DATA',
+                  payload: { DirectDebit: e.target.value },
+                })
+              }
             />
           </div>
         </fieldset>
       </div>
     </>
   );
-};
-
-DirectDebit.propTypes = {
-  setDirectDebitNumber: PropTypes.func.isRequired,
 };
 
 export default DirectDebit;

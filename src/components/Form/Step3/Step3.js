@@ -17,15 +17,15 @@ const Step3 = ({ currentStep, setCurrentStep }) => {
   return (
     <>
       <h2>Tell us about your ticket</h2>
-      {formState.customerType === 'DirectDebit' && <DirectDebit />}
+      {formState.CustomerType === 'DirectDebit' && <DirectDebit />}
 
-      {(formState.customerType === 'DirectDebit' ||
-        formState.customerType === 'Workwise' ||
-        formState.customerType === 'Corporate') && <SwiftCard />}
+      {(formState.CustomerType === 'DirectDebit' ||
+        formState.CustomerType === 'Workwise' ||
+        formState.CustomerType === 'Corporate') && <SwiftCard />}
 
-      {(formState.customerType === 'OnlineSales' ||
-        formState.customerType === 'Shop' ||
-        formState.customerType === 'SwiftPortal') && <TicketNumber />}
+      {(formState.CustomerType === 'OnlineSales' ||
+        formState.CustomerType === 'Shop' ||
+        formState.CustomerType === 'SwiftPortal') && <TicketNumber />}
 
       <UploadTicket />
 
@@ -47,7 +47,6 @@ const Step3 = ({ currentStep, setCurrentStep }) => {
 Step3.propTypes = {
   currentStep: PropTypes.number.isRequired,
   setCurrentStep: PropTypes.func.isRequired,
-  handleFormData: PropTypes.func.isRequired,
 };
 
 export default Step3;
