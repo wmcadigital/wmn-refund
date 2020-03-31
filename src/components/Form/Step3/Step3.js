@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 // Import components
 import DirectDebit from './DirectDebit';
 import SwiftCard from './SwiftCard';
+import TicketNumber from './TicketNumber';
 
 const Step3 = ({
   currentStep,
@@ -12,10 +13,12 @@ const Step3 = ({
 }) => {
   const [directDebitNumber, setDirectDebitNumber] = useState();
   const [cardNumber, setCardNumber] = useState();
+  const [ticketNumber, setTicketNumber] = useState();
 
   const handleContinue = () => {
     handleFormData('DirectDebitNumber', directDebitNumber);
     handleFormData('CardNumber', cardNumber);
+    handleFormData('TicketNumber', ticketNumber);
     setCurrentStep(currentStep + 1);
   };
   return (
@@ -24,9 +27,19 @@ const Step3 = ({
       {customerType === 'DirectDebit' && (
         <DirectDebit setDirectDebitNumber={setDirectDebitNumber} />
       )}
-      {(customerType === 'DirectDebit' || customerType === 'Workwise') && (
+
+      {(customerType === 'DirectDebit' ||
+        customerType === 'Workwise' ||
+        customerType === 'Corporate') && (
         <SwiftCard setCardNumber={setCardNumber} />
       )}
+
+      {(customerType === 'OnlineSales' ||
+        customerType === 'Shop' ||
+        customerType === 'SwiftPortal') && (
+        <TicketNumber setTicketNumber={setTicketNumber} />
+      )}
+
       <button
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
