@@ -18,7 +18,10 @@ const Form = () => {
     }
     // Else if it's anything else then update the item/value pair within the Application object
     else {
-      setFormData((state) => ({ ...state, Application: { [item]: value } }));
+      setFormData((state) => ({
+        ...state,
+        Application: { ...state.Application, [item]: value },
+      }));
     }
   };
 

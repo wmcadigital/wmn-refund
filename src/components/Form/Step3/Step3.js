@@ -8,7 +8,8 @@ const Step3 = ({ currentStep, setCurrentStep, handleFormData }) => {
   const [cardNumber, setCardNumber] = useState();
 
   const handleContinue = () => {
-    handleFormData('CustomerType', directDebitNumber);
+    handleFormData('DirectDebitNumber', directDebitNumber);
+    handleFormData('CardNumber', cardNumber);
     setCurrentStep(currentStep + 1);
   };
   return (
