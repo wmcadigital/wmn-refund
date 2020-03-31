@@ -9,21 +9,6 @@ import s from './Form.module.scss';
 
 const Form = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  // const [formData, setFormData] = useState({});
-
-  // const handleFormData = (item, value) => {
-  //   // If item is CustomerType then only update that
-  //   if (item === 'CustomerType') {
-  //     setFormData((state) => ({ ...state, [item]: value }));
-  //   }
-  //   // Else if it's anything else then update the item/value pair within the Application object
-  //   else {
-  //     setFormData((state) => ({
-  //       ...state,
-  //       Application: { ...state.Application, [item]: value },
-  //     }));
-  //   }
-  // };
 
   return (
     <div className="wmnds-col-1 wmnds-col-md-3-4 ">
