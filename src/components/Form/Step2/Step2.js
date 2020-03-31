@@ -61,8 +61,9 @@ const Step2 = ({ currentStep, setCurrentStep, handleFormData }) => {
       </div>
       <button
         type="button"
-        className="wmnds-btn wmnds-col-1 wmnds-m-t-md"
+        className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
         onClick={() => handleContinue()}
+        disabled={!CustomerType}
       >
         Continue
       </button>
