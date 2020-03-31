@@ -14,10 +14,18 @@ const Step1 = ({ currentStep, setCurrentStep }) => {
 
   // Update the current step to the correct one depending on users selection
   const handleContinue = () => {
+    // SwiftCard, paperTicket
     if (formState.CustomerType === 'Step2') {
       setCurrentStep(currentStep + 1); // Go to next step so we can set customerType
     }
-    // classpass, swiftOnMobile, scratchcard
+    // classPass, scratchcard
+    else if (
+      formState.CustomerType === 'Scratchcard' ||
+      formState.CustomerType === 'ClassPass'
+    ) {
+      setCurrentStep(currentStep + 3); // Skip to last steps as payment info isn't needed for scratchcard and classPass
+    }
+    // swiftOnMobile;
     else {
       setCurrentStep(currentStep + 2); // Skip two steps as customerType has been set
     }
