@@ -46,6 +46,7 @@ const Form = () => {
         {currentStep === 3 && (
           <Step3
             handleFormData={handleFormData}
+            customerType={formData.CustomerType}
             setCurrentStep={setCurrentStep}
             currentStep={currentStep}
           />
