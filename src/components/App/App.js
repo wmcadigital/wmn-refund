@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+// Import contexts
+import { FormProvider } from 'globalState/FormContext';
+// Import components
 import Form from 'components/Form/Form';
 import Introduction from 'components/Introduction/Introduction';
 
@@ -12,7 +15,11 @@ function App() {
       </h1>
       {/* If form isn't started, show intro...else show form */}
       {!isFormStarted && <Introduction setIsFormStarted={setIsFormStarted} />}
-      {isFormStarted && <Form />}
+      {isFormStarted && (
+        <FormProvider>
+          <Form />
+        </FormProvider>
+      )}
     </div>
   );
 }
