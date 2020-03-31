@@ -5,7 +5,10 @@ import svgSprite from 'assets/icons/wmnds-svg-sprite.min.svg';
 const Icon = ({ className, iconName }) => {
   return (
     <svg className={className}>
-      <use xlinkHref={`${svgSprite}#wmnds-${iconName}`} href={`${svgSprite}#wmnds-${iconName}`} />
+      <use
+        xlinkHref={`${svgSprite}#wmnds-${iconName}`}
+        href={`${svgSprite}#wmnds-${iconName}`}
+      />
     </svg>
   );
 };

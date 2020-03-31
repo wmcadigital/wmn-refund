@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import DirectDebit from './DirectDebit';
 import SwiftCard from './SwiftCard';
 import TicketNumber from './TicketNumber';
+import UploadTicket from './UploadTicket';
 
 const Step3 = ({
   currentStep,
@@ -39,6 +40,8 @@ const Step3 = ({
         customerType === 'SwiftPortal') && (
         <TicketNumber setTicketNumber={setTicketNumber} />
       )}
+
+      <UploadTicket />
 
       <button
         type="button"
