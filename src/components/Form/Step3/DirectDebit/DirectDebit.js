@@ -13,6 +13,10 @@ const DirectDebit = () => {
         <h3 className="wmnds-fe-question">
           What is your Direct Debit reference?
         </h3>
+        <p>
+          This is shown next to WMCA on your bank statement and begins with{' '}
+          <strong>6</strong>
+        </p>
       </legend>
       <Input
         className="wmnds-col-1-2 wmnds-col-sm-1-5"
