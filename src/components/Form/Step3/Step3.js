@@ -36,11 +36,21 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
       disabledState = !Application.DirectDebitNumber || !Application.CardNumber;
       break;
 
-    // Workwise, Corporate
+    // Workwise
     case 'Workwise':
-    case 'Corporate':
       elementsToRender = <SwiftCard />;
       disabledState = !Application.CardNumber;
+      break;
+
+    //  Corporate
+    case 'Corporate':
+      elementsToRender = (
+        <>
+          <SwiftCard />
+          <HowProcess />
+        </>
+      );
+      disabledState = !Application.CardNumber || !Application.ActionType;
       break;
 
     // OnlineSales, Shop, SwiftPortal
@@ -63,9 +73,6 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
           <UploadTicket />
         </>
       )}
-
-      {/* If customerType is corporate then show how process options */}
-      {CustomerType === 'Corporate' && <HowProcess />}
 
       <button
         type="button"
