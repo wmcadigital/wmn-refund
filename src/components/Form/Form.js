@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 // Import components
@@ -10,7 +11,7 @@ import ProgressIndicator from './ProgressIndicator/ProgressIndicator';
 // Import styling
 import s from './Form.module.scss';
 
-const Form = () => {
+const Form = ({ setFormSubmitStatus }) => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
   const [currentStep, setCurrentStep] = useState(1);
   const [isPaperTicket, setIsPaperTicket] = useState(false); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
@@ -28,7 +29,13 @@ const Form = () => {
       })
       .then((data) => {
         console.log({ data });
+        setFormSubmitStatus('success'); // Set form status to success
+
         alert(`form has been submitted as ${formState.CustomerType}`);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        setFormSubmitStatus('error'); // Set form status to success
       });
   };
 
@@ -82,6 +89,10 @@ const Form = () => {
       </pre>
     </>
   );
+};
+
+Form.propTypes = {
+  setFormSubmitStatus: PropTypes.func.isRequired,
 };
 
 export default Form;

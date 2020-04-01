@@ -7,7 +7,7 @@ import Introduction from 'components/Introduction/Introduction';
 
 function App() {
   const [isFormStarted, setIsFormStarted] = useState(false);
-  const [isFormSuccess, setisFormSuccess] = useState();
+  const [formSubmitStatus, setFormSubmitStatus] = useState(null);
 
   return (
     <div className="wmnds-container wmnds-p-t-lg wmnds-p-b-lg wmnds-grid">
@@ -19,7 +19,7 @@ function App() {
 
       {isFormStarted && (
         <FormProvider>
-          <Form />
+          <Form setFormSubmitStatus={setFormSubmitStatus} />
         </FormProvider>
       )}
     </div>
