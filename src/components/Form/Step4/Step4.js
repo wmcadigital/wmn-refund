@@ -7,6 +7,7 @@ import DOB from './DOB/DOB';
 import Address from './Address/Address';
 import Email from './Email/Email';
 import Telephone from './Telephone/Telephone';
+import Name from './Name/Name';
 
 const Step4 = () => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
@@ -20,6 +21,8 @@ const Step4 = () => {
         We’ll use this information to confirm your identity and contact you if
         we need more information
       </p>
+
+      <Name />
 
       {/* Only show Company if customer is one of the below */}
       {(CustomerType === 'DirectDebit' ||
