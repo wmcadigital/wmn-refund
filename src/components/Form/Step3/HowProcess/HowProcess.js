@@ -31,7 +31,7 @@ const HowProcess = () => {
           />
           <Radio
             name="ActionType"
-            text="Contact us again when you go back to work. After you have let us know, you will get refund for the period you have not travelled. You will continue to pay for your ticket every month during social distancing measures. You can use the same ticket when you go back to work."
+            text="Contact us again when you go back to work. After you have let us know, you will get refund for the period you have not travelled. <br/><br/>You will continue to pay for your ticket every month during social distancing measures. You can use the same ticket when you go back to work."
             value="NotTravelling"
             onChange={handleRadioChange}
           />
