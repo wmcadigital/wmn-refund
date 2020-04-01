@@ -35,7 +35,7 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
       break;
 
     // Workwise, Corporate
-    case 'WorkWise':
+    case 'Workwise':
     case 'Corporate':
       elementsToRender = <SwiftCard />;
       disabledState = !Application.CardNumber;
