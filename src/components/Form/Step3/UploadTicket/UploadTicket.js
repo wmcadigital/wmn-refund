@@ -33,7 +33,7 @@ const UploadTicket = () => {
 
   return (
     <>
-      <div className="wmnds-msg-summary wmnds-msg-summary--warning wmnds-t-b-xl wmnds-m-b-xl">
+      <div className="wmnds-msg-summary wmnds-msg-summary--warning wmnds-t-xl wmnds-m-b-xl">
         <div className="wmnds-msg-summary__header">
           <Icon
             className="wmnds-msg-summary__icon"
