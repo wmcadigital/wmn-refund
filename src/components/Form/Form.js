@@ -16,9 +16,20 @@ const Form = () => {
   const [isPaperTicket, setIsPaperTicket] = useState(false); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
   const [isSwiftCard, setIsSwiftCard] = useState(false); // Used to track if a user is using a SwiftCard(set in step 1). Then read this value in step 2 to hide 'bought on website radio option'
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(e);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    fetch('https://apisNWM.cenapps.org.uk/ticketapplications/Refund', {
+      method: 'post',
+      body: JSON.stringify(formState),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log({ data });
+        alert(`form has been submitted as ${formState.CustomerType}`);
+      });
   };
 
   return (

@@ -7,6 +7,7 @@ import Introduction from 'components/Introduction/Introduction';
 
 function App() {
   const [isFormStarted, setIsFormStarted] = useState(false);
+  const [isFormSuccess, setisFormSuccess] = useState();
 
   return (
     <div className="wmnds-container wmnds-p-t-lg wmnds-p-b-lg wmnds-grid">
@@ -15,6 +16,7 @@ function App() {
       </h1>
       {/* If form isn't started, show intro...else show form */}
       {!isFormStarted && <Introduction setIsFormStarted={setIsFormStarted} />}
+
       {isFormStarted && (
         <FormProvider>
           <Form />
