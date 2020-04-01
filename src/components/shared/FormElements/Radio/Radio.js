@@ -1,11 +1,14 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import PropTypes from 'prop-types';
+import dompurify from 'dompurify';
+
+const { sanitize } = dompurify;
 
 const Radio = ({ name, onChange, text, value }) => {
   return (
     <label className="wmnds-fe-radios__container">
-      {text}
+      <div dangerouslySetInnerHTML={{ __html: sanitize(text) }} />
       <input
         className="wmnds-fe-radios__input"
         value={value}
