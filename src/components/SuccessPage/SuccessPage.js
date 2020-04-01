@@ -15,7 +15,7 @@ const SuccessPage = () => {
         </div>
 
         <div className="wmnds-msg-summary__info">
-          Your reference number is 12345
+          Your reference number is <strong>12345</strong>
         </div>
       </div>
 

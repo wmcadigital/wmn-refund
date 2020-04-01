@@ -18,7 +18,7 @@ function App() {
       {/* If form isn't started, show intro...else show form */}
       {!isFormStarted && <Introduction setIsFormStarted={setIsFormStarted} />}
 
-      {isFormStarted && (
+      {isFormStarted && formSubmitStatus === null && (
         <FormProvider>
           <Form setFormSubmitStatus={setFormSubmitStatus} />
         </FormProvider>
