@@ -17,6 +17,7 @@ const Address = () => {
           <Input
             name="AddressLine1"
             label="Building and street"
+            className="wmnds-m-b-sm"
             onChange={(e) =>
               formDispatch({
                 type: 'UPDATE_FORM_DATA',
@@ -26,7 +27,6 @@ const Address = () => {
           />
           <Input
             name="AddressLine2"
-            className="wmnds-m-none"
             onChange={(e) =>
               formDispatch({
                 type: 'UPDATE_FORM_DATA',

@@ -1,16 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Input = ({
-  label,
-  inputmode,
-  onChange,
-  name,
-  noGroupClass,
-  spellcheck,
-}) => {
+const Input = ({ label, inputmode, onChange, name, className, spellcheck }) => {
   return (
-    <div className={!noGroupClass ? 'wmnds-fe-group' : ''}>
+    <div className={className ? className : 'wmnds-fe-group'}>
       {label && (
         <label className="wmnds-fe-label" htmlFor={name}>
           {label}
@@ -34,14 +27,14 @@ Input.propTypes = {
   inputmode: PropTypes.string,
   onChange: PropTypes.func,
   name: PropTypes.string.isRequired,
-  noGroupClass: PropTypes.bool,
+  className: PropTypes.string,
   spellcheck: PropTypes.bool,
 };
 
 Input.defaultProps = {
   inputmode: 'text',
   onChange: null,
-  noGroupClass: false,
+  className: null,
   spellcheck: false,
 };
 
