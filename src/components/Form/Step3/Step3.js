@@ -61,7 +61,11 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
         onClick={() => handleContinue()}
-        disabled={disabledState}
+        disabled={
+          isPaperTicket
+            ? !Application.PhotoBase64 || disabledState
+            : disabledState
+        }
       >
         Continue
       </button>
