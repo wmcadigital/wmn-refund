@@ -4,6 +4,7 @@ import { FormProvider } from 'globalState/FormContext';
 // Import components
 import Form from 'components/Form/Form';
 import Introduction from 'components/Introduction/Introduction';
+import SuccessPage from 'components/SuccessPage/SuccessPage';
 
 function App() {
   const [isFormStarted, setIsFormStarted] = useState(false);
@@ -22,6 +23,8 @@ function App() {
           <Form setFormSubmitStatus={setFormSubmitStatus} />
         </FormProvider>
       )}
+
+      {formSubmitStatus && <SuccessPage />}
     </div>
   );
 }

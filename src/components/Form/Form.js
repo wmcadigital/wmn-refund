@@ -19,24 +19,26 @@ const Form = ({ setFormSubmitStatus }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setFormSubmitStatus(true); // Set form status to success
 
-    fetch('https://apisNWM.cenapps.org.uk/ticketapplications/Refund', {
-      method: 'post',
-      body: JSON.stringify(formState),
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log({ data });
-        setFormSubmitStatus('success'); // Set form status to success
+    // The above is temp commented whilst we wait for CORS
+    // fetch('https://apisNWM.cenapps.org.uk/ticketapplications/Refund', {
+    //   method: 'post',
+    //   body: JSON.stringify(formState),
+    // })
+    //   .then((response) => {
+    //     return response.json();
+    //   })
+    //   .then((data) => {
+    //     console.log({ data });
+    //     setFormSubmitStatus(true); // Set form status to success
 
-        alert(`form has been submitted as ${formState.CustomerType}`);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        setFormSubmitStatus('error'); // Set form status to success
-      });
+    //     alert(`form has been submitted as ${formState.CustomerType}`);
+    //   })
+    //   .catch((error) => {
+    //     console.error('Error:', error);
+    //     setFormSubmitStatus(false); // Set form status to success
+    //   });
   };
 
   return (

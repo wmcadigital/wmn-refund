@@ -3,9 +3,9 @@ import Icon from 'components/shared/Icon/Icon';
 
 const SuccessPage = () => {
   return (
-    <div className="wmnds-col-1 wmnds-col-md-3-4">
+    <div className="wmnds-col-1 wmnds-col-md-1-2 ">
       {/* Success message */}
-      <div className="wmnds-msg-summary wmnds-msg-summary--success-fill">
+      <div className="wmnds-msg-summary wmnds-msg-summary--success-fill wmnds-m-b-xl">
         <div className="wmnds-msg-summary__header">
           <Icon
             iconName="general-success"
@@ -19,6 +19,7 @@ const SuccessPage = () => {
         </div>
       </div>
 
+      {/* Success copy */}
       <p>We have sent you a confirmation email.</p>
 
       <h3>What happens next</h3>
