@@ -4,27 +4,24 @@ import { FormContext } from 'globalState/FormContext';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
-const TicketNumber = () => {
+const Telephone = () => {
   const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
 
   return (
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
-        <h3 className="wmnds-fe-question">What is your ticket number?</h3>
-        <p>
-          This is the five-digit number found next to the expiry date on your
-          paper ticket
-        </p>
+        <h3 className="wmnds-fe-question">What is your telephone number?</h3>
       </legend>
+
       <Input
-        className="wmnds-col-1-2 wmnds-col-sm-1-5"
-        name="TicketNumber"
-        label="Ticket number"
+        className="wmnds-col-sm-1-2"
+        name="PhoneNumber"
+        label="UK telephone number"
         inputmode="numeric"
         onChange={(e) =>
           formDispatch({
             type: 'UPDATE_FORM_DATA',
-            payload: { TicketNumber: e.target.value },
+            payload: { PhoneNumber: e.target.value },
           })
         }
       />
@@ -32,4 +29,4 @@ const TicketNumber = () => {
   );
 };
 
-export default TicketNumber;
+export default Telephone;
