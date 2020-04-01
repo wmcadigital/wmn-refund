@@ -7,6 +7,7 @@ import DirectDebit from './DirectDebit/DirectDebit';
 import SwiftCard from './SwiftCard/SwiftCard';
 import TicketNumber from './TicketNumber/TicketNumber';
 import UploadTicket from './UploadTicket/UploadTicket';
+import LastUsed from './LastUsed/LastUsed';
 
 const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
@@ -35,7 +36,7 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
       break;
 
     // Workwise, Corporate
-    case 'WorkWise':
+    case 'Workwise':
     case 'Corporate':
       elementsToRender = <SwiftCard />;
       disabledState = !Application.CardNumber;
@@ -55,7 +56,12 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
       {elementsToRender}
 
       {/* Only show this if a user selected paper ticket in step 1 */}
-      {isPaperTicket && <UploadTicket />}
+      {isPaperTicket && (
+        <>
+          <LastUsed />
+          <UploadTicket />
+        </>
+      )}
 
       <button
         type="button"

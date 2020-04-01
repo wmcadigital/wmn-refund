@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 // Import components
@@ -7,11 +8,15 @@ import DOB from './DOB/DOB';
 import Address from './Address/Address';
 import Email from './Email/Email';
 import Telephone from './Telephone/Telephone';
+import Name from './Name/Name';
 
-const Step4 = () => {
+const Step4 = ({ currentStep, setCurrentStep }) => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
-
   const { CustomerType } = formState; // Destructure customertype
+
+  const handleContinue = () => {
+    setCurrentStep(currentStep + 1);
+  };
 
   return (
     <>
@@ -20,6 +25,8 @@ const Step4 = () => {
         We’ll use this information to confirm your identity and contact you if
         we need more information
       </p>
+
+      <Name />
 
       {/* Only show Company if customer is one of the below */}
       {(CustomerType === 'DirectDebit' ||
@@ -37,8 +44,21 @@ const Step4 = () => {
 
       <Email />
       <Telephone />
+
+      <button
+        type="button"
+        className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
+        onClick={() => handleContinue()}
+      >
+        Submit application
+      </button>
     </>
   );
+};
+
+Step4.propTypes = {
+  currentStep: PropTypes.number.isRequired,
+  setCurrentStep: PropTypes.func.isRequired,
 };
 
 export default Step4;
