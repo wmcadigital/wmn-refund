@@ -14,18 +14,44 @@ const Step3 = ({ currentStep, setCurrentStep }) => {
   const handleContinue = () => {
     setCurrentStep(currentStep + 1);
   };
+
+  // Set placeholder vars which we will change in the switch below (based on CustomerType)
+  let disabledState; // Used to change the disabled state on continue button
+  let elementsToRender; // Used to change conditional elements to render
+
+  const { Application, CustomerType } = formState; // Destructure object
+
+  // Switch on customer type, then change disabledState and elementsToRender accordingly
+  switch (CustomerType) {
+    // DirectDebit
+    case 'DirectDebit':
+      elementsToRender = (
+        <>
+          <DirectDebit />
+          <SwiftCard />
+        </>
+      );
+      disabledState = !Application.DirectDebitNumber || !Application.CardNumber;
+      break;
+
+    // Workwise, Corporate
+    case 'WorkWise':
+    case 'Corporate':
+      elementsToRender = <SwiftCard />;
+      disabledState = !Application.CardNumber;
+      break;
+
+    // OnlineSales, Shop, SwiftPortal
+    default:
+      elementsToRender = <TicketNumber />;
+      disabledState = !Application.TicketNumber;
+  }
+
   return (
     <>
       <h2>Tell us about your ticket</h2>
-      {formState.CustomerType === 'DirectDebit' && <DirectDebit />}
 
-      {(formState.CustomerType === 'DirectDebit' ||
-        formState.CustomerType === 'Workwise' ||
-        formState.CustomerType === 'Corporate') && <SwiftCard />}
-
-      {(formState.CustomerType === 'OnlineSales' ||
-        formState.CustomerType === 'Shop' ||
-        formState.CustomerType === 'SwiftPortal') && <TicketNumber />}
+      {elementsToRender}
 
       <UploadTicket />
 
@@ -33,10 +59,7 @@ const Step3 = ({ currentStep, setCurrentStep }) => {
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
         onClick={() => handleContinue()}
-        disabled={
-          !formState.Application.directDebitNumber ||
-          !formState.Application.cardNumber
-        }
+        disabled={disabledState}
       >
         Continue
       </button>
