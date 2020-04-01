@@ -72,7 +72,10 @@ const Step2 = ({ currentStep, setCurrentStep }) => {
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
         onClick={() => handleContinue()}
-        disabled={formState.CustomerType === 'Step2'}
+        disabled={
+          formState.CustomerType === 'SwiftCard' ||
+          formState.CustomerType === 'PaperTicket'
+        }
       >
         Continue
       </button>
