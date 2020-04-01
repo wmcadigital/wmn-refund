@@ -13,64 +13,64 @@ const Address = () => {
         <h3 className="wmnds-fe-question">What is your home address?</h3>
       </legend>
       {/* Building and street */}
-      <div className="wmnds-col-1-2 wmnds-col-sm-2-3">
-        <Input
-          name="AddressLine1"
-          label="Building and street"
-          onChange={(e) =>
-            formDispatch({
-              type: 'UPDATE_FORM_DATA',
-              payload: { AddressLine1: e.target.value },
-            })
-          }
-        />
-        <Input
-          name="AddressLine2"
-          onChange={(e) =>
-            formDispatch({
-              type: 'UPDATE_FORM_DATA',
-              payload: { AddressLine2: e.target.value },
-            })
-          }
-        />
-      </div>
+      <Input
+        className="wmnds-col-1-2 wmnds-col-sm-2-3"
+        name="AddressLine1"
+        label="Building and street"
+        onChange={(e) =>
+          formDispatch({
+            type: 'UPDATE_FORM_DATA',
+            payload: { AddressLine1: e.target.value },
+          })
+        }
+      />
+      <Input
+        className="wmnds-col-1-2 wmnds-col-sm-2-3"
+        name="AddressLine2"
+        onChange={(e) =>
+          formDispatch({
+            type: 'UPDATE_FORM_DATA',
+            payload: { AddressLine2: e.target.value },
+          })
+        }
+      />
+
       {/* Town/City and County */}
-      <div className="wmnds-col-1 wmnds-col-sm-1-2">
-        <Input
-          name="AddressTown"
-          label="Town or city"
-          onChange={(e) =>
-            formDispatch({
-              type: 'UPDATE_FORM_DATA',
-              payload: { AddressTown: e.target.value },
-            })
-          }
-        />
-        <Input
-          name="AddressLine3"
-          label="County"
-          onChange={(e) =>
-            formDispatch({
-              type: 'UPDATE_FORM_DATA',
-              payload: { AddressLine3: e.target.value },
-            })
-          }
-        />
-      </div>
+      <Input
+        className="wmnds-col-1 wmnds-col-sm-1-2"
+        name="AddressTown"
+        label="Town or city"
+        onChange={(e) =>
+          formDispatch({
+            type: 'UPDATE_FORM_DATA',
+            payload: { AddressTown: e.target.value },
+          })
+        }
+      />
+      <Input
+        className="wmnds-col-1 wmnds-col-sm-1-2"
+        name="AddressLine3"
+        label="County"
+        onChange={(e) =>
+          formDispatch({
+            type: 'UPDATE_FORM_DATA',
+            payload: { AddressLine3: e.target.value },
+          })
+        }
+      />
+
       {/* Postcode */}
-      <div className="wmnds-col-1">
-        <Input
-          name="AddressPostcode"
-          label="Postcode"
-          className="wmnds-col-sm-1-4"
-          onChange={(e) =>
-            formDispatch({
-              type: 'UPDATE_FORM_DATA',
-              payload: { AddressPostcode: e.target.value },
-            })
-          }
-        />
-      </div>
+      <Input
+        name="AddressPostcode"
+        label="Postcode"
+        className="wmnds-col-1-2 wmnds-col-sm-1-4"
+        onChange={(e) =>
+          formDispatch({
+            type: 'UPDATE_FORM_DATA',
+            payload: { AddressPostcode: e.target.value },
+          })
+        }
+      />
     </fieldset>
   );
 };
