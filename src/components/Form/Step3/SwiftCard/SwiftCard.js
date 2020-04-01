@@ -17,7 +17,7 @@ const SwiftCard = () => {
         </p>
       </legend>
       <Input
-        className="wmnds-col-1-2 wmnds-col-sm-1-5"
+        className="wmnds-col-1 wmnds-col-sm-3-4 wmnds-col-md-1-2"
         name="CardNumber"
         label="Swift card number"
         inputmode="numeric"
