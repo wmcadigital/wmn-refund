@@ -2,6 +2,7 @@ import React from 'react';
 import Company from './Company/Company';
 import DOB from './DOB/DOB';
 import Address from './Address/Address';
+import Email from './Email/Email';
 
 const Step4 = () => {
   return (
@@ -16,7 +17,7 @@ const Step4 = () => {
       <DOB />
       <Address />
 
-      <h3>What is your email address?</h3>
+      <Email />
       <h3>What is your telephone number?</h3>
     </>
   );
