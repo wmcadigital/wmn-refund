@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from 'components/shared/FormElements/Input/Input';
 import Company from './Company/Company';
+import DOB from './DOB/DOB';
 
 const Step4 = () => {
   return (
@@ -13,7 +14,7 @@ const Step4 = () => {
 
       <Company />
 
-      <h3>What is your date of birth?</h3>
+      <DOB />
 
       <h3>What is your home address?</h3>
       <Input name="AddressLine1" label="Building and street" />
