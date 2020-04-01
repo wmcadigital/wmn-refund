@@ -17,34 +17,39 @@ const Form = () => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
 
   return (
-    <div className="wmnds-col-1 wmnds-col-md-3-4 ">
-      <ProgressIndicator currentStep={currentStep} />
-      <div className={`wmnds-p-lg ${s.formWrapper}`}>
-        {currentStep === 1 && (
-          <Step1
-            setCurrentStep={setCurrentStep}
-            currentStep={currentStep}
-            setIsPaperTicket={setIsPaperTicket}
-          />
-        )}
-        {currentStep === 2 && (
-          <Step2 setCurrentStep={setCurrentStep} currentStep={currentStep} />
-        )}
-        {currentStep === 3 && (
-          <Step3
-            setCurrentStep={setCurrentStep}
-            currentStep={currentStep}
-            isPaperTicket={isPaperTicket}
-          />
-        )}
-        {currentStep === 4 && (
-          <Step4 setCurrentStep={setCurrentStep} currentStep={currentStep} />
-        )}
+    <>
+      <div className="wmnds-col-1 wmnds-col-md-3-4 ">
+        <ProgressIndicator currentStep={currentStep} />
+        <div className={`wmnds-p-lg ${s.formWrapper}`}>
+          {currentStep === 1 && (
+            <Step1
+              setCurrentStep={setCurrentStep}
+              currentStep={currentStep}
+              setIsPaperTicket={setIsPaperTicket}
+            />
+          )}
+          {currentStep === 2 && (
+            <Step2 setCurrentStep={setCurrentStep} currentStep={currentStep} />
+          )}
+          {currentStep === 3 && (
+            <Step3
+              setCurrentStep={setCurrentStep}
+              currentStep={currentStep}
+              isPaperTicket={isPaperTicket}
+            />
+          )}
+          {currentStep === 4 && (
+            <Step4 setCurrentStep={setCurrentStep} currentStep={currentStep} />
+          )}
+        </div>
       </div>
-      <pre className="wmnds-p-md" style={{ overflowX: 'auto' }}>
+      <pre
+        className="wmnds-col-1 wmnds-col-md-1-4 wmnds-p-md"
+        style={{ overflowX: 'auto', position: 'fixed', right: 0 }}
+      >
         {JSON.stringify(formState, null, 2)}
       </pre>
-    </div>
+    </>
   );
 };
 
