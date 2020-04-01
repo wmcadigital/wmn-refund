@@ -5,7 +5,7 @@ import { FormContext } from 'globalState/FormContext';
 // Import components
 import Radio from 'components/shared/FormElements/Radio/Radio';
 
-const Step2 = ({ currentStep, setCurrentStep }) => {
+const Step2 = ({ currentStep, setCurrentStep, isSwiftCard }) => {
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
 
   // Update customerType on radio button change
@@ -36,7 +36,7 @@ const Step2 = ({ currentStep, setCurrentStep }) => {
               onChange={handleRadioChange}
             />
             {/* Only show if not CustomerType of SwiftCard */}
-            {formState.CustomerType !== 'SwiftCard' && (
+            {!isSwiftCard && (
               <Radio
                 name="CustomerType"
                 text="I bought it from the West Midlands Network or Swift website"
@@ -89,6 +89,7 @@ const Step2 = ({ currentStep, setCurrentStep }) => {
 Step2.propTypes = {
   currentStep: PropTypes.number.isRequired,
   setCurrentStep: PropTypes.func.isRequired,
+  isSwiftCard: PropTypes.bool.isRequired,
 };
 
 export default Step2;

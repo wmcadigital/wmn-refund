@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 // Import components
@@ -10,13 +9,9 @@ import Email from './Email/Email';
 import Telephone from './Telephone/Telephone';
 import Name from './Name/Name';
 
-const Step4 = ({ currentStep, setCurrentStep }) => {
+const Step4 = () => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
   const { CustomerType } = formState; // Destructure customertype
-
-  const handleContinue = () => {
-    setCurrentStep(currentStep + 1);
-  };
 
   return (
     <>
@@ -46,19 +41,13 @@ const Step4 = ({ currentStep, setCurrentStep }) => {
       <Telephone />
 
       <button
-        type="button"
+        type="submit"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        onClick={() => handleContinue()}
       >
         Submit application
       </button>
     </>
   );
-};
-
-Step4.propTypes = {
-  currentStep: PropTypes.number.isRequired,
-  setCurrentStep: PropTypes.func.isRequired,
 };
 
 export default Step4;
