@@ -3,6 +3,7 @@ import Company from './Company/Company';
 import DOB from './DOB/DOB';
 import Address from './Address/Address';
 import Email from './Email/Email';
+import Telephone from './Telephone/Telephone';
 
 const Step4 = () => {
   return (
@@ -18,7 +19,7 @@ const Step4 = () => {
       <Address />
 
       <Email />
-      <h3>What is your telephone number?</h3>
+      <Telephone />
     </>
   );
 };
