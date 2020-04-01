@@ -37,37 +37,35 @@ const DOB = () => {
   };
 
   return (
-    <div className="wmnds-fe-group">
-      <fieldset className="wmnds-fe-fieldset">
-        <legend className="wmnds-fe-fieldset__legend">
-          <h3 className="wmnds-fe-question">What is your date of birth?</h3>
-        </legend>
-        <div className="wmnds-col-1-2 wmnds-col-sm-1-12 wmnds-m-r-md">
-          <Input
-            name="DOBDay"
-            label="Day"
-            inputmode="numeric"
-            onChange={(e) => handleDOB(e.target)}
-          />
-        </div>
-        <div className="wmnds-col-1-2 wmnds-col-sm-1-12 wmnds-m-r-md">
-          <Input
-            name="DOBMonth"
-            label="Month"
-            inputmode="numeric"
-            onChange={(e) => handleDOB(e.target)}
-          />
-        </div>
-        <div className="wmnds-col-1-2 wmnds-col-sm-1-8">
-          <Input
-            name="DOBYear"
-            label="Year"
-            inputmode="numeric"
-            onChange={(e) => handleDOB(e.target)}
-          />
-        </div>
-      </fieldset>
-    </div>
+    <fieldset className="wmnds-fe-fieldset">
+      <legend className="wmnds-fe-fieldset__legend">
+        <h3 className="wmnds-fe-question">What is your date of birth?</h3>
+      </legend>
+      <div className="wmnds-col-1-2 wmnds-col-sm-1-12 wmnds-m-r-md">
+        <Input
+          name="DOBDay"
+          label="Day"
+          inputmode="numeric"
+          onChange={(e) => handleDOB(e.target)}
+        />
+      </div>
+      <div className="wmnds-col-1-2 wmnds-col-sm-1-12 wmnds-m-r-md">
+        <Input
+          name="DOBMonth"
+          label="Month"
+          inputmode="numeric"
+          onChange={(e) => handleDOB(e.target)}
+        />
+      </div>
+      <div className="wmnds-col-1-2 wmnds-col-sm-1-8">
+        <Input
+          name="DOBYear"
+          label="Year"
+          inputmode="numeric"
+          onChange={(e) => handleDOB(e.target)}
+        />
+      </div>
+    </fieldset>
   );
 };
 

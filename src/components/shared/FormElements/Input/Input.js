@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Input = ({ label, inputmode, onChange, name, className, spellcheck }) => {
   return (
-    <div className={className ? className : 'wmnds-fe-group'}>
+    <div className={`wmnds-fe-group ${className}`}>
       {label && (
         <label className="wmnds-fe-label" htmlFor={name}>
           {label}
@@ -34,7 +34,7 @@ Input.propTypes = {
 Input.defaultProps = {
   inputmode: 'text',
   onChange: null,
-  className: null,
+  className: '',
   spellcheck: false,
 };
 
