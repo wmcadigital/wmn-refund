@@ -12,19 +12,19 @@ const Email = () => {
       <legend className="wmnds-fe-fieldset__legend">
         <h3 className="wmnds-fe-question">What is your email address?</h3>
       </legend>
-      <div className="wmnds-col-1-2 wmnds-col-sm-1-5">
-        <Input
-          name="Email"
-          label="Email address, for example name@example.com"
-          type="email"
-          onChange={(e) =>
-            formDispatch({
-              type: 'UPDATE_FORM_DATA',
-              payload: { Email: e.target.value },
-            })
-          }
-        />
-      </div>
+
+      <Input
+        className="wmnds-col-sm-1-2"
+        name="Email"
+        label="Email address, for example name@example.com"
+        type="email"
+        onChange={(e) =>
+          formDispatch({
+            type: 'UPDATE_FORM_DATA',
+            payload: { Email: e.target.value },
+          })
+        }
+      />
     </fieldset>
   );
 };
