@@ -8,6 +8,7 @@ import SwiftCard from './SwiftCard/SwiftCard';
 import TicketNumber from './TicketNumber/TicketNumber';
 import UploadTicket from './UploadTicket/UploadTicket';
 import LastUsed from './LastUsed/LastUsed';
+import HowProcess from './HowProcess/HowProcess';
 
 const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
@@ -62,6 +63,9 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
           <UploadTicket />
         </>
       )}
+
+      {/* If customerType is corporate then show how process options */}
+      {CustomerType === 'Corporate' && <HowProcess />}
 
       <button
         type="button"
