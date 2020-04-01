@@ -27,11 +27,12 @@ const Step4 = () => {
         CustomerType === 'SwiftPortal' ||
         CustomerType === 'Workwise') && <Company />}
 
-      <DOB />
-
-      {/* Only show address if not scratchcard and not classpass */}
+      {/* Only show address and DOB if not scratchcard and not classpass */}
       {CustomerType !== 'Scratchcard' && CustomerType !== 'ClassPass' && (
-        <Address />
+        <>
+          <DOB />
+          <Address />
+        </>
       )}
 
       <Email />
