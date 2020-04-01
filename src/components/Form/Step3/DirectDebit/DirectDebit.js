@@ -14,19 +14,18 @@ const DirectDebit = () => {
           What is your Direct Debit reference?
         </h3>
       </legend>
-      <div className="wmnds-col-1-2 wmnds-col-sm-1-5">
-        <Input
-          name="DirectDebitNumber"
-          label="Direct Debit reference"
-          inputmode="numeric"
-          onChange={(e) =>
-            formDispatch({
-              type: 'UPDATE_FORM_DATA',
-              payload: { DirectDebitNumber: e.target.value },
-            })
-          }
-        />
-      </div>
+      <Input
+        className="wmnds-col-1-2 wmnds-col-sm-1-5"
+        name="DirectDebitNumber"
+        label="Direct Debit reference"
+        inputmode="numeric"
+        onChange={(e) =>
+          formDispatch({
+            type: 'UPDATE_FORM_DATA',
+            payload: { DirectDebitNumber: e.target.value },
+          })
+        }
+      />
     </fieldset>
   );
 };

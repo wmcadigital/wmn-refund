@@ -16,19 +16,18 @@ const SwiftCard = () => {
           <strong>633597 0107</strong>
         </p>
       </legend>
-      <div className="wmnds-col-1-2 wmnds-col-sm-1-5">
-        <Input
-          name="CardNumber"
-          label="Swift card number"
-          inputmode="numeric"
-          onChange={(e) =>
-            formDispatch({
-              type: 'UPDATE_FORM_DATA',
-              payload: { CardNumber: e.target.value },
-            })
-          }
-        />
-      </div>
+      <Input
+        className="wmnds-col-1-2 wmnds-col-sm-1-5"
+        name="CardNumber"
+        label="Swift card number"
+        inputmode="numeric"
+        onChange={(e) =>
+          formDispatch({
+            type: 'UPDATE_FORM_DATA',
+            payload: { CardNumber: e.target.value },
+          })
+        }
+      />
     </fieldset>
   );
 };
