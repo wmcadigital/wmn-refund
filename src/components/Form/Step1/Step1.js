@@ -5,18 +5,29 @@ import { FormContext } from 'globalState/FormContext';
 // Import components
 import Radio from 'components/shared/FormElements/Radio/Radio';
 
-const Step1 = ({ currentStep, setCurrentStep }) => {
+const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
 
   // Update customerType on radio button change
-  const handleRadioChange = (e) =>
+  const handleRadioChange = (e) => {
     formDispatch({ type: 'UPDATE_CUSTOMER_TYPE', payload: e.target.value });
+
+    // If paper ticket chosen
+    if (e.target.value === 'PaperTicket') {
+      setIsPaperTicket(true); // Then set paper ticket to true (value used in step 3)
+    } else {
+      setIsPaperTicket(false); // Else set to false
+    }
+  };
 
   // Update the current step to the correct one depending on users selection
   const handleContinue = () => {
     // SwiftCard, paperTicket
-    if (formState.CustomerType === 'Step2') {
-      setCurrentStep(currentStep + 1); // Go to next step so we can set customerType
+    if (
+      formState.CustomerType === 'SwiftCard' ||
+      formState.CustomerType === 'PaperTicket'
+    ) {
+      setCurrentStep(currentStep + 1); // Go to next step(2) so we can set customerType
     }
     // classPass, scratchcard
     else if (
@@ -27,7 +38,7 @@ const Step1 = ({ currentStep, setCurrentStep }) => {
     }
     // swiftOnMobile;
     else {
-      setCurrentStep(currentStep + 2); // Skip two steps as customerType has been set
+      setCurrentStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
     }
   };
 
@@ -45,13 +56,13 @@ const Step1 = ({ currentStep, setCurrentStep }) => {
             <Radio
               name="CustomerType"
               text="Swift card"
-              value="Step2"
+              value="SwiftCard"
               onChange={handleRadioChange}
             />
             <Radio
               name="CustomerType"
               text="Paper ticket"
-              value="Step2"
+              value="PaperTicket"
               onChange={handleRadioChange}
             />
             <Radio
@@ -90,6 +101,7 @@ const Step1 = ({ currentStep, setCurrentStep }) => {
 Step1.propTypes = {
   currentStep: PropTypes.number.isRequired,
   setCurrentStep: PropTypes.func.isRequired,
+  setIsPaperTicket: PropTypes.func.isRequired,
 };
 
 export default Step1;

@@ -12,6 +12,8 @@ import s from './Form.module.scss';
 
 const Form = () => {
   const [currentStep, setCurrentStep] = useState(1);
+  const [isPaperTicket, setIsPaperTicket] = useState(false); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
+
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
 
   return (
@@ -19,13 +21,21 @@ const Form = () => {
       <ProgressIndicator currentStep={currentStep} />
       <div className={`wmnds-p-lg ${s.formWrapper}`}>
         {currentStep === 1 && (
-          <Step1 setCurrentStep={setCurrentStep} currentStep={currentStep} />
+          <Step1
+            setCurrentStep={setCurrentStep}
+            currentStep={currentStep}
+            setIsPaperTicket={setIsPaperTicket}
+          />
         )}
         {currentStep === 2 && (
           <Step2 setCurrentStep={setCurrentStep} currentStep={currentStep} />
         )}
         {currentStep === 3 && (
-          <Step3 setCurrentStep={setCurrentStep} currentStep={currentStep} />
+          <Step3
+            setCurrentStep={setCurrentStep}
+            currentStep={currentStep}
+            isPaperTicket={isPaperTicket}
+          />
         )}
         {currentStep === 4 && (
           <Step4 setCurrentStep={setCurrentStep} currentStep={currentStep} />

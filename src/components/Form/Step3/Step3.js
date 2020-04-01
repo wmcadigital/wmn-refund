@@ -8,7 +8,7 @@ import SwiftCard from './SwiftCard/SwiftCard';
 import TicketNumber from './TicketNumber/TicketNumber';
 import UploadTicket from './UploadTicket/UploadTicket';
 
-const Step3 = ({ currentStep, setCurrentStep }) => {
+const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
 
   const handleContinue = () => {
@@ -51,9 +51,11 @@ const Step3 = ({ currentStep, setCurrentStep }) => {
     <>
       <h2>Tell us about your ticket</h2>
 
+      {/* This changes based on switch logic above */}
       {elementsToRender}
 
-      <UploadTicket />
+      {/* Only show this if a user selected paper ticket in step 1 */}
+      {isPaperTicket && <UploadTicket />}
 
       <button
         type="button"
@@ -70,6 +72,7 @@ const Step3 = ({ currentStep, setCurrentStep }) => {
 Step3.propTypes = {
   currentStep: PropTypes.number.isRequired,
   setCurrentStep: PropTypes.func.isRequired,
+  isPaperTicket: PropTypes.bool.isRequired,
 };
 
 export default Step3;
