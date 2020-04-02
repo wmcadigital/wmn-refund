@@ -62,6 +62,7 @@ const Form = ({ setFormSubmitStatus }) => {
               <Step2
                 setCurrentStep={setCurrentStep}
                 currentStep={currentStep}
+                isPaperTicket={isPaperTicket}
                 isSwiftCard={isSwiftCard}
               />
             )}
