@@ -46,6 +46,7 @@ const DOB = () => {
           name="DOBDay"
           label="Day"
           inputmode="numeric"
+          autocomplete="bday-day"
           onChange={(e) => handleDOB(e.target)}
         />
       </div>
@@ -54,6 +55,7 @@ const DOB = () => {
           name="DOBMonth"
           label="Month"
           inputmode="numeric"
+          autocomplete="bday-month"
           onChange={(e) => handleDOB(e.target)}
         />
       </div>
@@ -62,6 +64,7 @@ const DOB = () => {
           name="DOBYear"
           label="Year"
           inputmode="numeric"
+          autocomplete="bday-year"
           onChange={(e) => handleDOB(e.target)}
         />
       </div>
