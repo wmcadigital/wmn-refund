@@ -18,6 +18,7 @@ const Company = () => {
         className="wmnds-col-1 wmnds-col-sm-1-2"
         name="CompanyName"
         label="Company or organisation name"
+        autocomplete="organization"
         onChange={(e) =>
           formDispatch({
             type: 'UPDATE_FORM_DATA',

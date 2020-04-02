@@ -16,6 +16,7 @@ const Name = () => {
         className="wmnds-col-1-2 wmnds-col-sm-2-3"
         name="Firstname"
         label="First name"
+        autocomplete="given-name"
         onChange={(e) =>
           formDispatch({
             type: 'UPDATE_FORM_DATA',
@@ -27,6 +28,7 @@ const Name = () => {
         className="wmnds-col-1-2 wmnds-col-sm-2-3"
         name="Lastname"
         label="Last name"
+        autocomplete="family-name"
         onChange={(e) =>
           formDispatch({
             type: 'UPDATE_FORM_DATA',
