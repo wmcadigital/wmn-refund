@@ -2,16 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useInput from 'customHooks/useFormValidation';
 
-const Input = ({
-  className,
-  inputmode,
-  label,
-  name,
-  // onChange,
-  // onBlur,
-  spellcheck,
-  type,
-}) => {
+const Input = ({ className, inputmode, label, name, spellcheck, type }) => {
   const { handleChange, handleBlur, error } = useInput(name, label);
 
   // Set input to render below
@@ -50,8 +41,6 @@ const Input = ({
 Input.propTypes = {
   label: PropTypes.string.isRequired,
   inputmode: PropTypes.string,
-  // onChange: PropTypes.func,
-  // onBlur: PropTypes.func,
   name: PropTypes.string.isRequired,
   className: PropTypes.string,
   spellcheck: PropTypes.bool,
@@ -60,8 +49,6 @@ Input.propTypes = {
 
 Input.defaultProps = {
   inputmode: 'text',
-  // onChange: null,
-  // onBlur: null,
   className: '',
   spellcheck: false,
   type: 'text',

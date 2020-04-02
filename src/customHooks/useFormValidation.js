@@ -9,6 +9,8 @@ const useInput = (name, label) => {
   const [error, setError] = useState(null);
   const [isTouched, setIsTouched] = useState(false);
 
+  const value = formState.Application[name]; // Get value from state
+
   // set up the event handler for onChange event
   function handleChange(e) {
     // When input is changed then update state
@@ -20,7 +22,7 @@ const useInput = (name, label) => {
 
   // set up event handler for onBlur
   function handleBlur() {
-    if (!formState.Application[name]) return; // if value is not set, then return
+    if (!value) return; // if value is not set, then return
     setIsTouched(true); // Set touched as the input has been touched by user (used below to determine whether to show errors)
   }
 
@@ -29,15 +31,18 @@ const useInput = (name, label) => {
     // If the user has touched the input then we can show errors
     if (isTouched) {
       // If there is no length
-      if (!formState.Application[name].length) {
+      if (!value.length) {
         setError(`${label} is required`);
+      }
+      // DirectDebit logic
+      else if (name === 'DirectDebit') {
       }
       // Else all is good, so reset error
       else {
         setError(null);
       }
     }
-  }, [formState.Application, isTouched, label, name]);
+  }, [isTouched, label, name, value.length]);
 
   // return object
   return {
