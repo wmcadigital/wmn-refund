@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useInput from 'customHooks/useInputValidation';
+import useInputValidation from 'customHooks/useInputValidation';
 
 const Input = ({
   autocomplete,
@@ -12,7 +12,8 @@ const Input = ({
   type,
   customValidation,
 }) => {
-  const { handleChange, handleBlur, error } = useInput(
+  // Use custom hook for validating inputs (this controls ALL inputs validation)
+  const { handleChange, handleBlur, error } = useInputValidation(
     name,
     label,
     inputmode,
