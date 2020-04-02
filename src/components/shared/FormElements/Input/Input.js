@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import useInput from 'customHooks/useFormValidation';
 
 const Input = ({ className, inputmode, label, name, spellcheck, type }) => {
-  const { handleChange, handleBlur, error } = useInput(name, label);
+  const customFunc = () => {
+    console.log('hello');
+  };
+
+  const { handleChange, handleBlur, error } = useInput(name, label, customFunc);
 
   // Set input to render below
   const input = (

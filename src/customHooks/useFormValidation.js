@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 
-const useInput = (name, label) => {
+const useInput = (name, label, customValidation) => {
   // set up the state for the inputs value prop and set it to the default value
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
   // set up state for the inputs error prop
@@ -33,15 +33,16 @@ const useInput = (name, label) => {
       if (!value.length) {
         setError(`${label} is required`);
       }
-      // DirectDebit logic
-      else if (name === 'DirectDebit') {
+      // Run custom validation logic
+      else if (typeof customValidation === 'function') {
+        customValidation();
       }
       // Else all is good, so reset error
       else {
         setError(null);
       }
     }
-  }, [isTouched, label, name, value.length]);
+  }, [customValidation, isTouched, label, name, value.length]);
 
   // return object
   return {
