@@ -48,7 +48,6 @@ const Introduction = ({ setIsFormStarted }) => {
           If you have a Swift on Mobile ticket, you will need the long number from your ticket in Google Pay. This is also referred to as the ISRN.
         </p>
         <p>If you have a paper ticket, you will need this ticket as proof.</p>
-        <p>We will process your information in line with the our Privacy Policy</p>
         <br />
         <p>There is guidance available to show <a
             href="https://wmnetwork.co.uk/get-in-touch/covid19-refund-scheme/"
@@ -56,7 +55,8 @@ const Introduction = ({ setIsFormStarted }) => {
             target="_self"
             className="wmnds-link"
           >how we will work out your refund</a>.</p>
-
+        <br />
+        <br />
         <button
           type="button"
           className="wmnds-btn wmnds-btn--start"
