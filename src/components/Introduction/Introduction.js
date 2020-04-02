@@ -4,7 +4,8 @@ import Icon from 'components/shared/Icon/Icon';
 
 const Introduction = ({ setIsFormStarted }) => {
   return (
-    <div className="wmnds-col-1 wmnds-col-md-3-4">
+    <div className="wmnds-col-1 wmnds-col-sm-3-4 wmnds-col-lg-1-2">
+      <h1>Apply for a ticket refund due to Coronavirus (COVID-19)</h1>
       <p>Use this service to:</p>
       <ul>
         <li>
