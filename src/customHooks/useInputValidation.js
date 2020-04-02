@@ -25,6 +25,7 @@ const useInputValidation = (name, label, inputmode, customValidation) => {
     setIsTouched(true); // Set touched as the input has been touched by user (used below to determine whether to show errors)
   }
 
+  // Handle validation
   // Re-use this logic everytime state is updated
   useEffect(() => {
     // If the user has touched the input then we can show errors

@@ -6,8 +6,8 @@ const useFileUploadValidation = () => {
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
 
   // Local state for controlling file upload
-  const [isFileInputFocused, setIsFileInputFocused] = useState(false);
-  const [fileName, setFileName] = useState('Upload photo');
+  const [isFileInputFocused, setIsFileInputFocused] = useState(false); // This is used to emulate the input focus class on the label
+  const [fileName, setFileName] = useState('Upload photo'); // Used to change the name of the input/label button to the users file name
 
   // set up state for the inputs error prop
   const [error, setError] = useState(null);
@@ -17,6 +17,7 @@ const useFileUploadValidation = () => {
   const handleChange = (e) => {
     const file = e.target.files[0];
 
+    // If a file exists (user hasn't clicked cancel button or something)
     if (file) {
       setFileName(file.name); // Set file name that the user has chosen (this will display in our label)
       setFileSize(file.size); // Set file size of the file
@@ -39,13 +40,17 @@ const useFileUploadValidation = () => {
     }
   };
 
-  const handleBlur = () => setIsFileInputFocused(false);
-
+  // HandleFocus (when user joins input)
   const handleFocus = () => {
     setIsTouched(true); // Set touched as the input has been touched by user (used below to determine whether to show errors)
-    setIsFileInputFocused(true);
+    setIsFileInputFocused(true); // Set input to focus
   };
 
+  // Handleblur (when user leaves input), set input to unfocus
+  const handleBlur = () => setIsFileInputFocused(false);
+
+  // Handle validation
+  // Re-use this logic everytime state is updated
   useEffect(() => {
     // If the user has touched the input then we can show errors
     if (isTouched) {
