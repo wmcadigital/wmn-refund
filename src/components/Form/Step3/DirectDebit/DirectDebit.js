@@ -6,14 +6,16 @@ import Input from 'components/shared/FormElements/Input/Input';
 
 const DirectDebit = () => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
+  const label = 'Direct Debit reference'; // Used on input and for validation
 
   const ddValidation = () => {
     let error;
 
-    if (formState.Application.DirectDebitNumber) {
-      error = 'hello guys';
+    // DirectDebit reference should start with 6
+    if (formState.Application.DirectDebitNumber.charAt(0) !== '6') {
+      error = `${label} should start with '6'`;
     }
-    console.log(error);
+
     return error;
   };
 
@@ -31,7 +33,7 @@ const DirectDebit = () => {
       <Input
         className="wmnds-col-1-2 wmnds-col-sm-1-5"
         name="DirectDebitNumber"
-        label="Direct Debit reference"
+        label={label}
         inputmode="numeric"
         customValidation={ddValidation}
       />
