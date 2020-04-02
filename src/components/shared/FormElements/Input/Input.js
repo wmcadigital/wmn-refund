@@ -17,7 +17,7 @@ const Input = ({
   // Set input to render below
   const input = (
     <>
-      <span className="wmnds-error-message">{error}</span>
+      <span className="wmnds-fe-error-message">{error}</span>
       <input
         className={`wmnds-fe-input ${error ? 'wmnds-fe-input--error' : ''}`}
         id={name}
@@ -32,7 +32,7 @@ const Input = ({
   );
 
   return (
-    <div className="wmnds-fe-group">
+    <div className={`wmnds-fe-group ${error ? 'wmnds-fe-group--error' : ''}`}>
       {label && (
         <label className="wmnds-fe-label" htmlFor={name}>
           {label}
