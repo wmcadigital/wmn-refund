@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useInput from 'customHooks/useFormValidation';
+import useInput from 'customHooks/useInputValidation';
 
 const Input = ({
   className,

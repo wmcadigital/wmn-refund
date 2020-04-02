@@ -21,7 +21,7 @@ const FileUpload = () => {
   const handleChange = (file) => {
     if (file) {
       setFileName(file.name); // Set file name that the user has chosen (this will display in our label)
-      setFileSize(file.size);
+      setFileSize(file.size); // Set file size of the file
 
       const PhotoBase64Extension = file.type.split('/')[1]; // => image/png (split at '/' and grab second part 'png')
       // Start base64'n our uploaded image
@@ -68,7 +68,7 @@ const FileUpload = () => {
   }, [fileSize, formState.Application.PhotoBase64Extension, isTouched]);
 
   return (
-    <div className="wmnds-fe-group">
+    <div className={`wmnds-fe-group ${error ? 'wmnds-fe-group--error' : ''}`}>
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
           <h3 className="wmnds-fe-question">

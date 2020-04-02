@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 
-const useInput = (name, label, inputmode, customValidation) => {
+const useInputValidation = (name, label, inputmode, customValidation) => {
   // set up the state for the inputs value prop and set it to the default value
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
   // set up state for the inputs error prop
@@ -64,4 +64,4 @@ const useInput = (name, label, inputmode, customValidation) => {
   };
 };
 
-export default useInput;
+export default useInputValidation;
