@@ -18,6 +18,7 @@ const Email = () => {
         name="Email"
         label="Email address, for example name@example.com"
         type="email"
+        autocomplete="email"
         onChange={(e) =>
           formDispatch({
             type: 'UPDATE_FORM_DATA',
