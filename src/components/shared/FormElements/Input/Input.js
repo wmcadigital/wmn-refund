@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import useInputValidation from 'customHooks/useInputValidation';
+import useInputValidation from './useInputValidation';
 
 const Input = ({
   autocomplete,
