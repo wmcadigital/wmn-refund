@@ -32,11 +32,11 @@ const useInputValidation = (name, label, inputmode, customValidation) => {
     if (isTouched) {
       // If there is no length
       if (!value.length) {
-        setError(`${label} is required`);
+        setError(`Enter your ${label}`);
       }
       // If input is numeric then it should only contain numbers
       else if (inputmode === 'numeric' && !/^\d+$/.test(value)) {
-        setError(`${label} should only contain numbers`);
+        setError(`${label} must only include numbers`);
       }
       // Run custom validation logic
       else if (customValidation) {
