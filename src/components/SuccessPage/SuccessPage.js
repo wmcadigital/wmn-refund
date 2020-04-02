@@ -23,19 +23,20 @@ const SuccessPage = () => {
         </div>
 
         {/* Success copy */}
-        <p>We have sent you a confirmation email.</p>
-
         <h3>What happens next</h3>
 
         <p>
-          Unfortunately, due to logistics, we are unable to process applications
-          for scratchcards and class passes remotely.
+          We have sent you an email to acknowledge your application. The email also 
+          contains more details about how we will process your refund.
         </p>
         <p>
-          As soon as the Government advises it is okay to return to the office,
-          we will process your application as a priority.
+          If we need any more information to process your refund, we will be in touch.
         </p>
-
+        <p>
+          If you have any questions regarding your refund, or you would like to know 
+          how we will calculate your refund, there is guidance available on our website.
+        </p>
+        <br />
         <p>
           <a
             href="https://surveys.hotjar.com/s?siteId=264586&surveyId=154279"
