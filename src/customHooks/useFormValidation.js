@@ -11,25 +11,30 @@ const useInput = (name, label) => {
 
   // set up the event handler for onChange event
   function handleChange(e) {
+    // When input is changed then update state
     formDispatch({
       type: 'UPDATE_FORM_DATA',
       payload: { [name]: e.target.value },
     });
   }
 
-  // set up event handler for onBlur, if value is not set, setError to true
+  // set up event handler for onBlur
   function handleBlur() {
-    if (!formState.Application[name]) return;
-    setIsTouched(true);
+    if (!formState.Application[name]) return; // if value is not set, then return
+    setIsTouched(true); // Set touched as the input has been touched by user (used below to determine whether to show errors)
   }
 
+  // Re-use this logic everytime state is updated
   useEffect(() => {
-    // set the state no matter what
+    // If the user has touched the input then we can show errors
     if (isTouched) {
+      // If there is no length
       if (!formState.Application[name].length) {
         setError(`${label} is required`);
-      } else {
-        setError('shorterName');
+      }
+      // Else all is good, so reset error
+      else {
+        setError(null);
       }
     }
   }, [formState.Application, isTouched, label, name]);
