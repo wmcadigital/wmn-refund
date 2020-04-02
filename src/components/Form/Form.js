@@ -24,6 +24,9 @@ const Form = ({ setFormSubmitStatus }) => {
     fetch('https://apisNWM.cenapps.org.uk/ticketapplications/Refund', {
       method: 'post',
       body: JSON.stringify(formState),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
       .then((response) => {
         return response.json();
