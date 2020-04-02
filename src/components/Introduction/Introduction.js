@@ -12,7 +12,10 @@ const Introduction = ({ setIsFormStarted }) => {
         <ul>
           <li>
             Apply for a refund of your Swift card, paper or Swift on Mobile
-            ticket if you have been unable to travel due to Coronavirus
+            ticket if you have been unable to travel due to the Coronavirus outbreak
+          </li>
+          <li>
+            Let us know that you would like to exchange your class pass or scratchcards
           </li>
         </ul>
         <p>This process takes around 5 minutes.</p>
