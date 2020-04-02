@@ -34,8 +34,12 @@ const useInputValidation = (name, label, inputmode, customValidation) => {
       if (!value.length) {
         setError(`Enter your ${label}`);
       }
-      // If input is numeric then it should only contain numbers
-      else if (inputmode === 'numeric' && !/^\d+$/.test(value)) {
+      // If input is numeric and isn't a phone number(we handle phone number with custom regex in it's own file) then it should only contain numbers
+      else if (
+        inputmode === 'numeric' &&
+        !/^\d+$/.test(value) &&
+        name !== 'PhoneNumber'
+      ) {
         setError(`${label} must only include numbers`);
       }
       // Run custom validation logic
