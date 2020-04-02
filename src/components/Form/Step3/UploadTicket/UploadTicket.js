@@ -1,35 +1,23 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 // Import components
 import Icon from 'components/shared/Icon/Icon';
-import s from './UploadTicket.module.scss';
+import FileUpload from './FileUpload/FileUpload';
 
 const UploadTicket = () => {
-  const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
 
-  const [isFileInputFocused, setIsFileInputFocused] = useState(false);
-  const [fileName, setFileName] = useState('Upload photo');
+  // const uploadValidation = () => {
+  //   let error;
 
-  const handleFileSelected = (file) => {
-    setFileName(file.name); // Set file name that the user has chosen (this will display in our label)
+  //   // DirectDebit reference should start with 6
+  //   if (formState.Application.DirectDebitNumber.charAt(0) !== '6') {
+  //     error = `${label} should start with '6'`;
+  //   }
 
-    const PhotoBase64Extension = file.type.split('/')[1]; // => image/png (split at '/' and grab second part 'png')
-    // Start base64'n our uploaded image
-    const reader = new FileReader(); // Start new file reader
-    reader.readAsDataURL(file); // Read file as dataURL
-    // When loaded
-    reader.onloadend = () => {
-      // Since it contains the Data URI, we should remove the prefix and keep only Base64 string
-      const PhotoBase64 = reader.result.replace(/^data:.+;base64,/, '');
-
-      // Update our formData with the base64Extension and Base64 photo
-      formDispatch({
-        type: 'UPDATE_FORM_DATA',
-        payload: { PhotoBase64Extension, PhotoBase64 },
-      });
-    };
-  };
+  //   return error;
+  // };
 
   return (
     <>
@@ -55,27 +43,7 @@ const UploadTicket = () => {
               process the refund
             </p>
           </legend>
-          <label
-            htmlFor="fileUpload"
-            className={`wmnds-btn wmnds-btn--primary ${
-              isFileInputFocused ? s.fileUploadLabelFocused : ''
-            }`}
-          >
-            {fileName}
-            <Icon
-              className="wmnds-btn__icon wmnds-btn__icon--right"
-              iconName="general-paperclip"
-            />
-            <input
-              type="file"
-              name="fileUpload"
-              id="fileUpload"
-              onFocus={() => setIsFileInputFocused(true)}
-              onBlur={() => setIsFileInputFocused(false)}
-              onChange={(e) => handleFileSelected(e.target.files[0])}
-              className={s.fileUpload}
-            />
-          </label>
+          <FileUpload />
         </fieldset>
       </div>
     </>
