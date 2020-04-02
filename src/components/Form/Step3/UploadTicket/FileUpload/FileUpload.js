@@ -1,12 +1,13 @@
 import React from 'react';
-// Import custom hooks
-import useFileUploadValidation from 'customHooks/useFileUploadValidation';
 // Import components
 import Icon from 'components/shared/Icon/Icon';
+// Import custom hooks
+import useFileUploadValidation from './useFileUploadValidation';
 // Import styles
 import s from './FileUpload.module.scss';
 
 const FileUpload = () => {
+  // Use custom hook for validating fileUpload inputs
   const {
     handleChange,
     handleBlur,
