@@ -1,28 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import useInput from 'customHooks/useFormValidation';
 
 const Input = ({
   className,
   inputmode,
   label,
   name,
-  onChange,
-  onBlur,
+  // onChange,
+  // onBlur,
   spellcheck,
   type,
 }) => {
+  const { handleChange, handleBlur, error } = useInput(name, '');
+
   // Set input to render below
   const input = (
-    <input
-      className="wmnds-fe-input"
-      id={name}
-      name={name}
-      type={type}
-      inputMode={inputmode}
-      spellCheck={spellcheck}
-      onChange={onChange}
-      onBlur={onBlur}
-    />
+    <>
+      <span className="wmnds-error-message">{error}</span>
+      <input
+        className={`wmnds-fe-input ${error ? 'wmnds-fe-input--error' : ''}`}
+        id={name}
+        name={name}
+        type={type}
+        inputMode={inputmode}
+        spellCheck={spellcheck}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+    </>
   );
 
   return (
@@ -41,8 +47,8 @@ const Input = ({
 Input.propTypes = {
   label: PropTypes.string.isRequired,
   inputmode: PropTypes.string,
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
+  // onChange: PropTypes.func,
+  // onBlur: PropTypes.func,
   name: PropTypes.string.isRequired,
   className: PropTypes.string,
   spellcheck: PropTypes.bool,
@@ -51,8 +57,8 @@ Input.propTypes = {
 
 Input.defaultProps = {
   inputmode: 'text',
-  onChange: null,
-  onBlur: null,
+  // onChange: null,
+  // onBlur: null,
   className: '',
   spellcheck: false,
   type: 'text',

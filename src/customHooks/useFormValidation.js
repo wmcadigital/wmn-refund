@@ -13,12 +13,17 @@ const useInput = (name) => {
   function handleChange(e) {
     formDispatch({
       type: 'UPDATE_FORM_DATA',
-      payload: { PhoneNumber: e.target.value },
+      payload: { [name]: e.target.value },
     });
   }
 
+  // set up event handler for onBlur, if value is not set, setError to true
+  function handleBlur() {
+    if (!formState.Application[name]) return;
+    setIsTouched(true);
+  }
+
   useEffect(() => {
-    console.log(isTouched);
     // set the state no matter what
     if (isTouched) {
       if (formState.Application[name].length > 4) {
@@ -29,15 +34,8 @@ const useInput = (name) => {
     }
   }, [formState.Application, isTouched, name]);
 
-  // set up event handler for onBlur, if value is not set, setError to true
-  function handleBlur() {
-    if (!formState.Application[name]) return;
-    setIsTouched(true);
-  }
-
   // return object
   return {
-    name,
     handleChange,
     handleBlur,
     error,

@@ -2,11 +2,8 @@ import React from 'react';
 
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
-import useInput from 'customHooks/useFormValidation';
 
 const Telephone = () => {
-  const { handleChange, handleBlur, error } = useInput('PhoneNumber', '');
-
   return (
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
@@ -17,10 +14,7 @@ const Telephone = () => {
         name="PhoneNumber"
         label="UK telephone number"
         inputmode="numeric"
-        onChange={handleChange}
-        onBlur={handleBlur}
       />
-      <p>{error}</p>
     </fieldset>
   );
 };
