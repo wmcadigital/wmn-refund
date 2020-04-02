@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 
-const useInput = (name, label, customValidation) => {
+const useInput = (name, label, inputmode, customValidation) => {
   // set up the state for the inputs value prop and set it to the default value
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
   // set up state for the inputs error prop
@@ -33,16 +33,28 @@ const useInput = (name, label, customValidation) => {
       if (!value.length) {
         setError(`${label} is required`);
       }
+      // If input is numeric then it should only contain numbers
+      else if (inputmode === 'numeric' && !/^\d+$/.test(value)) {
+        setError(`${label} should only contain numbers`);
+      }
       // Run custom validation logic
-      else if (typeof customValidation === 'function') {
-        customValidation();
+      else if (customValidation) {
+        setError(customValidation());
       }
       // Else all is good, so reset error
       else {
         setError(null);
       }
     }
-  }, [customValidation, isTouched, label, name, value.length]);
+  }, [
+    customValidation,
+    inputmode,
+    isTouched,
+    label,
+    name,
+    value,
+    value.length,
+  ]);
 
   // return object
   return {

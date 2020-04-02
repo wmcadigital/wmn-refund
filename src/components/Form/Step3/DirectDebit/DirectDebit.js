@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
+// Import contexts
+import { FormContext } from 'globalState/FormContext';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
 const DirectDebit = () => {
+  const [formState] = useContext(FormContext); // Get the state of form data from FormContext
+
+  const ddValidation = () => {
+    let error;
+
+    if (formState.Application.DirectDebitNumber) {
+      error = 'hello guys';
+    }
+    console.log(error);
+    return error;
+  };
+
   return (
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
@@ -19,6 +33,7 @@ const DirectDebit = () => {
         name="DirectDebitNumber"
         label="Direct Debit reference"
         inputmode="numeric"
+        customValidation={ddValidation}
       />
     </fieldset>
   );

@@ -14,6 +14,7 @@ const Input = ({
   const { handleChange, handleBlur, error } = useInput(
     name,
     label,
+    inputmode,
     customValidation
   );
 
