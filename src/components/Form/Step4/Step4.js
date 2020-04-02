@@ -21,20 +21,24 @@ const Step4 = () => {
         we need more information
       </p>
 
-      <Name />
+      {/* Only show name fields if customer type is none of the below */}
+      {CustomerType !== 'Scratchcard' && CustomerType !== 'ClassPass' && (
+        <Name />
+      )}
 
       {/* Only show Company if customer is one of the below */}
-      {(CustomerType === 'DirectDebit' ||
-        CustomerType === 'Shop' ||
-        CustomerType === 'SwiftPortal' ||
-        CustomerType === 'Workwise') && <Company />}
+      {(CustomerType === 'Corporate' ||
+        CustomerType === 'ClassPass' ||
+        CustomerType === 'Scratchcard') && <Company />}
 
-      {/* Only show address and DOB if not scratchcard and not classpass */}
+      {/* Only show  DOB if not scratchcard and not classpass and not Shop */}
+      {CustomerType !== 'Scratchcard' &&
+        CustomerType !== 'ClassPass' &&
+        CustomerType !== 'Shop' && <DOB />}
+
+      {/* Only show address if not scratchcard and not classpass */}
       {CustomerType !== 'Scratchcard' && CustomerType !== 'ClassPass' && (
-        <>
-          <DOB />
-          <Address />
-        </>
+        <Address />
       )}
 
       <Email />

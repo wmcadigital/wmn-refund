@@ -33,7 +33,18 @@ const SuccessPage = () => {
         will process your application as a priority.
       </p>
 
-      <p>What did you think of this service? (takes 30 seconds)</p>
+      <p>
+        <a
+          href="https://surveys.hotjar.com/s?siteId=264586&surveyId=154279"
+          title="link title"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="wmnds-link"
+        >
+          What did you think of this service?
+        </a>{' '}
+        (takes 30 seconds)
+      </p>
     </div>
   );
 };

@@ -17,11 +17,11 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
     setCurrentStep(currentStep + 1);
   };
 
-  // Set placeholder vars which we will change in the switch below (based on CustomerType)
-  let disabledState; // Used to change the disabled state on continue button
-  let elementsToRender; // Used to change conditional elements to render
-
   const { Application, CustomerType } = formState; // Destructure object
+
+  // Set placeholder vars which we will change in the switch below (based on CustomerType)
+  let disabledState = !Application.LastUsedDate; // Used to change the disabled state on continue button (by default we put in LastUsedDate as this is used by every outcome)
+  let elementsToRender; // Used to change conditional elements to render
 
   // Switch on customer type, then change disabledState and elementsToRender accordingly
   switch (CustomerType) {
@@ -33,13 +33,16 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
           <SwiftCard />
         </>
       );
-      disabledState = !Application.DirectDebitNumber || !Application.CardNumber;
+      disabledState =
+        disabledState ||
+        !Application.DirectDebitNumber ||
+        !Application.CardNumber;
       break;
 
     // Workwise
     case 'Workwise':
       elementsToRender = <SwiftCard />;
-      disabledState = !Application.CardNumber;
+      disabledState = disabledState || !Application.CardNumber;
       break;
 
     //  Corporate
@@ -50,13 +53,14 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
           <HowProcess />
         </>
       );
-      disabledState = !Application.CardNumber || !Application.ActionType;
+      disabledState =
+        disabledState || !Application.CardNumber || !Application.ActionType;
       break;
 
     // OnlineSales, Shop, SwiftPortal
     default:
       elementsToRender = <TicketNumber />;
-      disabledState = !Application.TicketNumber;
+      disabledState = disabledState || !Application.TicketNumber;
   }
 
   return (
@@ -66,13 +70,10 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
       {/* This changes based on switch logic above */}
       {elementsToRender}
 
+      <LastUsed />
+
       {/* Only show this if a user selected paper ticket in step 1 */}
-      {isPaperTicket && (
-        <>
-          <LastUsed />
-          <UploadTicket />
-        </>
-      )}
+      {isPaperTicket && <UploadTicket />}
 
       <button
         type="button"
