@@ -1,71 +1,20 @@
-import React, { useState, useContext, useEffect } from 'react';
-// Import contexts
-import { FormContext } from 'globalState/FormContext';
+import React from 'react';
+// Import custom hooks
+import useFileUploadValidation from 'customHooks/useFileUploadValidation';
 // Import components
 import Icon from 'components/shared/Icon/Icon';
 // Import styles
 import s from './FileUpload.module.scss';
 
 const FileUpload = () => {
-  const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
-
-  // Local state for controlling file upload
-  const [isFileInputFocused, setIsFileInputFocused] = useState(false);
-  const [fileName, setFileName] = useState('Upload photo');
-
-  // set up state for the inputs error prop
-  const [error, setError] = useState(null);
-  const [isTouched, setIsTouched] = useState(false);
-  const [fileSize, setFileSize] = useState(0);
-
-  const handleChange = (file) => {
-    if (file) {
-      setFileName(file.name); // Set file name that the user has chosen (this will display in our label)
-      setFileSize(file.size); // Set file size of the file
-
-      const PhotoBase64Extension = file.type.split('/')[1]; // => image/png (split at '/' and grab second part 'png')
-      // Start base64'n our uploaded image
-      const reader = new FileReader(); // Start new file reader
-      reader.readAsDataURL(file); // Read file as dataURL
-      // When loaded
-      reader.onloadend = () => {
-        // Since it contains the Data URI, we should remove the prefix and keep only Base64 string
-        const PhotoBase64 = reader.result.replace(/^data:.+;base64,/, '');
-
-        // Update our formData with the base64Extension and Base64 photo
-        formDispatch({
-          type: 'UPDATE_FORM_DATA',
-          payload: { PhotoBase64Extension, PhotoBase64 },
-        });
-      };
-    }
-  };
-
-  const handleFocus = () => {
-    setIsTouched(true); // Set touched as the input has been touched by user (used below to determine whether to show errors)
-    setIsFileInputFocused(true);
-  };
-
-  useEffect(() => {
-    // If the user has touched the input then we can show errors
-    if (isTouched) {
-      if (!formState.Application.PhotoBase64Extension) {
-        setError('Select a photo');
-      } else if (
-        formState.Application.PhotoBase64Extension !== 'png' &&
-        formState.Application.PhotoBase64Extension !== 'jpg' &&
-        formState.Application.PhotoBase64Extension !== 'jpeg'
-      ) {
-        setError('The selected file must be a JPG, JPEG, or PNG');
-      } else if (fileSize > 4194304) {
-        setError('The selected file must be smaller than 4MB');
-      }
-      // Else all is good, so reset error
-      else {
-        setError(null);
-      }
-    }
-  }, [fileSize, formState.Application.PhotoBase64Extension, isTouched]);
+  const {
+    handleChange,
+    handleBlur,
+    handleFocus,
+    isFileInputFocused,
+    fileName,
+    error,
+  } = useFileUploadValidation();
 
   return (
     <div className={`wmnds-fe-group ${error ? 'wmnds-fe-group--error' : ''}`}>
@@ -97,8 +46,8 @@ const FileUpload = () => {
             name="fileUpload"
             id="fileUpload"
             onFocus={handleFocus}
-            onBlur={() => setIsFileInputFocused(false)}
-            onChange={(e) => handleChange(e.target.files[0])}
+            onBlur={handleBlur}
+            onChange={handleChange}
             className={s.fileUpload}
           />
         </label>
