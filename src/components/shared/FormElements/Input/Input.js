@@ -2,12 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useInput from 'customHooks/useFormValidation';
 
-const Input = ({ className, inputmode, label, name, spellcheck, type }) => {
-  const customFunc = () => {
-    console.log('hello');
-  };
-
-  const { handleChange, handleBlur, error } = useInput(name, label, customFunc);
+const Input = ({
+  className,
+  inputmode,
+  label,
+  name,
+  spellcheck,
+  type,
+  customValidation,
+}) => {
+  const { handleChange, handleBlur, error } = useInput(
+    name,
+    label,
+    customValidation
+  );
 
   // Set input to render below
   const input = (
@@ -49,6 +57,7 @@ Input.propTypes = {
   className: PropTypes.string,
   spellcheck: PropTypes.bool,
   type: PropTypes.string,
+  customValidation: PropTypes.func,
 };
 
 Input.defaultProps = {
@@ -56,6 +65,7 @@ Input.defaultProps = {
   className: '',
   spellcheck: false,
   type: 'text',
+  customValidation: null,
 };
 
 export default Input;
