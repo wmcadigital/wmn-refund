@@ -1,6 +1,6 @@
 import React from 'react';
 import Icon from 'components/shared/Icon/Icon';
-import Title from 'components/Title/Title';
+import Title from 'components/shared/Title/Title';
 
 const ErrorPage = () => {
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'components/shared/Icon/Icon';
-import Title from 'components/Title/Title';
+import Title from 'components/shared/Title/Title';
 
 const Introduction = ({ setIsFormStarted }) => {
   return (
