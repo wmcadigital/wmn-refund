@@ -45,7 +45,8 @@ const Introduction = ({ setIsFormStarted }) => {
           payment to WMCA on your bank statement.
         </p>
         <p>
-          If you have a Swift on Mobile ticket, you will need the long number from your ticket in Google Pay. This is also referred to as the ISRN.
+          If you have a Swift on Mobile ticket, you will need the long number from your 
+          ticket in Google Pay. This is also referred to as the Swift card number or ISRN.
         </p>
         <p>If you have a paper ticket, you will need this ticket as proof.</p>
         <br />
