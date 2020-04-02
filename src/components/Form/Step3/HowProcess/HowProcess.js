@@ -29,7 +29,7 @@ const HowProcess = () => {
             value="CancelTicket"
             onChange={handleRadioChange}
           />
-        <p>or</p>
+          <p>or</p>
           <Radio
             name="ActionType"
             text="<strong>Suspend</strong> your ticket. Complete the refund form and let us know when you go back to work. We will calculate your refund from the the date you last travelled up to the day before you use your Swift card again. <br />By suspending your ticket, you will continue to pay monthly deducations from your salary and you can use the same Swift card on your first day back at work. The refund will be sent directly to you."
