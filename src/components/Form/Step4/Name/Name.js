@@ -1,12 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 // Import contexts
-import { FormContext } from 'globalState/FormContext';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
 const Name = () => {
-  const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
-
   return (
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
@@ -17,24 +14,12 @@ const Name = () => {
         name="Firstname"
         label="First name"
         autocomplete="given-name"
-        onChange={(e) =>
-          formDispatch({
-            type: 'UPDATE_FORM_DATA',
-            payload: { Firstname: e.target.value },
-          })
-        }
       />
       <Input
         className="wmnds-col-1-2 wmnds-col-sm-2-3"
         name="Lastname"
         label="Last name"
         autocomplete="family-name"
-        onChange={(e) =>
-          formDispatch({
-            type: 'UPDATE_FORM_DATA',
-            payload: { Lastname: e.target.value },
-          })
-        }
       />
     </fieldset>
   );

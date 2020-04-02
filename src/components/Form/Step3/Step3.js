@@ -34,8 +34,8 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
         </>
       );
       disabledState =
-        disabledState ||
-        !Application.DirectDebitNumber ||
+        disabledState &&
+        !Application.DirectDebitNumber &&
         !Application.CardNumber;
       break;
 

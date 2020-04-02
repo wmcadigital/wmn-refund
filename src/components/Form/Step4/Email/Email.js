@@ -5,7 +5,20 @@ import { FormContext } from 'globalState/FormContext';
 import Input from 'components/shared/FormElements/Input/Input';
 
 const Email = () => {
-  const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  const [formState] = useContext(FormContext); // Get the state of form data from FormContext
+
+  const customValidation = () => {
+    let error;
+
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; // Regex to validate email address https://emailregex.com/
+
+    // If not a valid email address
+    if (!emailRegex.test(formState.Application.Email)) {
+      error = 'Enter an email address in the correct format';
+    }
+
+    return error;
+  };
 
   return (
     <fieldset className="wmnds-fe-fieldset">
@@ -19,12 +32,7 @@ const Email = () => {
         label="Email address, for example name@example.com"
         type="email"
         autocomplete="email"
-        onChange={(e) =>
-          formDispatch({
-            type: 'UPDATE_FORM_DATA',
-            payload: { Email: e.target.value },
-          })
-        }
+        customValidation={customValidation}
       />
     </fieldset>
   );
