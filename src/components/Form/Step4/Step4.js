@@ -24,10 +24,9 @@ const Step4 = () => {
       <Name />
 
       {/* Only show Company if customer is one of the below */}
-      {(CustomerType === 'DirectDebit' ||
-        CustomerType === 'Shop' ||
-        CustomerType === 'SwiftPortal' ||
-        CustomerType === 'Workwise') && <Company />}
+      {(CustomerType === 'Corporate' ||
+        CustomerType === 'ClassPass' ||
+        CustomerType === 'Scratchcard') && <Company />}
 
       {/* Only show address and DOB if not scratchcard and not classpass */}
       {CustomerType !== 'Scratchcard' && CustomerType !== 'ClassPass' && (
