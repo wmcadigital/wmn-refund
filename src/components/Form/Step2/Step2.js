@@ -58,13 +58,13 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket, isSwiftCard }) => {
                 value="Workwise"
                 onChange={handleRadioChange}
               />
-            )}
             <Radio
               name="CustomerType"
               text="I bought it from a Swift ticket machine"
               value="SwiftPortal"
               onChange={handleRadioChange}
             />
+            )}
             <Radio
               name="CustomerType"
               text="I bought it from a ticket office, West Midlands Network travel shop or Payzone shop"
