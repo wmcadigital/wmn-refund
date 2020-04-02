@@ -7,7 +7,7 @@ const Introduction = ({ setIsFormStarted }) => {
   return (
     <>
       <Title />
-      <div className="wmnds-col-1 wmnds-col-sm-3-4 wmnds-col-lg-1-2">
+      <div className="wmnds-col-1 wmnds-col-md-3-4 wmnds-col-lg-1-2">
         <p>Use this service to:</p>
         <ul>
           <li>

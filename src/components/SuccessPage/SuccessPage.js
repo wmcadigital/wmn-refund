@@ -6,7 +6,7 @@ const SuccessPage = () => {
   return (
     <>
       <Title />
-      <div className="wmnds-col-1 wmnds-col-sm-3-4 wmnds-col-lg-1-2">
+      <div className="wmnds-col-1 wmnds-col-md-3-4 wmnds-col-lg-1-2">
         {/* Success message */}
         <div className="wmnds-msg-summary wmnds-msg-summary--success-fill wmnds-m-b-xl">
           <div className="wmnds-msg-summary__header">
