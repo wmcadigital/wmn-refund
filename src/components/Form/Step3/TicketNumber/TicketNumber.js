@@ -12,7 +12,7 @@ const TicketNumber = () => {
       <legend className="wmnds-fe-fieldset__legend">
         <h3 className="wmnds-fe-question">What is your ticket number?</h3>
         <p>
-          This is the five-digit number found next to the expiry date on your
+          This is the five-digit number found near the expiry date on your
           paper ticket
         </p>
       </legend>

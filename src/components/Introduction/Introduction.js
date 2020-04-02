@@ -12,7 +12,10 @@ const Introduction = ({ setIsFormStarted }) => {
         <ul>
           <li>
             Apply for a refund of your Swift card, paper or Swift on Mobile
-            ticket if you have been unable to travel due to Coronavirus
+            ticket if you have been unable to travel due to the Coronavirus outbreak
+          </li>
+          <li>
+            Let us know that you would like to exchange your class pass or scratchcards
           </li>
         </ul>
         <p>This process takes around 5 minutes.</p>
@@ -40,6 +43,9 @@ const Introduction = ({ setIsFormStarted }) => {
           If you pay by Direct Debit, you will need your direct debit reference
           number. This begins with <strong>6</strong> and is shown next to every
           payment to WMCA on your bank statement.
+        </p>
+        <p>
+          If you have a Swift on Mobile ticket, you will need the long number from your ticket in Google Pay. This is also referred to as the ISRN.
         </p>
         <p>If you have a paper ticket, you will need this ticket as proof.</p>
         <p>We will process your information in line with the our Privacy Policy</p>

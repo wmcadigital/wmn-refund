@@ -52,19 +52,21 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket, isSwiftCard }) => {
             />
             {/* Only show if not CustomerType of PaperTicket */}
             {!isPaperTicket && (
-              <Radio
-                name="CustomerType"
-                text="I am on the Workwise scheme"
-                value="Workwise"
-                onChange={handleRadioChange}
-              />
+              <>
+                <Radio
+                  name="CustomerType"
+                  text="I am on the Workwise scheme"
+                  value="Workwise"
+                  onChange={handleRadioChange}
+                />
+                <Radio
+                  name="CustomerType"
+                  text="I bought it from a Swift ticket machine"
+                  value="SwiftPortal"
+                  onChange={handleRadioChange}
+                />
+              </>
             )}
-            <Radio
-              name="CustomerType"
-              text="I bought it from a Swift ticket machine"
-              value="SwiftPortal"
-              onChange={handleRadioChange}
-            />
             <Radio
               name="CustomerType"
               text="I bought it from a ticket office, West Midlands Network travel shop or Payzone shop"

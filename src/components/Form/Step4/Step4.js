@@ -31,9 +31,10 @@ const Step4 = () => {
         CustomerType === 'ClassPass' ||
         CustomerType === 'Scratchcard') && <Company />}
 
-      {/* Only show  DOB if not scratchcard and not classpass and not Shop */}
+      {/* Only show  DOB if not scratchcard and not classpass and not corporate and not Shop */}
       {CustomerType !== 'Scratchcard' &&
         CustomerType !== 'ClassPass' &&
+        CustomerType !== 'Corporate' &&
         CustomerType !== 'Shop' && <DOB />}
 
       {/* Only show address if not scratchcard and not classpass */}
