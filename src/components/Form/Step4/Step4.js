@@ -21,7 +21,10 @@ const Step4 = () => {
         we need more information
       </p>
 
-      <Name />
+      {/* Only show name fields if customer type is none of the below */}
+      {CustomerType !== 'Scratchcard' && CustomerType !== 'ClassPass' && (
+        <Name />
+      )}
 
       {/* Only show Company if customer is one of the below */}
       {(CustomerType === 'Corporate' ||
