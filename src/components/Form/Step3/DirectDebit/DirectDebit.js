@@ -1,12 +1,8 @@
-import React, { useContext } from 'react';
-// Import contexts
-import { FormContext } from 'globalState/FormContext';
+import React from 'react';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
 const DirectDebit = () => {
-  const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
-
   return (
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
@@ -23,12 +19,6 @@ const DirectDebit = () => {
         name="DirectDebitNumber"
         label="Direct Debit reference"
         inputmode="numeric"
-        onChange={(e) =>
-          formDispatch({
-            type: 'UPDATE_FORM_DATA',
-            payload: { DirectDebitNumber: e.target.value },
-          })
-        }
       />
     </fieldset>
   );
