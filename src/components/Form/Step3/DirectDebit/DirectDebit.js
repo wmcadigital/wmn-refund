@@ -13,7 +13,7 @@ const DirectDebit = () => {
 
     // DirectDebit reference should start with 6
     if (formState.Application.DirectDebitNumber.charAt(0) !== '6') {
-      error = `${label} should start with '6'`;
+      error = `${label} is a number that begins with '6'`;
     }
 
     return error;
