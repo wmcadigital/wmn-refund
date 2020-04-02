@@ -20,6 +20,8 @@ const Input = ({
     customValidation
   );
 
+  console.log({ error });
+
   // Set input to render below
   const input = (
     <>
@@ -46,7 +48,7 @@ const Input = ({
       )}
 
       {/* If there is an error, show here */}
-      {error && <span className="wmnds-fe-error-message">{error}</span>}
+      {error.name && <span className="wmnds-fe-error-message">{error}</span>}
 
       {/* If className then wrap just input with the className else, just show input as usual */}
       {className ? <div className={className}>{input}</div> : input}
