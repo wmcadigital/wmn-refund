@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Input = ({
-  label,
-  inputmode,
-  onChange,
-  name,
   className,
+  inputmode,
+  label,
+  name,
+  onChange,
+  onBlur,
   spellcheck,
   type,
 }) => {
@@ -20,6 +21,7 @@ const Input = ({
       inputMode={inputmode}
       spellCheck={spellcheck}
       onChange={onChange}
+      onBlur={onBlur}
     />
   );
 
@@ -40,6 +42,7 @@ Input.propTypes = {
   label: PropTypes.string.isRequired,
   inputmode: PropTypes.string,
   onChange: PropTypes.func,
+  onBlur: PropTypes.func,
   name: PropTypes.string.isRequired,
   className: PropTypes.string,
   spellcheck: PropTypes.bool,
@@ -49,6 +52,7 @@ Input.propTypes = {
 Input.defaultProps = {
   inputmode: 'text',
   onChange: null,
+  onBlur: null,
   className: '',
   spellcheck: false,
   type: 'text',
