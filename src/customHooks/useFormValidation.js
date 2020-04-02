@@ -9,7 +9,7 @@ const useInput = (name, label) => {
   const [error, setError] = useState(null);
   const [isTouched, setIsTouched] = useState(false);
 
-  const value = formState.Application[name]; // Get value from state
+  const value = formState.Application[name] || ''; // Get value from state
 
   // set up the event handler for onChange event
   function handleChange(e) {
@@ -22,7 +22,6 @@ const useInput = (name, label) => {
 
   // set up event handler for onBlur
   function handleBlur() {
-    if (!value) return; // if value is not set, then return
     setIsTouched(true); // Set touched as the input has been touched by user (used below to determine whether to show errors)
   }
 
