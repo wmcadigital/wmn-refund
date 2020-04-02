@@ -7,13 +7,15 @@ export const FormErrorProvider = (props) => {
 
   const [errorState, setErrorState] = useState({});
 
+  const updateErrorState = (name, errorMessage) => {
+    setErrorState({ ...errorState, [name]: errorMessage });
+  };
+
   return (
     <FormErrorContext.Provider
       value={{
         errorState,
-        updateErrorState: (name, payload) => {
-          setErrorState({ ...errorState, [name]: payload });
-        },
+        updateErrorState,
       }}
     >
       {children}
