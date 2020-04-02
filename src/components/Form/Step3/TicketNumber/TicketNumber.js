@@ -15,7 +15,10 @@ const TicketNumber = () => {
           This is the five-digit number found near the expiry date on your
           paper ticket
         </p>
-      </legend>
+        <p>
+          <img src="../../../../assets/images/paper-ticket-example.jpg" alt="A paper Network travel ticket. The expiry date of the ticket is in the middle. There is a red rectangle box to the right of the expiry date to show where the ticket number is located." />
+        </p> 
+    </legend>
       <Input
         className="wmnds-col-1-2 wmnds-col-sm-1-5"
         name="TicketNumber"
