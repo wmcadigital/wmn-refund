@@ -25,13 +25,14 @@ const HowProcess = () => {
         <div className="wmnds-fe-radios wmnds-col-1 wmnds-col-md-3-4">
           <Radio
             name="ActionType"
-            text="Cancel your ticket and get a refund for the period you have not travelled. You will have to apply for a new ticket when you go back to work."
+            text="<strong>Cancel</strong> your ticket and get a refund for the period you have not travelled. We will process your refund from the date you last travelled up to the ticket expiry date and you will no longer be able to travel using this ticket."
             value="CancelTicket"
             onChange={handleRadioChange}
           />
+        <p>or</p>
           <Radio
             name="ActionType"
-            text="Contact us again when you go back to work. After you have let us know, you will get refund for the period you have not travelled. <br/><br/>You will continue to pay for your ticket every month during social distancing measures. You can use the same ticket when you go back to work."
+            text="<strong>Suspend</strong> your ticket. Complete the refund form and let us know when you go back to work. We will calculate your refund from the the date you last travelled up to the day before you use your Swift card again. <br />By suspending your ticket, you will continue to pay monthly deducations from your salary and you can use the same Swift card on your first day back at work. The refund will be sent directly to you."
             value="NotTravelling"
             onChange={handleRadioChange}
           />
