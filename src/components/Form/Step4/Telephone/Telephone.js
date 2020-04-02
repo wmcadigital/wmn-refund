@@ -14,6 +14,7 @@ const Telephone = () => {
         name="PhoneNumber"
         label="UK telephone number"
         inputmode="numeric"
+        autocomplete="tel-national"
       />
     </fieldset>
   );
