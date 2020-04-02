@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import useInput from 'customHooks/useInputValidation';
 
 const Input = ({
+  autocomplete,
   className,
   inputmode,
   label,
@@ -30,6 +31,7 @@ const Input = ({
         spellCheck={spellcheck}
         onChange={handleChange}
         onBlur={handleBlur}
+        autoComplete={autocomplete}
       />
     </>
   );
@@ -52,6 +54,7 @@ const Input = ({
 };
 
 Input.propTypes = {
+  autocomplete: PropTypes.string,
   label: PropTypes.string.isRequired,
   inputmode: PropTypes.string,
   name: PropTypes.string.isRequired,
@@ -62,6 +65,7 @@ Input.propTypes = {
 };
 
 Input.defaultProps = {
+  autocomplete: null,
   inputmode: 'text',
   className: '',
   spellcheck: false,

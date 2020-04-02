@@ -17,6 +17,7 @@ const Address = () => {
         className="wmnds-col-1-2 wmnds-col-sm-2-3"
         name="AddressLine1"
         label="Building and street"
+        autocomplete="address-line1"
         onChange={(e) =>
           formDispatch({
             type: 'UPDATE_FORM_DATA',
@@ -27,6 +28,7 @@ const Address = () => {
       <Input
         className="wmnds-col-1-2 wmnds-col-sm-2-3"
         name="AddressLine2"
+        autocomplete="address-line2"
         onChange={(e) =>
           formDispatch({
             type: 'UPDATE_FORM_DATA',
@@ -40,6 +42,7 @@ const Address = () => {
         className="wmnds-col-1 wmnds-col-sm-1-2"
         name="AddressTown"
         label="Town or city"
+        autocomplete="address-level2"
         onChange={(e) =>
           formDispatch({
             type: 'UPDATE_FORM_DATA',
@@ -51,6 +54,7 @@ const Address = () => {
         className="wmnds-col-1 wmnds-col-sm-1-2"
         name="AddressLine3"
         label="County"
+        autocomplete="address-county"
         onChange={(e) =>
           formDispatch({
             type: 'UPDATE_FORM_DATA',
@@ -64,6 +68,7 @@ const Address = () => {
         name="AddressPostcode"
         label="Postcode"
         className="wmnds-col-1-2 wmnds-col-sm-1-4"
+        autocomplete="postal-code"
         onChange={(e) =>
           formDispatch({
             type: 'UPDATE_FORM_DATA',
