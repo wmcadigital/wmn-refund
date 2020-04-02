@@ -5,6 +5,7 @@ import { FormProvider } from 'globalState/FormContext';
 import Form from 'components/Form/Form';
 import Introduction from 'components/Introduction/Introduction';
 import SuccessPage from 'components/SuccessPage/SuccessPage';
+import ErrorPage from 'components/ErrorPage/ErrorPage';
 
 function App() {
   const [isFormStarted, setIsFormStarted] = useState(false);
@@ -25,6 +26,8 @@ function App() {
       )}
 
       {formSubmitStatus && <SuccessPage />}
+
+      {formSubmitStatus === false && <ErrorPage />}
     </div>
   );
 }
