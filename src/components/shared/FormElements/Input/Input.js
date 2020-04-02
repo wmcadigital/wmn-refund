@@ -12,12 +12,11 @@ const Input = ({
   spellcheck,
   type,
 }) => {
-  const { handleChange, handleBlur, error } = useInput(name, '');
+  const { handleChange, handleBlur, error } = useInput(name, label);
 
   // Set input to render below
   const input = (
     <>
-      <span className="wmnds-fe-error-message">{error}</span>
       <input
         className={`wmnds-fe-input ${error ? 'wmnds-fe-input--error' : ''}`}
         id={name}
@@ -38,6 +37,10 @@ const Input = ({
           {label}
         </label>
       )}
+
+      {/* If there is an error, show here */}
+      {error && <span className="wmnds-fe-error-message">{error}</span>}
+
       {/* If className then wrap just input with the className else, just show input as usual */}
       {className ? <div className={className}>{input}</div> : input}
     </div>

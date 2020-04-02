@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 
-const useInput = (name) => {
+const useInput = (name, label) => {
   // set up the state for the inputs value prop and set it to the default value
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
   // set up state for the inputs error prop
@@ -26,13 +26,13 @@ const useInput = (name) => {
   useEffect(() => {
     // set the state no matter what
     if (isTouched) {
-      if (formState.Application[name].length > 4) {
-        setError('longer name');
+      if (!formState.Application[name].length) {
+        setError(`${label} is required`);
       } else {
         setError('shorterName');
       }
     }
-  }, [formState.Application, isTouched, name]);
+  }, [formState.Application, isTouched, label, name]);
 
   // return object
   return {
