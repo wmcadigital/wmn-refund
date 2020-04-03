@@ -8,7 +8,7 @@ const Introduction = ({ setIsFormStarted }) => {
     <>
       <Title />
       <div className="wmnds-col-1 wmnds-col-md-3-4 wmnds-col-lg-1-2">
-        <p>Use this service to:</p>
+        <h2>Use this service to:</h2>
         <ul>
           <li>
             Apply for a refund of your Swift card, paper or Swift on Mobile
@@ -19,36 +19,29 @@ const Introduction = ({ setIsFormStarted }) => {
           </li>
         </ul>
         <p>This process takes around 5 minutes.</p>
-        <p>
-          <strong>Before you start</strong>
-        </p>
-        <p>
-          If you have a Swift card, you will need the long number on the front
-          of the card.
-        </p>
-        <p>
-          If the long number begins with <strong>633 597 0112</strong>, it is
-          managed by National Express West Midlands and there is a{' '}
-          <a
-            href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
-            title="National Express West Midlands ticket refund application"
-            target="_self"
-            className="wmnds-link"
-          >
-            separate refund application
-          </a>
-          .
-        </p>
-        <p>
-          If you pay by Direct Debit, you will need your direct debit reference
+        <h2>Before you start</h2>
+        <ul>
+          <li>
+            You will need your Swift card, paper ticket or the phone your Swift on Mobile ticket is on
+          </li>
+          <li>
+            If the long number on your Swift card begins with <strong>633 597 0112</strong>, it is 
+            managed by National Express West Midlands and there is a{' '}
+             <a
+                href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
+                title="National Express West Midlands ticket refund application"
+                target="_self"
+                className="wmnds-link"
+              >
+                  separate refund application
+             </a>
+            .
+          </li>
+          <li>
+          If you pay by Direct Debit, you will need your Direct Debit reference
           number. This begins with <strong>6</strong> and is shown next to every
           payment to WMCA on your bank statement.
-        </p>
-        <p>
-          If you have a Swift on Mobile ticket, you will need the long number from your 
-          ticket in Google Pay. This is also referred to as the Swift card number or ISRN.
-        </p>
-        <p>If you have a paper ticket, you will need this ticket as proof.</p>
+          </li>
         <br />
         <p>There is guidance available to show <a
             href="https://wmnetwork.co.uk/get-in-touch/covid19-refund-scheme/"
