@@ -12,7 +12,7 @@ import ProgressIndicator from './ProgressIndicator/ProgressIndicator';
 import s from './Form.module.scss';
 
 const Form = ({ setFormSubmitStatus }) => {
-  const [formState] = useContext(FormContext); // Get the state of form data from FormContext
+  const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
   const [currentStep, setCurrentStep] = useState(1);
   const [isPaperTicket, setIsPaperTicket] = useState(false); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
   const [isSwiftCard, setIsSwiftCard] = useState(false); // Used to track if a user is using a SwiftCard(set in step 1). Then read this value in step 2 to hide 'bought on website radio option'
@@ -29,17 +29,20 @@ const Form = ({ setFormSubmitStatus }) => {
       },
     })
       .then((response) => {
-        return response.json();
+        // If the response is successful(200: OK)
+        if (response.status === 200) {
+          return response.text(); // Return response (reference number)
+        }
+        throw new Error(response.statusText, response.Message); // Else throw error and go to our catch below
       })
-      .then((data) => {
-        console.log({ data });
+      .then((payload) => {
+        formDispatch({ type: 'ADD_FORM_REF', payload }); // Update form state with the form ref received from server
         setFormSubmitStatus(true); // Set form status to success
-
-        alert(`form has been submitted as ${formState.CustomerType}`);
       })
       .catch((error) => {
-        console.error('Error:', error);
-        setFormSubmitStatus(false); // Set form status to success
+        // eslint-disable-next-line no-console
+        console.error({ error });
+        setFormSubmitStatus(false); // Set form status to error
       });
   };
 

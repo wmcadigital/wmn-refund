@@ -30,6 +30,14 @@ export const FormProvider = (props) => {
         };
       }
 
+      // Remove the waypoint by the id
+      case 'ADD_FORM_REF': {
+        return {
+          ...state,
+          FormRef: action.payload,
+        };
+      }
+
       // Default should return intial state if error
       default:
         return initialState;

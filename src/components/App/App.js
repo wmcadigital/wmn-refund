@@ -17,17 +17,17 @@ function App() {
       {/* If form isn't started, show intro...else show form */}
       {!isFormStarted && <Introduction setIsFormStarted={setIsFormStarted} />}
 
-      {isFormStarted && formSubmitStatus === null && (
-        <FormProvider>
+      <FormProvider>
+        {isFormStarted && formSubmitStatus === null && (
           <FormErrorProvider>
             <Form setFormSubmitStatus={setFormSubmitStatus} />
           </FormErrorProvider>
-        </FormProvider>
-      )}
+        )}
 
-      {formSubmitStatus && <SuccessPage />}
+        {formSubmitStatus && <SuccessPage />}
 
-      {formSubmitStatus === false && <ErrorPage />}
+        {formSubmitStatus === false && <ErrorPage />}
+      </FormProvider>
     </div>
   );
 }

@@ -8,12 +8,21 @@ const DirectDebit = () => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
   const label = 'Direct Debit reference'; // Used on input and for validation
 
-  const ddValidation = () => {
+  const customValidation = () => {
     let error;
+    const ddNum = formState.Application.DirectDebitNumber;
 
     // DirectDebit reference should start with 6
-    if (formState.Application.DirectDebitNumber.charAt(0) !== '6') {
+    if (ddNum.charAt(0) !== '6') {
       error = `${label} is a number that begins with '6'`;
+    }
+    // Must be 8 digits long
+    else if (ddNum.length !== 8) {
+      error = `${label} must be 8 digits`;
+    }
+    // Not valid ref if not between these numbers
+    else if (+ddNum < 60000000 || ddNum > 60999999) {
+      error = `Enter a valid ${label}`;
     }
 
     return error;
@@ -35,7 +44,7 @@ const DirectDebit = () => {
         name="DirectDebitNumber"
         label={label}
         inputmode="numeric"
-        customValidation={ddValidation}
+        customValidation={customValidation}
       />
     </fieldset>
   );
