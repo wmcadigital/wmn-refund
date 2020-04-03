@@ -23,44 +23,52 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
   let disabledState = !Application.LastUsedDate; // Used to change the disabled state on continue button (by default we put in LastUsedDate as this is used by every outcome)
   let elementsToRender; // Used to change conditional elements to render
 
-  // Switch on customer type, then change disabledState and elementsToRender accordingly
-  switch (CustomerType) {
-    // DirectDebit
-    case 'DirectDebit':
-      elementsToRender = (
-        <>
-          <DirectDebit />
-          <SwiftCard />
-        </>
-      );
-      disabledState =
-        disabledState &&
-        !Application.DirectDebitNumber &&
-        !Application.CardNumber;
-      break;
+  // If not a paper ticket then must be online customertype so run switch on it
+  if (!isPaperTicket) {
+    // Switch on customer type, then change disabledState and elementsToRender accordingly
+    switch (CustomerType) {
+      // DirectDebit
+      case 'DirectDebit':
+        elementsToRender = (
+          <>
+            <DirectDebit />
+            <SwiftCard />
+          </>
+        );
+        disabledState =
+          disabledState &&
+          !Application.DirectDebitNumber &&
+          !Application.CardNumber;
+        break;
 
-    // Workwise
-    case 'Workwise':
-      elementsToRender = <SwiftCard />;
-      disabledState = disabledState || !Application.CardNumber;
-      break;
+      // Workwise
+      case 'Workwise':
+        elementsToRender = <SwiftCard />;
+        disabledState = disabledState || !Application.CardNumber;
+        break;
 
-    //  Corporate
-    case 'Corporate':
-      elementsToRender = (
-        <>
-          <SwiftCard />
-          <HowProcess />
-        </>
-      );
-      disabledState =
-        disabledState || !Application.CardNumber || !Application.ActionType;
-      break;
+      //  Corporate
+      case 'Corporate':
+        elementsToRender = (
+          <>
+            <SwiftCard />
+            <HowProcess />
+          </>
+        );
+        disabledState =
+          disabledState || !Application.CardNumber || !Application.ActionType;
+        break;
 
-    // OnlineSales, Shop, SwiftPortal
-    default:
-      elementsToRender = <TicketNumber />;
-      disabledState = disabledState || !Application.TicketNumber;
+      // OnlineSales, Shop, SwiftPortal
+      default:
+        elementsToRender = <TicketNumber />;
+        disabledState = disabledState || !Application.TicketNumber;
+    }
+  }
+  // Else paper ticket so show paper ticket number
+  else {
+    elementsToRender = <TicketNumber />;
+    disabledState = disabledState || !Application.TicketNumber;
   }
 
   return (
