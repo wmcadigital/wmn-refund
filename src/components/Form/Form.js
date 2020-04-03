@@ -29,17 +29,19 @@ const Form = ({ setFormSubmitStatus }) => {
       },
     })
       .then((response) => {
-        return response.json();
+        // If the response is successful(200: OK)
+        if (response.status === 200) {
+          return response.json(); // Return response as json
+        }
+        throw new Error(response.statusText); // Else throw error and go to our catch below
       })
       .then((data) => {
         console.log({ data });
         setFormSubmitStatus(true); // Set form status to success
-
-        alert(`form has been submitted as ${formState.CustomerType}`);
       })
       .catch((error) => {
-        console.error('Error:', error);
-        setFormSubmitStatus(false); // Set form status to success
+        console.error({ error });
+        setFormSubmitStatus(false); // Set form status to error
       });
   };
 
