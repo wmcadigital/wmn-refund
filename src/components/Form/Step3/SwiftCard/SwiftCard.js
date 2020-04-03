@@ -5,7 +5,41 @@ import { FormContext } from 'globalState/FormContext';
 import Input from 'components/shared/FormElements/Input/Input';
 
 const SwiftCard = () => {
-  const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  const [formState] = useContext(FormContext); // Get the state of form data from FormContext
+  const label = 'Swift card number';
+
+  const customValidation = () => {
+    let error;
+    const swiftNum = formState.Application.CardNumber; // get swiftcard number from state
+    const firstTen = swiftNum.substr(0, 10); // Get first ten chars of input
+
+    // If card number starts with 6335970112 then user has NX card and needs to go to NX for refund
+    if (firstTen === '6335970112') {
+      error = `${label} is managed by National Express West Midlands and there is a
+            <a
+              href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
+              title="National Express West Midlands ticket refund application"
+              target="_blank"
+              className="wmnds-link"
+            >
+              separate refund application
+            </a>`;
+    }
+    // If swift card doesn't start with the below numbers then it's not valid
+    else if (firstTen !== '6335970107' || firstTen !== '6335970319') {
+      error = `Your ${label} is the long number on the front of the card`;
+    }
+    // Must be 16 digits long
+    else if (swiftNum.length !== 16) {
+      error = `Your ${label} is 16 digits long and begins with 633597 0107`;
+    }
+    // Not valid ref if not between these numbers
+    else if (+swiftNum < 60000000 || swiftNum > 60999999) {
+      error = `Enter a valid ${label}`;
+    }
+
+    return error;
+  };
 
   return (
     <fieldset className="wmnds-fe-fieldset">
@@ -15,21 +49,14 @@ const SwiftCard = () => {
           This is the long number on the front of the card and begins with{' '}
           <strong>633597</strong>
         </p>
-        <p>
-          On Swift on Mobile tickets it is also called the ISRN number.
-        </p>
+        <p>On Swift on Mobile tickets it is also called the ISRN number.</p>
       </legend>
       <Input
         className="wmnds-col-1 wmnds-col-sm-3-4 wmnds-col-md-1-2"
         name="CardNumber"
-        label="Swift card number"
+        label={label}
         inputmode="numeric"
-        onChange={(e) =>
-          formDispatch({
-            type: 'UPDATE_FORM_DATA',
-            payload: { CardNumber: e.target.value },
-          })
-        }
+        customValidation={customValidation}
       />
     </fieldset>
   );

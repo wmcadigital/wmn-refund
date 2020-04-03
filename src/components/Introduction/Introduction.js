@@ -12,43 +12,53 @@ const Introduction = ({ setIsFormStarted }) => {
         <ul>
           <li>
             Apply for a refund of your Swift card, paper or Swift on Mobile
-            ticket if you have been unable to travel due to the Coronavirus outbreak
+            ticket if you have been unable to travel due to the Coronavirus
+            outbreak
           </li>
           <li>
-            Let us know that you would like to exchange your class pass or scratchcards
+            Let us know that you would like to exchange your class pass or
+            scratchcards
           </li>
         </ul>
         <p>This process takes around 5 minutes.</p>
         <h2>Before you start</h2>
         <ul>
           <li>
-            You will need your Swift card, paper ticket or the phone your Swift on Mobile ticket is on
+            You will need your Swift card, paper ticket or the phone your Swift
+            on Mobile ticket is on
           </li>
           <li>
-            If the long number on your Swift card begins with <strong>633597 0112</strong>, it is 
-            managed by National Express West Midlands and there is a{' '}
-             <a
-                href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
-                title="National Express West Midlands ticket refund application"
-                target="_self"
-                className="wmnds-link"
-              >
-                  separate refund application
-             </a>
+            If the long number on your Swift card begins with{' '}
+            <strong>633597 0112</strong>, it is managed by National Express West
+            Midlands and there is a{' '}
+            <a
+              href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
+              title="National Express West Midlands ticket refund application"
+              target="_self"
+              className="wmnds-link"
+            >
+              separate refund application
+            </a>
           </li>
           <li>
-          If you pay by Direct Debit, you will need your Direct Debit reference
-          number. This begins with <strong>6</strong> and is shown next to every
-          payment to WMCA on your bank statement
+            If you pay by Direct Debit, you will need your Direct Debit
+            reference number. This begins with <strong>6</strong> and is shown
+            next to every payment to WMCA on your bank statement
           </li>
         </ul>
         <br />
-        <p>There is guidance available to show <a
+        <p>
+          There is guidance available to show{' '}
+          <a
             href="https://wmnetwork.co.uk/get-in-touch/covid19-refund-scheme/"
             title="How we will work out your refund"
             target="_self"
             className="wmnds-link"
-          >how we will work out your refund</a>.</p>
+          >
+            how we will work out your refund
+          </a>
+          .
+        </p>
         <br />
         <br />
         <button
