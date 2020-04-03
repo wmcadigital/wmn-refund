@@ -40,6 +40,7 @@ const Form = ({ setFormSubmitStatus }) => {
         setFormSubmitStatus(true); // Set form status to success
       })
       .catch((error) => {
+        // eslint-disable-next-line no-console
         console.error({ error });
         setFormSubmitStatus(false); // Set form status to error
       });

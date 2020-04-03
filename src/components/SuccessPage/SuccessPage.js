@@ -31,6 +31,22 @@ const SuccessPage = () => {
         {/* Success copy */}
         <h3>What happens next</h3>
 
+        {/* If user is scratchcard or classpass show additional info */}
+        {(formState.CustomerType === 'Scratchcard' ||
+          formState.CustomerType === 'ClassPass') && (
+          <>
+            <p>We have sent you an email to acknowledge your application.</p>
+            <p>
+              Unfortunately, due to logistics, we are unable to process
+              applications for scratchcards and class passes remotely.
+            </p>
+            <p>
+              As soon as the Government advises it is okay to return to the
+              office, we will process your application as a priority.
+            </p>
+          </>
+        )}
+
         <p>
           We have sent you an email to acknowledge your application. The email
           also contains more details about how we will process your refund.
