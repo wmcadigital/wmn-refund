@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import dompurify from 'dompurify';
+
 import useInputValidation from './useInputValidation';
+
+const { sanitize } = dompurify;
 
 const Input = ({
   autocomplete,
@@ -46,7 +50,12 @@ const Input = ({
       )}
 
       {/* If there is an error, show here */}
-      {error && <span className="wmnds-fe-error-message">{error}</span>}
+      {error && (
+        <span
+          className="wmnds-fe-error-message"
+          dangerouslySetInnerHTML={{ __html: sanitize(error) }}
+        />
+      )}
 
       {/* If className then wrap just input with the className else, just show input as usual */}
       {className ? <div className={className}>{input}</div> : input}

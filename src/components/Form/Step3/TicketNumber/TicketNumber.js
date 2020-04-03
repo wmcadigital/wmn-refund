@@ -1,13 +1,10 @@
-import React, { useContext } from 'react';
-// Import contexts
-import { FormContext } from 'globalState/FormContext';
+import React from 'react';
+
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 import paperTicketImg from 'assets/images/paper-ticket-example.jpg';
 
 const TicketNumber = () => {
-  const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
-
   return (
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
@@ -29,12 +26,6 @@ const TicketNumber = () => {
         name="TicketNumber"
         label="Ticket number"
         inputmode="numeric"
-        onChange={(e) =>
-          formDispatch({
-            type: 'UPDATE_FORM_DATA',
-            payload: { TicketNumber: e.target.value },
-          })
-        }
       />
     </fieldset>
   );
