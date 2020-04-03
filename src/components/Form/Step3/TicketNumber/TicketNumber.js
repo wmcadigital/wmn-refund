@@ -19,7 +19,7 @@ const TicketNumber = () => {
         <p>
           <img
             src={paperTicketImg}
-            alt="A paper Network travel ticket. The expiry date of the ticket is in the middle. There is a red rectangle box to the right of the expiry date to show where the ticket number is located."
+            alt="Paper Network travel ticket, with expiry date located in the middle and ticket number indicated in a red box."
             loading="auto"
           />
         </p>
