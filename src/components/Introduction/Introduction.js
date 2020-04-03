@@ -25,7 +25,7 @@ const Introduction = ({ setIsFormStarted }) => {
             You will need your Swift card, paper ticket or the phone your Swift on Mobile ticket is on
           </li>
           <li>
-            If the long number on your Swift card begins with <strong>633 597 0112</strong>, it is 
+            If the long number on your Swift card begins with <strong>633597 0112</strong>, it is 
             managed by National Express West Midlands and there is a{' '}
              <a
                 href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
@@ -35,13 +35,13 @@ const Introduction = ({ setIsFormStarted }) => {
               >
                   separate refund application
              </a>
-            .
           </li>
           <li>
           If you pay by Direct Debit, you will need your Direct Debit reference
           number. This begins with <strong>6</strong> and is shown next to every
-          payment to WMCA on your bank statement.
+          payment to WMCA on your bank statement
           </li>
+        </ul>
         <br />
         <p>There is guidance available to show <a
             href="https://wmnetwork.co.uk/get-in-touch/covid19-refund-scheme/"
