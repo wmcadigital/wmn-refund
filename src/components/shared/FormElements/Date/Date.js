@@ -5,7 +5,7 @@ import useDateValidation from './useDateValidation';
 import DateInput from './DateInput.js/DateInput';
 
 const Date = ({ name, label }) => {
-  const { error, handleChange, handleBlur } = useDateValidation();
+  const { error, handleChange, handleBlur } = useDateValidation(name, label);
 
   return (
     <>

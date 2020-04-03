@@ -2,12 +2,14 @@ import { useState, useContext, useEffect } from 'react';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 
-let day;
-let month;
-let year;
+const useInputValidation = (name, label, customValidation) => {
+  const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  // set up state for the inputs error prop
 
-const useInputValidation = () => {
-  const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  // State used for capturing date fields onChange below (we use these to validate against below)
+  const [day, setDay] = useState();
+  const [month, setMonth] = useState();
+  const [year, setYear] = useState();
   // set up state for the inputs error prop
   const [error, setError] = useState(null);
   const [isTouched, setIsTouched] = useState(false);
@@ -15,24 +17,14 @@ const useInputValidation = () => {
   const handleChange = (e) => {
     // Switch on the input name, depending on name then update the relevant var
     switch (e.target.name) {
-      case 'LastUsedDay':
-        day = e.target.value;
+      case `${name}Day`:
+        setDay(e.target.value);
         break;
-      case 'LastUsedMonth':
-        month = e.target.value;
+      case `${name}Month`:
+        setMonth(e.target.value);
         break;
       default:
-        year = e.target.value;
-    }
-
-    // If day, month and year exists then update state
-    if (day && month && year) {
-      const LastUsedDate = `${year}-${month}-${day}`; // Set LastUsed var on how API expects it
-      // Update state
-      formDispatch({
-        type: 'UPDATE_FORM_DATA',
-        payload: { LastUsedDate },
-      });
+        setYear(e.target.value);
     }
   };
 
@@ -41,13 +33,55 @@ const useInputValidation = () => {
     setIsTouched(true); // Set touched as the input has been touched by user (used below to determine whether to show errors)
   }
 
+  // Handle validation
+  // Re-use this logic everytime state is updated
   useEffect(() => {
+    const dateRegex = /^((((19[0-9][0-9])|(2[0-9][0-9][0-9]))([-])(0[13578]|10|12)([-])(0[1-9]|[12][0-9]|3[01]))|(((19[0-9][0-9])|(2[0-9][0-9][0-9]))([-])(0[469]|11)([-])([0][1-9]|[12][0-9]|30))|(((19[0-9][0-9])|(2[0-9][0-9][0-9]))([-])(02)([-])(0[1-9]|1[0-9]|2[0-8]))|(([02468][048]00)([-])(02)([-])(29))|(([13579][26]00)([-])(02)([-])(29))|(([0-9][0-9][0][48])([-])(02)([-])(29))|(([0-9][0-9][2468][048])([-])(02)([-])(29))|(([0-9][0-9][13579][26])([-])(02)([-])(29)))$/; // Date regex http://regexlib.com/REDetails.aspx?regexp_id=1850
+
+    const date = `${year}-${month}-${day}`; // Set LastUsed var on how API expects it
+
+    // If the user has touched the input then we can show errors
     if (isTouched) {
+      // If there is no day
       if (!day) {
-        setError('no day');
+        setError(`${label} must include day`);
+      }
+      // If there is no month
+      else if (!month) {
+        setError(`${label} must include month`);
+      }
+      // If there is no year
+      else if (!year) {
+        setError(`${label} must include year`);
+      }
+      // If not a valid date (yyyy-mm-dd)
+      else if (!dateRegex.test(date)) {
+        setError(`Enter a real ${label.toLowerCase()}`);
+      }
+      // Run custom validation logic
+      else if (customValidation) {
+        setError(customValidation());
+      }
+      // Else all is good, so reset error
+      else {
+        setError(null);
+        // Update state
+        formDispatch({
+          type: 'UPDATE_FORM_DATA',
+          payload: { [name]: date },
+        });
       }
     }
-  }, [isTouched]);
+  }, [
+    customValidation,
+    day,
+    formDispatch,
+    isTouched,
+    label,
+    month,
+    name,
+    year,
+  ]);
 
   // return object
   return {
