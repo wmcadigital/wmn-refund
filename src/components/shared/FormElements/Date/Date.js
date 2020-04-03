@@ -4,8 +4,13 @@ import PropTypes from 'prop-types';
 import useDateValidation from './useDateValidation';
 import DateInput from './DateInput.js/DateInput';
 
-const Date = ({ name, label }) => {
-  const { error, handleChange, handleBlur } = useDateValidation(name, label);
+const Date = ({ name, label, customValidation }) => {
+  // Use custom hook for validating inputs (this controls ALL inputs validation)
+  const { error, handleChange, handleBlur } = useDateValidation(
+    name,
+    label,
+    customValidation
+  );
 
   return (
     <>
@@ -51,6 +56,11 @@ const Date = ({ name, label }) => {
 Date.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  customValidation: PropTypes.func,
+};
+
+Date.defaultProps = {
+  customValidation: null,
 };
 
 export default Date;
