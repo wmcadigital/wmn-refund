@@ -1,9 +1,12 @@
 import { useState, useContext, useEffect } from 'react';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
+import { FormErrorContext } from 'globalState/FormErrorContext';
 
 const useInputValidation = (name, label, customValidation) => {
   const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  const [, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormContext
+
   // set up state for the inputs error prop
 
   // State used for capturing date fields onChange below (we use these to validate against below)
@@ -84,6 +87,16 @@ const useInputValidation = (name, label, customValidation) => {
       }
     }
   }, [customValidation, date, day, isTouched, label, month, year]);
+
+  // UseEffect to control global error state (this is used to halt the continue/submit button)
+  useEffect(() => {
+    // If there is an error or there is no value in the input
+    if (error || !day.length || !month.length || !year.length) {
+      errorDispatch({ type: 'ADD_ERROR', payload: name }); // Then add this error to global error state
+    } else {
+      errorDispatch({ type: 'REMOVE_ERROR', payload: name }); // Else remove from global error state
+    }
+  }, [day.length, error, errorDispatch, month.length, name, year.length]);
 
   // return object
   return {
