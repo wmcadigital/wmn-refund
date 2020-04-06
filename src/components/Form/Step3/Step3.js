@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
+import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
 import DirectDebit from './DirectDebit/DirectDebit';
 import SwiftCard from './SwiftCard/SwiftCard';
@@ -12,15 +13,15 @@ import HowProcess from './HowProcess/HowProcess';
 
 const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
+  const [errorState] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
 
   const handleContinue = () => {
     setCurrentStep(currentStep + 1);
   };
 
-  const { Application, CustomerType } = formState; // Destructure object
+  const { CustomerType } = formState; // Destructure object
 
   // Set placeholder vars which we will change in the switch below (based on CustomerType)
-  let disabledState = !Application.LastUsedDate; // Used to change the disabled state on continue button (by default we put in LastUsedDate as this is used by every outcome)
   let elementsToRender; // Used to change conditional elements to render
 
   // If not a paper ticket then must be online customertype so run switch on it
@@ -35,10 +36,7 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
             <SwiftCard />
           </>
         );
-        disabledState =
-          disabledState &&
-          !Application.DirectDebitNumber &&
-          !Application.CardNumber;
+
         break;
 
       //  Corporate
@@ -49,20 +47,17 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
             <HowProcess />
           </>
         );
-        disabledState =
-          disabledState || !Application.CardNumber || !Application.ActionType;
+
         break;
 
       // Worwise, Shop, SwiftPortal, OnlineSales(this won't happen as it is hidden in step2 unless paper ticket is chosen, so it will be part of the else statement below)
       default:
         elementsToRender = <SwiftCard />;
-        disabledState = disabledState || !Application.CardNumber;
     }
   }
   // Else paper ticket so show paper ticket number
   else {
     elementsToRender = <TicketNumber />;
-    disabledState = disabledState || !Application.TicketNumber;
   }
 
   return (
@@ -81,11 +76,7 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
         onClick={() => handleContinue()}
-        disabled={
-          isPaperTicket
-            ? !Application.PhotoBase64 || disabledState
-            : disabledState
-        }
+        disabled={errorState.length}
       >
         Continue
       </button>
