@@ -18,6 +18,7 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
   // Goto next step on continue
   const handleContinue = () => {
     setCurrentStep(currentStep + 1);
+    window.scrollTo(0, 0);
   };
 
   return (

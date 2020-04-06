@@ -40,6 +40,7 @@ const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
     else {
       setCurrentStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
     }
+    window.scrollTo(0, 0);
   };
 
   return (
