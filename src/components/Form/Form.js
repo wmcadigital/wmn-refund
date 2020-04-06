@@ -20,7 +20,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const [isPaperTicket, setIsPaperTicket] = useState(false); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
   const [isSwiftCard, setIsSwiftCard] = useState(false); // Used to track if a user is using a SwiftCard(set in step 1). Then read this value in step 2 to hide 'bought on website radio option'
 
-  useTrackFormAbandonment(formRef, currentStep, formSubmitStatus);
+  useTrackFormAbandonment(formRef, currentStep, formSubmitStatus); // Used to track user abandonment via Google Analytics/Tag Manager
 
   const handleSubmit = (event) => {
     event.preventDefault();
