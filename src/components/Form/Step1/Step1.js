@@ -51,6 +51,7 @@ const Step1 = ({
     else {
       setCurrentStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
     }
+    window.scrollTo(0, 0);
   };
 
   return (

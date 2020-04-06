@@ -17,6 +17,7 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
 
   const handleContinue = () => {
     setCurrentStep(currentStep + 1);
+    window.scrollTo(0, 0);
   };
 
   const { CustomerType } = formState; // Destructure object
