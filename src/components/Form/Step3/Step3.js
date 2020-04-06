@@ -41,12 +41,6 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
           !Application.CardNumber;
         break;
 
-      // Workwise
-      case 'Workwise':
-        elementsToRender = <SwiftCard />;
-        disabledState = disabledState || !Application.CardNumber;
-        break;
-
       //  Corporate
       case 'Corporate':
         elementsToRender = (
@@ -59,10 +53,10 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
           disabledState || !Application.CardNumber || !Application.ActionType;
         break;
 
-      // OnlineSales, Shop, SwiftPortal
+      // Worwise, Shop, SwiftPortal, OnlineSales(this won't happen as it is hidden in step2 unless paper ticket is chosen, so it will be part of the else statement below)
       default:
-        elementsToRender = <TicketNumber />;
-        disabledState = disabledState || !Application.TicketNumber;
+        elementsToRender = <SwiftCard />;
+        disabledState = disabledState || !Application.CardNumber;
     }
   }
   // Else paper ticket so show paper ticket number
