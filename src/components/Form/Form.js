@@ -18,7 +18,6 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
   const [currentStep, setCurrentStep] = useState(1);
   const [isPaperTicket, setIsPaperTicket] = useState(false); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
-  const [isSwiftCard, setIsSwiftCard] = useState(false); // Used to track if a user is using a SwiftCard(set in step 1). Then read this value in step 2 to hide 'bought on website radio option'
 
   useTrackFormAbandonment(formRef, currentStep, formSubmitStatus); // Used to track user abandonment via Google Analytics/Tag Manager
 
@@ -63,7 +62,6 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
                 setCurrentStep={setCurrentStep}
                 currentStep={currentStep}
                 setIsPaperTicket={setIsPaperTicket}
-                setIsSwiftCard={setIsSwiftCard}
               />
             )}
             {currentStep === 2 && (
@@ -71,7 +69,6 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
                 setCurrentStep={setCurrentStep}
                 currentStep={currentStep}
                 isPaperTicket={isPaperTicket}
-                isSwiftCard={isSwiftCard}
               />
             )}
             {currentStep === 3 && (

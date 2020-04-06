@@ -5,7 +5,7 @@ import { FormContext } from 'globalState/FormContext';
 // Import components
 import Radio from 'components/shared/FormElements/Radio/Radio';
 
-const Step2 = ({ currentStep, setCurrentStep, isPaperTicket, isSwiftCard }) => {
+const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
 
   // Update customerType on radio button change
@@ -35,15 +35,12 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket, isSwiftCard }) => {
               value="DirectDebit"
               onChange={handleRadioChange}
             />
-            {/* Only show if not CustomerType of SwiftCard */}
-            {!isSwiftCard && (
-              <Radio
-                name="CustomerType"
-                text="I bought it from the West Midlands Network or Swift website"
-                value="SwiftPortal"
-                onChange={handleRadioChange}
-              />
-            )}
+            <Radio
+              name="CustomerType"
+              text="I bought it from the West Midlands Network or Swift website"
+              value="SwiftPortal"
+              onChange={handleRadioChange}
+            />
             <Radio
               name="CustomerType"
               text="I pay for it through my company"
@@ -95,7 +92,6 @@ Step2.propTypes = {
   currentStep: PropTypes.number.isRequired,
   setCurrentStep: PropTypes.func.isRequired,
   isPaperTicket: PropTypes.bool.isRequired,
-  isSwiftCard: PropTypes.bool.isRequired,
 };
 
 export default Step2;
