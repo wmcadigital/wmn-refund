@@ -8,6 +8,8 @@ import Step2 from 'components/Form/Step2/Step2';
 import Step3 from 'components/Form/Step3/Step3';
 import Step4 from 'components/Form/Step4/Step4';
 import ProgressIndicator from './ProgressIndicator/ProgressIndicator';
+// Import custom hooks
+import useTrackFormAbandonment from './useTrackFormAbandonment';
 // Import styling
 import s from './Form.module.scss';
 
@@ -16,6 +18,8 @@ const Form = ({ setFormSubmitStatus }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isPaperTicket, setIsPaperTicket] = useState(false); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
   const [isSwiftCard, setIsSwiftCard] = useState(false); // Used to track if a user is using a SwiftCard(set in step 1). Then read this value in step 2 to hide 'bought on website radio option'
+
+  useTrackFormAbandonment();
 
   const handleSubmit = (event) => {
     event.preventDefault();
