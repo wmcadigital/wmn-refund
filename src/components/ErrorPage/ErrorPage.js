@@ -16,11 +16,9 @@ const ErrorPage = () => {
     
           <p>We have not saved your answers. When the service is available, you will have to start again.</p>
     
-          <p>Contact the 
-            <a href="https://www.wmnetwork.co.uk/get-in-touch/contact-us/" title="Customer Services Team Contact Details" target="_self" class="wmnds-link">
+          <p>Contact the <a href="https://www.wmnetwork.co.uk/get-in-touch/contact-us/" title="Customer Services Team Contact Details" target="_self" class="wmnds-link">
               Customer Services team
-            </a>
-            if you continue to have problems.</p>
+            </a> if you continue to have problems.</p>
         </div>
     </>
   );
