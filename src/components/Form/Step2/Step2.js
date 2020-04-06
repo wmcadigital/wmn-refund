@@ -5,7 +5,7 @@ import { FormContext } from 'globalState/FormContext';
 // Import components
 import Radio from 'components/shared/FormElements/Radio/Radio';
 
-const Step2 = ({ currentStep, setCurrentStep, isPaperTicket, isSwiftCard }) => {
+const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
 
   // Update customerType on radio button change
@@ -92,7 +92,6 @@ Step2.propTypes = {
   currentStep: PropTypes.number.isRequired,
   setCurrentStep: PropTypes.func.isRequired,
   isPaperTicket: PropTypes.bool.isRequired,
-  isSwiftCard: PropTypes.bool.isRequired,
 };
 
 export default Step2;
