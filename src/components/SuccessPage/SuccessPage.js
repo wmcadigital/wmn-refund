@@ -32,8 +32,8 @@ const SuccessPage = () => {
         <h3>What happens next</h3>
 
         {/* If user is scratchcard or classpass show info */}
-        {(formState.CustomerType === 'Scratchcard' ||
-          formState.CustomerType === 'ClassPass') && (
+        {formState.CustomerType === 'Scratchcard' ||
+        formState.CustomerType === 'ClassPass' ? (
           <>
             <p>We have sent you an email to acknowledge your application.</p>
             <p>
@@ -45,27 +45,26 @@ const SuccessPage = () => {
               office, we will process your application as a priority.
             </p>
           </>
-        )}
-
-        {/* If user is not scratchcard or classpass show info */}
-        {(formState.CustomerType !== 'Scratchcard' ||
-          formState.CustomerType !== 'ClassPass') && (
+        ) : (
+          //  If user is not scratchcard or classpass show info */}
           <>
             <p>
-              We have sent you an email to acknowledge your application. The email
-              also contains more details about how we will process your refund.
+              We have sent you an email to acknowledge your application. The
+              email also contains more details about how we will process your
+              refund.
             </p>
             <p>
-              If we need any more information to process your refund, we will be in
-              touch.
+              If we need any more information to process your refund, we will be
+              in touch.
             </p>
             <p>
-              If you have any questions regarding your refund, or you would like to
-              know how we will calculate your refund, there is guidance available on
-              our website.
+              If you have any questions regarding your refund, or you would like
+              to know how we will calculate your refund, there is guidance
+              available on our website.
             </p>
           </>
         )}
+
         <br />
         <p>
           <a
