@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
@@ -8,14 +8,19 @@ import Step2 from 'components/Form/Step2/Step2';
 import Step3 from 'components/Form/Step3/Step3';
 import Step4 from 'components/Form/Step4/Step4';
 import ProgressIndicator from './ProgressIndicator/ProgressIndicator';
+// Import custom hooks
+import useTrackFormAbandonment from './useTrackFormAbandonment';
 // Import styling
 import s from './Form.module.scss';
 
-const Form = ({ setFormSubmitStatus }) => {
+const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
   const [currentStep, setCurrentStep] = useState(1);
   const [isPaperTicket, setIsPaperTicket] = useState(false); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
   const [isSwiftCard, setIsSwiftCard] = useState(false); // Used to track if a user is using a SwiftCard(set in step 1). Then read this value in step 2 to hide 'bought on website radio option'
+
+  useTrackFormAbandonment(formRef, currentStep, formSubmitStatus); // Used to track user abandonment via Google Analytics/Tag Manager
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -52,7 +57,7 @@ const Form = ({ setFormSubmitStatus }) => {
         <ProgressIndicator currentStep={currentStep} />
         <div className={`wmnds-p-lg ${s.formWrapper}`}>
           {/* Start of form */}
-          <form onSubmit={handleSubmit} autoComplete="on">
+          <form onSubmit={handleSubmit} autoComplete="on" ref={formRef}>
             {currentStep === 1 && (
               <Step1
                 setCurrentStep={setCurrentStep}
@@ -100,7 +105,12 @@ const Form = ({ setFormSubmitStatus }) => {
 };
 
 Form.propTypes = {
+  formSubmitStatus: PropTypes.bool,
   setFormSubmitStatus: PropTypes.func.isRequired,
+};
+
+Form.defaultProps = {
+  formSubmitStatus: null,
 };
 
 export default Form;
