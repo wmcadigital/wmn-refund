@@ -1,7 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const DateInput = ({ name, dateType, error, handleChange, handleBlur }) => {
+const DateInput = ({
+  autoComplete,
+  name,
+  dateType,
+  error,
+  handleChange,
+  handleBlur,
+}) => {
   const inputName = name + dateType;
 
   return (
@@ -15,6 +22,7 @@ const DateInput = ({ name, dateType, error, handleChange, handleBlur }) => {
         name={inputName}
         type="text"
         inputMode="numeric"
+        autoComplete={autoComplete}
         onChange={handleChange}
         onBlur={handleBlur}
       />
@@ -23,6 +31,7 @@ const DateInput = ({ name, dateType, error, handleChange, handleBlur }) => {
 };
 
 DateInput.propTypes = {
+  autoComplete: PropTypes.string,
   name: PropTypes.string.isRequired,
   dateType: PropTypes.string.isRequired,
   error: PropTypes.string,
@@ -31,6 +40,7 @@ DateInput.propTypes = {
 };
 
 DateInput.defaultProps = {
+  autoComplete: null,
   error: null,
 };
 
