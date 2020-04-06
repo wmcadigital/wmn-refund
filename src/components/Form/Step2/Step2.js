@@ -35,15 +35,12 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket, isSwiftCard }) => {
               value="DirectDebit"
               onChange={handleRadioChange}
             />
-            {/* Only show if not CustomerType of SwiftCard */}
-            {!isSwiftCard && (
-              <Radio
-                name="CustomerType"
-                text="I bought it from the West Midlands Network or Swift website"
-                value="SwiftPortal"
-                onChange={handleRadioChange}
-              />
-            )}
+            <Radio
+              name="CustomerType"
+              text="I bought it from the West Midlands Network or Swift website"
+              value="SwiftPortal"
+              onChange={handleRadioChange}
+            />
             <Radio
               name="CustomerType"
               text="I pay for it through my company"
