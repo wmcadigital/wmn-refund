@@ -4,6 +4,10 @@ import Icon from 'components/shared/Icon/Icon';
 import Title from 'components/shared/Title/Title';
 
 const Introduction = ({ setIsFormStarted }) => {
+  const handleClick = () => {
+    setIsFormStarted(true);
+  };
+
   return (
     <>
       <Title />
@@ -64,7 +68,7 @@ const Introduction = ({ setIsFormStarted }) => {
         <button
           type="button"
           className="wmnds-btn wmnds-btn--start"
-          onClick={() => setIsFormStarted(true)}
+          onClick={handleClick}
         >
           Start now
           <Icon
