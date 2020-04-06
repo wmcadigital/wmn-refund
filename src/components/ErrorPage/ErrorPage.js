@@ -17,7 +17,7 @@ const ErrorPage = () => {
         </p>
 
         <p>
-          Contact the
+          Contact the{' '}
           <a
             href="https://www.wmnetwork.co.uk/get-in-touch/contact-us/"
             title="Customer Services Team Contact Details"
@@ -25,7 +25,7 @@ const ErrorPage = () => {
             className="wmnds-link"
           >
             Customer Services team
-          </a>
+          </a>{' '}
           if you continue to have problems.
         </p>
       </div>
