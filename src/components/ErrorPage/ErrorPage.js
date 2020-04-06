@@ -8,23 +8,20 @@ const ErrorPage = () => {
       <Title />
       <div className="wmnds-col-1 wmnds-col-md-3-4 wmnds-col-lg-1-2">
         {/* Error message */}
-        <div className="wmnds-msg-summary wmnds-msg-summary--error">
-          <div className="wmnds-msg-summary__header">
-            <Icon
-              iconName="general-warning-triangle"
-              className="wmnds-msg-summary__icon"
-            />
-            <h3 className="wmnds-msg-summary__title">
-              Looks like something went wrong
+            <h3>
+              Sorry, there is a problem with this service
             </h3>
-          </div>
 
-          <div className="wmnds-msg-summary__info">
-            Details added what happened and what to do next. Lorem ipsum lorem
-            ipsum. Lorem ipsum lorem ipsum.
-          </div>
+          <p>Try again later.</p>
+    
+          <p>We have not saved your answers. When the service is available, you will have to start again.</p>
+    
+          <p>Contact the 
+            <a href="https://www.wmnetwork.co.uk/get-in-touch/contact-us/" title="Customer Services Team Contact Details" target="_self" class="wmnds-link">
+              Customer Services team
+            </a>
+            if you continue to have problems.</p>
         </div>
-      </div>
     </>
   );
 };
