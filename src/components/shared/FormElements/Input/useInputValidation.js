@@ -6,7 +6,7 @@ import { FormErrorContext } from 'globalState/FormErrorContext';
 const useInputValidation = (name, label, inputmode, customValidation) => {
   // set up the state for the inputs value prop and set it to the default value
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
-  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormContext
+  const [, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormContext
   // set up state for the inputs error prop
   const [error, setError] = useState(null);
   const [isTouched, setIsTouched] = useState(false);
@@ -63,13 +63,15 @@ const useInputValidation = (name, label, inputmode, customValidation) => {
     value.length,
   ]);
 
+  // UseEffect to control global error state (this is used to halt the continue/submit button)
   useEffect(() => {
-    if (error || !isTouched) {
-      errorDispatch({ type: 'ADD_ERROR', payload: name });
+    // If there is an error or there is no value in the input
+    if (error || !value.length) {
+      errorDispatch({ type: 'ADD_ERROR', payload: name }); // Then add this error to global error state
     } else {
-      errorDispatch({ type: 'REMOVE_ERROR', payload: name });
+      errorDispatch({ type: 'REMOVE_ERROR', payload: name }); // Else remove from global error state
     }
-  }, [error, errorDispatch, isTouched, name]);
+  }, [error, errorDispatch, name, value.length]);
 
   // return object
   return {

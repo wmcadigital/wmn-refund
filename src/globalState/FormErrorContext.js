@@ -9,13 +9,13 @@ export const FormErrorProvider = (props) => {
 
   // Set up a reducer so we can change state based on centralised logic here
   const reducer = (state, action) => {
-    // Update the favState depening on action type
+    // Update the error state depending on action type
     switch (action.type) {
-      // Add favourite
+      // Add error to state
       case 'ADD_ERROR':
         return [...state, action.payload];
 
-      // Remove favourite
+      // Remove error from statea
       case 'REMOVE_ERROR':
         return state.filter((item) => item !== action.payload);
 
@@ -26,7 +26,6 @@ export const FormErrorProvider = (props) => {
   };
   // Set up reducer using reducer logic and initialState by default
   const [errorState, errorDispatch] = useReducer(reducer, initialState);
-  console.log({ errorState });
 
   return (
     <FormErrorContext.Provider value={[errorState, errorDispatch]}>
