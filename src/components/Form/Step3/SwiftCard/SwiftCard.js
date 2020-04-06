@@ -26,16 +26,12 @@ const SwiftCard = () => {
             </a>`;
     }
     // If swift card doesn't start with the below numbers then it's not valid
-    else if (firstTen !== '6335970107' || firstTen !== '6335970319') {
+    else if (firstTen !== '6335970107' && firstTen !== '6335970319') {
       error = `Your ${label} is the long number on the front of the card`;
     }
-    // Must be 16 digits long
-    else if (swiftNum.length !== 16) {
-      error = `Your ${label} is 16 digits long and begins with 633597 0107`;
-    }
-    // Not valid ref if not between these numbers
-    else if (+swiftNum < 60000000 || swiftNum > 60999999) {
-      error = `Enter a valid ${label}`;
+    // Must be 18 digits long
+    else if (swiftNum.length !== 18) {
+      error = `Your ${label} is 18 digits long and begins with 633597`;
     }
 
     return error;

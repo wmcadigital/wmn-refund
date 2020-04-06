@@ -52,7 +52,7 @@ const Form = ({ setFormSubmitStatus }) => {
         <ProgressIndicator currentStep={currentStep} />
         <div className={`wmnds-p-lg ${s.formWrapper}`}>
           {/* Start of form */}
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} autoComplete="on">
             {currentStep === 1 && (
               <Step1
                 setCurrentStep={setCurrentStep}
