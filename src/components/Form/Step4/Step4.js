@@ -12,7 +12,7 @@ import Name from './Name/Name';
 
 const Step4 = () => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
-  const [errorState] = useContext(FormErrorContext); // Get the state of form data from FormContext
+  const [errorState] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
   const { CustomerType } = formState; // Destructure customertype
 
   return (
