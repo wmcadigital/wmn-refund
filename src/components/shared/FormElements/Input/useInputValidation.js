@@ -1,10 +1,12 @@
 import { useState, useContext, useEffect } from 'react';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
+import { FormErrorContext } from 'globalState/FormErrorContext';
 
 const useInputValidation = (name, label, inputmode, customValidation) => {
   // set up the state for the inputs value prop and set it to the default value
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormContext
   // set up state for the inputs error prop
   const [error, setError] = useState(null);
   const [isTouched, setIsTouched] = useState(false);
@@ -60,6 +62,14 @@ const useInputValidation = (name, label, inputmode, customValidation) => {
     value,
     value.length,
   ]);
+
+  useEffect(() => {
+    if (error || !isTouched) {
+      errorDispatch({ type: 'ADD_ERROR', payload: name });
+    } else {
+      errorDispatch({ type: 'REMOVE_ERROR', payload: name });
+    }
+  }, [error, errorDispatch, isTouched, name]);
 
   // return object
   return {

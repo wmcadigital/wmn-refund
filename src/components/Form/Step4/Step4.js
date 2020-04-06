@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
+import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
 import Company from './Company/Company';
 import DOB from './DOB/DOB';
@@ -11,6 +12,7 @@ import Name from './Name/Name';
 
 const Step4 = () => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
+  const [errorState] = useContext(FormErrorContext); // Get the state of form data from FormContext
   const { CustomerType } = formState; // Destructure customertype
 
   return (
@@ -48,6 +50,7 @@ const Step4 = () => {
       <button
         type="submit"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
+        disabled={errorState.length}
       >
         Submit application
       </button>
