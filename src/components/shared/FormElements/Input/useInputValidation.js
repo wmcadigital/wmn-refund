@@ -6,7 +6,7 @@ import { FormErrorContext } from 'globalState/FormErrorContext';
 const useInputValidation = (name, label, inputmode, customValidation) => {
   // set up the state for the inputs value prop and set it to the default value
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
-  const [, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormContext
+  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormContext
   // set up state for the inputs error prop
   const [error, setError] = useState(null);
   const [isTouched, setIsTouched] = useState(false);
@@ -34,8 +34,8 @@ const useInputValidation = (name, label, inputmode, customValidation) => {
   // Handle validation
   // Re-use this logic everytime state is updated
   useEffect(() => {
-    // If the user has touched the input then we can show errors
-    if (isTouched) {
+    // If the user has touched the input then we can show errors / OR / If user has clicked continue/submit button
+    if (isTouched || errorState.continuePressed) {
       // If there is no length
       if (!value.length) {
         setError(`Enter your ${label}`);
@@ -59,12 +59,12 @@ const useInputValidation = (name, label, inputmode, customValidation) => {
     }
   }, [
     customValidation,
+    errorState.continuePressed,
     inputmode,
     isTouched,
     label,
     name,
     value,
-    value.length,
   ]);
 
   // UseEffect to control global error state (this is used to halt the continue/submit button)
