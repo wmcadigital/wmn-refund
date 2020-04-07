@@ -49,7 +49,7 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
 
   // If the user has selected something other than paper ticket in step 1
   if (!isPaperTicket) {
-    const SwiftPortal = { text: 'I bought it from the West Midlands Network or Swift website', value: 'SwiftPortal' };
+    const swiftPortal = { text: 'I bought it from the West Midlands Network or Swift website', value: 'SwiftPortal' };
     const workwise = { text: 'I am on the Workwise scheme', value: 'Workwise' };
     const ticketMachine = {
       text: 'I bought it from a Swift kiosk',
