@@ -2,6 +2,8 @@ import React, { useState, useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
+import { FormErrorContext } from 'globalState/FormErrorContext';
+
 // Import components
 import Step1 from 'components/Form/Step1/Step1';
 import Step2 from 'components/Form/Step2/Step2';
@@ -15,6 +17,8 @@ import s from './Form.module.scss';
 
 const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
+
   const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
   const [currentStep, setCurrentStep] = useState(1);
   const [isPaperTicket, setIsPaperTicket] = useState(false); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
@@ -23,31 +27,36 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (errorState.errors.length) {
+      errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
+    } else {
+      errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
 
-    // The above is temp commented whilst we wait for CORS
-    fetch('https://apisNWM.cenapps.org.uk/ticketapplications/Refund', {
-      method: 'post',
-      body: JSON.stringify(formState),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => {
-        // If the response is successful(200: OK)
-        if (response.status === 200) {
-          return response.text(); // Return response (reference number)
-        }
-        throw new Error(response.statusText, response.Message); // Else throw error and go to our catch below
+      // The above is temp commented whilst we wait for CORS
+      fetch('https://apisNWM.cenapps.org.uk/ticketapplications/Refund', {
+        method: 'post',
+        body: JSON.stringify(formState),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
-      .then((payload) => {
-        formDispatch({ type: 'ADD_FORM_REF', payload }); // Update form state with the form ref received from server
-        setFormSubmitStatus(true); // Set form status to success
-      })
-      .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.error({ error });
-        setFormSubmitStatus(false); // Set form status to error
-      });
+        .then((response) => {
+          // If the response is successful(200: OK)
+          if (response.status === 200) {
+            return response.text(); // Return response (reference number)
+          }
+          throw new Error(response.statusText, response.Message); // Else throw error and go to our catch below
+        })
+        .then((payload) => {
+          formDispatch({ type: 'ADD_FORM_REF', payload }); // Update form state with the form ref received from server
+          setFormSubmitStatus(true); // Set form status to success
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error({ error });
+          setFormSubmitStatus(false); // Set form status to error
+        });
+    }
   };
 
   return (
