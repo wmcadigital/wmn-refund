@@ -27,7 +27,7 @@ const Radios = ({ name, label, radios, onChange }) => {
           {/* Loop through radios and display each radio button */}
           {radios.map((radio) => (
             <Radio
-              key={radio.value}
+              key={radio.text}
               name={name}
               text={radio.text}
               value={radio.value}
