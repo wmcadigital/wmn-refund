@@ -37,11 +37,11 @@ const Introduction = ({ setIsFormStarted }) => {
             Midlands and there is a{' '}
             <a
               href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
-              title="National Express West Midlands ticket refund application"
+              title="National Express West Midlands ticket refund process"
               target="_self"
               className="wmnds-link"
             >
-              separate refund application
+              separate refund process
             </a>
           </li>
           <li>
