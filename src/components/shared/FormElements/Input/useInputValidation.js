@@ -16,9 +16,13 @@ const useInputValidation = (name, label, inputmode, customValidation) => {
   // set up the event handler for onChange event
   function handleChange(e) {
     // When input is changed then update state
+    let val = e.target.value;
+    if (name === 'AddressPostcode') {
+      val = val.toUpperCase();
+    }
     formDispatch({
       type: 'UPDATE_FORM_DATA',
-      payload: { [name]: e.target.value },
+      payload: { [name]: val },
     });
   }
 
