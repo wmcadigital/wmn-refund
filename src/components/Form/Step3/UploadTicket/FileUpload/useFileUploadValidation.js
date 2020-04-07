@@ -5,7 +5,7 @@ import { FormErrorContext } from 'globalState/FormErrorContext';
 
 const useFileUploadValidation = () => {
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
-  const [, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormContext
+  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormContext
 
   // Local state for controlling file upload
   const [isFileInputFocused, setIsFileInputFocused] = useState(false); // This is used to emulate the input focus class on the label
@@ -56,8 +56,8 @@ const useFileUploadValidation = () => {
   // Handle validation
   // Re-use this logic everytime state is updated
   useEffect(() => {
-    // If the user has touched the input then we can show errors
-    if (isTouched) {
+    // If the user has touched the input then we can show errors / OR / If user has clicked continue/submit button
+    if (isTouched || errorState.continuePressed) {
       if (!value) {
         setError('Select a photo');
       } else if (value !== 'png' && value !== 'jpg' && value !== 'jpeg') {
@@ -70,7 +70,7 @@ const useFileUploadValidation = () => {
         setError(null);
       }
     }
-  }, [fileSize, value, isTouched]);
+  }, [fileSize, value, isTouched, errorState.continuePressed]);
 
   // UseEffect to control global error state (this is used to halt the continue/submit button)
   useEffect(() => {

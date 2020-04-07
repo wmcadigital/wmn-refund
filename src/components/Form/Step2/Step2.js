@@ -2,11 +2,13 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
+import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
 
 const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
-  const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
 
   // Update customerType on radio button change
   const handleRadioChange = (e) =>
@@ -17,8 +19,15 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
 
   // Goto next step on continue
   const handleContinue = () => {
-    setCurrentStep(currentStep + 1);
-    window.scrollTo(0, 0);
+    // If errors, then don't progress and set continue button to true(halt form and show errors)
+    if (errorState.errors.length) {
+      errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
+    } else {
+      errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
+
+      setCurrentStep(currentStep + 1);
+      window.scrollTo(0, 0);
+    }
   };
 
   //  Set up default radio options (shown for both paper ticket and swift card)
@@ -58,7 +67,7 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
     <>
       <h2>Tell us about your ticket</h2>
       <Radios
-        name="CustomerType"
+        name="CustomerTypeStep2"
         label="How did you buy your ticket?"
         radios={radios}
         onChange={handleRadioChange}
@@ -68,10 +77,6 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
         onClick={() => handleContinue()}
-        disabled={
-          formState.CustomerType === 'SwiftCard' ||
-          formState.CustomerType === 'PaperTicket'
-        }
       >
         Continue
       </button>
