@@ -24,25 +24,29 @@ const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
 
   // Update the current step to the correct one depending on users selection
   const handleContinue = () => {
-    // SwiftCard, paperTicket
-    if (
-      formState.CustomerType === 'SwiftCard' ||
-      formState.CustomerType === 'PaperTicket'
-    ) {
-      setCurrentStep(currentStep + 1); // Go to next step(2) so we can set customerType
+    if (errorState.length) {
+      console.log({ errorState });
+    } else {
+      // SwiftCard, paperTicket
+      if (
+        formState.CustomerType === 'SwiftCard' ||
+        formState.CustomerType === 'PaperTicket'
+      ) {
+        setCurrentStep(currentStep + 1); // Go to next step(2) so we can set customerType
+      }
+      // classPass, scratchcard
+      else if (
+        formState.CustomerType === 'Scratchcard' ||
+        formState.CustomerType === 'ClassPass'
+      ) {
+        setCurrentStep(currentStep + 3); // Skip to last steps as payment info isn't needed for scratchcard and classPass
+      }
+      // swiftOnMobile;
+      else {
+        setCurrentStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
+      }
+      window.scrollTo(0, 0);
     }
-    // classPass, scratchcard
-    else if (
-      formState.CustomerType === 'Scratchcard' ||
-      formState.CustomerType === 'ClassPass'
-    ) {
-      setCurrentStep(currentStep + 3); // Skip to last steps as payment info isn't needed for scratchcard and classPass
-    }
-    // swiftOnMobile;
-    else {
-      setCurrentStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
-    }
-    window.scrollTo(0, 0);
   };
 
   return (
@@ -76,7 +80,7 @@ const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
         onClick={() => handleContinue()}
-        disabled={errorState.length}
+        // disabled={errorState.length}
       >
         Continue
       </button>
