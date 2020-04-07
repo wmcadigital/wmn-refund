@@ -66,7 +66,14 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
   else {
     // If the customertype is DD then show that else must be paper ticket
     elementsToRender =
-      CustomerType === 'DirectDebit' ? <DirectDebit /> : <TicketNumber />;
+      CustomerType === 'DirectDebit' ? (
+        <>
+          <DirectDebit />
+          <TicketNumber />
+        </>
+      ) : (
+        <TicketNumber />
+      );
   }
 
   return (
