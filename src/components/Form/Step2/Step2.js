@@ -37,28 +37,26 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
       value: 'DirectDebit',
     },
     {
-      text: 'I bought it from the West Midlands Network or Swift website',
-      value: 'SwiftPortal',
-    },
-    {
       text: 'I pay for it through my company',
       value: 'Corporate',
     },
     {
       text:
-        'I bought it from a ticket office, West Midlands Network travel shop or Payzone shop',
+        'I bought it from a travel shop or Payzone shop',
       value: 'Shop',
     },
   ];
 
   // If the user has selected something other than paper ticket in step 1
   if (!isPaperTicket) {
+    const swiftPortal = { text: 'I bought it from the West Midlands Network or Swift website', value: 'SwiftPortal' };
     const workwise = { text: 'I am on the Workwise scheme', value: 'Workwise' };
     const ticketMachine = {
-      text: 'I bought it from a Swift ticket machine',
+      text: 'I bought it from a Swift kiosk',
       value: 'SwiftPortal',
     };
 
+    radios.splice(-1, 0, swiftPortal); // push SwiftPortal radio option to last before 1 in radio list   
     radios.splice(-1, 0, workwise); // push workwise radio option to last before 1 in radio list
     radios.splice(-1, 0, ticketMachine); // push ticketMachine radio option to last before 1 in radio list
   }
