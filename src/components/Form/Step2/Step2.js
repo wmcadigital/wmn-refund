@@ -19,6 +19,7 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
 
   // Goto next step on continue
   const handleContinue = () => {
+    // If errors, then don't progress and set continue button to true(halt form and show errors)
     if (errorState.errors.length) {
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
     } else {

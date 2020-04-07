@@ -13,11 +13,17 @@ import HowProcess from './HowProcess/HowProcess';
 
 const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
-  const [errorState] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
+  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
 
   const handleContinue = () => {
-    setCurrentStep(currentStep + 1);
-    window.scrollTo(0, 0);
+    // If errors, then don't progress and set continue button to true(halt form and show errors)
+    if (errorState.errors.length) {
+      errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
+    } else {
+      errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
+      setCurrentStep(currentStep + 1);
+      window.scrollTo(0, 0);
+    }
   };
 
   const { CustomerType } = formState; // Destructure object
@@ -79,7 +85,6 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
         onClick={() => handleContinue()}
-        disabled={errorState.errors.length}
       >
         Continue
       </button>
