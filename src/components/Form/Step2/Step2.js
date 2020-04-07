@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 // Import components
-import Radio from 'components/shared/FormElements/Radios/Radio/Radio';
 import Radios from 'components/shared/FormElements/Radios/Radios';
 
 const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
