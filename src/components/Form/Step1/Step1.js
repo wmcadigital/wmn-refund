@@ -2,11 +2,13 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
+import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
-import Radio from 'components/shared/FormElements/Radio/Radio';
+import Radios from 'components/shared/FormElements/Radios/Radios';
 
 const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  const [errorState] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
 
   // Update customerType on radio button change
   const handleRadioChange = (e) => {
@@ -46,52 +48,35 @@ const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
   return (
     <>
       <h2>About your ticket</h2>
-      <div className="wmnds-fe-group">
-        <fieldset className="wmnds-fe-fieldset">
-          <legend className="wmnds-fe-fieldset__legend">
-            <h3 className="wmnds-fe-question">
-              Which best describes your ticket?
-            </h3>
-          </legend>
-          <div className="wmnds-fe-radios">
-            <Radio
-              name="CustomerType"
-              text="Swift card"
-              value="SwiftCard"
-              onChange={handleRadioChange}
-            />
-            <Radio
-              name="CustomerType"
-              text="Paper ticket"
-              value="PaperTicket"
-              onChange={handleRadioChange}
-            />
-            <Radio
-              name="CustomerType"
-              text="Swift on Mobile app"
-              value="SwiftPortal"
-              onChange={handleRadioChange}
-            />
-            <Radio
-              name="CustomerType"
-              text="Scratchcard"
-              value="Scratchcard"
-              onChange={handleRadioChange}
-            />
-            <Radio
-              name="CustomerType"
-              text="Class pass"
-              value="ClassPass"
-              onChange={handleRadioChange}
-            />
-          </div>
-        </fieldset>
-      </div>
+      <Radios
+        name="CustomerType"
+        label="Which best describes your ticket?"
+        radios={[
+          { text: 'Swift card', value: 'SwiftCard' },
+          {
+            text: 'Paper ticket',
+            value: 'PaperTicket',
+          },
+          {
+            text: 'Swift on Mobile app',
+            value: 'SwiftPortal',
+          },
+          {
+            text: 'Scratchcard',
+            value: 'Scratchcard',
+          },
+          {
+            text: 'Class pass',
+            value: 'ClassPass',
+          },
+        ]}
+        onChange={handleRadioChange}
+      />
       <button
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
         onClick={() => handleContinue()}
-        disabled={!formState.CustomerType}
+        disabled={errorState.length}
       >
         Continue
       </button>
