@@ -54,7 +54,7 @@ const Introduction = ({ setIsFormStarted }) => {
         <p>
           There is guidance available to show{' '}
           <a
-            href="https://wmnetwork.co.uk/get-in-touch/covid19-refund-scheme/"
+            href="https://wmnetwork.co.uk/coronavirus/"
             title="How we will work out your refund"
             target="_self"
             className="wmnds-link"
