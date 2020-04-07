@@ -59,6 +59,7 @@ const useInputValidation = (name, label, inputmode, customValidation) => {
     }
   }, [
     customValidation,
+    errorState.btnPressed,
     inputmode,
     isTouched,
     label,

@@ -79,7 +79,7 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
         onClick={() => handleContinue()}
-        disabled={errorState.length}
+        disabled={errorState.errors.length}
       >
         Continue
       </button>

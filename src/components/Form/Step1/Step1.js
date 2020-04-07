@@ -24,7 +24,7 @@ const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
 
   // Update the current step to the correct one depending on users selection
   const handleContinue = () => {
-    if (errorState.length) {
+    if (errorState.errors.length) {
       console.log({ errorState });
     } else {
       // SwiftCard, paperTicket
@@ -80,7 +80,7 @@ const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
         onClick={() => handleContinue()}
-        // disabled={errorState.length}
+        // disabled={errorState.errors.length}
       >
         Continue
       </button>

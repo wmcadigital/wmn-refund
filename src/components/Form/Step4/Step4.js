@@ -50,7 +50,7 @@ const Step4 = () => {
       <button
         type="submit"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        disabled={errorState.length}
+        disabled={errorState.errors.length}
       >
         Submit application
       </button>
