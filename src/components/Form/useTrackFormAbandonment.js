@@ -6,8 +6,7 @@ const useTrackFormAbandonment = (
   formRef,
   currentStep,
   formSubmitStatus,
-  formState,
-  formError
+  formState
 ) => {
   const [fieldsChanged, setFieldsChanged] = useState([]); // Track fields the user has touched/changed
 
@@ -57,25 +56,16 @@ const useTrackFormAbandonment = (
     };
   }, [currentStep, fieldsChanged, formSubmitStatus]);
 
-  // UseEffect to track form submissions
+  // Sends a form started to analytics
   useEffect(() => {
-    // If formsubmission is successful
-    if (formSubmitStatus) {
+    if (currentStep) {
       window.dataLayer.push({
         event: 'formAbandonment',
-        eventCategory: 'Refund form submission: success',
-        eventAction: formState.CustomerType,
+        eventCategory: 'Refund form started',
+        eventAction: true,
       });
     }
-    // If formsubmission errors
-    else if (formSubmitStatus === false) {
-      window.dataLayer.push({
-        event: 'formAbandonment',
-        eventCategory: 'Refund form submission: error',
-        eventAction: formError,
-      });
-    }
-  }, [formError, formState.CustomerType, formSubmitStatus]);
+  }, [currentStep, formState.CustomerType]);
 };
 
 export default useTrackFormAbandonment;

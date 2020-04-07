@@ -23,18 +23,12 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isPaperTicket, setIsPaperTicket] = useState(false); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
 
-  const [formError, setFormError] = useState(null);
-
-  useTrackFormAbandonment(
-    formRef,
-    currentStep,
-    formSubmitStatus,
-    formState,
-    formError
-  ); // Used to track user abandonment via Google Analytics/Tag Manager
+  useTrackFormAbandonment(formRef, currentStep, formSubmitStatus, formState); // Used to track user abandonment via Google Analytics/Tag Manager
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    window.dataLayer = window.dataLayer || []; // Set datalayer (GA thing)
+
     if (errorState.errors.length) {
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
     } else {
@@ -56,13 +50,27 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
           throw new Error(response.statusText, response.Message); // Else throw error and go to our catch below
         })
         .then((payload) => {
+          // If formsubmission is successful
           formDispatch({ type: 'ADD_FORM_REF', payload }); // Update form state with the form ref received from server
+          // Log event to analytics/tag manager
+          window.dataLayer.push({
+            event: 'formAbandonment',
+            eventCategory: 'Refund form submission: success',
+            eventAction: formState.CustomerType,
+          });
+
           setFormSubmitStatus(true); // Set form status to success
         })
         .catch((error) => {
+          // If formsubmission errors
           // eslint-disable-next-line no-console
           console.error({ error });
-          setFormError(error);
+          // Log event to analytics/tag manager
+          window.dataLayer.push({
+            event: 'formAbandonment',
+            eventCategory: 'Refund form submission: error',
+            eventAction: error,
+          });
           setFormSubmitStatus(false); // Set form status to error
         });
     }
