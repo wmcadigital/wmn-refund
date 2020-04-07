@@ -28,8 +28,8 @@ const Introduction = ({ setIsFormStarted }) => {
         <h2>Before you start</h2>
         <ul>
           <li>
-            You will need your Swift card, paper ticket or the phone your Swift
-            on Mobile ticket is on
+            You will need your Swift card, paper ticket or your Swift
+            on Mobile device
           </li>
           <li>
             If the long number on your Swift card begins with{' '}
