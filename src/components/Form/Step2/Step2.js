@@ -37,7 +37,7 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
     },
     {
       text:
-        'I bought it from a ticket office, West Midlands Network travel shop or Payzone shop',
+        'I bought it from a ticket office, travel shop or Payzone shop',
       value: 'Shop',
     },
   ];
@@ -46,7 +46,7 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
   if (!isPaperTicket) {
     const workwise = { text: 'I am on the Workwise scheme', value: 'Workwise' };
     const ticketMachine = {
-      text: 'I bought it from a Swift ticket machine',
+      text: 'I bought it from a Swift kiosk',
       value: 'SwiftPortal',
     };
 
