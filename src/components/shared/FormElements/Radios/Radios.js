@@ -8,10 +8,10 @@ import useRadioValidation from './useRadiosValidation';
 const { sanitize } = dompurify;
 
 const Radios = ({ label, onChange }) => {
-  const { error } = useRadioValidation('CustomerType');
+  const { error } = useRadioValidation('CustomerType', label);
 
   return (
-    <div className="wmnds-fe-group">
+    <div className={`wmnds-fe-group ${error ? 'wmnds-fe-group--error' : ''}`}>
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
           <h3 className="wmnds-fe-question">{label}</h3>

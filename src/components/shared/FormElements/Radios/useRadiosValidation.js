@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from 'react';
 import { FormContext } from 'globalState/FormContext';
 import { FormErrorContext } from 'globalState/FormErrorContext';
 
-const useRadiosValidation = (name) => {
+const useRadiosValidation = (name, label) => {
   // set up the state for the inputs value prop and set it to the default value
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
   const [, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormContext
@@ -18,10 +18,11 @@ const useRadiosValidation = (name) => {
   // Re-use this logic everytime state is updated
   useEffect(() => {
     // If the user has touched the input then we can show errors
+
     // if (isTouched) {
     // If there is no length
     if (!value.length) {
-      setError(`Select ${null}`);
+      setError(`Select ${label.toLowerCase().replace(/\?/, '')}`);
     }
 
     // Else all is good, so reset error
@@ -29,7 +30,7 @@ const useRadiosValidation = (name) => {
       setError(null);
     }
     // }
-  }, [name, value, value.length]);
+  }, [label, name, value, value.length]);
 
   // UseEffect to control global error state (this is used to halt the continue/submit button)
   useEffect(() => {
