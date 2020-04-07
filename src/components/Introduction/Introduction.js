@@ -15,7 +15,7 @@ const Introduction = ({ setIsFormStarted }) => {
         <h2>Use this service to:</h2>
         <ul>
           <li>
-            Apply for a refund of your Swift card, paper or Swift on Mobile
+            Apply for a refund of your Swift card, paper ticket or Swift on Mobile
             ticket if you have been unable to travel due to the Coronavirus
             outbreak
           </li>
