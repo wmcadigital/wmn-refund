@@ -25,7 +25,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
     event.preventDefault();
 
     // The above is temp commented whilst we wait for CORS
-    fetch('https://apisNWM.cenapps.org.uk/ticketapplications/Refund', {
+    fetch('https://apis.networkwestmidlands.com/ticketapplications/Refund', {
       method: 'post',
       body: JSON.stringify(formState),
       headers: {
