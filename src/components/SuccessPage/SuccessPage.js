@@ -59,8 +59,15 @@ const SuccessPage = () => {
             </p>
             <p>
               If you have any questions regarding your refund, or you would like
-              to know how we will calculate your refund, there is guidance
-              available on our website.
+              to know how we will calculate your refund, there is <a
+            href="https://wmnetwork.co.uk/coronavirus"
+            title="Guidance about how we will calculate your refund"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="wmnds-link"
+          >guidance
+              </a>
+             available on our website.
             </p>
           </>
         )}
@@ -69,7 +76,7 @@ const SuccessPage = () => {
         <p>
           <a
             href="https://surveys.hotjar.com/s?siteId=264586&surveyId=154279"
-            title="link title"
+            title="Service feedback survey"
             target="_blank"
             rel="noopener noreferrer"
             className="wmnds-link"
