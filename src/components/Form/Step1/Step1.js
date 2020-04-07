@@ -25,9 +25,9 @@ const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
   // Update the current step to the correct one depending on users selection
   const handleContinue = () => {
     if (errorState.errors.length) {
-      errorDispatch({ type: 'CONTINUE_PRESSED', payload: true });
+      errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
     } else {
-      errorDispatch({ type: 'CONTINUE_PRESSED', payload: false });
+      errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
 
       // SwiftCard, paperTicket
       if (
@@ -82,7 +82,6 @@ const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
         onClick={() => handleContinue()}
-        // disabled={errorState.errors.length}
       >
         Continue
       </button>
