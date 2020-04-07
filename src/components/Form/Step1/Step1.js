@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 // Import components
-import Radio from 'components/shared/FormElements/Radio/Radio';
+import Radios from 'components/shared/FormElements/Radios/Radios';
 
 const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
@@ -46,47 +46,10 @@ const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
   return (
     <>
       <h2>About your ticket</h2>
-      <div className="wmnds-fe-group">
-        <fieldset className="wmnds-fe-fieldset">
-          <legend className="wmnds-fe-fieldset__legend">
-            <h3 className="wmnds-fe-question">
-              Which best describes your ticket?
-            </h3>
-          </legend>
-          <div className="wmnds-fe-radios">
-            <Radio
-              name="CustomerType"
-              text="Swift card"
-              value="SwiftCard"
-              onChange={handleRadioChange}
-            />
-            <Radio
-              name="CustomerType"
-              text="Paper ticket"
-              value="PaperTicket"
-              onChange={handleRadioChange}
-            />
-            <Radio
-              name="CustomerType"
-              text="Swift on Mobile app"
-              value="SwiftPortal"
-              onChange={handleRadioChange}
-            />
-            <Radio
-              name="CustomerType"
-              text="Scratchcard"
-              value="Scratchcard"
-              onChange={handleRadioChange}
-            />
-            <Radio
-              name="CustomerType"
-              text="Class pass"
-              value="ClassPass"
-              onChange={handleRadioChange}
-            />
-          </div>
-        </fieldset>
-      </div>
+      <Radios
+        label="Which best describes your ticket?"
+        onChange={handleRadioChange}
+      />
       <button
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
