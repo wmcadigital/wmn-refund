@@ -2,11 +2,13 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
+import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
 
 const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  const [errorState] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
 
   // Update customerType on radio button change
   const handleRadioChange = (e) => {
@@ -74,7 +76,7 @@ const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
         onClick={() => handleContinue()}
-        disabled={!formState.CustomerType}
+        disabled={errorState.length}
       >
         Continue
       </button>

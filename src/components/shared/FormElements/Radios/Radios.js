@@ -8,7 +8,7 @@ import useRadioValidation from './useRadiosValidation';
 const { sanitize } = dompurify;
 
 const Radios = ({ name, label, radios, onChange }) => {
-  const { error } = useRadioValidation(name, label); // Use custom hook for validating radios (this controls ALL radios validation)
+  const { handleBlur, error } = useRadioValidation(name, label); // Use custom hook for validating radios (this controls ALL radios validation)
 
   return (
     <div className={`wmnds-fe-group ${error ? 'wmnds-fe-group--error' : ''}`}>
@@ -31,6 +31,7 @@ const Radios = ({ name, label, radios, onChange }) => {
               name={name}
               text={radio.text}
               value={radio.value}
+              onBlur={handleBlur}
               onChange={onChange}
             />
           ))}
