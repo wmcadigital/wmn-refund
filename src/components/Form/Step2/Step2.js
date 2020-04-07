@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 // Import components
-import Radio from 'components/shared/FormElements/Radio/Radio';
+import Radio from 'components/shared/FormElements/Radios/Radio/Radio';
 
 const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext

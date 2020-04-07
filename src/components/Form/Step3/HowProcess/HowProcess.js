@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 // Import components
-import Radio from 'components/shared/FormElements/Radio/Radio';
+import Radio from 'components/shared/FormElements/Radios/Radio/Radio';
 
 const HowProcess = () => {
   const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext

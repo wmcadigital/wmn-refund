@@ -3,22 +3,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import dompurify from 'dompurify';
 
-import useRadioValidation from './useRadioValidation';
-
 const { sanitize } = dompurify;
 
 const Radio = ({ name, onChange, text, value }) => {
-  const { error } = useRadioValidation(name);
-
   return (
     <>
-      {/* If there is an error, show here */}
-      {error && (
-        <span
-          className="wmnds-fe-error-message"
-          dangerouslySetInnerHTML={{ __html: sanitize(error) }}
-        />
-      )}
       <label className="wmnds-fe-radios__container">
         <div dangerouslySetInnerHTML={{ __html: sanitize(text) }} />
         <input

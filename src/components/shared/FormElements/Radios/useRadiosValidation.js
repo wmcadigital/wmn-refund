@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from 'react';
 import { FormContext } from 'globalState/FormContext';
 import { FormErrorContext } from 'globalState/FormErrorContext';
 
-const useRadioValidation = (name) => {
+const useRadiosValidation = (name) => {
   // set up the state for the inputs value prop and set it to the default value
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
   const [, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormContext
@@ -44,4 +44,4 @@ const useRadioValidation = (name) => {
   return { error };
 };
 
-export default useRadioValidation;
+export default useRadiosValidation;
