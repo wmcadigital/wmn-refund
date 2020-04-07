@@ -47,7 +47,27 @@ const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
     <>
       <h2>About your ticket</h2>
       <Radios
+        name="CustomerType"
         label="Which best describes your ticket?"
+        radios={[
+          { text: 'Swift card', value: 'SwiftCard' },
+          {
+            text: 'Paper ticket',
+            value: 'PaperTicket',
+          },
+          {
+            text: 'Swift on Mobile app',
+            value: 'SwiftPortal',
+          },
+          {
+            text: 'Scratchcard',
+            value: 'Scratchcard',
+          },
+          {
+            text: 'Class pass',
+            value: 'ClassPass',
+          },
+        ]}
         onChange={handleRadioChange}
       />
       <button

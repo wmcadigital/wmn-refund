@@ -7,8 +7,8 @@ import useRadioValidation from './useRadiosValidation';
 
 const { sanitize } = dompurify;
 
-const Radios = ({ label, onChange }) => {
-  const { error } = useRadioValidation('CustomerType', label);
+const Radios = ({ name, label, radios, onChange }) => {
+  const { error } = useRadioValidation(name, label); // Use custom hook for validating radios (this controls ALL radios validation)
 
   return (
     <div className={`wmnds-fe-group ${error ? 'wmnds-fe-group--error' : ''}`}>
@@ -24,36 +24,16 @@ const Radios = ({ label, onChange }) => {
           )}
         </legend>
         <div className="wmnds-fe-radios">
-          <Radio
-            name="CustomerType"
-            text="Swift card"
-            value="SwiftCard"
-            onChange={onChange}
-          />
-          <Radio
-            name="CustomerType"
-            text="Paper ticket"
-            value="PaperTicket"
-            onChange={onChange}
-          />
-          <Radio
-            name="CustomerType"
-            text="Swift on Mobile app"
-            value="SwiftPortal"
-            onChange={onChange}
-          />
-          <Radio
-            name="CustomerType"
-            text="Scratchcard"
-            value="Scratchcard"
-            onChange={onChange}
-          />
-          <Radio
-            name="CustomerType"
-            text="Class pass"
-            value="ClassPass"
-            onChange={onChange}
-          />
+          {/* Loop through radios and display each radio button */}
+          {radios.map((radio) => (
+            <Radio
+              key={radio.value}
+              name={name}
+              text={radio.text}
+              value={radio.value}
+              onChange={onChange}
+            />
+          ))}
         </div>
       </fieldset>
     </div>
@@ -61,7 +41,11 @@ const Radios = ({ label, onChange }) => {
 };
 
 Radios.propTypes = {
+  name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  radios: PropTypes.arrayOf(
+    PropTypes.objectOf(PropTypes.string, PropTypes.string)
+  ).isRequired,
   onChange: PropTypes.func,
 };
 
