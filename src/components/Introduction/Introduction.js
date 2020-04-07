@@ -20,8 +20,8 @@ const Introduction = ({ setIsFormStarted }) => {
             outbreak
           </li>
           <li>
-            Let us know that you would like to exchange your class pass or
-            scratchcards
+            Let us know that you would like to exchange your Class pass or
+            Scratchcards
           </li>
         </ul>
         <p>This process takes around 5 minutes.</p>
