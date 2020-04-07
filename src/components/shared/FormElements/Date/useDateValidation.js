@@ -71,7 +71,9 @@ const useInputValidation = (name, label, customValidation) => {
       }
       // If not a valid date (yyyy-mm-dd)
       else if (!dateRegex.test(date)) {
-        setError(`Enter a real ${label.toLowerCase()}`);
+        setError(
+          `Enter ${label.toLowerCase()} in the correct format, for example 18 03 2020`
+        );
       }
       // Date must be in future
       else if (date > d) {
