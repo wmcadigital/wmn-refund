@@ -56,7 +56,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
           window.dataLayer.push({
             event: 'formAbandonment',
             eventCategory: 'Refund form submission: success',
-            eventAction: formState.CustomerType,
+            eventAction: `CustomerType:${formState.CustomerType}`,
           });
 
           setFormSubmitStatus(true); // Set form status to success
