@@ -56,7 +56,7 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
       value: 'SwiftPortal',
     };
 
-    radios.splice(-1, 0, SwiftPortal); // push SwiftPortal radio option to last before 1 in radio list   
+    radios.splice(-1, 0, swiftPortal); // push SwiftPortal radio option to last before 1 in radio list   
     radios.splice(-1, 0, workwise); // push workwise radio option to last before 1 in radio list
     radios.splice(-1, 0, ticketMachine); // push ticketMachine radio option to last before 1 in radio list
   }
