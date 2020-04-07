@@ -23,7 +23,15 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isPaperTicket, setIsPaperTicket] = useState(false); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
 
-  useTrackFormAbandonment(formRef, currentStep, formSubmitStatus); // Used to track user abandonment via Google Analytics/Tag Manager
+  const [formError, setFormError] = useState(null);
+
+  useTrackFormAbandonment(
+    formRef,
+    currentStep,
+    formSubmitStatus,
+    formState,
+    formError
+  ); // Used to track user abandonment via Google Analytics/Tag Manager
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -54,6 +62,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
         .catch((error) => {
           // eslint-disable-next-line no-console
           console.error({ error });
+          setFormError(error);
           setFormSubmitStatus(false); // Set form status to error
         });
     }

@@ -2,8 +2,16 @@
 import { useEffect, useState } from 'react';
 // Import contexts
 
-const useTrackFormAbandonment = (formRef, currentStep, formSubmitStatus) => {
+const useTrackFormAbandonment = (
+  formRef,
+  currentStep,
+  formSubmitStatus,
+  formState,
+  formError
+) => {
   const [fieldsChanged, setFieldsChanged] = useState([]); // Track fields the user has touched/changed
+
+  window.dataLayer = window.dataLayer || []; // Set datalayer (GA thing)
 
   // This useEffect is used to track form changes and update the fieldsChanged state as the user progresses
   useEffect(() => {
@@ -26,7 +34,6 @@ const useTrackFormAbandonment = (formRef, currentStep, formSubmitStatus) => {
 
   // Used to update Google Tag Manager
   useEffect(() => {
-    window.dataLayer = window.dataLayer || []; // Set datalayer (GA thing)
     // Function for updating datalayer with correct data
     const formAbandoned = () => {
       // If there is a current step and no form submit status then it means the user is still in progress of filling in the form, so we can log that as a true abandonment
@@ -49,6 +56,26 @@ const useTrackFormAbandonment = (formRef, currentStep, formSubmitStatus) => {
       window.removeEventListener('beforeunload', formAbandoned);
     };
   }, [currentStep, fieldsChanged, formSubmitStatus]);
+
+  // UseEffect to track form submissions
+  useEffect(() => {
+    // If formsubmission is successful
+    if (formSubmitStatus) {
+      window.dataLayer.push({
+        event: 'formAbandonment',
+        eventCategory: 'Refund form submission: success',
+        eventAction: formState.CustomerType,
+      });
+    }
+    // If formsubmission errors
+    else if (formSubmitStatus === false) {
+      window.dataLayer.push({
+        event: 'formAbandonment',
+        eventCategory: 'Refund form submission: error',
+        eventAction: formError,
+      });
+    }
+  }, [formError, formState.CustomerType, formSubmitStatus]);
 };
 
 export default useTrackFormAbandonment;
