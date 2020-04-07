@@ -15,13 +15,15 @@ const Input = ({
   spellcheck,
   type,
   customValidation,
+  validation,
 }) => {
   // Use custom hook for validating inputs (this controls ALL inputs validation)
   const { handleChange, handleBlur, error } = useInputValidation(
     name,
     label,
     inputmode,
-    customValidation
+    customValidation,
+    validation
   );
 
   // Set input to render below
@@ -72,6 +74,7 @@ Input.propTypes = {
   spellcheck: PropTypes.bool,
   type: PropTypes.string,
   customValidation: PropTypes.func,
+  validation: PropTypes.bool,
 };
 
 Input.defaultProps = {
@@ -81,6 +84,7 @@ Input.defaultProps = {
   spellcheck: false,
   type: 'text',
   customValidation: null,
+  validation: true,
 };
 
 export default Input;

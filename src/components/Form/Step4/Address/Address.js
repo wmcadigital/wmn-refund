@@ -37,6 +37,7 @@ const Address = () => {
         name="AddressLine2"
         label="Address line 2"
         autocomplete="address-line2"
+        validation={false}
       />
 
       {/* Town/City and County */}
