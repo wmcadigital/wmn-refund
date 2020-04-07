@@ -8,7 +8,7 @@ import Radios from 'components/shared/FormElements/Radios/Radios';
 
 const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
-  const [errorState] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
+  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
 
   // Update customerType on radio button change
   const handleRadioChange = (e) => {
@@ -25,8 +25,10 @@ const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
   // Update the current step to the correct one depending on users selection
   const handleContinue = () => {
     if (errorState.errors.length) {
-      console.log({ errorState });
+      errorDispatch({ type: 'CONTINUE_PRESSED', payload: true });
     } else {
+      errorDispatch({ type: 'CONTINUE_PRESSED', payload: false });
+
       // SwiftCard, paperTicket
       if (
         formState.CustomerType === 'SwiftCard' ||

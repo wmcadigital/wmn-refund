@@ -25,7 +25,7 @@ export const FormErrorProvider = (props) => {
           errors: state.errors.filter((item) => item !== action.payload),
         };
 
-      // Continue or Submit button pressed
+      // Continue or Submit button pressed logic (toggles between true and false depending on errors in errors array)
       case 'CONTINUE_PRESSED':
         return {
           ...state,

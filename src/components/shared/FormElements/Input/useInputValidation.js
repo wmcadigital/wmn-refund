@@ -34,8 +34,8 @@ const useInputValidation = (name, label, inputmode, customValidation) => {
   // Handle validation
   // Re-use this logic everytime state is updated
   useEffect(() => {
-    // If the user has touched the input then we can show errors
-    if (isTouched || errorState.btnPressed) {
+    // If the user has touched the input then we can show errors / OR / If user has clicked continue/submit button
+    if (isTouched || errorState.continuePressed) {
       // If there is no length
       if (!value.length) {
         setError(`Enter your ${label}`);
@@ -59,13 +59,12 @@ const useInputValidation = (name, label, inputmode, customValidation) => {
     }
   }, [
     customValidation,
-    errorState.btnPressed,
+    errorState.continuePressed,
     inputmode,
     isTouched,
     label,
     name,
     value,
-    value.length,
   ]);
 
   // UseEffect to control global error state (this is used to halt the continue/submit button)
