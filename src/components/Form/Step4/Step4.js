@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
-import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
 import Company from './Company/Company';
 import DOB from './DOB/DOB';
@@ -9,10 +8,10 @@ import Address from './Address/Address';
 import Email from './Email/Email';
 import Telephone from './Telephone/Telephone';
 import Name from './Name/Name';
+import NHS from './NHS/NHS';
 
 const Step4 = () => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
-  const [errorState] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
   const { CustomerType } = formState; // Destructure customertype
 
   return (
@@ -39,18 +38,21 @@ const Step4 = () => {
         CustomerType !== 'Corporate' &&
         CustomerType !== 'Shop' && <DOB />}
 
-      {/* Only show address if not scratchcard and not classpass */}
+      {/* Only show address and NHS if not scratchcard and not classpass */}
       {CustomerType !== 'Scratchcard' && CustomerType !== 'ClassPass' && (
-        <Address />
+        <>
+          <Address />
+          <NHS />
+        </>
       )}
 
       <Email />
       <Telephone />
 
+      {/* Button onClick logic is located in parent Form component as it is 'submit' form logic */}
       <button
         type="submit"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        disabled={errorState.length}
       >
         Submit application
       </button>

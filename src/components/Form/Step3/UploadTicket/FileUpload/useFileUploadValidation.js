@@ -1,9 +1,11 @@
 import { useState, useContext, useEffect } from 'react';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
+import { FormErrorContext } from 'globalState/FormErrorContext';
 
 const useFileUploadValidation = () => {
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormContext
 
   // Local state for controlling file upload
   const [isFileInputFocused, setIsFileInputFocused] = useState(false); // This is used to emulate the input focus class on the label
@@ -13,6 +15,8 @@ const useFileUploadValidation = () => {
   const [error, setError] = useState(null);
   const [isTouched, setIsTouched] = useState(false);
   const [fileSize, setFileSize] = useState(0);
+
+  const value = formState.Application.PhotoBase64Extension || ''; // Get value from state
 
   const handleChange = (e) => {
     const file = e.target.files[0];
@@ -52,15 +56,11 @@ const useFileUploadValidation = () => {
   // Handle validation
   // Re-use this logic everytime state is updated
   useEffect(() => {
-    // If the user has touched the input then we can show errors
-    if (isTouched) {
-      if (!formState.Application.PhotoBase64Extension) {
+    // If the user has touched the input then we can show errors / OR / If user has clicked continue/submit button
+    if (isTouched || errorState.continuePressed) {
+      if (!value) {
         setError('Select a photo');
-      } else if (
-        formState.Application.PhotoBase64Extension !== 'png' &&
-        formState.Application.PhotoBase64Extension !== 'jpg' &&
-        formState.Application.PhotoBase64Extension !== 'jpeg'
-      ) {
+      } else if (value !== 'png' && value !== 'jpg' && value !== 'jpeg') {
         setError('The selected file must be a JPG, JPEG, or PNG');
       } else if (fileSize > 4194304) {
         setError('The selected file must be smaller than 4MB');
@@ -70,7 +70,17 @@ const useFileUploadValidation = () => {
         setError(null);
       }
     }
-  }, [fileSize, formState.Application.PhotoBase64Extension, isTouched]);
+  }, [fileSize, value, isTouched, errorState.continuePressed]);
+
+  // UseEffect to control global error state (this is used to halt the continue/submit button)
+  useEffect(() => {
+    // If there is an error or there is no value in the input
+    if (error || !value.length) {
+      errorDispatch({ type: 'ADD_ERROR', payload: 'fileUpload' }); // Then add this error to global error state
+    } else {
+      errorDispatch({ type: 'REMOVE_ERROR', payload: 'fileUpload' }); // Else remove from global error state
+    }
+  }, [error, errorDispatch, value.length]);
 
   // return object
   return {

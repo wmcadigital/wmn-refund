@@ -18,11 +18,11 @@ const SwiftCard = () => {
       error = `${label} is managed by National Express West Midlands and there is a
             <a
               href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
-              title="National Express West Midlands ticket refund application"
+              title="National Express West Midlands ticket refund process"
               target="_blank"
               className="wmnds-link"
             >
-              separate refund application
+              separate refund process
             </a>`;
     }
     // If swift card doesn't start with the below numbers then it's not valid
@@ -43,8 +43,9 @@ const SwiftCard = () => {
         <h3 className="wmnds-fe-question">What is your Swift card number?</h3>
         <p>
           This is the long number on the front of the card and begins with{' '}
-          <strong>633597</strong>, on Swift on Mobile it is also called the ISRN
+          <strong>633597</strong>
         </p>
+        <p>Enter the number without spaces</p>
       </legend>
       <Input
         className="wmnds-col-1 wmnds-col-sm-3-4 wmnds-col-md-1-2"

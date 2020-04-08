@@ -2,11 +2,18 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
+import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
-import Radio from 'components/shared/FormElements/Radio/Radio';
+import Radios from 'components/shared/FormElements/Radios/Radios';
 
-const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
+const Step1 = ({
+  currentStep,
+  setCurrentStep,
+  setIsPaperTicket,
+  setIsSwiftOnMobile,
+}) => {
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
 
   // Update customerType on radio button change
   const handleRadioChange = (e) => {
@@ -18,80 +25,75 @@ const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
     } else {
       setIsPaperTicket(false); // Else set to false
     }
+    // If Swift on Mobile chosen (only one with SwiftPortal val on this step)
+    if (e.target.value === 'SwiftPortal') {
+      setIsSwiftOnMobile(true);
+    } else {
+      setIsSwiftOnMobile(false);
+    }
   };
 
   // Update the current step to the correct one depending on users selection
   const handleContinue = () => {
-    // SwiftCard, paperTicket
-    if (
-      formState.CustomerType === 'SwiftCard' ||
-      formState.CustomerType === 'PaperTicket'
-    ) {
-      setCurrentStep(currentStep + 1); // Go to next step(2) so we can set customerType
+    // If errors, then don't progress and set continue button to true(halt form and show errors)
+    if (errorState.errors.length) {
+      errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
+    } else {
+      errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
+
+      // SwiftCard, paperTicket
+      if (
+        formState.CustomerType === 'SwiftCard' ||
+        formState.CustomerType === 'PaperTicket'
+      ) {
+        setCurrentStep(currentStep + 1); // Go to next step(2) so we can set customerType
+      }
+      // classPass, scratchcard
+      else if (
+        formState.CustomerType === 'Scratchcard' ||
+        formState.CustomerType === 'ClassPass'
+      ) {
+        setCurrentStep(currentStep + 3); // Skip to last steps as payment info isn't needed for scratchcard and classPass
+      }
+      // swiftOnMobile;
+      else {
+        setCurrentStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
+      }
+      window.scrollTo(0, 0);
     }
-    // classPass, scratchcard
-    else if (
-      formState.CustomerType === 'Scratchcard' ||
-      formState.CustomerType === 'ClassPass'
-    ) {
-      setCurrentStep(currentStep + 3); // Skip to last steps as payment info isn't needed for scratchcard and classPass
-    }
-    // swiftOnMobile;
-    else {
-      setCurrentStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
-    }
-    window.scrollTo(0, 0);
   };
 
   return (
     <>
       <h2>About your ticket</h2>
-      <div className="wmnds-fe-group">
-        <fieldset className="wmnds-fe-fieldset">
-          <legend className="wmnds-fe-fieldset__legend">
-            <h3 className="wmnds-fe-question">
-              Which best describes your ticket?
-            </h3>
-          </legend>
-          <div className="wmnds-fe-radios">
-            <Radio
-              name="CustomerType"
-              text="Swift card"
-              value="SwiftCard"
-              onChange={handleRadioChange}
-            />
-            <Radio
-              name="CustomerType"
-              text="Paper ticket"
-              value="PaperTicket"
-              onChange={handleRadioChange}
-            />
-            <Radio
-              name="CustomerType"
-              text="Swift on Mobile app"
-              value="SwiftPortal"
-              onChange={handleRadioChange}
-            />
-            <Radio
-              name="CustomerType"
-              text="Scratchcard"
-              value="Scratchcard"
-              onChange={handleRadioChange}
-            />
-            <Radio
-              name="CustomerType"
-              text="Class pass"
-              value="ClassPass"
-              onChange={handleRadioChange}
-            />
-          </div>
-        </fieldset>
-      </div>
+      <Radios
+        name="CustomerType"
+        label="Which best describes your ticket?"
+        radios={[
+          { text: 'Swift card', value: 'SwiftCard' },
+          {
+            text: 'Paper ticket',
+            value: 'PaperTicket',
+          },
+          {
+            text: 'Swift on Mobile app',
+            value: 'SwiftPortal',
+          },
+          {
+            text: 'Scratchcard',
+            value: 'Scratchcard',
+          },
+          {
+            text: 'Class pass',
+            value: 'ClassPass',
+          },
+        ]}
+        onChange={handleRadioChange}
+      />
       <button
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
         onClick={() => handleContinue()}
-        disabled={!formState.CustomerType}
       >
         Continue
       </button>
@@ -103,6 +105,7 @@ Step1.propTypes = {
   currentStep: PropTypes.number.isRequired,
   setCurrentStep: PropTypes.func.isRequired,
   setIsPaperTicket: PropTypes.func.isRequired,
+  setIsSwiftOnMobile: PropTypes.func.isRequired,
 };
 
 export default Step1;

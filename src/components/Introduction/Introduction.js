@@ -15,21 +15,21 @@ const Introduction = ({ setIsFormStarted }) => {
         <h2>Use this service to:</h2>
         <ul>
           <li>
-            Apply for a refund of your Swift card, paper or Swift on Mobile
+            Apply for a refund of your Swift card, paper ticket or Swift on Mobile
             ticket if you have been unable to travel due to the Coronavirus
             outbreak
           </li>
           <li>
-            Let us know that you would like to exchange your class pass or
-            scratchcards
+            Let us know that you would like to exchange your Class pass or
+            Scratchcards
           </li>
         </ul>
         <p>This process takes around 5 minutes.</p>
         <h2>Before you start</h2>
         <ul>
           <li>
-            You will need your Swift card, paper ticket or the phone your Swift
-            on Mobile ticket is on
+            You will need your Swift card, paper ticket or your Swift
+            on Mobile device
           </li>
           <li>
             If the long number on your Swift card begins with{' '}
@@ -37,11 +37,11 @@ const Introduction = ({ setIsFormStarted }) => {
             Midlands and there is a{' '}
             <a
               href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
-              title="National Express West Midlands ticket refund application"
+              title="National Express West Midlands ticket refund process"
               target="_self"
               className="wmnds-link"
             >
-              separate refund application
+              separate refund process
             </a>
           </li>
           <li>
@@ -54,7 +54,7 @@ const Introduction = ({ setIsFormStarted }) => {
         <p>
           There is guidance available to show{' '}
           <a
-            href="https://wmnetwork.co.uk/get-in-touch/covid19-refund-scheme/"
+            href="https://wmnetwork.co.uk/coronavirus/"
             title="How we will work out your refund"
             target="_self"
             className="wmnds-link"

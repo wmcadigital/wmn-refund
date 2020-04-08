@@ -5,7 +5,7 @@ import { FormErrorContext } from 'globalState/FormErrorContext';
 
 const useInputValidation = (name, label, customValidation) => {
   const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
-  const [, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormContext
+  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormContext
 
   // set up state for the inputs error prop
 
@@ -55,8 +55,8 @@ const useInputValidation = (name, label, customValidation) => {
     const dateRegex = /^((((19[0-9][0-9])|(2[0-9][0-9][0-9]))([-])(0[13578]|10|12)([-])(0[1-9]|[12][0-9]|3[01]))|(((19[0-9][0-9])|(2[0-9][0-9][0-9]))([-])(0[469]|11)([-])([0][1-9]|[12][0-9]|30))|(((19[0-9][0-9])|(2[0-9][0-9][0-9]))([-])(02)([-])(0[1-9]|1[0-9]|2[0-8]))|(([02468][048]00)([-])(02)([-])(29))|(([13579][26]00)([-])(02)([-])(29))|(([0-9][0-9][0][48])([-])(02)([-])(29))|(([0-9][0-9][2468][048])([-])(02)([-])(29))|(([0-9][0-9][13579][26])([-])(02)([-])(29)))$/; // Date regex http://regexlib.com/REDetails.aspx?regexp_id=1850
     const d = new Date().toISOString().slice(0, 10); // Set todays date as yyyy-mm-dd
 
-    // If the user has touched the input then we can show errors
-    if (isTouched) {
+    // If the user has touched the input then we can show errors / OR / If user has clicked continue/submit button
+    if (isTouched || errorState.continuePressed) {
       // If there is no day
       if (!day) {
         setError(`${label} must include day`);
@@ -71,7 +71,9 @@ const useInputValidation = (name, label, customValidation) => {
       }
       // If not a valid date (yyyy-mm-dd)
       else if (!dateRegex.test(date)) {
-        setError(`Enter a real ${label.toLowerCase()}`);
+        setError(
+          `Enter ${label.toLowerCase()} in the correct format, for example 18 03 2020`
+        );
       }
       // Date must be in future
       else if (date > d) {
@@ -86,7 +88,16 @@ const useInputValidation = (name, label, customValidation) => {
         setError(null);
       }
     }
-  }, [customValidation, date, day, isTouched, label, month, year]);
+  }, [
+    customValidation,
+    date,
+    day,
+    errorState.continuePressed,
+    isTouched,
+    label,
+    month,
+    year,
+  ]);
 
   // UseEffect to control global error state (this is used to halt the continue/submit button)
   useEffect(() => {
