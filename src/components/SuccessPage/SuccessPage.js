@@ -35,7 +35,7 @@ const SuccessPage = () => {
         {formState.CustomerType === 'Scratchcard' ||
         formState.CustomerType === 'ClassPass' ? (
           <>
-            <!-- <p>We have sent you an email to acknowledge your application.</p> -->
+            {/*  <p>We have sent you an email to acknowledge your application.</p>  */}
             <p>We will send you an email within the next 24 hours to acknowledge your application.</p>
             <p>
               Unfortunately, due to logistics, we are unable to process
