@@ -25,6 +25,7 @@ const Step1 = ({
     } else {
       setIsPaperTicket(false); // Else set to false
     }
+    // If Swift on Mobile chosen (only one with SwiftPortal val on this step)
     if (e.target.value === 'SwiftPortal') {
       setIsSwiftOnMobile(true);
     } else {
