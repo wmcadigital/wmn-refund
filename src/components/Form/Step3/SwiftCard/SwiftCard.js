@@ -43,7 +43,7 @@ const SwiftCard = () => {
         <h3 className="wmnds-fe-question">What is your Swift card number?</h3>
         <p>
           This is the long number on the front of the card and begins with{' '}
-          <strong>633597</strong>, on Swift on Mobile it is also called the ISRN
+          <strong>633597</strong>
         </p>
         <p>Enter the number without spaces</p>
       </legend>
