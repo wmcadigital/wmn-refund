@@ -35,7 +35,9 @@ const DirectDebit = () => {
           What is your Direct Debit reference?
         </h3>
         <p>
-          This is the <strong>8</strong> digit number that will be shown in an email with the subject starting 'Direct Debit Application Reference Number', sent from 'directsales@tfwm.org.uk'</p>
+          This is the <strong>8</strong> digit number that will be shown in an
+          email with the subject starting &apos;Direct Debit Application
+          Reference Number&apos;, sent from &apos;directsales@tfwm.org.uk&apos;
         </p>
       </legend>
       <Input
