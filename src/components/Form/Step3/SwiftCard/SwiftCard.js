@@ -1,11 +1,10 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
-const SwiftCard = ({ isSwiftOnMobile }) => {
+const SwiftCard = () => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
   const label = 'Swift card number';
 
@@ -57,10 +56,6 @@ const SwiftCard = ({ isSwiftOnMobile }) => {
       />
     </fieldset>
   );
-};
-
-SwiftCard.propTypes = {
-  isSwiftOnMobile: PropTypes.bool.isRequired,
 };
 
 export default SwiftCard;
