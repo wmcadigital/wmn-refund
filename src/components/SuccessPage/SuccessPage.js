@@ -35,7 +35,8 @@ const SuccessPage = () => {
         {formState.CustomerType === 'Scratchcard' ||
         formState.CustomerType === 'ClassPass' ? (
           <>
-            <p>We have sent you an email to acknowledge your application.</p>
+            <!-- <p>We have sent you an email to acknowledge your application.</p> -->
+            <p>We will send you an email within the next 24 hours to acknowledge your application.</p>
             <p>
               Unfortunately, due to logistics, we are unable to process
               applications for scratchcards and class passes remotely.
@@ -48,8 +49,16 @@ const SuccessPage = () => {
         ) : (
           //  If user is not scratchcard or classpass show info */}
           <>
+            <!--
             <p>
               We have sent you an email to acknowledge your application. The
+              email also contains more details about how we will process your
+              refund.
+            </p>
+            -->
+    
+            <p>
+              We will send you an email within the next 24 hours to acknowledge your application. The
               email also contains more details about how we will process your
               refund.
             </p>
