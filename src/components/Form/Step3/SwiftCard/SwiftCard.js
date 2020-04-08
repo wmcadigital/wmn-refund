@@ -45,9 +45,7 @@ const SwiftCard = () => {
           This is the long number on the front of the card and begins with{' '}
           <strong>633597</strong>, on Swift on Mobile it is also called the ISRN
         </p>
-        <p>
-          Enter the number without spaces
-        </p>
+        <p>Enter the number without spaces</p>
       </legend>
       <Input
         className="wmnds-col-1 wmnds-col-sm-3-4 wmnds-col-md-1-2"
