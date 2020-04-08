@@ -35,10 +35,16 @@ const DirectDebit = () => {
           What is your Direct Debit reference?
         </h3>
         <p>
-          This is the <strong>8</strong> digit number that will be shown in an
-          email with the subject starting &apos;Direct Debit Application
-          Reference Number&apos;, sent from &apos;directsales@tfwm.org.uk&apos;
+          This is the <strong>8-digit number</strong> beginning with{' '}
+          <strong>6</strong>. It is shown next to every payment to WMCA on your
+          bank statement
         </p>
+
+        <strong>
+          If you have a 6-digit number, you can just add <strong>00</strong>{' '}
+          after the first number: <strong>612345</strong> would become{' '}
+          <strong>60012345</strong>
+        </strong>
       </legend>
       <Input
         className="wmnds-col-1-2 wmnds-col-sm-1-5"
