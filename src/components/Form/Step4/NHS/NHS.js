@@ -7,16 +7,16 @@ import Radios from 'components/shared/FormElements/Radios/Radios';
 const NHS = () => {
   const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
 
-  // Update customerType on radio button change
+  // Update NHS on radio button change
   const handleRadioChange = (e) =>
     formDispatch({
       type: 'UPDATE_FORM_DATA',
-      payload: { ActionType: e.target.value },
+      payload: { NHS: e.target.value },
     });
 
   return (
     <Radios
-      name="ActionType"
+      name="NHS"
       label="Do you work for the NHS?"
       radios={[
         {
