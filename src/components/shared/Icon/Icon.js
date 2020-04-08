@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import svgSprite from 'assets/icons/wmnds-svg-sprite.min.svg';
+
+// Due to weird Protocol errors with external SVGs the svg use doesn't work well with production builds
+// So we Ajax the SVG in with a snippet at the bottom of public/index.html
 
 const Icon = ({ className, iconName }) => {
   return (
     <svg className={className}>
-      <use
-        xlinkHref={`${svgSprite}#wmnds-${iconName}`}
-        href={`${svgSprite}#wmnds-${iconName}`}
-      />
+      <use xlinkHref={`#wmnds-${iconName}`} href={`#wmnds-${iconName}`} />
     </svg>
   );
 };
