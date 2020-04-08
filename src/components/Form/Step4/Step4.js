@@ -8,6 +8,7 @@ import Address from './Address/Address';
 import Email from './Email/Email';
 import Telephone from './Telephone/Telephone';
 import Name from './Name/Name';
+import NHS from './NHS/NHS';
 
 const Step4 = () => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
@@ -39,7 +40,11 @@ const Step4 = () => {
 
       {/* Only show address if not scratchcard and not classpass */}
       {CustomerType !== 'Scratchcard' && CustomerType !== 'ClassPass' && (
-        <Address />
+        <>
+          {' '}
+          <Address />
+          <NHS />
+        </>
       )}
 
       <Email />
