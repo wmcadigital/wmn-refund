@@ -16,12 +16,8 @@ const DirectDebit = () => {
     if (ddNum.charAt(0) !== '6') {
       error = `${label} is a number that begins with '6'`;
     }
-    // Must be 8 digits long
-    else if (ddNum.length !== 8) {
-      error = `${label} must be 8 digits`;
-    }
     // Not valid ref if not between these numbers
-    else if (+ddNum < 60000000 || ddNum > 60999999) {
+    else if (+ddNum < 600000 || ddNum > 60999999) {
       error = `Enter a valid ${label}`;
     }
 
