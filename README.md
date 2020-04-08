@@ -1,5 +1,16 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Building for Umbraco
+
+1. Run `npm run build` locally
+2. Copy the entire build folder to our CDN (cdn/nwmassets/apps/wmn-covid-refund/build/)
+3. Then copy the entire contents of `index.html` file located at `build/index.html`
+4. Log into WMN/NWM Umbraco
+5. Navigate to `Settings/Templates/Master WMN/WMN - Apps/WMN - COVID19 Refunds`
+6. Then paste the data you copied in step 3
+7. Delete you local `build` folder
+8. All done! Continue developing until next build release.
+
 ## Available Scripts
 
 In the project directory, you can run:
