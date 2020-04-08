@@ -66,11 +66,21 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
           // If formsubmission errors
           // eslint-disable-next-line no-console
           console.error({ error });
+          let errMsg;
+
+          if (error.text) {
+            error.text().then((errorMessage) => {
+              errMsg = errorMessage;
+            });
+          } else {
+            errMsg = error;
+          }
+
           // Log event to analytics/tag manager
           window.dataLayer.push({
             event: 'formAbandonment',
             eventCategory: 'Refund form submission: error',
-            eventAction: error,
+            eventAction: errMsg,
           });
           setFormSubmitStatus(false); // Set form status to error
         });

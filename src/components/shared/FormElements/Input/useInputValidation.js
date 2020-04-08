@@ -10,6 +10,7 @@ const useInputValidation = (
   customValidation,
   validation
 ) => {
+  console.log({ name, validation });
   // set up the state for the inputs value prop and set it to the default value
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormContext
@@ -40,8 +41,11 @@ const useInputValidation = (
   // Handle validation
   // Re-use this logic everytime state is updated
   useEffect(() => {
-    // If the user has touched the input then we can show errors / OR / If user has clicked continue/submit button && validation is required
-    if (isTouched || (errorState.continuePressed && validation)) {
+    // If the user has touched the input then we can show errors / OR / If user has clicked continue/submit button && validation is required (this is so we can set validation to false for optional inputs)
+    if (
+      (isTouched && validation) ||
+      (errorState.continuePressed && validation)
+    ) {
       // If there is no length
       if (!value.length) {
         setError(`Enter your ${label}`);

@@ -15,9 +15,9 @@ const Introduction = ({ setIsFormStarted }) => {
         <h2>Use this service to:</h2>
         <ul>
           <li>
-            Apply for a refund of your Swift card, paper ticket or Swift on Mobile
-            ticket if you have been unable to travel due to the Coronavirus
-            outbreak
+            Apply for a refund of your Swift card, paper ticket or Swift on
+            Mobile ticket if you have been unable to travel due to the
+            Coronavirus outbreak
           </li>
           <li>
             Let us know that you would like to exchange your Class pass or
@@ -28,8 +28,8 @@ const Introduction = ({ setIsFormStarted }) => {
         <h2>Before you start</h2>
         <ul>
           <li>
-            You will need your Swift card, paper ticket or your Swift
-            on Mobile device
+            You will need your Swift card, paper ticket or your Swift on Mobile
+            device
           </li>
           <li>
             If the long number on your Swift card begins with{' '}
@@ -46,7 +46,8 @@ const Introduction = ({ setIsFormStarted }) => {
           </li>
           <li>
             If you pay by Direct Debit, you will need your Direct Debit
-            reference number. This is the <strong>8</strong> digit number that will be shown in an email with the subject starting 'Direct Debit Application Reference Number', sent from 'directsales@tfwm.org.uk'
+            reference number. This begins with <strong>6</strong> and is shown
+            next to every payment to WMCA on your bank statement
           </li>
         </ul>
         <br />
