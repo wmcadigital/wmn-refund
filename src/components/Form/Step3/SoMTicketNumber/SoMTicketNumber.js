@@ -3,7 +3,7 @@ import React from 'react';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
-const TicketNumber = () => {
+const SoMTicketNumber = () => {
   return (
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
@@ -12,7 +12,7 @@ const TicketNumber = () => {
       </legend>
       <Input
         className="wmnds-col-1-2 wmnds-col-sm-1-5"
-        name="SoMTicketNumber"
+        name="TicketNumber"
         label="Ticket number"
         inputmode="numeric"
       />
