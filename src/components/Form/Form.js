@@ -36,7 +36,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
 
       // The above is temp commented whilst we wait for CORS
-      fetch('https://apisNWM.cenapps.org.uk/ticketapplications/Refund', {
+      fetch(process.env.REACT_APP_API_HOST, {
         method: 'post',
         body: JSON.stringify(formState),
         headers: {
@@ -116,16 +116,18 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
           </form>
         </div>
       </div>
-      <pre
-        className="wmnds-col-1 wmnds-col-md-1-4 wmnds-p-md"
-        style={{
-          overflowX: 'auto',
-          position: 'fixed',
-          right: 0,
-        }}
-      >
-        {JSON.stringify(formState, null, 2)}
-      </pre>
+      {process.env.NODE_ENV === 'development' && (
+        <pre
+          className="wmnds-col-1 wmnds-col-md-1-4 wmnds-p-md"
+          style={{
+            overflowX: 'auto',
+            position: 'fixed',
+            right: 0,
+          }}
+        >
+          {JSON.stringify(formState, null, 2)}
+        </pre>
+      )}
     </>
   );
 };
