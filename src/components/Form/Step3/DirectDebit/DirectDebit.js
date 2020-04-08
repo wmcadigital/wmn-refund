@@ -40,11 +40,11 @@ const DirectDebit = () => {
           bank statement
         </p>
 
-        <strong>
+        <p>
           If you have a 6-digit number, you can just add <strong>00</strong>{' '}
           after the first number: <strong>612345</strong> would become{' '}
           <strong>60012345</strong>
-        </strong>
+        </p>
       </legend>
       <Input
         className="wmnds-col-1-2 wmnds-col-sm-1-5"
