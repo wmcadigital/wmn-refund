@@ -35,8 +35,7 @@ const DirectDebit = () => {
           What is your Direct Debit reference?
         </h3>
         <p>
-          This is shown next to WMCA on your bank statement and begins with{' '}
-          <strong>6</strong>
+          This is the <strong>8</strong> digit number that will be shown in an email with the subject starting 'Direct Debit Application Reference Number', sent from 'directsales@tfwm.org.uk'</p>
         </p>
       </legend>
       <Input
