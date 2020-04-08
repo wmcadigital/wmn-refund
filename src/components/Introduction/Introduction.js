@@ -46,8 +46,7 @@ const Introduction = ({ setIsFormStarted }) => {
           </li>
           <li>
             If you pay by Direct Debit, you will need your Direct Debit
-            reference number. This begins with <strong>6</strong> and is shown
-            next to every payment to WMCA on your bank statement
+            reference number. This is the <strong>8</strong> digit number that will be shown in an email with the subject starting 'Direct Debit Application Reference Number', sent from 'directsales@tfwm.org.uk'
           </li>
         </ul>
         <br />
