@@ -12,7 +12,12 @@ import UploadTicket from './UploadTicket/UploadTicket';
 import LastUsed from './LastUsed/LastUsed';
 import HowProcess from './HowProcess/HowProcess';
 
-const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
+const Step3 = ({
+  currentStep,
+  setCurrentStep,
+  isPaperTicket,
+  isSwiftOnMobile,
+}) => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
 
@@ -59,8 +64,9 @@ const Step3 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
         break;
 
       // Worwise, Shop, SwiftPortal, OnlineSales(this won't happen as it is hidden in step2 unless paper ticket is chosen, so it will be part of the else statement below)
+      // Pass isSwiftOnMobile state to see if user has selected this option in step 1, if so we show slightly different text for swiftCard
       default:
-        elementsToRender = <SwiftCard />;
+        elementsToRender = <SwiftCard isSwiftOnMobile={isSwiftOnMobile} />;
     }
   }
   // Else paper ticket so show paper ticket number
@@ -104,6 +110,7 @@ Step3.propTypes = {
   currentStep: PropTypes.number.isRequired,
   setCurrentStep: PropTypes.func.isRequired,
   isPaperTicket: PropTypes.bool.isRequired,
+  isSwiftOnMobile: PropTypes.bool.isRequired,
 };
 
 export default Step3;
