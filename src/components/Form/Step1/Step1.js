@@ -6,7 +6,12 @@ import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
 
-const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
+const Step1 = ({
+  currentStep,
+  setCurrentStep,
+  setIsPaperTicket,
+  setIsSwiftOnMobile,
+}) => {
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
 
@@ -19,6 +24,11 @@ const Step1 = ({ currentStep, setCurrentStep, setIsPaperTicket }) => {
       setIsPaperTicket(true); // Then set paper ticket to true (value used in step 3)
     } else {
       setIsPaperTicket(false); // Else set to false
+    }
+    if (e.target.value === 'SwiftPortal') {
+      setIsSwiftOnMobile(true);
+    } else {
+      setIsSwiftOnMobile(false);
     }
   };
 
@@ -94,6 +104,7 @@ Step1.propTypes = {
   currentStep: PropTypes.number.isRequired,
   setCurrentStep: PropTypes.func.isRequired,
   setIsPaperTicket: PropTypes.func.isRequired,
+  setIsSwiftOnMobile: PropTypes.func.isRequired,
 };
 
 export default Step1;

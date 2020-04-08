@@ -7,7 +7,7 @@ import { FormErrorContext } from 'globalState/FormErrorContext';
 import DirectDebit from './DirectDebit/DirectDebit';
 import SwiftCard from './SwiftCard/SwiftCard';
 import TicketNumber from './TicketNumber/TicketNumber';
-import SoMTicketNumber from './SoMTicketNumber/SoMTicketNumber';
+// import SoMTicketNumber from './SoMTicketNumber/SoMTicketNumber';
 import UploadTicket from './UploadTicket/UploadTicket';
 import LastUsed from './LastUsed/LastUsed';
 import HowProcess from './HowProcess/HowProcess';
