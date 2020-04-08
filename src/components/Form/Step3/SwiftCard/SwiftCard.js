@@ -18,11 +18,11 @@ const SwiftCard = () => {
       error = `${label} is managed by National Express West Midlands and there is a
             <a
               href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
-              title="National Express West Midlands ticket refund application"
+              title="National Express West Midlands ticket refund process"
               target="_blank"
               className="wmnds-link"
             >
-              separate refund application
+              separate refund process
             </a>`;
     }
     // If swift card doesn't start with the below numbers then it's not valid

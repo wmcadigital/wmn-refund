@@ -14,7 +14,7 @@ const Address = () => {
 
     // If not a valid email address
     if (!postcodeRegex.test(formState.Application.AddressPostcode)) {
-      error = 'Enter a postcode in the correct format';
+      error = 'Enter a postcode in the correct format, for example B19 3SD';
     }
 
     return error;
