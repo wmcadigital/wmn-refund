@@ -44,16 +44,32 @@ const Step3 = ({
   }
   // Else if is paper ticket user (clicked in step 1)
   else if (isPaperTicket) {
-    // If the customertype is DD then show that else must be paper ticket
-    elementsToRender =
-      CustomerType === 'DirectDebit' ? (
-        <>
-          <DirectDebit />
-          <TicketNumber />
-        </>
-      ) : (
-        <TicketNumber />
-      );
+    switch (CustomerType) {
+      // If the paper ticket and customertype is DD
+      case 'DirectDebit':
+        elementsToRender = (
+          <>
+            <DirectDebit />
+            <TicketNumber />
+          </>
+        );
+        break;
+      // If the paper ticket and customertype is Corporate
+      case 'Corporate':
+        elementsToRender = (
+          <>
+            <>
+              <TicketNumber />
+              <HowProcess />
+            </>
+          </>
+        );
+        break;
+      // Else if paperTicket
+      default:
+        elementsToRender = <TicketNumber />;
+        break;
+    }
   }
   // If not a paper ticket or swift on mobile then must be online customertype so run switch on it
   else {
