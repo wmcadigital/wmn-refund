@@ -68,7 +68,7 @@ const SuccessPage = () => {
                 className="wmnds-link"
               >
                 guidance
-              </a>
+              </a>{' '}
               available on our website.
             </p>
           </>
