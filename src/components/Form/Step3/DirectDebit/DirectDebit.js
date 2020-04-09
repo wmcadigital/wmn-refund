@@ -17,11 +17,11 @@ const DirectDebit = () => {
       error = `${label} is a number that begins with '6'`;
     }
     // Must be 8 digits long
-    else if (ddNum.length !== 8) {
-      error = `${label} must be 8 digits`;
+    else if (ddNum.length !== 6) {
+      error = `${label} must be 6 digits`;
     }
     // Not valid ref if not between these numbers
-    else if (+ddNum < 60000000 || ddNum > 60999999) {
+    else if (+ddNum < 600000 || ddNum > 699999) {
       error = `Enter a valid ${label}`;
     }
 
@@ -35,15 +35,9 @@ const DirectDebit = () => {
           What is your Direct Debit reference?
         </h3>
         <p>
-          This is the <strong>8-digit number</strong> beginning with{' '}
-          <strong>6</strong>. It is shown next to every payment to WMCA on your
-          bank statement
-        </p>
-
-        <p>
-          If you have a 6-digit number, you can just add <strong>00</strong>{' '}
-          after the first number: <strong>612345</strong> would become{' '}
-          <strong>60012345</strong>
+          This is the <strong>6-digit number</strong> beginning with a{' '}
+          <strong>6</strong>. It is shown next to every payment to WMCA for your
+          Direct Debit on your bank statement.
         </p>
       </legend>
       <Input
