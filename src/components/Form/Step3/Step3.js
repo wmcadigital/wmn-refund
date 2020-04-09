@@ -12,7 +12,6 @@ import SoMTicketNumber from './SoMTicketNumber/SoMTicketNumber';
 import UploadTicket from './UploadTicket/UploadTicket';
 import LastUsed from './LastUsed/LastUsed';
 import HowProcess from './HowProcess/HowProcess';
-import FileUpload from './UploadTicket/FileUpload/FileUpload';
 
 const Step3 = ({
   currentStep,
@@ -128,7 +127,7 @@ const Step3 = ({
       <LastUsed />
 
       {/* Only show this based on the logic set near top of file */}
-      {shouldRenderUpload && <FileUpload />}
+      {shouldRenderUpload && <UploadTicket />}
 
       <button
         type="button"
