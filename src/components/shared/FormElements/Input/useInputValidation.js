@@ -10,7 +10,6 @@ const useInputValidation = (
   customValidation,
   validation
 ) => {
-  console.log({ name, validation });
   // set up the state for the inputs value prop and set it to the default value
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormContext
