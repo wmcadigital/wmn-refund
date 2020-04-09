@@ -12,6 +12,7 @@ import SoMTicketNumber from './SoMTicketNumber/SoMTicketNumber';
 import UploadTicket from './UploadTicket/UploadTicket';
 import LastUsed from './LastUsed/LastUsed';
 import HowProcess from './HowProcess/HowProcess';
+import FileUpload from './UploadTicket/FileUpload/FileUpload';
 
 const Step3 = ({
   currentStep,
@@ -33,10 +34,11 @@ const Step3 = ({
     }
   };
 
-  const { CustomerType } = formState; // Destructure object
+  const { CustomerType, Application } = formState; // Destructure object
 
   // Set placeholder vars which we will change in the switch below (based on CustomerType)
   let elementsToRender; // Used to change conditional elements to render
+  let shouldRenderUpload;
 
   // If a swift on mobile user (clicked in step 1)
   if (isSwiftOnMobile) {
@@ -69,6 +71,18 @@ const Step3 = ({
       default:
         elementsToRender = <TicketNumber />;
         break;
+    }
+
+    // if a CustomerType is corporate then only show file upload if they have selected cancel ticket option in HowProcess
+    // Otherwise if the customerType isn't corporate then show file upload.
+    if (
+      (CustomerType === 'Corporate' &&
+        Application.ActionType === 'CancelTicket') ||
+      CustomerType !== 'Corporate'
+    ) {
+      shouldRenderUpload = true; // Show FileUpload
+    } else {
+      shouldRenderUpload = false; // Hide FileUpload
     }
   }
   // If not a paper ticket or swift on mobile then must be online customertype so run switch on it
@@ -113,8 +127,8 @@ const Step3 = ({
 
       <LastUsed />
 
-      {/* Only show this if a user selected paper ticket in step 1 */}
-      {isPaperTicket && <UploadTicket />}
+      {/* Only show this based on the logic set near top of file */}
+      {shouldRenderUpload && <FileUpload />}
 
       <button
         type="button"
