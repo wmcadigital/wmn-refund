@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
+import GenericError from 'components/shared/Errors/GenericError';
 
 const Step1 = ({
   currentStep,
@@ -14,6 +15,7 @@ const Step1 = ({
 }) => {
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
+  const [showError, toggleShowError] = useState(false);
 
   // Update customerType on radio button change
   const handleRadioChange = (e) => {
@@ -37,6 +39,7 @@ const Step1 = ({
   const handleContinue = () => {
     // If errors, then don't progress and set continue button to true(halt form and show errors)
     if (errorState.errors.length) {
+      toggleShowError(true);
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
     } else {
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
@@ -62,10 +65,10 @@ const Step1 = ({
       window.scrollTo(0, 0);
     }
   };
-
   return (
     <>
       <h2>About your ticket</h2>
+      {errorState.errors.length > 0 && showError && <GenericError />}
       <Radios
         name="CustomerType"
         label="Which best describes your ticket?"

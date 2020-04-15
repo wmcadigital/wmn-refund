@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
@@ -12,6 +12,7 @@ import SoMTicketNumber from './SoMTicketNumber/SoMTicketNumber';
 import UploadTicket from './UploadTicket/UploadTicket';
 import LastUsed from './LastUsed/LastUsed';
 import HowProcess from './HowProcess/HowProcess';
+import GenericError from '../../shared/Errors/GenericError';
 
 const Step3 = ({
   currentStep,
@@ -21,10 +22,11 @@ const Step3 = ({
 }) => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
-
+  const [showError, toggleShowError] = useState(false);
   const handleContinue = () => {
     // If errors, then don't progress and set continue button to true(halt form and show errors)
     if (errorState.errors.length) {
+      toggleShowError(true);
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
     } else {
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
@@ -120,6 +122,7 @@ const Step3 = ({
   return (
     <>
       <h2>Tell us about your ticket</h2>
+      {errorState.errors.length > 0 && showError && <GenericError />}
 
       {/* This changes based on switch logic above */}
       {elementsToRender}
