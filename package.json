@@ -11,6 +11,7 @@
     "dompurify": "^2.0.8",
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
+    "react-app-polyfill": "^1.0.6",
     "react-dom": "^16.13.1",
     "react-hook-form": "^5.2.0",
     "react-scripts": "3.4.1"
@@ -42,7 +43,8 @@
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 safari version",
+      "ie 11"
     ]
   }
 }
