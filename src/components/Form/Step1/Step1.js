@@ -11,10 +11,11 @@ const Step1 = ({
   setCurrentStep,
   setIsPaperTicket,
   setIsSwiftOnMobile,
+  formRef
 }) => {
+  console.log(currentStep);
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
-
   // Update customerType on radio button change
   const handleRadioChange = (e) => {
     formDispatch({ type: 'UPDATE_CUSTOMER_TYPE', payload: e.target.value });
@@ -37,6 +38,7 @@ const Step1 = ({
   const handleContinue = () => {
     // If errors, then don't progress and set continue button to true(halt form and show errors)
     if (errorState.errors.length) {
+      window.scrollTo(0, formRef.current.offsetTop);
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
     } else {
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
@@ -61,6 +63,7 @@ const Step1 = ({
       }
       window.scrollTo(0, 0);
     }
+    
   };
 
   return (
