@@ -38,6 +38,7 @@ const Step1 = ({
   const handleContinue = () => {
     // If errors, then don't progress and set continue button to true(halt form and show errors)
     if (errorState.errors.length) {
+      window.scrollTo(0, formRef.current.offsetTop);
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
     } else {
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
@@ -60,8 +61,9 @@ const Step1 = ({
       else {
         setCurrentStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
       }
+      window.scrollTo(0, 0);
     }
-    window.scrollTo(0, formRef.current.offsetTop);
+    
   };
 
   return (
