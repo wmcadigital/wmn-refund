@@ -11,10 +11,11 @@ const Step1 = ({
   setCurrentStep,
   setIsPaperTicket,
   setIsSwiftOnMobile,
+  formRef
 }) => {
+  console.log(currentStep);
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
-
   // Update customerType on radio button change
   const handleRadioChange = (e) => {
     formDispatch({ type: 'UPDATE_CUSTOMER_TYPE', payload: e.target.value });
@@ -59,8 +60,8 @@ const Step1 = ({
       else {
         setCurrentStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
       }
-      window.scrollTo(0, 0);
     }
+    window.scrollTo(0, formRef.current.offsetTop);
   };
 
   return (

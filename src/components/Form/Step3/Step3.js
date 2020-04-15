@@ -18,10 +18,11 @@ const Step3 = ({
   setCurrentStep,
   isPaperTicket,
   isSwiftOnMobile,
+  formRef,
 }) => {
+
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
-
   const handleContinue = () => {
     // If errors, then don't progress and set continue button to true(halt form and show errors)
     if (errorState.errors.length) {
@@ -29,8 +30,8 @@ const Step3 = ({
     } else {
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
       setCurrentStep(currentStep + 1);
-      window.scrollTo(0, 0);
     }
+    window.scrollTo(0, formRef.current.offsetTop);
   };
 
   const { CustomerType, Application } = formState; // Destructure object
@@ -141,6 +142,8 @@ const Step3 = ({
 };
 
 Step3.propTypes = {
+  formRef: PropTypes.shape({ current: PropTypes.instanceOf(Object) })
+    .isRequired,
   currentStep: PropTypes.number.isRequired,
   setCurrentStep: PropTypes.func.isRequired,
   isPaperTicket: PropTypes.bool.isRequired,

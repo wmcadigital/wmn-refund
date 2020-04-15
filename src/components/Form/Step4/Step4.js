@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 // Import components
@@ -13,7 +14,6 @@ import NHS from './NHS/NHS';
 const Step4 = () => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
   const { CustomerType } = formState; // Destructure customertype
-
   return (
     <>
       <h2>Tell us about yourself</h2>
@@ -58,6 +58,11 @@ const Step4 = () => {
       </button>
     </>
   );
+};
+
+Step4.propTypes = {
+  formRef: PropTypes.shape({ current: PropTypes.instanceOf(Object) })
+    .isRequired,
 };
 
 export default Step4;

@@ -6,10 +6,9 @@ import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
 
-const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
+const Step2 = ({ currentStep, setCurrentStep, isPaperTicket, formRef }) => {
   const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
-
   // Update customerType on radio button change
   const handleRadioChange = (e) =>
     formDispatch({
@@ -24,10 +23,9 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
     } else {
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
-
       setCurrentStep(currentStep + 1);
-      window.scrollTo(0, 0);
     }
+    window.scrollTo(0, formRef.current.offsetTop);
   };
 
   //  Set up default radio options (shown for both paper ticket and swift card)
@@ -37,8 +35,7 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
       value: 'DirectDebit',
     },
     {
-      text:
-        'I bought it from the West Midlands Network or Swift website',
+      text: 'I bought it from the West Midlands Network or Swift website',
       value: 'SwiftPortal',
     },
     {
@@ -47,8 +44,7 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
     },
 
     {
-      text:
-        'I bought it from a travel shop or Payzone shop',
+      text: 'I bought it from a travel shop or Payzone shop',
       value: 'Shop',
     },
   ];
