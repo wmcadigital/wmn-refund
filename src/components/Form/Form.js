@@ -25,12 +25,12 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const [isSwiftOnMobile, setIsSwiftOnMobile] = useState(false); // Used to track if a user has clicked Swift On Mobile (set in step 1). Then read this value in step 3 to show 'different text for swift card number'
 
   useTrackFormAbandonment(formRef, currentStep, formSubmitStatus, formState); // Used to track user abandonment via Google Analytics/Tag Manager
-
   const handleSubmit = (event) => {
     event.preventDefault();
     window.dataLayer = window.dataLayer || []; // Set datalayer (GA thing)
 
     if (errorState.errors.length) {
+      window.scrollTo(0, formRef.current.offsetTop);
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
     } else {
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
@@ -96,6 +96,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
           <form onSubmit={handleSubmit} autoComplete="on" ref={formRef}>
             {currentStep === 1 && (
               <Step1
+                formRef={formRef}
                 setCurrentStep={setCurrentStep}
                 currentStep={currentStep}
                 setIsPaperTicket={setIsPaperTicket}
@@ -104,6 +105,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
             )}
             {currentStep === 2 && (
               <Step2
+                formRef={formRef}
                 setCurrentStep={setCurrentStep}
                 currentStep={currentStep}
                 isPaperTicket={isPaperTicket}
@@ -111,6 +113,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
             )}
             {currentStep === 3 && (
               <Step3
+                formRef={formRef}
                 setCurrentStep={setCurrentStep}
                 currentStep={currentStep}
                 isPaperTicket={isPaperTicket}
@@ -119,6 +122,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
             )}
             {currentStep === 4 && (
               <Step4
+                formRef={formRef}
                 setCurrentStep={setCurrentStep}
                 currentStep={currentStep}
               />

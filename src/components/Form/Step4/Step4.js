@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 import { FormErrorContext } from 'globalState/FormErrorContext';
@@ -22,6 +23,7 @@ const Step4 = () => {
       toggleShowError(true);
     }
   }
+
   return (
     <>
       <h2>Tell us about yourself</h2>
@@ -68,6 +70,11 @@ const Step4 = () => {
       </button>
     </>
   );
+};
+
+Step4.propTypes = {
+  formRef: PropTypes.shape({ current: PropTypes.instanceOf(Object) })
+    .isRequired,
 };
 
 export default Step4;
