@@ -309,7 +309,7 @@
       const ajax = new XMLHttpRequest();
       ajax.open('GET', '%PUBLIC_URL%/icons/wmnds-svg-sprite.min.svg', true);
       ajax.send();
-      ajax.onload = () => {
+      ajax.onload = function () {
         const div = document.createElement('div');
         div.style.display = 'none';
         div.innerHTML = ajax.responseText;
