@@ -1,14 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
+import GenericError from 'components/shared/Errors/GenericError';
 
 const Step2 = ({ currentStep, setCurrentStep, isPaperTicket, formRef }) => {
   const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
+  const [showError, toggleShowError] = useState(false);
+
   // Update customerType on radio button change
   const handleRadioChange = (e) =>
     formDispatch({
@@ -20,6 +23,7 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket, formRef }) => {
   const handleContinue = () => {
     // If errors, then don't progress and set continue button to true(halt form and show errors)
     if (errorState.errors.length) {
+      toggleShowError(true);
       window.scrollTo(0, formRef.current.offsetTop);
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
     } else {
@@ -65,6 +69,7 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket, formRef }) => {
   return (
     <>
       <h2>Tell us about your ticket</h2>
+      {errorState.errors.length > 0 && showError && <GenericError />}
       <Radios
         name="CustomerTypeStep2"
         label="How did you buy your ticket?"
@@ -87,6 +92,12 @@ Step2.propTypes = {
   currentStep: PropTypes.number.isRequired,
   setCurrentStep: PropTypes.func.isRequired,
   isPaperTicket: PropTypes.bool.isRequired,
+  formRef: PropTypes.oneOfType([
+    // Either a function
+    PropTypes.func,
+    // Or the instance of a DOM native element (see the note about SSR)
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]).isRequired,
 };
 
 export default Step2;
