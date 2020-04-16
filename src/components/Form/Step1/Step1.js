@@ -110,6 +110,12 @@ Step1.propTypes = {
   setCurrentStep: PropTypes.func.isRequired,
   setIsPaperTicket: PropTypes.func.isRequired,
   setIsSwiftOnMobile: PropTypes.func.isRequired,
+  formRef: PropTypes.oneOfType([
+    // Either a function
+    PropTypes.func,
+    // Or the instance of a DOM native element (see the note about SSR)
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]).isRequired,
 };
 
 export default Step1;

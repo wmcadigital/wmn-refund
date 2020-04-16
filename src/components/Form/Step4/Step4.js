@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 import { FormErrorContext } from 'globalState/FormErrorContext';
@@ -21,8 +20,9 @@ const Step4 = () => {
   const handleContinue = () => {
     if (errorState.errors.length > 0) {
       toggleShowError(true);
+      window.scrollTo(0, 0);
     }
-  }
+  };
 
   return (
     <>
@@ -70,11 +70,6 @@ const Step4 = () => {
       </button>
     </>
   );
-};
-
-Step4.propTypes = {
-  formRef: PropTypes.shape({ current: PropTypes.instanceOf(Object) })
-    .isRequired,
 };
 
 export default Step4;

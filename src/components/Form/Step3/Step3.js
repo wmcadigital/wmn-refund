@@ -21,7 +21,6 @@ const Step3 = ({
   isSwiftOnMobile,
   formRef,
 }) => {
-
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
 
@@ -148,12 +147,16 @@ const Step3 = ({
 };
 
 Step3.propTypes = {
-  formRef: PropTypes.shape({ current: PropTypes.instanceOf(Object) })
-    .isRequired,
   currentStep: PropTypes.number.isRequired,
   setCurrentStep: PropTypes.func.isRequired,
   isPaperTicket: PropTypes.bool.isRequired,
   isSwiftOnMobile: PropTypes.bool.isRequired,
+  formRef: PropTypes.oneOfType([
+    // Either a function
+    PropTypes.func,
+    // Or the instance of a DOM native element (see the note about SSR)
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]).isRequired,
 };
 
 export default Step3;
