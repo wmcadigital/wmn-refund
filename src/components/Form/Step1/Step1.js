@@ -14,7 +14,6 @@ const Step1 = ({
   setIsSwiftOnMobile,
   formRef,
 }) => {
-  console.log(currentStep);
   const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
   const [showError, toggleShowError] = useState(false);
@@ -66,7 +65,6 @@ const Step1 = ({
       }
       window.scrollTo(0, 0);
     }
-    
   };
   return (
     <>
