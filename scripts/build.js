@@ -1,7 +1,9 @@
 // npm install rewire
 const rewire = require('rewire');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const defaults = rewire('react-scripts/scripts/build.js');
+// eslint-disable-next-line no-underscore-dangle
 const config = defaults.__get__('config');
 
 // Consolidate chunk files instead
@@ -21,7 +23,7 @@ config.plugins = config.plugins.filter(
 );
 // CSS replaces all MiniCssExtractPlugin.loader with style-loader
 config.module.rules[2].oneOf = config.module.rules[2].oneOf.map((rule) => {
-  if (!rule.hasOwnProperty('use')) return rule;
+  if (!Object.prototype.hasOwnProperty.call(rule, 'use')) return rule;
   return {
     ...rule,
     use: rule.use.map((options) =>
