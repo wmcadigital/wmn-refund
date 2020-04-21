@@ -23,6 +23,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isPaperTicket, setIsPaperTicket] = useState(false); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
   const [isSwiftOnMobile, setIsSwiftOnMobile] = useState(false); // Used to track if a user has clicked Swift On Mobile (set in step 1). Then read this value in step 3 to show 'different text for swift card number'
+  const [isFetching, setIsFetching] = useState(false);
 
   useTrackFormAbandonment(formRef, currentStep, formSubmitStatus, formState); // Used to track user abandonment via Google Analytics/Tag Manager
 
@@ -36,6 +37,8 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
     } else {
       window.dataLayer = window.dataLayer || []; // Set datalayer (GA thing)
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
+
+      setIsFetching(true); // Set this so we can put loading state on button
 
       // Go hit the API with the data
       fetch(process.env.REACT_APP_API_HOST, {
@@ -61,7 +64,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
             eventCategory: 'Refund form submission: success',
             eventAction: `CustomerType:${formState.CustomerType}`,
           });
-
+          setIsFetching(false); // set to false as we are done fetching now
           setFormSubmitStatus(true); // Set form status to success
           window.scrollTo(0, 0); // Scroll to top of page
         })
@@ -85,7 +88,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
             eventCategory: 'Refund form submission: error',
             eventAction: errMsg,
           });
-
+          setIsFetching(false); // set to false as we are done fetching now
           setFormSubmitStatus(false); // Set form status to error
           window.scrollTo(0, 0); // Scroll to top of page
         });
@@ -129,6 +132,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               <Step4
                 setCurrentStep={setCurrentStep}
                 currentStep={currentStep}
+                isFetching={isFetching}
               />
             )}
           </form>
