@@ -16,7 +16,7 @@ config.optimization.splitChunks = {
 config.optimization.runtimeChunk = false;
 
 // JS
-config.output.filename = 'static/js/[name].js';
+config.output.filename = 'static/js/main.min.js';
 // CSS remove MiniCssPlugin
 config.plugins = config.plugins.filter(
   (plugin) => !(plugin instanceof MiniCssExtractPlugin)
