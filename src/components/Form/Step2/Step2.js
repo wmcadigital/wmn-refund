@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
@@ -10,7 +10,6 @@ import GenericError from 'components/shared/Errors/GenericError';
 const Step2 = ({ currentStep, setCurrentStep, isPaperTicket, formRef }) => {
   const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
-  const [showError, toggleShowError] = useState(false);
 
   // Update customerType on radio button change
   const handleRadioChange = (e) =>
@@ -23,13 +22,12 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket, formRef }) => {
   const handleContinue = () => {
     // If errors, then don't progress and set continue button to true(halt form and show errors)
     if (errorState.errors.length) {
-      toggleShowError(true);
-      window.scrollTo(0, formRef.current.offsetTop);
+      window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
     } else {
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
-      setCurrentStep(currentStep + 1);
-      window.scrollTo(0, 0);
+      setCurrentStep(currentStep + 1); // Set to next step in form
+      window.scrollTo(0, 0); // Scroll to top of page
     }
   };
 
@@ -69,7 +67,9 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket, formRef }) => {
   return (
     <>
       <h2>Tell us about your ticket</h2>
-      {errorState.errors.length > 0 && showError && <GenericError />}
+      {errorState.errors.length > 0 && errorState.continuePressed && (
+        <GenericError />
+      )}
       <Radios
         name="CustomerTypeStep2"
         label="How did you buy your ticket?"
