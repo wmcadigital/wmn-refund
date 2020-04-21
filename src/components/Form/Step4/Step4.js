@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 import { FormErrorContext } from 'globalState/FormErrorContext';
@@ -16,18 +16,13 @@ const Step4 = () => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
   const [errorState] = useContext(FormErrorContext);
   const { CustomerType } = formState; // Destructure customertype
-  const [showError, toggleShowError] = useState(false);
-  const handleContinue = () => {
-    if (errorState.errors.length > 0) {
-      toggleShowError(true);
-      window.scrollTo(0, 0);
-    }
-  };
 
   return (
     <>
       <h2>Tell us about yourself</h2>
-      {errorState.errors.length > 0 && showError && <GenericError />}
+      {errorState.errors.length && errorState.continuePressed && (
+        <GenericError />
+      )}
       <p>
         We’ll use this information to confirm your identity and contact you if
         we need more information
@@ -64,7 +59,6 @@ const Step4 = () => {
       <button
         type="submit"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        onClick={() => handleContinue()}
       >
         Submit application
       </button>
