@@ -20,16 +20,28 @@ const useInputValidation = (name, label, customValidation) => {
   const [isTouched, setIsTouched] = useState(false);
 
   const handleChange = (e) => {
+    const { value } = e.target;
+
     // Switch on the input name, depending on name then update the relevant var
     switch (e.target.name) {
       case `${name}Day`:
-        setDay(e.target.value);
+        // If value is less than ten and greater than 0 (1-9) and is only 1 in length (so not 08)
+        if (value < 10 && value > 0 && value.length === 1) {
+          setDay(0 + value); // Then prepend a 0 to it to make it a valid day
+        } else {
+          setDay(value);
+        }
         break;
       case `${name}Month`:
-        setMonth(e.target.value);
+        // If value is less than ten and greater than 0 (1-9) and is only 1 in length (so not 08)
+        if (value < 10 && value > 0 && value.length === 1) {
+          setMonth(0 + value); // Then prepend a 0 to it to make it a valid month
+        } else {
+          setMonth(value);
+        }
         break;
       default:
-        setYear(e.target.value);
+        setYear(value);
     }
   };
 
