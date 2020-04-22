@@ -12,6 +12,7 @@ import Step4 from 'components/Form/Step4/Step4';
 import ProgressIndicator from './ProgressIndicator/ProgressIndicator';
 // Import custom hooks
 import useTrackFormAbandonment from './useTrackFormAbandonment';
+import useLogRocketTracking from './useLogRocketTracking';
 // Import styling
 import s from './Form.module.scss';
 
@@ -26,6 +27,8 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   const [isFetching, setIsFetching] = useState(false);
 
   useTrackFormAbandonment(formRef, currentStep, formSubmitStatus, formState); // Used to track user abandonment via Google Analytics/Tag Manager
+
+  useLogRocketTracking(formState, isPaperTicket, isSwiftOnMobile); // Used to track javascript errors etc. in Log Rocket
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevent default form submission method
