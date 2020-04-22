@@ -43,6 +43,13 @@ Sentry.init({
     'https://50233258c9794d6bbe3b694d19405e29@o378798.ingest.sentry.io/5202758',
 });
 
+// Link Log Rocket and Sentry together
+LogRocket.getSessionURL((sessionURL) => {
+  Sentry.configureScope((scope) => {
+    scope.setExtra('sessionURL', sessionURL);
+  });
+});
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
