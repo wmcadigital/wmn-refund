@@ -47,7 +47,7 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket, formRef }) => {
     },
 
     {
-      text: 'I bought it from a travel shop or Payzone shop',
+      text: 'I bought it from a West Midlands Network travel shop, railway station ticket office or Payzone shop',
       value: 'Shop',
     },
   ];
