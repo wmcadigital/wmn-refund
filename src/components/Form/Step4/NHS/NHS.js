@@ -21,11 +21,11 @@ const NHS = () => {
       radios={[
         {
           text: 'Yes',
-          value: true,
+          value: 'true',
         },
         {
           text: `No`,
-          value: false,
+          value: 'false',
         },
       ]}
       onChange={handleRadioChange}
