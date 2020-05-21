@@ -10,8 +10,8 @@ import ReactDOM from 'react-dom';
 import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 
-// If not built for Umbraco based on envs then don't log using Sentry and Log Rocket
-if (process.env.REACT_APP_UMBRACO === 'false') {
+// If is prod build and is not netlify build (based on envs) then log using Sentry and Log Rocket
+if (process.env.NODE_ENV === 'production' && !process.env.NETLIFY) {
   // LOG ROCKET
   // Used to log/track console errors with LogRocket
   LogRocket.init('brya8q/wmn-refunds', {
