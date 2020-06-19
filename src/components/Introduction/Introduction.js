@@ -34,14 +34,14 @@ const Introduction = ({ setIsFormStarted }) => {
           <li>
             If the long number on your Swift card begins with{' '}
             <strong>633597 0112</strong>, it is managed by National Express West
-            Midlands and there is a{' '}
+            Midlands and you will need to request a refund by email: {' '}
             <a
-              href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
-              title="National Express West Midlands ticket refund process"
+              href="mailto:buspass@nationalexpress.com?subject=COVID-19 Refund Request"
+              title="Request a refund for a National Express Swift card"
               target="_self"
               className="wmnds-link"
             >
-              separate refund process
+              buspass@nationalexpress.com
             </a>
           </li>
           <li>
