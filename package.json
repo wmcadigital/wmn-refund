@@ -5,7 +5,7 @@
   "author": "WMCA",
   "main": "src/index.js",
   "dependencies": {
-    "@sentry/browser": "^5.18.0",
+    "@sentry/browser": "^5.21.3",
     "@testing-library/jest-dom": "^5.10.1",
     "@testing-library/react": "^10.3.0",
     "@testing-library/user-event": "^7.2.1",
