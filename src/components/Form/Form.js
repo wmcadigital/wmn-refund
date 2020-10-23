@@ -8,7 +8,6 @@ import { FormErrorContext } from 'globalState/FormErrorContext';
 import Step1 from 'components/Form/Step1/Step1';
 import Step2 from 'components/Form/Step2/Step2';
 import Step3 from 'components/Form/Step3/Step3';
-import Step4 from 'components/Form/Step4/Step4';
 import ProgressIndicator from './ProgressIndicator/ProgressIndicator';
 // Import custom hooks
 import useTrackFormAbandonment from './useTrackFormAbandonment';
@@ -52,7 +51,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
         },
       })
         .then((response) => {
-          // If the response is successful(200: OK)
+          // If the response is successful
           if (response.status === 200) {
             return response.text(); // Return response (reference number)
           }
@@ -129,13 +128,6 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
                 currentStep={currentStep}
                 isPaperTicket={isPaperTicket}
                 isSwiftOnMobile={isSwiftOnMobile}
-              />
-            )}
-            {currentStep === 4 && (
-              <Step4
-                setCurrentStep={setCurrentStep}
-                currentStep={currentStep}
-                isFetching={isFetching}
               />
             )}
           </form>
