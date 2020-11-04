@@ -25,8 +25,9 @@ const FileUpload = () => {
             Upload a photo of the inside of your vehicle logbook (V5C)
           </h3>
           <p>
-            Open your vehicle logbook (V5C) and take a photo of the left hand page.
-            The image must show your vehicle's numberplate and your name and address.
+            Open your vehicle logbook (V5C) and take a photo of the left hand
+            page. The image must show your vehicle's numberplate and your name
+            and address.
           </p>
           <h2>Example V5C</h2>
           <img src="https://www.leicestershire.gov.uk/sites/default/files/V5C-page2-example.png" />
@@ -37,7 +38,7 @@ const FileUpload = () => {
           htmlFor="fileUpload"
           className={`wmnds-btn wmnds-btn--primary ${
             isFileInputFocused ? s.fileUploadLabelFocused : ''
-            }`}
+          }`}
         >
           {fileName}
           <Icon

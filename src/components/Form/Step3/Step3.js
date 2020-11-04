@@ -7,11 +7,7 @@ import { FormErrorContext } from 'globalState/FormErrorContext';
 import UploadTicket from './UploadTicket/UploadTicket';
 import GenericError from '../../shared/Errors/GenericError';
 
-const Step3 = ({
-  currentStep,
-  setCurrentStep,
-  formRef,
-}) => {
+const Step3 = ({ currentStep, setCurrentStep, formRef }) => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
 
@@ -33,16 +29,13 @@ const Step3 = ({
   let elementsToRender; // Used to change conditional elements to render
   let shouldRenderUpload;
 
-
   return (
     <>
       <h2>Tell us about your ticket</h2>
       {errorState.errors.length && errorState.continuePressed && (
         <GenericError />
       )}
-
       <UploadTicket />}
-
       <button
         type="button"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"

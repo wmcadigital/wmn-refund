@@ -39,10 +39,8 @@ const Step1 = ({
       window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
       errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
     } else {
-
       setCurrentStep(currentStep + 2); // Skip to last steps as payment info isn't needed for scratchcard and classPass
     }
-
   };
   return (
     <>
