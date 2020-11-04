@@ -46,7 +46,7 @@ const Step1 = ({
   };
   return (
     <>
-      <h2>About your vehicle</h2>
+      <h2>Your details</h2>
       {errorState.errors.length > 0 && errorState.continuePressed && (
         <GenericError />
       )}
