@@ -9,4 +9,4 @@ package = "@sentry/netlify-build-plugin"
 
 [plugins.inputs]
   sentryOrg = "wmca-digital"
-  sentryProject = "wmn-covid19-refund"
+  sentryProject = "wmn-refund"
