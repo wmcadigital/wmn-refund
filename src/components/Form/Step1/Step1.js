@@ -6,6 +6,7 @@ import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
 import GenericError from 'components/shared/Errors/GenericError';
+import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo'
 
 const Step1 = ({
   currentStep,
@@ -67,7 +68,8 @@ const Step1 = ({
   };
   return (
     <>
-      <h2>About your ticket</h2>
+    <SectionStepInfo section={`Section ${currentStep} of 4`} description="About your ticket" />
+
       {errorState.errors.length > 0 && errorState.continuePressed && (
         <GenericError />
       )}

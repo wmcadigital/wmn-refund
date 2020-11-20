@@ -12,6 +12,7 @@ import Email from './Email/Email';
 import Telephone from './Telephone/Telephone';
 import Name from './Name/Name';
 import NHS from './NHS/NHS';
+import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo'
 
 const Step4 = ({ isFetching }) => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
@@ -20,7 +21,7 @@ const Step4 = ({ isFetching }) => {
 
   return (
     <>
-      <h2>Tell us about yourself</h2>
+    <SectionStepInfo section={`Section 4 of 4`} description="Tell us about yourself" />
       {errorState.errors.length && errorState.continuePressed && (
         <GenericError />
       )}

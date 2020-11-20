@@ -6,6 +6,7 @@ import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
 import GenericError from 'components/shared/Errors/GenericError';
+import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo'
 
 const Step2 = ({ currentStep, setCurrentStep, isPaperTicket, formRef }) => {
   const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
@@ -66,7 +67,7 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket, formRef }) => {
 
   return (
     <>
-      <h2>Tell us about your ticket</h2>
+    <SectionStepInfo section={`Section ${currentStep} of 4`} description="Tell us about your ticket" />
       {errorState.errors.length > 0 && errorState.continuePressed && (
         <GenericError />
       )}

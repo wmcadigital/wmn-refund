@@ -8,6 +8,7 @@ import DirectDebit from './DirectDebit/DirectDebit';
 import SwiftCard from './SwiftCard/SwiftCard';
 import TicketNumber from './TicketNumber/TicketNumber';
 import SoMTicketNumber from './SoMTicketNumber/SoMTicketNumber';
+import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo'
 // import SoMTicketNumber from './SoMTicketNumber/SoMTicketNumber';
 import UploadTicket from './UploadTicket/UploadTicket';
 import LastUsed from './LastUsed/LastUsed';
@@ -122,7 +123,7 @@ const Step3 = ({
 
   return (
     <>
-      <h2>Tell us about your ticket</h2>
+    <SectionStepInfo section={`Section ${currentStep} of 4`} description="Tell us about your ticket" />
       {errorState.errors.length && errorState.continuePressed && (
         <GenericError />
       )}
