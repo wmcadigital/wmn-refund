@@ -13,10 +13,6 @@ const Radios = ({ name, label, radios, fieldValidation, onChange }) => {
   const {errors} = useFormContext()
   // const { handleBlur, error } = useRadioValidation(name, label); // Use custom hook for validating radios (this controls ALL radios validation)
 
-  useEffect(() => {
-    console.log(errors)
-  })
-
   return (
     <div className={`wmnds-fe-group ${errors[name] ? 'wmnds-fe-group--error' : ''}`}>
       <fieldset className="wmnds-fe-fieldset">
@@ -40,7 +36,7 @@ const Radios = ({ name, label, radios, fieldValidation, onChange }) => {
               value={radio.value}
               //onBlur={handleBlur}
               fieldValidation={fieldValidation}
-              //onChange={onChange}
+              onChange={onChange}
             />
           ))}
         </div>

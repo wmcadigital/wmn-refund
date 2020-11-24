@@ -16,7 +16,7 @@ const Radio = ({ name, onChange, onBlur, fieldValidation, text, value }) => {
           name={name}
           type="radio"
           ref={fieldValidation}
-          // onChange={onChange}
+          onChange={onChange}
           // onBlur={onBlur}
         />
         <span className="wmnds-fe-radios__checkmark" />
