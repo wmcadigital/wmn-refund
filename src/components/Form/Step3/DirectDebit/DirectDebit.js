@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
+import { useFormContext } from 'react-hook-form';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
@@ -8,9 +9,11 @@ const DirectDebit = () => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
   const label = 'Direct Debit reference'; // Used on input and for validation
 
-  const customValidation = () => {
+  const { register } = useFormContext(); // Custom hook for handling continue button (validation, errors etc)
+  
+  const ddNumValidation = (ddNum) => {
     let error;
-    const ddNum = formState.Application.DirectDebitNumber;
+    //const ddNum = formState.Application.DirectDebitNumber;
 
     // DirectDebit reference should start with 6
     if (ddNum.charAt(0) !== '6') {
@@ -45,7 +48,16 @@ const DirectDebit = () => {
         name="DirectDebitNumber"
         label={label}
         inputmode="numeric"
-        customValidation={customValidation}
+        fieldValidation={register({
+          required: `Enter a valid ${label}`,
+          pattern: {
+            value: /^(0|[1-9][0-9]*)$/,
+            message: `${label} must only include numbers`
+          },
+          validate: {
+            directDebit: value => ddNumValidation(value) && ddNumValidation(value)
+          },
+        })}
       />
     </fieldset>
   );

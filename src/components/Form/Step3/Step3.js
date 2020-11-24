@@ -1,5 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
+// Import custom hooks
+import useStepLogic from 'components/Form/useStepLogic';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
 import { FormErrorContext } from 'globalState/FormErrorContext';
@@ -20,11 +22,13 @@ const Step3 = ({
   setCurrentStep,
   isPaperTicket,
   isSwiftOnMobile,
-  formRef,
 }) => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
-
+  
+  const formRef = useRef(); // Used so we can keep track of the form DOM element
+  const { register, handleSubmit, showGenericError } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
+  
   const handleContinue = () => {
     // If errors, then don't progress and set continue button to true(halt form and show errors)
     if (errorState.errors.length) {
@@ -122,11 +126,15 @@ const Step3 = ({
   }
 
   return (
-    <>
+    <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
     <SectionStepInfo section={`Section ${currentStep} of 4`} description="Tell us about your ticket" />
-      {errorState.errors.length && errorState.continuePressed && (
+
+    {/* Show generic error message */}
+    {showGenericError}
+
+      {/* {errorState.errors.length && errorState.continuePressed && (
         <GenericError />
-      )}
+      )} */}
 
       {/* This changes based on switch logic above */}
       {elementsToRender}
@@ -137,13 +145,13 @@ const Step3 = ({
       {shouldRenderUpload && <UploadTicket />}
 
       <button
-        type="button"
+        type="submit"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        onClick={() => handleContinue()}
+        // onClick={() => handleContinue()}
       >
         Continue
       </button>
-    </>
+    </form>
   );
 };
 
