@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+// Import contexts
+import { useFormContext } from 'react-hook-form';
 // Import components
 import Icon from 'components/shared/Icon/Icon';
 // Import custom hooks
@@ -6,7 +9,7 @@ import useFileUploadValidation from './useFileUploadValidation';
 // Import styles
 import s from './FileUpload.module.scss';
 
-const FileUpload = () => {
+const FileUpload = ({fieldValidation}) => {
   // Use custom hook for validating fileUpload inputs
   const {
     handleChange,
@@ -50,11 +53,21 @@ const FileUpload = () => {
             onBlur={handleBlur}
             onChange={handleChange}
             className={s.fileUpload}
+            ref={fieldValidation}
           />
         </label>
       </fieldset>
     </div>
   );
 };
+
+FileUpload.propTypes = {
+  fieldValidation: PropTypes.func,
+};
+
+FileUpload.defaultProps = {
+  fieldValidation: null,
+};
+
 
 export default FileUpload;
