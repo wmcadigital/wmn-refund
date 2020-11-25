@@ -1,8 +1,8 @@
 import React, { useState, useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useForm, FormContext as FormDataContext } from 'react-hook-form';
+import { useForm, FormContext } from 'react-hook-form';
 // Import contexts
-import { FormContext } from 'globalState/FormContext';
+import { FormDataContext } from 'globalState/FormDataContext';
 import { FormErrorContext } from 'globalState/FormErrorContext';
 
 // Import components
@@ -17,7 +17,7 @@ import useLogRocketTracking from './useLogRocketTracking';
 import s from './Form.module.scss';
 
 const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
-  const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  const [formState, formDispatch] = useContext(FormDataContext); // Get the state of form data from FormDataContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
 
   const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
@@ -104,7 +104,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
   return (
     <>
       <div className="wmnds-col-1 wmnds-col-md-3-4 ">
-        <FormDataContext {...methods}>
+        <FormContext {...methods}>
           <div className={`wmnds-p-lg ${s.formWrapper}`}>
             {/* Start of form */}
               {currentStep === 1 && (
@@ -141,7 +141,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
                 />
               )}
           </div>
-        </FormDataContext>
+        </FormContext>
       </div>
       {/* If in dev mode or on netlify then show debugging options */}
       {(process.env.NODE_ENV === 'development' || process.env.NETLIFY) && (

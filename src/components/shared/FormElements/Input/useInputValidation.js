@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 // Import contexts
-import { FormContext } from 'globalState/FormContext';
+import { FormDataContext } from 'globalState/FormDataContext';
 import { FormErrorContext } from 'globalState/FormErrorContext';
 
 const useInputValidation = (
@@ -11,8 +11,8 @@ const useInputValidation = (
   validation
 ) => {
   // set up the state for the inputs value prop and set it to the default value
-  const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
-  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormContext
+  const [formState, formDispatch] = useContext(FormDataContext); // Get the state of form data from FormDataContext
+  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormDataContext
   // set up state for the inputs error prop
   const [error, setError] = useState(null);
   const [isTouched, setIsTouched] = useState(false);

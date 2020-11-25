@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 // Import contexts
 import { useFormContext } from 'react-hook-form';
-import { FormContext } from 'globalState/FormContext';
+import { FormDataContext } from 'globalState/FormDataContext';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 

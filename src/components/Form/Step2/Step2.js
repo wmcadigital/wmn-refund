@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
 // Import contexts
-import { FormContext } from 'globalState/FormContext';
+import { FormDataContext } from 'globalState/FormDataContext';
 import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
@@ -11,7 +11,7 @@ import GenericError from 'components/shared/Errors/GenericError';
 import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo'
 
 const Step2 = ({ currentStep, setCurrentStep, isPaperTicket }) => {
-  const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  const [, formDispatch] = useContext(FormDataContext); // Get the state of form data from FormDataContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
   
   const formRef = useRef(); // Used so we can keep track of the form DOM element

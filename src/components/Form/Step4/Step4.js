@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
-import { FormContext } from 'globalState/FormContext';
+import { FormDataContext } from 'globalState/FormDataContext';
 import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
 import GenericError from 'components/shared/Errors/GenericError';
@@ -15,7 +15,7 @@ import NHS from './NHS/NHS';
 import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo'
 
 const Step4 = ({ isFetching }) => {
-  const [formState] = useContext(FormContext); // Get the state of form data from FormContext
+  const [formState] = useContext(FormDataContext); // Get the state of form data from FormDataContext
   const [errorState] = useContext(FormErrorContext);
   const { CustomerType } = formState; // Destructure customertype
 

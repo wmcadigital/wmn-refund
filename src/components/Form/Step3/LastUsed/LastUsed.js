@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 // Import contexts
 import { useFormContext } from 'react-hook-form';
-import { FormContext } from 'globalState/FormContext';
+import { FormDataContext } from 'globalState/FormDataContext';
 // Import components
 import DateInput from 'components/shared/FormElements/Date/Date';
 
 const LastUsed = () => {
-  const [formState] = useContext(FormContext); // Get the state of form data from FormContext
+  const [formState] = useContext(FormDataContext); // Get the state of form data from FormDataContext
 
   const { register } = useFormContext(); // Custom hook for handling continue button (validation, errors etc)
 

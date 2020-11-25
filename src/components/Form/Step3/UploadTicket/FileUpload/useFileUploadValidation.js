@@ -1,11 +1,11 @@
 import { useState, useContext, useEffect } from 'react';
 // Import contexts
-import { FormContext } from 'globalState/FormContext';
+import { FormDataContext } from 'globalState/FormDataContext';
 import { FormErrorContext } from 'globalState/FormErrorContext';
 
 const useFileUploadValidation = () => {
-  const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
-  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormContext
+  const [formState, formDispatch] = useContext(FormDataContext); // Get the state of form data from FormDataContext
+  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormDataContext
 
   // Local state for controlling file upload
   const [isFileInputFocused, setIsFileInputFocused] = useState(false); // This is used to emulate the input focus class on the label

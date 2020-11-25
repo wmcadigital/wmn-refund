@@ -1,12 +1,12 @@
 import { useState, useContext, useEffect } from 'react';
 // Import contexts
-import { FormContext } from 'globalState/FormContext';
+import { FormDataContext } from 'globalState/FormDataContext';
 import { FormErrorContext } from 'globalState/FormErrorContext';
 
 const useRadiosValidation = (name, label) => {
   // set up the state for the inputs value prop and set it to the default value
-  const [formState] = useContext(FormContext); // Get the state of form data from FormContext
-  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormContext
+  const [formState] = useContext(FormDataContext); // Get the state of form data from FormDataContext
+  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the state of form data from FormDataContext
 
   // set up state for the inputs error prop
   const [error, setError] = useState(null);

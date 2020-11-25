@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 // Import contexts
-import { FormContext } from 'globalState/FormContext';
+import { FormDataContext } from 'globalState/FormDataContext';
 import { useFormContext } from 'react-hook-form';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
 const DirectDebit = () => {
-  const [formState] = useContext(FormContext); // Get the state of form data from FormContext
+  const [formState] = useContext(FormDataContext); // Get the state of form data from FormDataContext
   const label = 'Direct Debit reference'; // Used on input and for validation
 
   const { register } = useFormContext(); // Custom hook for handling continue button (validation, errors etc)

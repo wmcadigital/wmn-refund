@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
-import { useFormContext } from 'react-hook-form';
+import { useFormDataContext } from 'react-hook-form';
 // Import components
 import Icon from 'components/shared/Icon/Icon';
 // Import custom hooks
@@ -24,9 +24,9 @@ const FileUpload = ({fieldValidation}) => {
     <div className={`wmnds-fe-group ${error ? 'wmnds-fe-group--error' : ''}`}>
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
-          <h3 className="wmnds-fe-question">
+          <h2 className="wmnds-fe-question">
             Upload a photo of the front of the ripped ticket
-          </h3>
+          </h2>
           <p>
             We need to be able to read the ticket type and expiry date to
             process the refund

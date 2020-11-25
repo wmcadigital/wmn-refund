@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
 // Import contexts
-import { FormContext } from 'globalState/FormContext';
+import { FormDataContext } from 'globalState/FormDataContext';
 import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
@@ -19,7 +19,7 @@ const Step1 = ({
   const formRef = useRef(); // Used so we can keep track of the form DOM element
   const { register, handleSubmit, showGenericError } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
 
-  const [formState, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  const [formState, formDispatch] = useContext(FormDataContext); // Get the state of form data from FormDataContext
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
   // Update customerType on radio button change
   const handleRadioChange = (e) => {
