@@ -8,6 +8,7 @@ export const FormProvider = (props) => {
   // Set intial state of when
   const initialState = {
     CustomerType: '',
+    formData: {},
     Application: {},
   };
 
