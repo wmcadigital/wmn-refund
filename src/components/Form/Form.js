@@ -17,11 +17,13 @@ import useLogRocketTracking from './useLogRocketTracking';
 import s from './Form.module.scss';
 
 const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
-  const [formState, formDispatch] = useContext(FormDataContext); // Get the state of form data from FormDataContext
+  const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
+  const { currentStep } = formDataState; // Destructure step from state
+
   const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
 
   const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
-  const [currentStep, setCurrentStep] = useState(1);
+  
   const [isPaperTicket, setIsPaperTicket] = useState(false); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
   const [isSwiftOnMobile, setIsSwiftOnMobile] = useState(false); // Used to track if a user has clicked Swift On Mobile (set in step 1). Then read this value in step 3 to show 'different text for swift card number'
   const [isFetching, setIsFetching] = useState(false);
@@ -31,7 +33,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
 
   // useTrackFormAbandonment(formRef, currentStep, formSubmitStatus, formState); // Used to track user abandonment via Google Analytics/Tag Manager
 
-  useLogRocketTracking(formState, isPaperTicket, isSwiftOnMobile); // Used to track javascript errors etc. in Log Rocket
+  useLogRocketTracking(formDataState, isPaperTicket, isSwiftOnMobile); // Used to track javascript errors etc. in Log Rocket
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevent default form submission method
@@ -49,7 +51,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
       // Go hit the API with the data
       fetch(process.env.REACT_APP_API_HOST, {
         method: 'post',
-        body: JSON.stringify(formState),
+        body: JSON.stringify(formDataState),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -63,12 +65,12 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
         })
         .then((payload) => {
           // If formsubmission is successful
-          formDispatch({ type: 'ADD_FORM_REF', payload }); // Update form state with the form ref received from server
+          formDataDispatch({ type: 'ADD_FORM_REF', payload }); // Update form state with the form ref received from server
           // Log event to analytics/tag manager
           window.dataLayer.push({
             event: 'formAbandonment',
             eventCategory: 'Refund form submission: success',
-            eventAction: `CustomerType:${formState.CustomerType}`,
+            eventAction: `CustomerType:${formDataState.CustomerType}`,
           });
           setIsFetching(false); // set to false as we are done fetching now
           setFormSubmitStatus(true); // Set form status to success
@@ -110,7 +112,6 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               {currentStep === 1 && (
                 <Step1
                   formRef={formRef}
-                  setCurrentStep={setCurrentStep}
                   currentStep={currentStep}
                   setIsPaperTicket={setIsPaperTicket}
                   setIsSwiftOnMobile={setIsSwiftOnMobile}
@@ -119,7 +120,6 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               {currentStep === 2 && (
                 <Step2
                   formRef={formRef}
-                  setCurrentStep={setCurrentStep}
                   currentStep={currentStep}
                   isPaperTicket={isPaperTicket}
                 />
@@ -127,7 +127,6 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               {currentStep === 3 && (
                 <Step3
                   formRef={formRef}
-                  setCurrentStep={setCurrentStep}
                   currentStep={currentStep}
                   isPaperTicket={isPaperTicket}
                   isSwiftOnMobile={isSwiftOnMobile}
@@ -135,7 +134,6 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               )}
               {currentStep === 4 && (
                 <Step4
-                  setCurrentStep={setCurrentStep}
                   currentStep={currentStep}
                   isFetching={isFetching}
                 />
@@ -153,7 +151,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
             right: 0,
           }}
         >
-          {JSON.stringify(formState, null, 2)}
+          {JSON.stringify(formDataState, null, 2)}
         </pre>
       )}
     </>

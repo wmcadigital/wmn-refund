@@ -7,6 +7,7 @@ export const FormProvider = (props) => {
 
   // Set intial state of when
   const initialState = {
+    currentStep: 1,
     CustomerType: '',
     formData: {},
     Application: {},
@@ -36,6 +37,14 @@ export const FormProvider = (props) => {
         return {
           ...state,
           FormRef: action.payload,
+        };
+      }
+
+      // Remove the waypoint by the id
+      case 'UPDATE_STEP': {
+        return {
+          ...state,
+          currentStep: action.payload,
         };
       }
 
