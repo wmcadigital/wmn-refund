@@ -6,7 +6,6 @@ import { useFormContext } from 'react-hook-form';
 import Input from 'components/shared/FormElements/Input/Input';
 
 const SwiftCard = () => {
-  const [formState] = useContext(FormContext); // Get the state of form data from FormContext
   const label = 'Swift card number';
 
   const { register } = useFormContext(); // Custom hook for handling continue button (validation, errors etc)
@@ -43,7 +42,7 @@ const SwiftCard = () => {
   return (
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
-        <h3 className="wmnds-fe-question">What is your Swift card number?</h3>
+        <h2 className="wmnds-fe-question">What is your Swift card number?</h2>
         <p>
           This is the long number on the front of the card and begins with{' '}
           <strong>633597</strong>

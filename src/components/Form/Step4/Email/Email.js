@@ -1,24 +1,20 @@
 import React, { useContext } from 'react';
 // Import contexts
-import { FormContext } from 'globalState/FormContext';
+import {useFormContext} from 'react-hook-form';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
 const Email = () => {
-  const [formState] = useContext(FormContext); // Get the state of form data from FormContext
+  const {register} = useFormContext();
+  const emailRegex = /^[\w!#$%&amp;'*+\-/=?^_`{|}~]+(\.[\w!#$%&amp;'*+\-/=?^_`{|}~]+)*@((([-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$/
 
-  const customValidation = () => {
-    let error;
-
-    const emailRegex = /^[\w!#$%&amp;'*+\-/=?^_`{|}~]+(\.[\w!#$%&amp;'*+\-/=?^_`{|}~]+)*@((([-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$/; // Matches email regex on server
-
-    // If not a valid email address
-    if (!emailRegex.test(formState.Application.Email)) {
-      error = 'Enter an email address in the correct format';
+  const emailValidation = register({
+    required: 'Enter an email address',
+    pattern: {
+      value: emailRegex,
+      message: 'Enter an email address in the correct format',
     }
-
-    return error;
-  };
+  });
 
   return (
     <fieldset className="wmnds-fe-fieldset">
@@ -32,7 +28,7 @@ const Email = () => {
         label="Email address, for example name@example.com"
         type="email"
         autocomplete="email"
-        customValidation={customValidation}
+        fieldValidation={emailValidation}
       />
     </fieldset>
   );

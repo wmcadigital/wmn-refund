@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
+import {useFormContext} from 'react-hook-form'
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
 
 const NHS = () => {
   const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
-
+  const {register} = useFormContext();
   // Update NHS on radio button change
   const handleRadioChange = (e) =>
     formDispatch({
@@ -28,6 +29,9 @@ const NHS = () => {
           value: 'false',
         },
       ]}
+      fieldValidation={register({
+        required: 'Select a response'
+      })}
       onChange={handleRadioChange}
     />
   );

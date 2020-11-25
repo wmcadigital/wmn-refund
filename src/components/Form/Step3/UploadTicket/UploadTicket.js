@@ -35,7 +35,7 @@ const UploadTicket = () => {
     }
   })
 
-  
+
   return (
     <>
       <div className="wmnds-msg-summary wmnds-msg-summary--warning wmnds-m-t-xl wmnds-m-b-xl">
@@ -44,9 +44,9 @@ const UploadTicket = () => {
             className="wmnds-msg-summary__icon"
             iconName="general-warning-circle"
           />
-          <h3 className="wmnds-msg-summary__title">
+          <h2 className="wmnds-msg-summary__title">
             Rip your paper ticket in half
-          </h3>
+          </h2>
         </div>
       </div>
 

@@ -1,25 +1,12 @@
 import React, { useContext } from 'react';
 // Import contexts
+import { useFormContext } from 'react-hook-form';
 import { FormContext } from 'globalState/FormContext';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
 const Address = () => {
-  const [formState] = useContext(FormContext); // Get the state of form data from FormContext
-
-  const customValidation = () => {
-    let error;
-
-    const postcodeRegex = /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) [0-9][A-Za-z]{2})$/; // Matches postcode regex on server
-
-    // If not a valid email address
-    if (!postcodeRegex.test(formState.Application.AddressPostcode)) {
-      error = 'Enter a postcode in the correct format, for example B19 3SD';
-    }
-
-    return error;
-  };
-
+  const { register } = useFormContext(); // Custom hook for handling validation (errors etc)
   return (
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
@@ -31,6 +18,9 @@ const Address = () => {
         name="AddressLine1"
         label="Building and street"
         autocomplete="address-line1"
+        fieldValidation={register({
+          required: 'Enter building and street'
+        })}
       />
       <Input
         className="wmnds-col-1-2 wmnds-col-sm-2-3"
@@ -46,6 +36,9 @@ const Address = () => {
         name="AddressTown"
         label="Town or city"
         autocomplete="address-level2"
+        fieldValidation={register({
+          required: 'Enter town/city'
+        })}
       />
       <Input
         className="wmnds-col-1 wmnds-col-sm-1-2"
@@ -60,7 +53,13 @@ const Address = () => {
         label="Postcode"
         className="wmnds-col-1-2 wmnds-col-sm-1-4"
         autocomplete="postal-code"
-        customValidation={customValidation}
+        fieldValidation={register({
+          required: 'Enter a postcode',
+          pattern: {
+            value: /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) [0-9][A-Za-z]{2})$/,
+            message: 'Enter a postcode in the correct format, for example B19 3SD',
+          }
+        })}
       />
     </fieldset>
   );
