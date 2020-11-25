@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 // Import contexts
 import { FormContext } from 'globalState/FormContext';
+import { useFormContext } from 'react-hook-form';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
@@ -8,9 +9,11 @@ const SwiftCard = () => {
   const [formState] = useContext(FormContext); // Get the state of form data from FormContext
   const label = 'Swift card number';
 
-  const customValidation = () => {
+  const { register } = useFormContext(); // Custom hook for handling continue button (validation, errors etc)
+
+  const customValidation = (swiftNum) => {
     let error;
-    const swiftNum = formState.Application.CardNumber; // get swiftcard number from state
+    //const swiftNum = formState.Application.CardNumber; // get swiftcard number from state
     const firstTen = swiftNum.substr(0, 10); // Get first ten chars of input
 
     // If card number starts with 6335970112 then user has NX card and needs to go to NX for refund
@@ -52,7 +55,16 @@ const SwiftCard = () => {
         name="CardNumber"
         label={label}
         inputmode="numeric"
-        customValidation={customValidation}
+        fieldValidation={register({
+          required: `Enter a valid ${label}`,
+          pattern: {
+            value: /^(0|[1-9][0-9]*)$/,
+            message: `${label} must only include numbers`
+          },
+          validate: {
+            swiftNumber: value => customValidation(value) && customValidation(value)
+          },
+        })}
       />
     </fieldset>
   );

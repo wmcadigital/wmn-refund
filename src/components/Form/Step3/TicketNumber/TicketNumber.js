@@ -1,10 +1,13 @@
 import React from 'react';
-
+// Import contexts
+import { useFormContext } from 'react-hook-form';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 import paperTicketImg from 'assets/images/paper-ticket-example.jpg';
 
 const TicketNumber = () => {
+  const {register} = useFormContext();
+
   return (
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
@@ -26,6 +29,12 @@ const TicketNumber = () => {
         name="TicketNumber"
         label="Ticket number"
         inputmode="numeric"
+        fieldValidation={register({
+          required: 'Enter a ticket number',
+          validate: {
+            length: value => value.length === 5 ||  'Ticket number must be 5 digits'
+          }
+        })}
       />
     </fieldset>
   );
