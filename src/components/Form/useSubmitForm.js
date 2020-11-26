@@ -39,14 +39,14 @@ const useSubmitForm = (formRef, setFormSubmitStatus) => {
                 'Content-Type': 'application/json',
                 },
             })
-                .then((response) => {
+            .then((response) => {
                 // If the response is successful(200: OK)
                 if (response.status === 200) {
                     return response.text(); // Return response (reference number)
                 }
                 throw new Error(response.statusText, response.Message); // Else throw error and go to our catch below
-                })
-                .then((payload) => {
+            })
+            .then((payload) => {
                 // If formsubmission is successful
                 formDataDispatch({ type: 'ADD_FORM_REF', payload }); // Update form state with the form ref received from server
                 // Log event to analytics/tag manager
@@ -58,8 +58,8 @@ const useSubmitForm = (formRef, setFormSubmitStatus) => {
                 setIsFetching(false); // set to false as we are done fetching now
                 setFormSubmitStatus(true); // Set form status to success
                 window.scrollTo(0, 0); // Scroll to top of page
-                })
-                .catch((error) => {
+            })
+            .catch((error) => {
                 // If formsubmission errors
                 // eslint-disable-next-line no-console
                 console.error({ error });
