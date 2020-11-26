@@ -3,13 +3,12 @@ import { useState, useContext } from 'react';
 import { FormDataContext } from 'globalState/FormDataContext';
 
 const useFileUploadValidation = () => {
-  const [formDispatch] = useContext(FormDataContext); // Get the state of form data from FormContext
-
+  const [, formDispatch] = useContext(FormDataContext); // Get the state of form data from FormContext
 
   // Local state for controlling file upload
+  const [isFileInputFocused, setIsFileInputFocused] = useState(false); // This is used to emulate the input focus class on the label
   const [fileName, setFileName] = useState('Upload photo'); // Used to change the name of the input/label button to the users file name
 
-  const [fileSize, setFileSize] = useState(0);
 
   const handleChange = (e) => {
     const file = e.target.files[0];
@@ -17,7 +16,6 @@ const useFileUploadValidation = () => {
     // If a file exists (user hasn't clicked cancel button or something)
     if (file) {
       setFileName(file.name); // Set file name that the user has chosen (this will display in our label)
-      setFileSize(file.size); // Set file size of the file
 
       const PhotoBase64Extension = file.type.split('/')[1]; // => image/png (split at '/' and grab second part 'png')
       // Start base64'n our uploaded image
@@ -37,11 +35,21 @@ const useFileUploadValidation = () => {
     }
   };
 
+  // HandleFocus (when user joins input)
+  const handleFocus = () => {
+    setIsFileInputFocused(true); // Set input to focus
+  };
+
+  // Handleblur (when user leaves input), set input to unfocus
+  const handleBlur = () => setIsFileInputFocused(false);
+
   // return object
   return {
+    handleBlur,
     handleChange,
+    handleFocus,
+    isFileInputFocused,
     fileName,
-    fileSize,
   };
 };
 

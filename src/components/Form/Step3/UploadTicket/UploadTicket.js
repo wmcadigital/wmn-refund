@@ -50,7 +50,7 @@ const UploadTicket = () => {
         </div>
       </div>
 
-      <FileUpload fieldValidation={fileUploadValidation} />
+      <FileUpload name='UploadTicket' fieldValidation={fileUploadValidation} />
     </>
   );
 };

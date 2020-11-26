@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 import Icon from 'components/shared/Icon/Icon';
 // Import custom hooks
 import useFileUploadValidation from './useFileUploadValidation';
+// Import contexts
+import { useFormContext } from 'react-hook-form'
 // Import styles
 import s from './FileUpload.module.scss';
 
-const FileUpload = ({fieldValidation}) => {
+const FileUpload = ({name, fieldValidation}) => {
   // Use custom hook for validating fileUpload inputs
   const {
     handleChange,
@@ -15,11 +17,12 @@ const FileUpload = ({fieldValidation}) => {
     handleFocus,
     isFileInputFocused,
     fileName,
-    error,
   } = useFileUploadValidation();
+  
+  const { errors } = useFormContext()
 
   return (
-    <div className={`wmnds-fe-group ${error ? 'wmnds-fe-group--error' : ''}`}>
+    <div className={`wmnds-fe-group ${errors[name] ? 'wmnds-fe-group--error' : ''}`}>
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
           <h2 className="wmnds-fe-question">
@@ -31,7 +34,7 @@ const FileUpload = ({fieldValidation}) => {
           </p>
         </legend>
         {/* If there is an error, show here */}
-        {error && <span className="wmnds-fe-error-message">{error}</span>}
+        {errors[name] && <span className="wmnds-fe-error-message">{errors[name].message}</span>}
         <label
           htmlFor="fileUpload"
           className={`wmnds-btn wmnds-btn--primary ${
@@ -45,10 +48,10 @@ const FileUpload = ({fieldValidation}) => {
           />
           <input
             type="file"
-            name="fileUpload"
+            name={name}
             id="fileUpload"
-            onFocus={handleFocus}
             onBlur={handleBlur}
+            onFocus={handleFocus}
             onChange={handleChange}
             className={s.fileUpload}
             ref={fieldValidation}
@@ -60,6 +63,7 @@ const FileUpload = ({fieldValidation}) => {
 };
 
 FileUpload.propTypes = {
+  name: PropTypes.string.isRequired,
   fieldValidation: PropTypes.func,
 };
 
