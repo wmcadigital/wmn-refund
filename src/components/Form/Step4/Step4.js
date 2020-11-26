@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+// Import custom hooks
+import useSubmitForm from 'components/Form/useSubmitForm';
 // Import contexts
 import { FormDataContext } from 'globalState/FormDataContext';
-import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
-import GenericError from 'components/shared/Errors/GenericError';
 import Company from './Company/Company';
 import DOB from './DOB/DOB';
 import Address from './Address/Address';
@@ -14,17 +14,16 @@ import Name from './Name/Name';
 import NHS from './NHS/NHS';
 import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo'
 
-const Step4 = ({ isFetching }) => {
+const Step4 = ({ formRef, setFormSubmitStatus }) => {
   const [formState] = useContext(FormDataContext); // Get the state of form data from FormDataContext
-  const [errorState] = useContext(FormErrorContext);
+  const { handleSubmit, showGenericError, isFetching } = useSubmitForm(formRef, setFormSubmitStatus); // Custom hook for handling continue button (validation, errors etc)
   const { CustomerType } = formState; // Destructure customertype
 
   return (
-    <>
+    <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
     <SectionStepInfo section={`Section 4 of 4`} description="Tell us about yourself" />
-      {errorState.errors.length && errorState.continuePressed && (
-        <GenericError />
-      )}
+      {/* Show generic error message */}
+      {showGenericError}
       <p>
         We’ll use this information to confirm your identity and contact you if
         we need more information
@@ -61,6 +60,7 @@ const Step4 = ({ isFetching }) => {
       <button
         type="submit"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
+
         disabled={isFetching} // Disable button so users can't spam submit
       >
         Submit application
@@ -75,12 +75,18 @@ const Step4 = ({ isFetching }) => {
           </div>
         )}
       </button>
-    </>
+    </form>
   );
 };
 
 Step4.propTypes = {
-  isFetching: PropTypes.bool.isRequired,
+  setFormSubmitStatus: PropTypes.func.isRequired,
+  formRef: PropTypes.oneOfType([
+    // Either a function
+    PropTypes.func,
+    // Or the instance of a DOM native element (see the note about SSR)
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]).isRequired,
 };
 
 export default Step4;

@@ -55,7 +55,7 @@ const useStepLogic = (formRef) => {
                 } 
                 // if not on step 1...
                 else {
-                    setStep(!formDataState.hasReachedConfirmation && formDataState.currentStep + 1);
+                    setStep(formDataState.currentStep + 1);
                 }
             setIsContinuePressed(false);
 
@@ -70,7 +70,6 @@ const useStepLogic = (formRef) => {
     const continueButton = (
         <Button btnClass="wmnds-btn wmnds-col-1 wmnds-m-t-md" type="submit" text="Continue" />
     );
-
 
     const showGenericError = Object.keys(errors).length > 0 && isContinuePressed && <GenericError />;
 

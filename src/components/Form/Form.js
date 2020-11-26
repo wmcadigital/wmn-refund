@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { useForm, FormContext } from 'react-hook-form';
 // Import contexts
 import { FormDataContext } from 'globalState/FormDataContext';
-import { FormErrorContext } from 'globalState/FormErrorContext';
 
 // Import components
 import Step1 from 'components/Form/Step1/Step1';
@@ -17,92 +16,23 @@ import useLogRocketTracking from './useLogRocketTracking';
 import s from './Form.module.scss';
 
 const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
-  const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
+  const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const { currentStep } = formDataState; // Destructure step from state
 
-  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
 
   const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
   
   const [isPaperTicket, setIsPaperTicket] = useState(false); // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
   const [isSwiftOnMobile, setIsSwiftOnMobile] = useState(false); // Used to track if a user has clicked Swift On Mobile (set in step 1). Then read this value in step 3 to show 'different text for swift card number'
-  const [isFetching, setIsFetching] = useState(false);
+  
   const methods = useForm({
     mode: 'onBlur',
   }); // Trigger validation onBlur events (config for react hook form lib)
 
-  useTrackFormAbandonment(formRef, currentStep, formSubmitStatus, formDataState); // Used to track user abandonment via Google Analytics/Tag Manager
+  useTrackFormAbandonment(currentStep, formSubmitStatus); // Used to track user abandonment via Google Analytics/Tag Manager
 
 
   useLogRocketTracking(formDataState, isPaperTicket, isSwiftOnMobile); // Used to track javascript errors etc. in Log Rocket
-
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent default form submission method
-
-    // If error
-    if (errorState.errors.length) {
-      window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
-      errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
-    } else {
-      window.dataLayer = window.dataLayer || []; // Set datalayer (GA thing)
-      errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
-
-      setIsFetching(true); // Set this so we can put loading state on button
-
-      // Go hit the API with the data
-      fetch(process.env.REACT_APP_API_HOST, {
-        method: 'post',
-        body: JSON.stringify(formDataState),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((response) => {
-          // If the response is successful(200: OK)
-          if (response.status === 200) {
-            return response.text(); // Return response (reference number)
-          }
-          throw new Error(response.statusText, response.Message); // Else throw error and go to our catch below
-        })
-        .then((payload) => {
-          // If formsubmission is successful
-          formDataDispatch({ type: 'ADD_FORM_REF', payload }); // Update form state with the form ref received from server
-          // Log event to analytics/tag manager
-          window.dataLayer.push({
-            event: 'formAbandonment',
-            eventCategory: 'Refund form submission: success',
-            eventAction: `CustomerType:${formDataState.CustomerType}`,
-          });
-          setIsFetching(false); // set to false as we are done fetching now
-          setFormSubmitStatus(true); // Set form status to success
-          window.scrollTo(0, 0); // Scroll to top of page
-        })
-        .catch((error) => {
-          // If formsubmission errors
-          // eslint-disable-next-line no-console
-          console.error({ error });
-          let errMsg;
-
-          if (error.text) {
-            error.text().then((errorMessage) => {
-              errMsg = errorMessage;
-            });
-          } else {
-            errMsg = error;
-          }
-
-          // Log event to analytics/tag manager
-          window.dataLayer.push({
-            event: 'formAbandonment',
-            eventCategory: 'Refund form submission: error',
-            eventAction: errMsg,
-          });
-          setIsFetching(false); // set to false as we are done fetching now
-          setFormSubmitStatus(false); // Set form status to error
-          window.scrollTo(0, 0); // Scroll to top of page
-        });
-    }
-  };
 
   return (
     <>
@@ -131,12 +61,14 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
                   currentStep={currentStep}
                   isPaperTicket={isPaperTicket}
                   isSwiftOnMobile={isSwiftOnMobile}
-                />
-              )}
+                  />
+                  )}
               {currentStep === 4 && (
                 <Step4
+                  formRef={formRef}
                   currentStep={currentStep}
-                  isFetching={isFetching}
+                  formSubmitStatus={formSubmitStatus}
+                  setFormSubmitStatus={setFormSubmitStatus}
                 />
               )}
           </div>
