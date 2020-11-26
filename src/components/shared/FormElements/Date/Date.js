@@ -54,8 +54,8 @@ const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
 
   // Trigger validation every time date has been updated
   useEffect(() => {
-    if (date) triggerValidation();
-  }, [date, triggerValidation]);
+    if (date) triggerValidation(name);
+  }, [date, name, triggerValidation]);
 
   return (
     <>

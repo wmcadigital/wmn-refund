@@ -3,29 +3,34 @@ import React from 'react';
 import { useFormContext } from 'react-hook-form';
 // Import components
 import DateInput from 'components/shared/FormElements/Date/Date';
+// Import helper functions
+import dateValidationHelpers from 'components/shared/FormElements/Date/dateValidationHelpers';
 
 const LastUsed = () => {
 
   const { register } = useFormContext(); // Custom hook for handling continue button (validation, errors etc)
   
-  // helper function to determine if a number is between two values 
-  const between = (number, min, max) => number >= min && number <= max; 
+  const { validateDay, validateDate, validateMonth, pastDate } = dateValidationHelpers;
 
   const dateValidation = register({
     required: 'Enter last used date',
     validate:{
+      
       // make sure date is after 16/03/2020
       lastUsed: value => value > '2020-03-16' || 'We can only issue refunds from the 16 March 2020. If you stopped travelling before this date, please still use 16 March 2020.',
-      // make sure day is valid
-      checkDay: value => between(value.split('-')[2], 1, 31) || 'Enter a valid last used date',
-      // make sure month is valid
-      checkMonth: value => between(value.split('-')[1], 1, 12) || 'Enter a valid last used date',
+
+      // make sure day is valid between 1 & 31
+      checkDay: value => validateDay(value) || 'Enter a valid day',
+
+      // make sure month is valid between 1 & 12
+      checkMonth: value => validateMonth(value) || 'Enter a valid month',
+      
+      // make sure date is valid e.g not 30th Feb
+      checkDate: value => validateDate(value) || 'Enter a valid date',
+      
       // make sure date entered is in the past or today
-      pastDate: value => {
-        const dateToday = new Date();
-        const dateString = `${dateToday.getFullYear()}-${dateToday.getMonth() + 1}-${dateToday.getDate()}`
-        return dateString > value || 'Last used date cannot be in the future'
-      }
+      pastDate: value => pastDate(value) || 'Last used date cannot be in the future'
+
     }
   })
 
