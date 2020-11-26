@@ -19,7 +19,7 @@ const Email = () => {
   return (
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
-        <h3 className="wmnds-fe-question">What is your email address?</h3>
+        <h2 className="wmnds-fe-question">What is your email address?</h2>
       </legend>
 
       <Input

@@ -9,7 +9,7 @@ const Name = () => {
   return (
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
-        <h3 className="wmnds-fe-question">What is your name?</h3>
+        <h2 className="wmnds-fe-question">What is your name?</h2>
       </legend>
       <Input
         className="wmnds-col-1-2 wmnds-col-sm-2-3"

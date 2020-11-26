@@ -9,9 +9,9 @@ const Company = () => {
   return (
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
-        <h3 className="wmnds-fe-question">
+        <h2 className="wmnds-fe-question">
           What company or organisation do you work for?
-        </h3>
+        </h2>
       </legend>
       <Input
         className="wmnds-col-1 wmnds-col-sm-1-2"

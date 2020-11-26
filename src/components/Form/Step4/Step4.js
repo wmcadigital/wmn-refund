@@ -60,7 +60,6 @@ const Step4 = ({ formRef, setFormSubmitStatus }) => {
       <button
         type="submit"
         className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-
         disabled={isFetching} // Disable button so users can't spam submit
       >
         Submit application

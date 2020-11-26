@@ -57,7 +57,6 @@ const useStepLogic = (formRef) => {
                 else {
                     setStep(formDataState.currentStep + 1);
                 }
-            setIsContinuePressed(false);
 
         }
         // else, errors are true...

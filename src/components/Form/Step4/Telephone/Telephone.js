@@ -19,7 +19,7 @@ const Telephone = () => {
   return (
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
-        <h3 className="wmnds-fe-question">What is your telephone number?</h3>
+        <h2 className="wmnds-fe-question">What is your telephone number?</h2>
       </legend>
       <Input
         className="wmnds-col-sm-1-2"

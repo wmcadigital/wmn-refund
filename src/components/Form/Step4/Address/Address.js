@@ -12,7 +12,7 @@ const Address = () => {
   return (
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
-        <h3 className="wmnds-fe-question">What is your home address?</h3>
+        <h2 className="wmnds-fe-question">What is your home address?</h2>
       </legend>
       {/* Building and street */}
       <Input
