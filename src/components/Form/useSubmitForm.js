@@ -36,7 +36,7 @@ const useSubmitForm = (formRef, setFormSubmitStatus) => {
                 method: 'post',
                 body: JSON.stringify(formDataState),
                 headers: {
-                'Content-Type': 'application/json',
+                    'Content-Type': 'application/json',
                 },
             })
             .then((response) => {
@@ -83,8 +83,6 @@ const useSubmitForm = (formRef, setFormSubmitStatus) => {
                 setFormSubmitStatus(false); // Set form status to error
                 window.scrollTo(0, 0); // Scroll to top of page
             });
-
-            setIsContinuePressed(false);
 
         }
         // else, errors are true...
