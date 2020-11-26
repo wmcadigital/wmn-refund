@@ -1,17 +1,15 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import dompurify from 'dompurify';
 // Import contexts
 import { useFormContext } from 'react-hook-form';
 // Import components
 import Radio from './Radio/Radio';
-import useRadioValidation from './useRadiosValidation';
 
 const { sanitize } = dompurify;
 
 const Radios = ({ name, label, radios, fieldValidation, onChange }) => {
   const {errors} = useFormContext()
-  // const { handleBlur, error } = useRadioValidation(name, label); // Use custom hook for validating radios (this controls ALL radios validation)
 
   return (
     <div className={`wmnds-fe-group ${errors[name] ? 'wmnds-fe-group--error' : ''}`}>
@@ -34,7 +32,6 @@ const Radios = ({ name, label, radios, fieldValidation, onChange }) => {
               name={name}
               text={radio.text}
               value={radio.value}
-              //onBlur={handleBlur}
               fieldValidation={fieldValidation}
               onChange={onChange}
             />

@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import useStepLogic from 'components/Form/useStepLogic';
 // Import contexts
 import { FormDataContext } from 'globalState/FormDataContext';
-import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
 import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo'
@@ -38,46 +37,13 @@ const Step1 = ({
     }
   };
 
-  // // Update the current step to the correct one depending on users selection
-  // const handleContinue = () => {
-  //   // If errors, then don't progress and set continue button to true(halt form and show errors)
-  //   if (errorState.errors.length) {
-  //     window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
-  //     errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
-  //   } else {
-  //     errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
-
-  //     // SwiftCard, paperTicket
-  //     if (
-  //       formState.CustomerType === 'SwiftCard' ||
-  //       formState.CustomerType === 'PaperTicket'
-  //     ) {
-  //       setCurrentStep(currentStep + 1); // Go to next step(2) so we can set customerType
-  //     }
-  //     // classPass, scratchcard
-  //     else if (
-  //       formState.CustomerType === 'Scratchcard' ||
-  //       formState.CustomerType === 'ClassPass'
-  //     ) {
-  //       setCurrentStep(currentStep + 3); // Skip to last steps as payment info isn't needed for scratchcard and classPass
-  //     }
-  //     // swiftOnMobile;
-  //     else {
-  //       setCurrentStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
-  //     }
-
-  //     window.scrollTo(0, 0); // Scroll to top of page
-  //   }
-  // };
   return (
     <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
     <SectionStepInfo section={`Section ${currentStep} of 4`} description="About your ticket" />
 
     {/* Show generic error message */}
     {showGenericError}
-      {/* {errorState.errors.length > 0 && errorState.continuePressed && (
-        <GenericError />
-      )} */}
+    
       <Radios
         name="CustomerType"
         label="Which best describes your ticket?"

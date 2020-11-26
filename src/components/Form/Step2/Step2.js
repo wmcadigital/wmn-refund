@@ -4,14 +4,12 @@ import PropTypes from 'prop-types';
 import useStepLogic from 'components/Form/useStepLogic';
 // Import contexts
 import { FormDataContext } from 'globalState/FormDataContext';
-import { FormErrorContext } from 'globalState/FormErrorContext';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
 import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo'
 
 const Step2 = ({ currentStep, isPaperTicket }) => {
   const [, formDispatch] = useContext(FormDataContext); // Get the state of form data from FormDataContext
-  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
   
   const formRef = useRef(); // Used so we can keep track of the form DOM element
   const { register, handleSubmit, showGenericError, continueButton } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
@@ -22,19 +20,6 @@ const Step2 = ({ currentStep, isPaperTicket }) => {
       type: 'UPDATE_CUSTOMER_TYPE',
       payload: e.target.value,
     });
-
-  // // Goto next step on continue
-  // const handleContinue = () => {
-  //   // If errors, then don't progress and set continue button to true(halt form and show errors)
-  //   if (errorState.errors.length) {
-  //     window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
-  //     errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
-  //   } else {
-  //     errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
-  //     setCurrentStep(currentStep + 1); // Set to next step in form
-  //     window.scrollTo(0, 0); // Scroll to top of page
-  //   }
-  // };
 
   //  Set up default radio options (shown for both paper ticket and swift card)
   const radios = [
@@ -74,9 +59,7 @@ const Step2 = ({ currentStep, isPaperTicket }) => {
     <SectionStepInfo section={`Section ${currentStep} of 4`} description="Tell us about your ticket" />
     {/* Show generic error message */}
     {showGenericError}
-      {/* {errorState.errors.length > 0 && errorState.continuePressed && (
-        <GenericError />
-      )} */}
+
       <Radios
         name="CustomerTypeStep2"
         label="How did you buy your ticket?"

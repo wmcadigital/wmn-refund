@@ -31,7 +31,8 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
     mode: 'onBlur',
   }); // Trigger validation onBlur events (config for react hook form lib)
 
-  // useTrackFormAbandonment(formRef, currentStep, formSubmitStatus, formState); // Used to track user abandonment via Google Analytics/Tag Manager
+  useTrackFormAbandonment(formRef, currentStep, formSubmitStatus, formDataState); // Used to track user abandonment via Google Analytics/Tag Manager
+
 
   useLogRocketTracking(formDataState, isPaperTicket, isSwiftOnMobile); // Used to track javascript errors etc. in Log Rocket
 

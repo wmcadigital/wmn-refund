@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 // Import contexts
 import {useFormContext} from 'react-hook-form';
 // Import components

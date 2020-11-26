@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
 // Import contexts
-import { FormDataContext } from 'globalState/FormDataContext';
 import { useFormContext } from 'react-hook-form';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
@@ -10,34 +9,30 @@ const SwiftCard = () => {
 
   const { register } = useFormContext(); // Custom hook for handling continue button (validation, errors etc)
 
-  const customValidation = (swiftNum) => {
-    let error;
-    //const swiftNum = formState.Application.CardNumber; // get swiftcard number from state
-    const firstTen = swiftNum.substr(0, 10); // Get first ten chars of input
-
-    // If card number starts with 6335970112 then user has NX card and needs to go to NX for refund
-    if (firstTen === '6335970112') {
-      error = `${label} is managed by National Express West Midlands and there is a
-            <a
-              href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
-              title="National Express West Midlands ticket refund process"
-              target="_blank"
-              className="wmnds-link"
-            >
-              separate refund process
-            </a>`;
-    }
-    // If swift card doesn't start with the below numbers then it's not valid
-    else if (firstTen !== '6335970107' && firstTen !== '6335970319') {
-      error = `Your ${label} is the long number on the front of the card`;
-    }
-    // Must be 18 digits long
-    else if (swiftNum.length !== 18) {
-      error = `Your ${label} is 18 digits long and begins with 633597`;
-    }
-
-    return error;
-  };
+  const swiftCardValidation = register({
+    required: `Enter a valid ${label}`,
+    pattern: {
+      value: /^(0|[1-9][0-9]*)$/,
+      message: `${label} must only include numbers`
+    },
+    validate: {
+      // ensure first 10 digits don't match 6335970112 NXCard
+      nxCard: value => value.substr(0, 10) !== '6335970112' || `${label} is managed by National Express West Midlands and there is a
+      <a
+        href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
+        title="National Express West Midlands ticket refund process"
+        target="_blank"
+        className="wmnds-link"
+      >
+        separate refund process
+      </a>`,
+      // ensure first 10 digits don't match 6335970107 or 6335970319
+      firstTenValidA: value => value.substr(0, 10) !== '6335970107' || `Your ${label} is the long number on the front of the card`,
+      firstTenValidB: value => value.substr(0, 10) !== '6335970319' || `Your ${label} is the long number on the front of the card`,
+      // ensure number is 18 digits long
+      checkLength: value => value.length === 18 || `Your ${label} is 18 digits long and begins with 633597`,
+    },
+  })
 
   return (
     <fieldset className="wmnds-fe-fieldset">
@@ -54,16 +49,7 @@ const SwiftCard = () => {
         name="CardNumber"
         label={label}
         inputmode="numeric"
-        fieldValidation={register({
-          required: `Enter a valid ${label}`,
-          pattern: {
-            value: /^(0|[1-9][0-9]*)$/,
-            message: `${label} must only include numbers`
-          },
-          validate: {
-            swiftNumber: value => customValidation(value) && customValidation(value)
-          },
-        })}
+        fieldValidation={swiftCardValidation}
       />
     </fieldset>
   );

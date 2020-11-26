@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// Import contexts
-import { useFormDataContext } from 'react-hook-form';
 // Import components
 import Icon from 'components/shared/Icon/Icon';
 // Import custom hooks

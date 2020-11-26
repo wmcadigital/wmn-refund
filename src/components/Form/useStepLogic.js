@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { useFormContext, useForm } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 // Import contexts
 import { FormDataContext } from 'globalState/FormDataContext';
 // Import components
@@ -29,35 +29,35 @@ const useStepLogic = (formRef) => {
         setIsContinuePressed(true);
         // if no errors
         if (result) {
-            console.log(getValues());
-
+            
             formDataDispatch({ type: 'UPDATE_FORM_DATA', payload: getValues() });
-
-            // // step logic that applies to step 1 only
-            // if(formDataState.currentStep === 1){
-            //     // SwiftCard, paperTicket
-            //     if(
-            //         formDataState.CustomerType === 'SwiftCard' ||
-            //         formDataState.CustomerType === 'PaperTicket'
-            //     ) {
-            //         setStep(currentStep + 1) // Go to next step (2) so we can set customerType
-            //     }
-            //     // classPass, scratchcard
-            //     else if (
-            //         formDataState.CustomerType === 'Scratchcard' ||
-            //         formDataState.CustomerType === 'ClassPass'
-            //     ) {
-            //         setStep(currentStep + 3); // Skip to last steps as payment info isn't needed for scratchcard and classPass
-            //     }
-            //     // swiftOnMobile;
-            //     else {
-            //         setStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
-            //     }
-            // } 
-            // // if not on step 1...
-            // else {
-            //     setStep(!formDataState.hasReachedConfirmation && formDataState.currentStep + 1);
-            // }
+            
+            // step logic that applies to step 1 only
+            if(formDataState.currentStep === 1){
+                // SwiftCard, paperTicket
+                if(
+                    formDataState.CustomerType === 'SwiftCard' ||
+                    formDataState.CustomerType === 'PaperTicket'
+                ) {
+                    setStep(currentStep + 1) // Go to next step (2) so we can set customerType
+                }
+                // classPass, scratchcard
+                else if (
+                    formDataState.CustomerType === 'Scratchcard' ||
+                    formDataState.CustomerType === 'ClassPass'
+                    ) {
+                        setStep(currentStep + 3); // Skip to last steps as payment info isn't needed for scratchcard and classPass
+                    }
+                    // swiftOnMobile;
+                    else {
+                        setStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
+                    }
+                } 
+                // if not on step 1...
+                else {
+                    setStep(!formDataState.hasReachedConfirmation && formDataState.currentStep + 1);
+                }
+            setIsContinuePressed(false);
 
         }
         // else, errors are true...

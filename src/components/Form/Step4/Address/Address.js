@@ -1,12 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 // Import contexts
 import { useFormContext } from 'react-hook-form';
-import { FormDataContext } from 'globalState/FormDataContext';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
 const Address = () => {
   const { register } = useFormContext(); // Custom hook for handling validation (errors etc)
+
+  const postcodeRegex = /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) [0-9][A-Za-z]{2})$/;
+
   return (
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
@@ -27,7 +29,6 @@ const Address = () => {
         name="AddressLine2"
         label="Address line 2"
         autocomplete="address-line2"
-        validation={false}
       />
 
       {/* Town/City and County */}
@@ -56,7 +57,7 @@ const Address = () => {
         fieldValidation={register({
           required: 'Enter a postcode',
           pattern: {
-            value: /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) [0-9][A-Za-z]{2})$/,
+            value: postcodeRegex,
             message: 'Enter a postcode in the correct format, for example B19 3SD',
           }
         })}
