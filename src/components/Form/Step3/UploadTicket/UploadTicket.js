@@ -31,7 +31,7 @@ const UploadTicket = () => {
   const fileUploadValidation = register({
     required: 'Select a photo',
     validate: {
-      test: value => fileValidation(value) && fileValidation(value)
+      fileValid: value => fileValidation(value) && fileValidation(value)
     }
   })
 

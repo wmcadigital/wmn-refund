@@ -29,8 +29,35 @@ const useStepLogic = (formRef) => {
         setIsContinuePressed(true);
         // if no errors
         if (result) {
+            if (Object.keys(getValues()).includes("UploadTicket")){
+                
+                const payload = getValues();
+
+                // upload ticket key is no longer needed
+                delete payload.UploadTicket;
+
+                const file = getValues("UploadTicket")[0];
+                
+                const PhotoBase64Extension = file.type.split('/')[1]; // => image/png (split at '/' and grab second part 'png')
+                // Start base64'n our uploaded image
+                const reader = new FileReader(); // Start new file reader
+                reader.readAsDataURL(file); // Read file as dataURL
             
-            formDataDispatch({ type: 'UPDATE_FORM_DATA', payload: getValues() });
+                // When loaded
+                reader.onloadend = () => {
+                    // Since it contains the Data URI, we should remove the prefix and keep only Base64 string
+                    const PhotoBase64 = reader.result.replace(/^data:.+;base64,/, '');
+            
+                    // Update our formData with the base64Extension and Base64 photo
+                    formDataDispatch({
+                        type: 'UPDATE_FORM_DATA',
+                        payload: { ...payload, PhotoBase64Extension, PhotoBase64 },
+                    });
+                };
+
+            } else {
+                formDataDispatch({ type: 'UPDATE_FORM_DATA', payload: getValues() });
+            }
             
             // step logic that applies to step 1 only
             if(formDataState.currentStep === 1){
