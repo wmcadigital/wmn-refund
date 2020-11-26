@@ -10,25 +10,19 @@ const DirectDebit = () => {
 
   const { register } = useFormContext(); // Custom hook for handling continue button (validation, errors etc)
   
-  const ddNumValidation = (ddNum) => {
-    let error;
-    //const ddNum = formState.Application.DirectDebitNumber;
-
-    // DirectDebit reference should start with 6
-    if (ddNum.charAt(0) !== '6') {
-      error = `${label} is a number that begins with '6'`;
-    }
-    // Must be 8 digits long
-    else if (ddNum.length !== 6) {
-      error = `${label} must be 6 digits`;
-    }
-    // Not valid ref if not between these numbers
-    else if (+ddNum < 600000 || ddNum > 699999) {
-      error = `Enter a valid ${label}`;
-    }
-
-    return error;
-  };
+  const ddNumValidation = register({
+    required: `Enter a valid ${label}`,
+    pattern: {
+      value: /^(0|[1-9][0-9]*)$/,
+      message: `${label} must only include numbers`
+    },
+    validate: {
+      // DirectDebit reference should start with 6
+      firstNumberCheck: value => value.charAt(0) === '6' || `${label} is a number that begins with '6'`,
+      // Must be 6 digits long
+      lengthCheck: value => value.length === 6 || `${label} must be 6 digits`,
+    },
+  })
 
   return (
     <fieldset className="wmnds-fe-fieldset">
@@ -47,16 +41,7 @@ const DirectDebit = () => {
         name="DirectDebitNumber"
         label={label}
         inputmode="numeric"
-        fieldValidation={register({
-          required: `Enter a valid ${label}`,
-          pattern: {
-            value: /^(0|[1-9][0-9]*)$/,
-            message: `${label} must only include numbers`
-          },
-          validate: {
-            directDebit: value => ddNumValidation(value) && ddNumValidation(value)
-          },
-        })}
+        fieldValidation={ddNumValidation}
       />
     </fieldset>
   );
