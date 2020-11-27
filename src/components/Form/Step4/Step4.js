@@ -1,10 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 // Import custom hooks
 import useSubmitForm from 'components/Form/useSubmitForm';
-// Import contexts
-import { FormDataContext } from 'globalState/FormDataContext';
 // Import components
+import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo';
 import Company from './Company/Company';
 import DOB from './DOB/DOB';
 import Address from './Address/Address';
@@ -12,16 +11,23 @@ import Email from './Email/Email';
 import Telephone from './Telephone/Telephone';
 import Name from './Name/Name';
 import NHS from './NHS/NHS';
-import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo'
 
-const Step4 = ({ formRef, setFormSubmitStatus }) => {
-  const [formState] = useContext(FormDataContext); // Get the state of form data from FormDataContext
-  const { handleSubmit, showGenericError, isFetching } = useSubmitForm(formRef, setFormSubmitStatus); // Custom hook for handling continue button (validation, errors etc)
-  const { CustomerType } = formState; // Destructure customertype
+const Step4 = ({ setFormSubmitStatus }) => {
+  const formRef = useRef(); // Used so we can keep track of the form DOM element
+  const {
+    formDataState,
+    handleSubmit,
+    showGenericError,
+    isFetching,
+  } = useSubmitForm(formRef, setFormSubmitStatus); // Custom hook for handling continue button (validation, errors etc)
+  const { CustomerType } = formDataState; // Destructure customertype
 
   return (
     <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
-    <SectionStepInfo section={`Section 4 of 4`} description="Tell us about yourself" />
+      <SectionStepInfo
+        section="Section 4 of 4"
+        description="Tell us about yourself"
+      />
       {/* Show generic error message */}
       {showGenericError}
       <p>
@@ -80,12 +86,6 @@ const Step4 = ({ formRef, setFormSubmitStatus }) => {
 
 Step4.propTypes = {
   setFormSubmitStatus: PropTypes.func.isRequired,
-  formRef: PropTypes.oneOfType([
-    // Either a function
-    PropTypes.func,
-    // Or the instance of a DOM native element (see the note about SSR)
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
 };
 
 export default Step4;

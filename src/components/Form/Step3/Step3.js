@@ -1,31 +1,28 @@
-import React, { useContext, useRef } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
-// Import contexts
-import { FormDataContext } from 'globalState/FormDataContext';
 // Import components
+import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo';
 import DirectDebit from './DirectDebit/DirectDebit';
 import SwiftCard from './SwiftCard/SwiftCard';
 import TicketNumber from './TicketNumber/TicketNumber';
 import SoMTicketNumber from './SoMTicketNumber/SoMTicketNumber';
-import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo'
 // import SoMTicketNumber from './SoMTicketNumber/SoMTicketNumber';
 import UploadTicket from './UploadTicket/UploadTicket';
 import LastUsed from './LastUsed/LastUsed';
 import HowProcess from './HowProcess/HowProcess';
 
-const Step3 = ({
-  currentStep,
-  isPaperTicket,
-  isSwiftOnMobile,
-}) => {
-  const [formState] = useContext(FormDataContext); // Get the state of form data from FormDataContext
-
+const Step3 = ({ currentStep, isPaperTicket, isSwiftOnMobile }) => {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
-  const { handleSubmit, showGenericError, continueButton } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
+  const {
+    formDataState,
+    handleSubmit,
+    showGenericError,
+    continueButton,
+  } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
 
-  const { CustomerType, Application } = formState; // Destructure object
+  const { CustomerType, Application } = formDataState; // Destructure object
 
   // Set placeholder vars which we will change in the switch below (based on CustomerType)
   let elementsToRender; // Used to change conditional elements to render
@@ -111,14 +108,13 @@ const Step3 = ({
 
   return (
     <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
-    <SectionStepInfo section={`Section ${currentStep} of 4`} description="Tell us about your ticket" />
+      <SectionStepInfo
+        section={`Section ${currentStep} of 4`}
+        description="Tell us about your ticket"
+      />
 
-    {/* Show generic error message */}
-    {showGenericError}
-
-      {/* {errorState.errors.length && errorState.continuePressed && (
-        <GenericError />
-      )} */}
+      {/* Show generic error message */}
+      {showGenericError}
 
       {/* This changes based on switch logic above */}
       {elementsToRender}
@@ -137,12 +133,6 @@ Step3.propTypes = {
   currentStep: PropTypes.number.isRequired,
   isPaperTicket: PropTypes.bool.isRequired,
   isSwiftOnMobile: PropTypes.bool.isRequired,
-  formRef: PropTypes.oneOfType([
-    // Either a function
-    PropTypes.func,
-    // Or the instance of a DOM native element (see the note about SSR)
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
 };
 
 export default Step3;

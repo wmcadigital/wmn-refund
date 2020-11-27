@@ -9,10 +9,14 @@ import Radio from './Radio/Radio';
 const { sanitize } = dompurify;
 
 const Radios = ({ name, label, radios, fieldValidation, onChange }) => {
-  const {errors} = useFormContext()
+  const { errors } = useFormContext();
 
   return (
-    <div className={`wmnds-fe-group ${errors[name] ? 'wmnds-fe-group--error' : ''}`}>
+    <div
+      className={`wmnds-fe-group ${
+        errors[name] ? 'wmnds-fe-group--error' : ''
+      }`}
+    >
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
           <h2 className="wmnds-fe-question">{label}</h2>
@@ -20,7 +24,9 @@ const Radios = ({ name, label, radios, fieldValidation, onChange }) => {
           {errors[name] && (
             <span
               className="wmnds-fe-error-message"
-              dangerouslySetInnerHTML={{ __html: sanitize(errors[name].message) }}
+              dangerouslySetInnerHTML={{
+                __html: sanitize(errors[name].message),
+              }}
             />
           )}
         </legend>

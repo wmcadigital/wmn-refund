@@ -1,27 +1,24 @@
-import React, { useContext, useRef } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
-// Import contexts
-import { FormDataContext } from 'globalState/FormDataContext';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
-import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo'
+import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo';
 
-
-const Step1 = ({
-  currentStep,
-  setIsPaperTicket,
-  setIsSwiftOnMobile,
-}) => {
+const Step1 = ({ currentStep, setIsPaperTicket, setIsSwiftOnMobile }) => {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
-  const { register, handleSubmit, showGenericError, continueButton } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
+  const {
+    register,
+    formDataDispatch,
+    handleSubmit,
+    showGenericError,
+    continueButton,
+  } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
 
-  const [, formDispatch] = useContext(FormDataContext); // Get the state of form data from FormDataContext
-  
   // Update customerType on radio button change
   const handleRadioChange = (e) => {
-    formDispatch({ type: 'UPDATE_CUSTOMER_TYPE', payload: e.target.value });
+    formDataDispatch({ type: 'UPDATE_CUSTOMER_TYPE', payload: e.target.value });
 
     // If paper ticket chosen
     if (e.target.value === 'PaperTicket') {
@@ -39,11 +36,14 @@ const Step1 = ({
 
   return (
     <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
-    <SectionStepInfo section={`Section ${currentStep} of 4`} description="About your ticket" />
+      <SectionStepInfo
+        section={`Section ${currentStep} of 4`}
+        description="About your ticket"
+      />
 
-    {/* Show generic error message */}
-    {showGenericError}
-    
+      {/* Show generic error message */}
+      {showGenericError}
+
       <Radios
         name="CustomerType"
         label="Which best describes your ticket?"
@@ -80,12 +80,6 @@ Step1.propTypes = {
   currentStep: PropTypes.number.isRequired,
   setIsPaperTicket: PropTypes.func.isRequired,
   setIsSwiftOnMobile: PropTypes.func.isRequired,
-  formRef: PropTypes.oneOfType([
-    // Either a function
-    PropTypes.func,
-    // Or the instance of a DOM native element (see the note about SSR)
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
 };
 
 export default Step1;

@@ -1,22 +1,25 @@
-import React, { useContext, useRef } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
-// Import contexts
-import { FormDataContext } from 'globalState/FormDataContext';
+
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
-import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo'
+import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo';
 
 const Step2 = ({ currentStep, isPaperTicket }) => {
-  const [, formDispatch] = useContext(FormDataContext); // Get the state of form data from FormDataContext
-  
   const formRef = useRef(); // Used so we can keep track of the form DOM element
-  const { register, handleSubmit, showGenericError, continueButton } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
-  
+  const {
+    register,
+    formDataDispatch,
+    handleSubmit,
+    showGenericError,
+    continueButton,
+  } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
+
   // Update customerType on radio button change
   const handleRadioChange = (e) =>
-    formDispatch({
+    formDataDispatch({
       type: 'UPDATE_CUSTOMER_TYPE',
       payload: e.target.value,
     });
@@ -37,7 +40,8 @@ const Step2 = ({ currentStep, isPaperTicket }) => {
     },
 
     {
-      text: 'I bought it from a West Midlands Network travel shop, railway station ticket office or Payzone shop',
+      text:
+        'I bought it from a West Midlands Network travel shop, railway station ticket office or Payzone shop',
       value: 'Shop',
     },
   ];
@@ -56,9 +60,12 @@ const Step2 = ({ currentStep, isPaperTicket }) => {
 
   return (
     <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
-    <SectionStepInfo section={`Section ${currentStep} of 4`} description="Tell us about your ticket" />
-    {/* Show generic error message */}
-    {showGenericError}
+      <SectionStepInfo
+        section={`Section ${currentStep} of 4`}
+        description="Tell us about your ticket"
+      />
+      {/* Show generic error message */}
+      {showGenericError}
 
       <Radios
         name="CustomerTypeStep2"
@@ -78,12 +85,6 @@ const Step2 = ({ currentStep, isPaperTicket }) => {
 Step2.propTypes = {
   currentStep: PropTypes.number.isRequired,
   isPaperTicket: PropTypes.bool.isRequired,
-  formRef: PropTypes.oneOfType([
-    // Either a function
-    PropTypes.func,
-    // Or the instance of a DOM native element (see the note about SSR)
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
 };
 
 export default Step2;
