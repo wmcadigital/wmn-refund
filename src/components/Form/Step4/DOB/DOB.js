@@ -9,22 +9,16 @@ import dateValidationHelpers  from 'components/shared/FormElements/Date/dateVali
 const DOB = () => {
   const { register } = useFormContext(); // Custom hook for handling validation (errors etc)
 
-  const { validateDay, validateDate, validateMonth, pastDate } = dateValidationHelpers;
+  const { dateRegex, pastDate } = dateValidationHelpers;
   
   const dateValidation = register({
     required: 'Enter a date of birth',
-    validate: {
-      // make sure day is valid between 1 & 31
-      checkDay: value => validateDay(value) || 'Enter a valid day',
-
-      // make sure month is valid between 1 & 12
-      checkMonth: value => validateMonth(value) || 'Enter a valid month',
-      
-      // make sure date is valid e.g not 30th Feb
-      checkDate: value => validateDate(value) || 'Enter a valid date',
-      
-      // make sure date entered is in the past or today
-      pastDate: value => pastDate(value) || 'Date of birth cannot be in the future'
+    pattern: {
+      value: dateRegex,
+      message: 'Enter last used date in the correct format, for example 18 03 2020'
+    },
+    validate:{
+      pastDate: value => pastDate(value, 10) || 'Date of birth must be in the past',
     }
   })
   return (

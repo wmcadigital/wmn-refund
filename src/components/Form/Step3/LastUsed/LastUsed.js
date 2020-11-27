@@ -10,27 +10,17 @@ const LastUsed = () => {
 
   const { register } = useFormContext(); // Custom hook for handling continue button (validation, errors etc)
   
-  const { validateDay, validateDate, validateMonth, pastDate } = dateValidationHelpers;
+  const { dateRegex, pastDate } = dateValidationHelpers;
 
   const dateValidation = register({
     required: 'Enter last used date',
+    pattern: {
+      value: dateRegex,
+      message: 'Enter last used date in the correct format, for example 18 03 2020'
+    },
     validate:{
-      
-      // make sure date is after 16/03/2020
       lastUsed: value => value > '2020-03-16' || 'We can only issue refunds from the 16 March 2020. If you stopped travelling before this date, please still use 16 March 2020.',
-
-      // make sure day is valid between 1 & 31
-      checkDay: value => validateDay(value) || 'Enter a valid day',
-
-      // make sure month is valid between 1 & 12
-      checkMonth: value => validateMonth(value) || 'Enter a valid month',
-      
-      // make sure date is valid e.g not 30th Feb
-      checkDate: value => validateDate(value) || 'Enter a valid date',
-      
-      // make sure date entered is in the past or today
-      pastDate: value => pastDate(value) || 'Last used date cannot be in the future'
-
+      pastDate: value => pastDate(value) || 'Last used date must be today or in the past',
     }
   })
 

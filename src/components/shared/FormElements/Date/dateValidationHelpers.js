@@ -1,52 +1,27 @@
+const d = new Date().toISOString().slice(0, 10); // Set todays date as yyyy-mm-dd
 
-const dateToday = new Date();
-const dateTodayAsString = `${dateToday.getFullYear()}-${dateToday.getMonth() + 1}-${dateToday.getDate()}`
+const dateRegex = /^((((19[0-9][0-9])|(2[0-9][0-9][0-9]))([-])(0[13578]|10|12)([-])(0[1-9]|[12][0-9]|3[01]))|(((19[0-9][0-9])|(2[0-9][0-9][0-9]))([-])(0[469]|11)([-])([0][1-9]|[12][0-9]|30))|(((19[0-9][0-9])|(2[0-9][0-9][0-9]))([-])(02)([-])(0[1-9]|1[0-9]|2[0-8]))|(([02468][048]00)([-])(02)([-])(29))|(([13579][26]00)([-])(02)([-])(29))|(([0-9][0-9][0][48])([-])(02)([-])(29))|(([0-9][0-9][2468][048])([-])(02)([-])(29))|(([0-9][0-9][13579][26])([-])(02)([-])(29)))$/; // Date regex http://regexlib.com/REDetails.aspx?regexp_id=1850
 
-// helper function to determine if a number is between two values 
+// determine if number is between two values 
 const between = (number, min, max) => number >= min && number <= max;
-// returns date as a array [yyyy, mm, dd]
-const dateAsArray = date => date.split('-');
 
-// returns true if year is a leap year
-const leapYear = (year) => {
-  return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
-}
+// return date as an array [yyyy, mm, dd]
+const dateSplit = date => date.split('-');
 
 // make sure day entry is valid
-const validateDay = value => between(dateAsArray(value)[2], 1, 31)
+const validateDay = value => between(dateSplit(value)[2], 1, 31)
 
 // make sure month entry is between 1 & 12
-const validateMonth = value => between(value.split('-')[1], 1, 12);
+const validateMonth = value => between(dateSplit(value)[1], 1, 12);
 
-// make sure date entry is valid
-const validateDate = value => {
-  let valid;
-  const monthsWith30days = ['04', '06', '09', '11']
-  
-  // if month is february
-  if(dateAsArray(value)[1] === '02') {
-    const max = leapYear(dateAsArray(value)[0]) ? 29 : 28;
-    valid = between(dateAsArray(value)[2], 1, max);
-  }
-  // if month has 30 days
-  else if(monthsWith30days.includes(dateAsArray(value)[1])) {
-    valid = between(dateAsArray(value)[2], 1, 30);
-  }
-  else {
-    valid = between(dateAsArray(value)[2], 1, 31);
-  }
-
-  return valid;
-}
-
-// check if date is in the past
-const pastDate = value => dateTodayAsString > value;
+// check if date is in the past (years ago)
+const pastDate = (value, yearsAgo = 0) => d > value && dateSplit(value)[0] <= dateSplit(d)[0] - yearsAgo;
 
 const dateValidationHelpers = {
+  dateRegex,
   validateDay,
-  validateDate,
   validateMonth,
-  pastDate
+  pastDate,
 }
 
 export default dateValidationHelpers;
