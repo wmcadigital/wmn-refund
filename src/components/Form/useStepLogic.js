@@ -7,7 +7,7 @@ import GenericError from 'components/shared/Errors/GenericError';
 import Button from 'components/shared/Button/Button';
 
 const useStepLogic = (formRef) => {
-  const { register, errors, triggerValidation, getValues } = useFormContext(); // Get useForm methods
+  const { register, errors, trigger, getValues } = useFormContext(); // Get useForm methods
 
   const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
 
@@ -24,7 +24,7 @@ const useStepLogic = (formRef) => {
   // Update the current step to the correct one depending on users selection
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const result = await triggerValidation();
+    const result = await trigger();
     const { currentStep } = formDataState;
     setIsContinuePressed(true);
     // if no errors

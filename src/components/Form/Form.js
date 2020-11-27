@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { useForm, FormContext } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 // Import contexts
 import { FormDataContext } from 'globalState/FormDataContext';
 
@@ -37,7 +37,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
       <div className="wmnds-col-1 wmnds-col-md-3-4 ">
         {/* pass all methods into the context */}
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-        <FormContext {...methods}>
+        <FormProvider {...methods}>
           <div className={`wmnds-p-lg ${s.formWrapper}`}>
             {/* Start of form */}
             {currentStep === 1 && (
@@ -65,7 +65,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               />
             )}
           </div>
-        </FormContext>
+        </FormProvider>
       </div>
       {/* If in dev mode or on netlify then show debugging options */}
       {(process.env.NODE_ENV === 'development' || process.env.NETLIFY) && (

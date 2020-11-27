@@ -6,7 +6,7 @@ import { FormDataContext } from 'globalState/FormDataContext';
 import GenericError from 'components/shared/Errors/GenericError';
 
 const useSubmitForm = (formRef, setFormSubmitStatus) => {
-  const { errors, triggerValidation, getValues } = useFormContext(); // Get useForm methods
+  const { errors, trigger, getValues } = useFormContext(); // Get useForm methods
 
   const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
 
@@ -18,7 +18,7 @@ const useSubmitForm = (formRef, setFormSubmitStatus) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const result = await triggerValidation();
+    const result = await trigger();
 
     setIsContinuePressed(true);
     // if no errors

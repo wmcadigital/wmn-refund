@@ -8,7 +8,7 @@ import DateInput from './DateInput.js/DateInput';
 
 const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
   const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
-  const { errors, triggerValidation } = useFormContext();
+  const { errors, trigger } = useFormContext();
 
   const [stateYear, stateMonth, stateDay] = formDataState.formData[name]
     ? formDataState.formData[name].split('-')
@@ -54,8 +54,8 @@ const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
 
   // Trigger validation every time date has been updated
   useEffect(() => {
-    if (date) triggerValidation(name);
-  }, [date, name, triggerValidation]);
+    if (date) trigger(name);
+  }, [date, name, trigger]);
 
   return (
     <>
