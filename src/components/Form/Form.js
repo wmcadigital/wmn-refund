@@ -15,7 +15,7 @@ import useLogRocketTracking from './useLogRocketTracking';
 // Import styling
 import s from './Form.module.scss';
 
-const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
+const Form = ({ formSubmitStatus, setFormSubmitStatus, setCannotProcess }) => {
   const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const { currentStep } = formDataState; // Destructure step from state
 
@@ -48,7 +48,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
               />
             )}
             {currentStep === 2 && (
-              <Step2 currentStep={currentStep} isPaperTicket={isPaperTicket} />
+              <Step2 currentStep={currentStep} isPaperTicket={isPaperTicket} setCannotProcess={setCannotProcess} />
             )}
             {currentStep === 3 && (
               <Step3
@@ -87,6 +87,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
 Form.propTypes = {
   formSubmitStatus: PropTypes.bool,
   setFormSubmitStatus: PropTypes.func.isRequired,
+  setCannotProcess: PropTypes.func.isRequired,
 };
 
 Form.defaultProps = {

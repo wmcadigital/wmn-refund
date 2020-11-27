@@ -6,7 +6,7 @@ import { FormDataContext } from 'globalState/FormDataContext';
 import GenericError from 'components/shared/Errors/GenericError';
 import Button from 'components/shared/Button/Button';
 
-const useStepLogic = (formRef) => {
+const useStepLogic = (formRef, setCannotProcess) => {
   const { register, errors, trigger, getValues } = useFormContext(); // Get useForm methods
 
   const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
@@ -78,7 +78,11 @@ const useStepLogic = (formRef) => {
           setStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
         }
       }
-      // if not on step 1...
+      // checkfor direct debit as nothing else can currently be processed
+      else if(formDataState.currentStep === 2 && formDataState.CustomerType !== 'DirectDebit'){
+          setCannotProcess(true);
+      }
+      // if not on step 1 & can continue...
       else {
         setStep(formDataState.currentStep + 1);
       }
