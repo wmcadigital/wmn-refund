@@ -25,14 +25,23 @@ const useSubmitForm = (formRef, setFormSubmitStatus) => {
     if (result) {
       formDataDispatch({ type: 'UPDATE_FORM_DATA', payload: getValues() });
 
+      const dataToSend = {
+          CustomerType: formDataState.CustomerType,
+          Application: {
+              ...formDataState.Application,
+              ...getValues()
+            }
+        }
+
       window.dataLayer = window.dataLayer || []; // Set datalayer (GA thing)
 
       setIsFetching(true); // Set this so we can put loading state on button
+      console.log(JSON.stringify(dataToSend))
 
       // Go hit the API with the data
       fetch(process.env.REACT_APP_API_HOST, {
         method: 'post',
-        body: JSON.stringify(formDataState),
+        body: JSON.stringify(dataToSend),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -98,7 +107,6 @@ const useSubmitForm = (formRef, setFormSubmitStatus) => {
     isFetching,
     showGenericError,
     formDataState,
-    formDataDispatch,
   };
 };
 
