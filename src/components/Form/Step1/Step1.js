@@ -6,7 +6,7 @@ import useStepLogic from 'components/Form/useStepLogic';
 import Radios from 'components/shared/FormElements/Radios/Radios';
 import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo';
 
-const Step1 = ({ currentStep, setIsPaperTicket, setIsSwiftOnMobile }) => {
+const Step1 = ({ setIsPaperTicket, setIsSwiftOnMobile }) => {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
   const {
     register,
@@ -64,8 +64,8 @@ const Step1 = ({ currentStep, setIsPaperTicket, setIsSwiftOnMobile }) => {
   return (
     <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
       <SectionStepInfo
-        section={`Section ${currentStep} of 4`}
-        description="About your ticket"
+        section="Section 1 of 3"
+        description="Before you start"
       />
 
       {/* Show generic error message */}
@@ -104,7 +104,6 @@ const Step1 = ({ currentStep, setIsPaperTicket, setIsSwiftOnMobile }) => {
 };
 
 Step1.propTypes = {
-  currentStep: PropTypes.number.isRequired,
   setIsPaperTicket: PropTypes.func.isRequired,
   setIsSwiftOnMobile: PropTypes.func.isRequired,
 };

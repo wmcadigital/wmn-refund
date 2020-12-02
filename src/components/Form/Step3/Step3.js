@@ -14,7 +14,7 @@ import LastUsed from './LastUsed/LastUsed';
 import HowProcess from './HowProcess/HowProcess';
 import CovidTravel from './CovidTravel/CovidTravel';
 
-const Step3 = ({ currentStep, isPaperTicket, isSwiftOnMobile }) => {
+const Step3 = ({ isPaperTicket, isSwiftOnMobile }) => {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
   const {
     formDataState,
@@ -110,8 +110,8 @@ const Step3 = ({ currentStep, isPaperTicket, isSwiftOnMobile }) => {
   return (
     <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
       <SectionStepInfo
-        section={`Section ${currentStep} of 4`}
-        description="Tell us about your ticket"
+        section="Section 2 of 3"
+        description="About your ticket"
       />
 
       {/* Show generic error message */}
@@ -133,7 +133,6 @@ const Step3 = ({ currentStep, isPaperTicket, isSwiftOnMobile }) => {
 };
 
 Step3.propTypes = {
-  currentStep: PropTypes.number.isRequired,
   isPaperTicket: PropTypes.bool.isRequired,
   isSwiftOnMobile: PropTypes.bool.isRequired,
 };

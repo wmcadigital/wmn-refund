@@ -23,10 +23,7 @@ const Step4 = () => {
 
   return (
     <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
-      <SectionStepInfo
-        section="Section 4 of 4"
-        description="Tell us about yourself"
-      />
+      <SectionStepInfo section="Section 3 of 3" description="About you" />
       {/* Show generic error message */}
       {showGenericError}
       <p>

@@ -83,17 +83,13 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus, setIsFormStarted }) => {
             {/* Start of form */}
             {currentStep === 1 && (
               <Step1
-                currentStep={currentStep}
                 setIsPaperTicket={setIsPaperTicket}
                 setIsSwiftOnMobile={setIsSwiftOnMobile}
               />
             )}
-            {currentStep === 2 && (
-              <Step2 currentStep={currentStep} isPaperTicket={isPaperTicket} />
-            )}
+            {currentStep === 2 && <Step2 isPaperTicket={isPaperTicket} />}
             {currentStep === 3 && (
               <Step3
-                currentStep={currentStep}
                 isPaperTicket={isPaperTicket}
                 isSwiftOnMobile={isSwiftOnMobile}
               />
@@ -101,7 +97,6 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus, setIsFormStarted }) => {
             {currentStep === 4 && <Step4 />}
             {currentStep === 5 && (
               <Step5
-                currentStep={currentStep}
                 formSubmitStatus={formSubmitStatus}
                 setFormSubmitStatus={setFormSubmitStatus}
               />
