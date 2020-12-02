@@ -28,6 +28,7 @@ function Step5SummarySection() {
     PhotoBase64,
     PhotoBase64Extension,
     PhoneNumber,
+    CovidTravel,
   } = formDataState.Application;
 
   // return the text for the CustomerType field
@@ -113,7 +114,7 @@ function Step5SummarySection() {
         </tbody>
       </table>
 
-      {CustomerTypeStep2 && (
+      {(CustomerType !== 'Scratchcard' || CustomerType !== 'ClassPass') && (
         <>
           <div
             className={`wmnds-m-b-sm wmnds-m-t-xl wmnds-grid wmnds-grid--justify-between ${style.serviceAdded}`}
@@ -147,6 +148,15 @@ function Step5SummarySection() {
                 <tr>
                   <th scope="row">Ticket last used</th>
                   <td className={`${style.tableColspan2}`}>{LastUsedDate}</td>
+                </tr>
+              )}
+              {CovidTravel && (
+                <tr>
+                  <th scope="row">
+                    Did you stop using your ticket to travel because of the
+                    coronavirus (COVID-19) pandemic?
+                  </th>
+                  <td className={`${style.tableColspan2}`}>{CovidTravel}</td>
                 </tr>
               )}
               {PhotoBase64 && (
