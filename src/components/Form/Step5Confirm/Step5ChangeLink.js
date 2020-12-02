@@ -15,15 +15,13 @@ const ChangeLink = ({ changeStepTo }) => {
   };
 
   return (
-    <td className="wmnds-text-align-right wmnds-p-r-none">
-      <button
-        type="button"
-        className={`${style.asLink} wmnds-link`}
-        onClick={() => setStepInContext(changeStepTo)}
-      >
-        Change
-      </button>
-    </td>
+    <button
+      type="button"
+      className={`${style.asLink} wmnds-link`}
+      onClick={() => setStepInContext(changeStepTo)}
+    >
+      Change
+    </button>
   );
 };
 

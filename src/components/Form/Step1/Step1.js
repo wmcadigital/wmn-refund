@@ -10,19 +10,47 @@ const Step1 = ({ currentStep, setIsPaperTicket, setIsSwiftOnMobile }) => {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
   const {
     register,
+    formDataState,
     formDataDispatch,
     handleSubmit,
     showGenericError,
     continueButton,
   } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
 
+  const mustRewrite = (a, b) => {
+    let rewrite;
+    if (
+      (a === 'Scratchcard' && b === 'ClassPass') ||
+      (a === 'ClassPass' && b === 'Scratchcard')
+    ) {
+      rewrite = false;
+    } else {
+      rewrite = true;
+    }
+    return rewrite;
+  };
+
   // Update customerType on radio button change
   const handleRadioChange = (e) => {
     formDataDispatch({ type: 'UPDATE_CUSTOMER_TYPE', payload: e.target.value });
-    formDataDispatch({
-      type: 'REACHED_CONFIRMATION',
-      payload: false,
-    });
+
+    if (mustRewrite(formDataState.Application.CustomerType, e.target.value)) {
+      // check if user has reached confirmation before
+      if (formDataState.hasReachedConfirmation) {
+        // set hasReachedConfirmation false to allow user to continue to next question
+        formDataDispatch({
+          type: 'REACHED_CONFIRMATION',
+          payload: false,
+        });
+      }
+
+      // update form data removing unnecessary fields
+      formDataDispatch({
+        type: 'REWRITE_FORM_DATA',
+        payload: {},
+      });
+    }
+
     // If paper ticket chosen
     if (e.target.value === 'PaperTicket') {
       setIsPaperTicket(true); // Then set paper ticket to true (value used in step 3)

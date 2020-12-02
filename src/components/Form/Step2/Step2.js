@@ -11,6 +11,7 @@ const Step2 = ({ currentStep, isPaperTicket }) => {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
   const {
     register,
+    formDataState,
     formDataDispatch,
     handleSubmit,
     showGenericError,
@@ -18,11 +19,29 @@ const Step2 = ({ currentStep, isPaperTicket }) => {
   } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
 
   // Update customerType on radio button change
-  const handleRadioChange = (e) =>
+  const handleRadioChange = (e) => {
     formDataDispatch({
       type: 'UPDATE_CUSTOMER_TYPE',
       payload: e.target.value,
     });
+
+    // check if user has reached confirmation before
+    if (formDataState.hasReachedConfirmation) {
+      // set hasReachedConfirmation false to allow user to continue to next question
+      formDataDispatch({
+        type: 'REACHED_CONFIRMATION',
+        payload: false,
+      });
+    }
+
+    // update form data removing unnecessary fields
+    formDataDispatch({
+      type: 'REWRITE_FORM_DATA',
+      payload: {
+        CustomerType: formDataState.Application.CustomerType,
+      },
+    });
+  };
 
   //  Set up default radio options (shown for both paper ticket and swift card)
   const radios = [

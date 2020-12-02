@@ -31,8 +31,6 @@ const SwiftCard = () => {
       // ensure first 10 digits don't match 6335970107 or 6335970319
       firstTenValidA: (value) =>
         value.substr(0, 10) === '6335970107' ||
-        `Your ${label} is the long number on the front of the card`,
-      firstTenValidB: (value) =>
         value.substr(0, 10) === '6335970319' ||
         `Your ${label} is the long number on the front of the card`,
       // ensure number is 18 digits long

@@ -90,7 +90,9 @@ function Step5SummarySection() {
             <tr>
               <th scope="row">Type of Ticket</th>
               <td>{CustomerTypeText()}</td>
-              <ChangeLink changeStepTo={1} />
+              <td className="wmnds-text-align-right wmnds-p-r-none">
+                <ChangeLink changeStepTo={1} />
+              </td>
             </tr>
           )}
           {CustomerTypeStep2 && (
@@ -100,7 +102,9 @@ function Step5SummarySection() {
                 {CustomerTypeStep2Text()}{' '}
                 {CustomerTypeStep2 === 'Corporate' && `(${CompanyName})`}
               </td>
-              <ChangeLink changeStepTo={2} />
+              <td className="wmnds-text-align-right wmnds-p-r-none">
+                <ChangeLink changeStepTo={2} />
+              </td>
             </tr>
           )}
         </tbody>

@@ -33,6 +33,14 @@ export const FormProvider = (props) => {
       }
 
       // Remove the waypoint by the id
+      case 'REWRITE_FORM_DATA': {
+        return {
+          ...state,
+          Application: action.payload,
+        };
+      }
+
+      // Remove the waypoint by the id
       case 'ADD_FORM_REF': {
         return {
           ...state,
