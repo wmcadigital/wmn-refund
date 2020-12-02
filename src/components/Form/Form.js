@@ -45,10 +45,15 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus, setCannotProcess }) => {
                 currentStep={currentStep}
                 setIsPaperTicket={setIsPaperTicket}
                 setIsSwiftOnMobile={setIsSwiftOnMobile}
+                setCannotProcess={setCannotProcess}
               />
             )}
             {currentStep === 2 && (
-              <Step2 currentStep={currentStep} isPaperTicket={isPaperTicket} setCannotProcess={setCannotProcess} />
+              <Step2
+                currentStep={currentStep}
+                isPaperTicket={isPaperTicket}
+                setCannotProcess={setCannotProcess}
+              />
             )}
             {currentStep === 3 && (
               <Step3

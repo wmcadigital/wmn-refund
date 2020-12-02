@@ -6,7 +6,12 @@ import useStepLogic from 'components/Form/useStepLogic';
 import Radios from 'components/shared/FormElements/Radios/Radios';
 import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo';
 
-const Step1 = ({ currentStep, setIsPaperTicket, setIsSwiftOnMobile }) => {
+const Step1 = ({
+  currentStep,
+  setIsPaperTicket,
+  setIsSwiftOnMobile,
+  setCannotProcess,
+}) => {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
   const {
     register,
@@ -14,7 +19,7 @@ const Step1 = ({ currentStep, setIsPaperTicket, setIsSwiftOnMobile }) => {
     handleSubmit,
     showGenericError,
     continueButton,
-  } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
+  } = useStepLogic(formRef, setCannotProcess); // Custom hook for handling continue button (validation, errors etc)
 
   // Update customerType on radio button change
   const handleRadioChange = (e) => {
@@ -80,6 +85,7 @@ Step1.propTypes = {
   currentStep: PropTypes.number.isRequired,
   setIsPaperTicket: PropTypes.func.isRequired,
   setIsSwiftOnMobile: PropTypes.func.isRequired,
+  setCannotProcess: PropTypes.func.isRequired,
 };
 
 export default Step1;

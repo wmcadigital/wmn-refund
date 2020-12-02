@@ -65,22 +65,27 @@ const useStepLogic = (formRef, setCannotProcess) => {
           formDataState.CustomerType === 'PaperTicket'
         ) {
           setStep(currentStep + 1); // Go to next step (2) so we can set customerType
+        } else {
+          setCannotProcess(true);
         }
-        // classPass, scratchcard
-        else if (
-          formDataState.CustomerType === 'Scratchcard' ||
-          formDataState.CustomerType === 'ClassPass'
-        ) {
-          setStep(currentStep + 3); // Skip to last steps as payment info isn't needed for scratchcard and classPass
-        }
-        // swiftOnMobile;
-        else {
-          setStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
-        }
+        // // classPass, scratchcard
+        // else if (
+        //   formDataState.CustomerType === 'Scratchcard' ||
+        //   formDataState.CustomerType === 'ClassPass'
+        // ) {
+        //   setStep(currentStep + 3); // Skip to last steps as payment info isn't needed for scratchcard and classPass
+        // }
+        // // swiftOnMobile;
+        // else {
+        //   setStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
+        // }
       }
       // checkfor direct debit as nothing else can currently be processed
-      else if(formDataState.currentStep === 2 && formDataState.CustomerType !== 'DirectDebit'){
-          setCannotProcess(true);
+      else if (
+        formDataState.currentStep === 2 &&
+        formDataState.CustomerType !== 'DirectDebit'
+      ) {
+        setCannotProcess(true);
       }
       // if not on step 1 & can continue...
       else {
