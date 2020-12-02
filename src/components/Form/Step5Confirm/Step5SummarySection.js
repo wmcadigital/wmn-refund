@@ -1,0 +1,245 @@
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
+// Context
+import { FormDataContext } from 'globalState/FormDataContext';
+// Style
+import style from './Step5Confirm.module.scss';
+
+const ChangeLink = ({ changeStepTo }) => {
+  const [, formDataDispatch] = useContext(FormDataContext);
+  const setStepInContext = (st) => {
+    formDataDispatch({
+      type: 'UPDATE_STEP',
+      payload: st,
+    });
+  };
+
+  return (
+    <td className="wmnds-text-align-right wmnds-p-r-none">
+      <button
+        type="button"
+        className={`${style.asLink} wmnds-link`}
+        onClick={() => setStepInContext(changeStepTo)}
+      >
+        Change
+      </button>
+    </td>
+  );
+};
+
+ChangeLink.defaultProps = {
+  changeStepTo: null,
+};
+
+ChangeLink.propTypes = {
+  changeStepTo: PropTypes.number,
+};
+
+function Step5SummarySection() {
+  const [formDataState] = useContext(FormDataContext);
+  const {
+    CustomerType,
+    CustomerTypeStep2,
+    DirectDebitNumber,
+    CardNumber,
+    TicketNumber,
+    CompanyName,
+    LastUsedDate,
+    Firstname,
+    Lastname,
+    DateOfBirth,
+    AddressLine1,
+    AddressLine2,
+    AddressLine3,
+    AddressTown,
+    AddressPostcode,
+    Email,
+    PhotoBase64,
+    PhotoBase64Extension,
+    PhoneNumber,
+  } = formDataState.Application;
+
+  const CustomerTypeText = () => {
+    let text;
+    if (CustomerTypeStep2) {
+      if (CustomerType !== 'PaperTicket') {
+        text = 'Swift Card';
+      } else {
+        text = 'Paper Ticket';
+      }
+    } else {
+      switch (CustomerType) {
+        case 'ClassPass':
+          text = 'Class pass';
+          break;
+        case 'Scratchcard':
+          text = 'Scratchcard';
+          break;
+        default:
+          text = 'Swift on Mobile app';
+          break;
+      }
+    }
+    return text;
+  };
+
+  const CustomerTypeStep2Text = () => {
+    let text;
+    if (CustomerTypeStep2) {
+      switch (CustomerTypeStep2) {
+        case 'DirectDebit':
+          text = 'Direct Debit';
+          break;
+        case 'SwiftPortal':
+          text = 'West Midlands Network, Swift website or Swift kiosk';
+          break;
+        case 'Corporate':
+          text = 'My company';
+          break;
+        case 'Workwise':
+          text = 'Workwise scheme';
+          break;
+        default:
+          text =
+            'West Midlands Network travel shop, railway station ticket office or Payzone shop';
+          break;
+      }
+    }
+    return text;
+  };
+
+  return (
+    <div className={`wmnds-col-1 ${style.summary}`}>
+      <h2>Check your answers</h2>
+
+      <h3>Ticket</h3>
+      <table className="wmnds-table wmnds-m-b-xl wmnds-table--without-header">
+        <tbody>
+          {CustomerType && (
+            <tr>
+              <th scope="row">Type of Ticket</th>
+              <td>{CustomerTypeText()}</td>
+              <ChangeLink changeStepTo={1} />
+            </tr>
+          )}
+          {CustomerTypeStep2 && (
+            <tr>
+              <th scope="row">Purchased via</th>
+              <td>
+                {CustomerTypeStep2Text()}{' '}
+                {CustomerTypeStep2 === 'Corporate' && `(${CompanyName})`}
+              </td>
+              <ChangeLink changeStepTo={2} />
+            </tr>
+          )}
+        </tbody>
+      </table>
+
+      {CustomerTypeStep2 && (
+        <>
+          <div
+            className={`wmnds-m-b-sm wmnds-m-t-xl wmnds-grid wmnds-grid--justify-between ${style.serviceAdded}`}
+          >
+            <h3 className="wmnds-col-2-3">Ticket Details</h3>
+            <ChangeLink changeStepTo={3} />
+          </div>
+          <table className="wmnds-table wmnds-m-b-xl wmnds-table--without-header">
+            <tbody>
+              {DirectDebitNumber && (
+                <tr>
+                  <th scope="row">Direct Debit Reference</th>
+                  <td className={`${style.tableColspan2}`}>
+                    {DirectDebitNumber}
+                  </td>
+                </tr>
+              )}
+              {CardNumber && (
+                <tr>
+                  <th scope="row">Swift Card Number</th>
+                  <td className={`${style.tableColspan2}`}>{CardNumber}</td>
+                </tr>
+              )}
+              {TicketNumber && (
+                <tr>
+                  <th scope="row">Ticket Number</th>
+                  <td className={`${style.tableColspan2}`}>{TicketNumber}</td>
+                </tr>
+              )}
+              {LastUsedDate && (
+                <tr>
+                  <th scope="row">Ticket last used</th>
+                  <td className={`${style.tableColspan2}`}>{LastUsedDate}</td>
+                </tr>
+              )}
+              {PhotoBase64 && (
+                <tr>
+                  <th scope="row">Ticket last used</th>
+                  <td width="60%">
+                    <img
+                      src={`data:image/${PhotoBase64Extension};base64, ${PhotoBase64}`}
+                      alt="Ticket upload"
+                    />
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </>
+      )}
+      <div
+        className={`wmnds-m-b-sm wmnds-m-t-xl wmnds-grid wmnds-grid--justify-between ${style.serviceAdded}`}
+      >
+        <h3 className="wmnds-col-2-3">Personal Details</h3>
+        <ChangeLink changeStepTo={4} />
+      </div>
+      <table className="wmnds-table wmnds-m-b-xl wmnds-table--without-header">
+        <tbody>
+          {Firstname && (
+            <tr>
+              <th scope="row">Name</th>
+              <td className={`${style.tableColspan2}`}>
+                {Firstname} {Lastname}
+              </td>
+            </tr>
+          )}
+          {DateOfBirth && (
+            <tr>
+              <th scope="row">Date of Birth</th>
+              <td className={`${style.tableColspan2}`}>{DateOfBirth}</td>
+            </tr>
+          )}
+          {CompanyName && (
+            <tr>
+              <th scope="row">Company Name</th>
+              <td className={`${style.tableColspan2}`}>{CompanyName}</td>
+            </tr>
+          )}
+          {Email && (
+            <tr>
+              <th scope="row">Email</th>
+              <td className={`${style.tableColspan2}`}>{Email}</td>
+            </tr>
+          )}
+          {PhoneNumber && (
+            <tr>
+              <th scope="row">Phone Number</th>
+              <td className={`${style.tableColspan2}`}>{PhoneNumber}</td>
+            </tr>
+          )}
+          {AddressLine1 && (
+            <tr>
+              <th scope="row">Address</th>
+              <td className={`${style.tableColspan2}`}>
+                {AddressLine1}, {AddressLine2.length > 0 && `${AddressLine2}, `}
+                {AddressTown}, {AddressLine3.length > 0 && `${AddressLine3}, `}
+                {AddressPostcode}
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+export default Step5SummarySection;

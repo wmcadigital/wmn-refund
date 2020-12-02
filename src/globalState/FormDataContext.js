@@ -9,7 +9,7 @@ export const FormProvider = (props) => {
   const initialState = {
     currentStep: 1,
     CustomerType: '',
-    formData: {},
+    hasReachedConfirmation: false,
     Application: {},
   };
 
@@ -45,6 +45,13 @@ export const FormProvider = (props) => {
         return {
           ...state,
           currentStep: action.payload,
+        };
+      }
+
+      case 'REACHED_CONFIRMATION': {
+        return {
+          ...state,
+          hasReachedConfirmation: action.payload,
         };
       }
 

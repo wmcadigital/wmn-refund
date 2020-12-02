@@ -9,14 +9,15 @@ import Step1 from 'components/Form/Step1/Step1';
 import Step2 from 'components/Form/Step2/Step2';
 import Step3 from 'components/Form/Step3/Step3';
 import Step4 from 'components/Form/Step4/Step4';
+import Step5 from 'components/Form/Step5Confirm/Step5Confirm';
 // Import custom hooks
 import useTrackFormAbandonment from './useTrackFormAbandonment';
 import useLogRocketTracking from './useLogRocketTracking';
 // Import styling
 import s from './Form.module.scss';
 
-const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
-  const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
+const Form = ({ formSubmitStatus, setFormSubmitStatus, setIsFormStarted }) => {
+  const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const { currentStep } = formDataState; // Destructure step from state
 
   // const formRef = useRef(null); // Ref for tracking the dom of the form (used in Google tracking)
@@ -32,9 +33,49 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
 
   useLogRocketTracking(formDataState, isPaperTicket, isSwiftOnMobile); // Used to track javascript errors etc. in Log Rocket
 
+  const setStep = (step) => {
+    formDataDispatch({
+      type: 'UPDATE_STEP',
+      payload: step,
+    });
+  };
+
+  const goBack = () => {
+    if (currentStep > 1) {
+      if (
+        currentStep === 4 &&
+        (formDataState.CustomerType === 'Scratchcard' ||
+          formDataState.CustomerType === 'ClassPass')
+      ) {
+        setStep(currentStep - 3);
+      } else if (
+        currentStep === 3 &&
+        formDataState.CustomerType === 'SwiftPortal' &&
+        !formDataState.Application.CustomerTypeStep2
+      ) {
+        setStep(currentStep - 2);
+      } else {
+        setStep(currentStep - 1);
+      }
+    } else {
+      setStep(1);
+      setIsFormStarted(false);
+    }
+  };
   return (
     <>
       <div className="wmnds-col-1 wmnds-col-md-3-4 ">
+        {!formDataState.hasReachedConfirmation && (
+          <div className="wmnds-col-1 wmnds-m-b-md">
+            <button
+              type="button"
+              className={`wmnds-link ${s.asLink}`}
+              onClick={goBack}
+            >
+              &lt; Back
+            </button>
+          </div>
+        )}
         {/* pass all methods into the context */}
         {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <FormProvider {...methods}>
@@ -57,8 +98,9 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
                 isSwiftOnMobile={isSwiftOnMobile}
               />
             )}
-            {currentStep === 4 && (
-              <Step4
+            {currentStep === 4 && <Step4 />}
+            {currentStep === 5 && (
+              <Step5
                 currentStep={currentStep}
                 formSubmitStatus={formSubmitStatus}
                 setFormSubmitStatus={setFormSubmitStatus}
@@ -87,6 +129,7 @@ const Form = ({ formSubmitStatus, setFormSubmitStatus }) => {
 Form.propTypes = {
   formSubmitStatus: PropTypes.bool,
   setFormSubmitStatus: PropTypes.func.isRequired,
+  setIsFormStarted: PropTypes.func.isRequired,
 };
 
 Form.defaultProps = {

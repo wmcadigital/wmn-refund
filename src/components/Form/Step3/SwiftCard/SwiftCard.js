@@ -13,11 +13,13 @@ const SwiftCard = () => {
     required: `Enter a valid ${label}`,
     pattern: {
       value: /^(0|[1-9][0-9]*)$/,
-      message: `${label} must only include numbers`
+      message: `${label} must only include numbers`,
     },
     validate: {
       // ensure first 10 digits don't match 6335970112 NXCard
-      nxCard: value => value.substr(0, 10) !== '6335970112' || `${label} is managed by National Express West Midlands and there is a
+      nxCard: (value) =>
+        value.substr(0, 10) !== '6335970112' ||
+        `${label} is managed by National Express West Midlands and there is a
       <a
         href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
         title="National Express West Midlands ticket refund process"
@@ -27,12 +29,18 @@ const SwiftCard = () => {
         separate refund process
       </a>`,
       // ensure first 10 digits don't match 6335970107 or 6335970319
-      firstTenValidA: value => value.substr(0, 10) !== '6335970107' || `Your ${label} is the long number on the front of the card`,
-      firstTenValidB: value => value.substr(0, 10) !== '6335970319' || `Your ${label} is the long number on the front of the card`,
+      firstTenValidA: (value) =>
+        value.substr(0, 10) === '6335970107' ||
+        `Your ${label} is the long number on the front of the card`,
+      firstTenValidB: (value) =>
+        value.substr(0, 10) === '6335970319' ||
+        `Your ${label} is the long number on the front of the card`,
       // ensure number is 18 digits long
-      checkLength: value => value.length === 18 || `Your ${label} is 18 digits long and begins with 633597`,
+      checkLength: (value) =>
+        value.length === 18 ||
+        `Your ${label} is 18 digits long and begins with 633597`,
     },
-  })
+  });
 
   return (
     <fieldset className="wmnds-fe-fieldset">

@@ -10,15 +10,15 @@ const Date = ({ autoCompletPrefix, fieldValidation, name, label }) => {
   const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const { errors, trigger } = useFormContext();
 
-  const [stateYear, stateMonth, stateDay] = formDataState.formData[name]
-    ? formDataState.formData[name].split('-')
+  const [stateYear, stateMonth, stateDay] = formDataState.Application[name]
+    ? formDataState.Application[name].split('-')
     : ['', '', ''];
 
   // State used for capturing date fields onChange below (we use these to validate against below)
   const [day, setDay] = useState(stateDay);
   const [month, setMonth] = useState(stateMonth);
   const [year, setYear] = useState(stateYear);
-  const [date, setDate] = useState(formDataState.formData[name]);
+  const [date, setDate] = useState(formDataState.Application[name]);
 
   const handleChange = (e) => {
     const { value } = e.target;

@@ -19,7 +19,10 @@ const Step1 = ({ currentStep, setIsPaperTicket, setIsSwiftOnMobile }) => {
   // Update customerType on radio button change
   const handleRadioChange = (e) => {
     formDataDispatch({ type: 'UPDATE_CUSTOMER_TYPE', payload: e.target.value });
-
+    formDataDispatch({
+      type: 'REACHED_CONFIRMATION',
+      payload: false,
+    });
     // If paper ticket chosen
     if (e.target.value === 'PaperTicket') {
       setIsPaperTicket(true); // Then set paper ticket to true (value used in step 3)

@@ -57,30 +57,34 @@ const useStepLogic = (formRef) => {
         formDataDispatch({ type: 'UPDATE_FORM_DATA', payload: getValues() });
       }
 
-      // step logic that applies to step 1 only
-      if (formDataState.currentStep === 1) {
-        // SwiftCard, paperTicket
-        if (
-          formDataState.CustomerType === 'SwiftCard' ||
-          formDataState.CustomerType === 'PaperTicket'
-        ) {
-          setStep(currentStep + 1); // Go to next step (2) so we can set customerType
+      if (!formDataState.hasReachedConfirmation) {
+        // step logic that applies to step 1 only
+        if (formDataState.currentStep === 1) {
+          // SwiftCard, paperTicket
+          if (
+            formDataState.CustomerType === 'SwiftCard' ||
+            formDataState.CustomerType === 'PaperTicket'
+          ) {
+            setStep(currentStep + 1); // Go to next step (2) so we can set customerType
+          }
+          // classPass, scratchcard
+          else if (
+            formDataState.CustomerType === 'Scratchcard' ||
+            formDataState.CustomerType === 'ClassPass'
+          ) {
+            setStep(currentStep + 3); // Skip to last steps as payment info isn't needed for scratchcard and classPass
+          }
+          // swiftOnMobile;
+          else {
+            setStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
+          }
         }
-        // classPass, scratchcard
-        else if (
-          formDataState.CustomerType === 'Scratchcard' ||
-          formDataState.CustomerType === 'ClassPass'
-        ) {
-          setStep(currentStep + 3); // Skip to last steps as payment info isn't needed for scratchcard and classPass
-        }
-        // swiftOnMobile;
+        // if not on step 1...
         else {
-          setStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
+          setStep(formDataState.currentStep + 1);
         }
-      }
-      // if not on step 1...
-      else {
-        setStep(formDataState.currentStep + 1);
+      } else {
+        setStep(5);
       }
     }
     // else, errors are true...

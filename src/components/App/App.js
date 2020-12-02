@@ -12,16 +12,17 @@ function App() {
   const [formSubmitStatus, setFormSubmitStatus] = useState(null);
 
   return (
-    <div className="wmnds-p-t-lg wmnds-p-b-lg wmnds-grid">
+    <div className="wmnds-p-b-lg wmnds-grid">
       {/* If form isn't started, show intro...else show form */}
       {!isFormStarted && <Introduction setIsFormStarted={setIsFormStarted} />}
 
       <FormProvider>
         {isFormStarted && formSubmitStatus === null && (
-            <Form
-              formSubmitStatus={formSubmitStatus}
-              setFormSubmitStatus={setFormSubmitStatus}
-            />
+          <Form
+            formSubmitStatus={formSubmitStatus}
+            setFormSubmitStatus={setFormSubmitStatus}
+            setIsFormStarted={setIsFormStarted}
+          />
         )}
 
         {formSubmitStatus && <SuccessPage />}

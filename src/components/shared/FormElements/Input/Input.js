@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import dompurify from 'dompurify';
 
 // Import contexts
 import { useFormContext } from 'react-hook-form';
+import { FormDataContext } from 'globalState/FormDataContext';
 
 const { sanitize } = dompurify;
 
@@ -17,18 +18,20 @@ const Input = ({
   type,
   fieldValidation,
 }) => {
-
-
   const { errors } = useFormContext();
+  const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
 
   // Set input to render below
   const input = (
     <>
       <input
-        className={`wmnds-fe-input ${errors[name] ? 'wmnds-fe-input--error' : ''}`}
+        className={`wmnds-fe-input ${
+          errors[name] ? 'wmnds-fe-input--error' : ''
+        }`}
         id={name}
         name={name}
         type={type}
+        defaultValue={formDataState.Application[name]}
         inputMode={inputmode}
         spellCheck={spellcheck}
         autoComplete={autocomplete}
@@ -38,7 +41,11 @@ const Input = ({
   );
 
   return (
-    <div className={`wmnds-fe-group ${errors[name] ? 'wmnds-fe-group--error' : ''}`}>
+    <div
+      className={`wmnds-fe-group ${
+        errors[name] ? 'wmnds-fe-group--error' : ''
+      }`}
+    >
       {label && (
         <label className="wmnds-fe-label" htmlFor={name}>
           {label}
