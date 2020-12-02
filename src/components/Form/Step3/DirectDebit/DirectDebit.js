@@ -18,9 +18,9 @@ const DirectDebit = () => {
   ); // state for setting can't find direct debit number checkbox
 
   useEffect(() => {
-    // set the Direct debit number value to 00000 if checkbox is selected
+    // set the Direct debit number value to 0 if checkbox is selected
     if (noDDNumber) {
-      setValue('DirectDebitNumber', '000000', { shouldValidate: true });
+      setValue('DirectDebitNumber', '0', { shouldValidate: true });
     } else {
       setValue('DirectDebitNumber', '');
     }
@@ -36,10 +36,11 @@ const DirectDebit = () => {
       // DirectDebit reference should start with 6
       firstNumberCheck: (value) =>
         value.charAt(0) === '6' ||
-        value === '000000' ||
+        value === '0' ||
         `${label} is a number that begins with '6'`,
       // Must be 6 digits long
-      lengthCheck: (value) => value.length === 6 || `${label} must be 6 digits`,
+      lengthCheck: (value) =>
+        value.length === 6 || value === '0' || `${label} must be 6 digits`,
     },
   });
 
