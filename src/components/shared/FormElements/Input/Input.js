@@ -15,6 +15,7 @@ const Input = ({
   label,
   name,
   spellcheck,
+  disabled,
   type,
   fieldValidation,
 }) => {
@@ -34,6 +35,7 @@ const Input = ({
         defaultValue={formDataState.Application[name]}
         inputMode={inputmode}
         spellCheck={spellcheck}
+        disabled={disabled}
         autoComplete={autocomplete}
         ref={fieldValidation}
       />
@@ -73,6 +75,7 @@ Input.propTypes = {
   name: PropTypes.string.isRequired,
   className: PropTypes.string,
   spellcheck: PropTypes.bool,
+  disabled: PropTypes.bool,
   type: PropTypes.string,
   fieldValidation: PropTypes.func,
 };
@@ -80,6 +83,7 @@ Input.propTypes = {
 Input.defaultProps = {
   autocomplete: null,
   inputmode: 'text',
+  disabled: false,
   className: '',
   spellcheck: false,
   type: 'text',

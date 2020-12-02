@@ -15,6 +15,7 @@ const InputCheckbox = ({
   fieldValidation,
   name,
   labelValue,
+  handleChange,
   labelElement,
   classes,
 }) => {
@@ -48,8 +49,9 @@ const InputCheckbox = ({
         )}
         <input
           ref={fieldValidation}
-          defaultValue={formDataState.Application[name]}
+          defaultChecked={formDataState.Application[name]}
           className="wmnds-fe-checkboxes__input"
+          onChange={handleChange}
           name={name}
           type="checkbox"
         />
@@ -67,6 +69,7 @@ const InputCheckbox = ({
 InputCheckbox.propTypes = {
   labelValue: PropTypes.string,
   fieldValidation: PropTypes.func,
+  handleChange: PropTypes.func,
   name: PropTypes.string.isRequired,
   classes: PropTypes.string,
   labelElement: PropTypes.element,
@@ -75,6 +78,7 @@ InputCheckbox.propTypes = {
 InputCheckbox.defaultProps = {
   labelValue: null,
   labelElement: null,
+  handleChange: null,
   fieldValidation: null,
   classes: null,
 };
