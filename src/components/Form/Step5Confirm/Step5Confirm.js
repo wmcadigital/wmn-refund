@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 // Import custom hooks
 import useSubmitForm from '../useSubmitForm';
 import SummarySection from './Step5SummarySection';
+import Consent from './Step5ConsentForm';
 import { FormDataContext } from '../../../globalState/FormDataContext';
 
-function Step9Confirm({ setFormSubmitStatus }) {
+function Step5Confirm({ setFormSubmitStatus }) {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
   const [formDataState, formDataDispatch] = useContext(FormDataContext);
   const { handleSubmit, isFetching } = useSubmitForm(
@@ -24,8 +25,10 @@ function Step9Confirm({ setFormSubmitStatus }) {
   }, [formDataDispatch, formDataState.currentStep]);
 
   return (
-    <form onSubmit={handleSubmit} data-private>
+    <form onSubmit={handleSubmit} ref={formRef} data-private>
       <SummarySection />
+
+      <Consent />
 
       <div className="wmnds-col-1">
         {/* Button onClick logic is located in parent Form component as it is 'submit' form logic */}
@@ -51,8 +54,8 @@ function Step9Confirm({ setFormSubmitStatus }) {
   );
 }
 
-Step9Confirm.propTypes = {
+Step5Confirm.propTypes = {
   setFormSubmitStatus: PropTypes.func.isRequired,
 };
 
-export default Step9Confirm;
+export default Step5Confirm;

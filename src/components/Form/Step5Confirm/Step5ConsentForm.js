@@ -1,12 +1,13 @@
-import React, { useRef } from 'react';
-// Import custom hooks
-import useStepLogic from 'components/Form/useStepLogic';
+import React from 'react';
+// Import contexts
+import { useFormContext } from 'react-hook-form';
+import { FormDataContext } from 'globalState/FormDataContext';
+
 // Import components
 import InputCheckbox from '../../shared/FormElements/Input/InputCheckbox';
 
-const Step9ConsentForm = () => {
-  const formRef = useRef(); // Used so we can keep track of the form DOM element
-  const { register } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
+const Step5ConsentForm = () => {
+  const { register } = useFormContext(FormDataContext); // Custom hook for handling continue button (validation, errors etc)
 
   // Labels used on inputs and for validation
   const checkBoxLabel = (
@@ -33,7 +34,7 @@ const Step9ConsentForm = () => {
   });
 
   return (
-    <fieldset className="wmnds-fe-fieldset" ref={formRef}>
+    <fieldset className="wmnds-fe-fieldset">
       <h3 className="wmnds-m-t-lg wmnds-m-b-lg">Consent</h3>
       <InputCheckbox
         name="Terms"
@@ -45,4 +46,4 @@ const Step9ConsentForm = () => {
   );
 };
 
-export default Step9ConsentForm;
+export default Step5ConsentForm;
