@@ -6,6 +6,8 @@ import useSubmitForm from '../useSubmitForm';
 import SummarySection from './Step5SummarySection';
 import Consent from './Step5ConsentForm';
 import { FormDataContext } from '../../../globalState/FormDataContext';
+// Inport components
+import Button from '../../shared/Button/Button';
 
 function Step5Confirm({ setFormSubmitStatus }) {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
@@ -32,23 +34,13 @@ function Step5Confirm({ setFormSubmitStatus }) {
 
       <div className="wmnds-col-1">
         {/* Button onClick logic is located in parent Form component as it is 'submit' form logic */}
-        <button
-          type="submit"
-          className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-          disabled={isFetching} // Disable button so users can't spam submit
-        >
-          Submit application
-          {/* If API is fetching */}
-          {isFetching && (
-            <div
-              className="wmnds-loader wmnds-loader--btn wmnds-btn__icon wmnds-btn__icon--right"
-              role="alert"
-              aria-live="assertive"
-            >
-              <p className="wmnds-loader__content">Content is loading...</p>
-            </div>
-          )}
-        </button>
+        <Button
+          isFetching={isFetching}
+          disabled={isFetching}
+          text="Submit application"
+          btnClass="wmnds-btn--start wmnds-btn--disabled wmnds-m-t-md"
+          iconRight="general-chevron-right"
+        />
       </div>
     </form>
   );
