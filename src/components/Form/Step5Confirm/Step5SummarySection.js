@@ -30,8 +30,10 @@ function Step5SummarySection() {
     PhoneNumber,
   } = formDataState.Application;
 
+  // return the text for the CustomerType field
   const CustomerTypeText = () => {
     let text;
+    // if CustomerTypeStep2 exists then CustomerType won't be SwiftPortal
     if (CustomerTypeStep2) {
       if (CustomerType !== 'PaperTicket') {
         text = 'Swift Card';
@@ -54,6 +56,7 @@ function Step5SummarySection() {
     return text;
   };
 
+  // returns the text for the CustomerTypeStep2 field
   const CustomerTypeStep2Text = () => {
     let text;
     if (CustomerTypeStep2) {
@@ -150,6 +153,7 @@ function Step5SummarySection() {
                 <tr>
                   <th scope="row">Ticket last used</th>
                   <td width="60%">
+                    {/* Render image from base64 (generated in file upload step) */}
                     <img
                       src={`data:image/${PhotoBase64Extension};base64, ${PhotoBase64}`}
                       alt="Ticket upload"

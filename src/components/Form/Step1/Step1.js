@@ -17,22 +17,18 @@ const Step1 = ({ currentStep, setIsPaperTicket, setIsSwiftOnMobile }) => {
     continueButton,
   } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
 
-  const mustRewrite = (a, b) => {
-    let rewrite;
-    if (
-      (a === 'Scratchcard' && b === 'ClassPass') ||
-      (a === 'ClassPass' && b === 'Scratchcard')
-    ) {
-      rewrite = false;
-    } else {
-      rewrite = true;
-    }
-    return rewrite;
-  };
-
   // Update customerType on radio button change
   const handleRadioChange = (e) => {
     formDataDispatch({ type: 'UPDATE_CUSTOMER_TYPE', payload: e.target.value });
+
+    // function to compare previous and new values to check if we should clear the form data
+    const mustRewrite = (previousValue, newValue) => {
+      // if switching between Scratchcard & classpass, we don't need to clear the form data as the steps are the same
+      return !(
+        (previousValue === 'Scratchcard' && newValue === 'ClassPass') ||
+        (previousValue === 'ClassPass' && newValue === 'Scratchcard')
+      );
+    };
 
     if (mustRewrite(formDataState.Application.CustomerType, e.target.value)) {
       // check if user has reached confirmation before

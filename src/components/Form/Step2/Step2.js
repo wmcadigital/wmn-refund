@@ -57,7 +57,6 @@ const Step2 = ({ currentStep, isPaperTicket }) => {
       text: 'I pay for it through my company',
       value: 'Corporate',
     },
-
     {
       text:
         'I bought it from a West Midlands Network travel shop, railway station ticket office or Payzone shop',
