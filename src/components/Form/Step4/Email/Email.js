@@ -1,19 +1,19 @@
 import React from 'react';
 // Import contexts
-import {useFormContext} from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 
 const Email = () => {
-  const {register} = useFormContext();
-  const emailRegex = /^[\w!#$%&amp;'*+\-/=?^_`{|}~]+(\.[\w!#$%&amp;'*+\-/=?^_`{|}~]+)*@((([-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$/
+  const { register } = useFormContext();
+  const emailRegex = /^[\w!#$%&amp;'*+\-/=?^_`{|}~]+(\.[\w!#$%&amp;'*+\-/=?^_`{|}~]+)*@((([-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$/;
 
   const emailValidation = register({
     required: 'Enter an email address',
     pattern: {
       value: emailRegex,
       message: 'Enter an email address in the correct format',
-    }
+    },
   });
 
   return (

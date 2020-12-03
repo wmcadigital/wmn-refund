@@ -19,7 +19,7 @@ const SoMTicketNumber = () => {
         label="Ticket number"
         inputmode="numeric"
         fieldValidation={register({
-          required: 'Enter ticket number'
+          required: 'Enter ticket number',
         })}
       />
     </fieldset>
