@@ -12,6 +12,7 @@ const ChangeLink = ({ changeStepTo }) => {
       type: 'UPDATE_STEP',
       payload: st,
     });
+    window.scrollTo(0, 0);
   };
 
   return (

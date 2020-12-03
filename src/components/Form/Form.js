@@ -43,6 +43,7 @@ const Form = ({
       type: 'UPDATE_STEP',
       payload: step,
     });
+    window.scrollTo(0, 0);
   };
 
   const goBack = () => {

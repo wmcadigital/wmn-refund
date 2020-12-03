@@ -21,6 +21,7 @@ const useStepLogic = (formRef, setCannotProcess) => {
       type: 'UPDATE_STEP',
       payload: step,
     });
+    window.scrollTo(0, 0);
   };
 
   // Update the current step to the correct one depending on users selection

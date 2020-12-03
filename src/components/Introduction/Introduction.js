@@ -7,6 +7,7 @@ import Title from 'components/shared/Title/Title';
 const Introduction = ({ setIsFormStarted }) => {
   const handleClick = () => {
     setIsFormStarted(true);
+    window.scrollTo(0, 0);
   };
 
   // const warningMessage = (
