@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import dompurify from 'dompurify';
+import InputMask from 'react-input-mask';
 
 // Import contexts
 import { useFormContext } from 'react-hook-form';
@@ -13,6 +14,8 @@ const Input = ({
   className,
   inputmode,
   label,
+  mask,
+  maskPlaceholder,
   name,
   spellcheck,
   disabled,
@@ -23,7 +26,24 @@ const Input = ({
   const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
 
   // Set input to render below
-  const input = (
+  const input = mask ? (
+    <InputMask
+      className={`wmnds-fe-input ${
+        errors[name] ? 'wmnds-fe-input--error' : ''
+      }`}
+      mask={mask}
+      maskPlaceholder={maskPlaceholder}
+      id={name}
+      name={name}
+      type={type}
+      defaultValue={formDataState.Application[name]}
+      inputMode={inputmode}
+      spellCheck={spellcheck}
+      disabled={disabled}
+      autoComplete={autocomplete}
+      ref={fieldValidation}
+    />
+  ) : (
     <>
       <input
         className={`wmnds-fe-input ${
@@ -78,6 +98,8 @@ Input.propTypes = {
   disabled: PropTypes.bool,
   type: PropTypes.string,
   fieldValidation: PropTypes.func,
+  mask: PropTypes.string,
+  maskPlaceholder: PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -88,6 +110,8 @@ Input.defaultProps = {
   spellcheck: false,
   type: 'text',
   fieldValidation: null,
+  mask: null,
+  maskPlaceholder: null,
 };
 
 export default Input;

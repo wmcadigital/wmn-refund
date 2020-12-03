@@ -54,6 +54,7 @@ const SwiftCard = () => {
       <Input
         className="wmnds-col-1 wmnds-col-sm-3-4 wmnds-col-md-1-2"
         name="CardNumber"
+        mask="999999 9999 9999 9999"
         label={label}
         inputmode="numeric"
         fieldValidation={swiftCardValidation}
