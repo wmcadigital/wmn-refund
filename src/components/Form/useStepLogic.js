@@ -6,12 +6,14 @@ import { FormDataContext } from 'globalState/FormDataContext';
 import GenericError from 'components/shared/Errors/GenericError';
 import Button from 'components/shared/Button/Button';
 
-const useStepLogic = (formRef) => {
+const useStepLogic = (formRef, setCannotProcess) => {
   const { register, errors, trigger, getValues } = useFormContext(); // Get useForm methods
 
   const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
 
   const [isContinuePressed, setIsContinuePressed] = useState(false); // State for tracking if continue has been pressed
+
+  const { CustomerType } = formDataState;
 
   // Function for setting the step of the form
   const setStep = (step) => {
@@ -60,24 +62,24 @@ const useStepLogic = (formRef) => {
       if (!formDataState.hasReachedConfirmation) {
         // step logic that applies to step 1 only
         if (formDataState.currentStep === 1) {
-          // SwiftCard, paperTicket
-          if (
-            formDataState.CustomerType === 'SwiftCard' ||
-            formDataState.CustomerType === 'PaperTicket'
-          ) {
-            setStep(currentStep + 1); // Go to next step (2) so we can set customerType
+          switch (CustomerType) {
+            case 'SwiftCard':
+            case 'PaperTicket':
+              setStep(currentStep + 1); // Go to next step (2) so we can set customerType
+              break;
+            case 'Scratchcard':
+            case 'ClassPass':
+              setCannotProcess(true);
+              setStep(currentStep + 3); // Skip to last steps as payment info isn't needed for scratchcard and classPass
+              break;
+            default:
+              setCannotProcess(true);
+              setStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
+              break;
           }
-          // classPass, scratchcard
-          else if (
-            formDataState.CustomerType === 'Scratchcard' ||
-            formDataState.CustomerType === 'ClassPass'
-          ) {
-            setStep(currentStep + 3); // Skip to last steps as payment info isn't needed for scratchcard and classPass
-          }
-          // swiftOnMobile;
-          else {
-            setStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
-          }
+        }
+        if (formDataState.currentStep === 2 && CustomerType !== 'DirectDebit') {
+          setCannotProcess(true);
         }
         // if not on step 1...
         else {

@@ -6,10 +6,12 @@ import Form from 'components/Form/Form';
 import Introduction from 'components/Introduction/Introduction';
 import SuccessPage from 'components/SuccessPage/SuccessPage';
 import ErrorPage from 'components/ErrorPage/ErrorPage';
+import NoProcessPage from 'components/NoProcessPage/NoProcessPage';
 
 function App() {
   const [isFormStarted, setIsFormStarted] = useState(false);
   const [formSubmitStatus, setFormSubmitStatus] = useState(null);
+  const [cannotProcess, setCannotProcess] = useState(null);
 
   return (
     <div className="wmnds-p-b-lg wmnds-grid">
@@ -17,16 +19,22 @@ function App() {
       {!isFormStarted && <Introduction setIsFormStarted={setIsFormStarted} />}
 
       <FormProvider>
-        {isFormStarted && formSubmitStatus === null && (
-          <Form
-            formSubmitStatus={formSubmitStatus}
-            setFormSubmitStatus={setFormSubmitStatus}
-            setIsFormStarted={setIsFormStarted}
-          />
+        {!cannotProcess ? (
+          <>
+            {isFormStarted && formSubmitStatus === null && (
+              <Form
+                formSubmitStatus={formSubmitStatus}
+                setFormSubmitStatus={setFormSubmitStatus}
+                setCannotProcess={setCannotProcess}
+                setIsFormStarted={setIsFormStarted}
+              />
+            )}
+          </>
+        ) : (
+          <NoProcessPage />
         )}
 
         {formSubmitStatus && <SuccessPage />}
-
         {formSubmitStatus === false && <ErrorPage />}
       </FormProvider>
     </div>

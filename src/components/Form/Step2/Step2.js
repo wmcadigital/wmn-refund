@@ -7,7 +7,7 @@ import useStepLogic from 'components/Form/useStepLogic';
 import Radios from 'components/shared/FormElements/Radios/Radios';
 import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo';
 
-const Step2 = ({ isPaperTicket }) => {
+const Step2 = ({ isPaperTicket, setCannotProcess }) => {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
   const {
     register,
@@ -16,7 +16,7 @@ const Step2 = ({ isPaperTicket }) => {
     handleSubmit,
     showGenericError,
     continueButton,
-  } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
+  } = useStepLogic(formRef, setCannotProcess); // Custom hook for handling continue button (validation, errors etc)
 
   // Update customerType on radio button change
   const handleRadioChange = (e) => {
@@ -102,6 +102,7 @@ const Step2 = ({ isPaperTicket }) => {
 
 Step2.propTypes = {
   isPaperTicket: PropTypes.bool.isRequired,
+  setCannotProcess: PropTypes.func.isRequired,
 };
 
 export default Step2;
