@@ -1,11 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import dompurify from 'dompurify';
 
+// Import contexts
+import { FormDataContext } from 'globalState/FormDataContext';
+
 const { sanitize } = dompurify;
 
-const Radio = ({ name, onChange, onBlur, fieldValidation, text, value }) => {
+const Radio = ({ name, onChange, fieldValidation, text, value }) => {
+  const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
+
   return (
     <>
       <label className="wmnds-fe-radios__container">
@@ -17,7 +22,7 @@ const Radio = ({ name, onChange, onBlur, fieldValidation, text, value }) => {
           type="radio"
           ref={fieldValidation}
           onChange={onChange}
-          // onBlur={onBlur}
+          defaultChecked={formDataState.Application[name] === value}
         />
         <span className="wmnds-fe-radios__checkmark" />
       </label>
@@ -28,14 +33,14 @@ const Radio = ({ name, onChange, onBlur, fieldValidation, text, value }) => {
 Radio.propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
-  onBlur: PropTypes.func,
   text: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+  fieldValidation: PropTypes.func,
 };
 
 Radio.defaultProps = {
   onChange: null,
-  onBlur: null,
+  fieldValidation: null,
 };
 
 export default Radio;

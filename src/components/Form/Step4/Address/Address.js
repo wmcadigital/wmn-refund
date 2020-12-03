@@ -21,7 +21,7 @@ const Address = () => {
         label="Building and street"
         autocomplete="address-line1"
         fieldValidation={register({
-          required: 'Enter building and street'
+          required: 'Enter building and street',
         })}
       />
       <Input
@@ -29,6 +29,9 @@ const Address = () => {
         name="AddressLine2"
         label="Address line 2"
         autocomplete="address-line2"
+        fieldValidation={register({
+          required: false,
+        })}
       />
 
       {/* Town/City and County */}
@@ -38,7 +41,7 @@ const Address = () => {
         label="Town or city"
         autocomplete="address-level2"
         fieldValidation={register({
-          required: 'Enter town/city'
+          required: 'Enter town/city',
         })}
       />
       <Input
@@ -46,6 +49,9 @@ const Address = () => {
         name="AddressLine3"
         label="County"
         autocomplete="address-county"
+        fieldValidation={register({
+          required: false,
+        })}
       />
 
       {/* Postcode */}
@@ -58,8 +64,9 @@ const Address = () => {
           required: 'Enter a postcode',
           pattern: {
             value: postcodeRegex,
-            message: 'Enter a postcode in the correct format, for example B19 3SD',
-          }
+            message:
+              'Enter a postcode in the correct format, for example B19 3SD',
+          },
         })}
       />
     </fieldset>

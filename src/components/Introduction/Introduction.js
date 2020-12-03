@@ -2,11 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'components/shared/Icon/Icon';
 import Title from 'components/shared/Title/Title';
+import WarningText from 'components/shared/WarningText/WarningText';
 
 const Introduction = ({ setIsFormStarted }) => {
   const handleClick = () => {
     setIsFormStarted(true);
   };
+
+  const warningMessage = (
+    <p>
+      You can only get a refund using this service if you paid for your ticket
+      by Direct Debit
+    </p>
+  );
 
   return (
     <>
@@ -15,39 +23,32 @@ const Introduction = ({ setIsFormStarted }) => {
         <h2>Use this service to:</h2>
         <ul>
           <li>
-            Apply for a refund of your Swift card, paper ticket or Swift on
-            Mobile ticket if you have been unable to travel due to the
-            Coronavirus outbreak
-          </li>
-          <li>
-            Let us know that you would like to exchange your Class pass or
-            Scratchcards
+            Get a refund of your Swift card or paper ticket if you pay by Direct
+            Debit
           </li>
         </ul>
         <p>This process takes around 5 minutes.</p>
+        <WarningText type="warning" message={warningMessage} />
         <h2>Before you start</h2>
         <ul>
+          <li>You will need your Swift card or paper ticket</li>
           <li>
-            You will need your Swift card, paper ticket or your Swift on Mobile
-            device
-          </li>
-          <li>
-            If the long number on your Swift card begins with{' '}
-            <strong>633597 0112</strong>, it is managed by National Express West
-            Midlands and you will need to request a refund by email:{' '}
+            If the long number on your Swift card begins with 633597{' '}
+            <strong>0112</strong>, it is managed by{' '}
             <a
-              href="mailto:buspass@nationalexpress.com?subject=COVID-19 Refund Request"
+              href="https://nxbus.co.uk/"
               title="Request a refund for a National Express Swift card"
-              target="_self"
+              target="_blank"
               className="wmnds-link"
+              rel="noopener noreferrer"
             >
-              buspass@nationalexpress.com
+              National Express West Midlands
             </a>
           </li>
           <li>
-            If you pay by Direct Debit, you will need your Direct Debit
-            reference number. This begins with <strong>6</strong> and is shown
-            next to every payment to WMCA on your bank statement
+            You will need your Direct Debit reference number. This begins with{' '}
+            <strong>6</strong> and is shown next to every payment to WMCA on
+            your bank statement
           </li>
         </ul>
         <br />

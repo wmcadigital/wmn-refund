@@ -6,15 +6,11 @@ import useStepLogic from 'components/Form/useStepLogic';
 import Radios from 'components/shared/FormElements/Radios/Radios';
 import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo';
 
-const Step1 = ({
-  currentStep,
-  setIsPaperTicket,
-  setIsSwiftOnMobile,
-  setCannotProcess,
-}) => {
+const Step1 = ({ setIsPaperTicket, setIsSwiftOnMobile, setCannotProcess }) => {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
   const {
     register,
+    formDataState,
     formDataDispatch,
     handleSubmit,
     showGenericError,
@@ -24,6 +20,32 @@ const Step1 = ({
   // Update customerType on radio button change
   const handleRadioChange = (e) => {
     formDataDispatch({ type: 'UPDATE_CUSTOMER_TYPE', payload: e.target.value });
+
+    // function to compare previous and new values to check if we should clear the form data
+    const mustRewrite = (previousValue, newValue) => {
+      // if switching between Scratchcard & classpass, we don't need to clear the form data as the steps are the same
+      return !(
+        (previousValue === 'Scratchcard' && newValue === 'ClassPass') ||
+        (previousValue === 'ClassPass' && newValue === 'Scratchcard')
+      );
+    };
+
+    if (mustRewrite(formDataState.Application.CustomerType, e.target.value)) {
+      // check if user has reached confirmation before
+      if (formDataState.hasReachedConfirmation) {
+        // set hasReachedConfirmation false to allow user to continue to next question
+        formDataDispatch({
+          type: 'REACHED_CONFIRMATION',
+          payload: false,
+        });
+      }
+
+      // update form data removing unnecessary fields
+      formDataDispatch({
+        type: 'REWRITE_FORM_DATA',
+        payload: {},
+      });
+    }
 
     // If paper ticket chosen
     if (e.target.value === 'PaperTicket') {
@@ -42,8 +64,8 @@ const Step1 = ({
   return (
     <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
       <SectionStepInfo
-        section={`Section ${currentStep} of 4`}
-        description="About your ticket"
+        section="Section 1 of 3"
+        description="Before you start"
       />
 
       {/* Show generic error message */}
@@ -82,7 +104,6 @@ const Step1 = ({
 };
 
 Step1.propTypes = {
-  currentStep: PropTypes.number.isRequired,
   setIsPaperTicket: PropTypes.func.isRequired,
   setIsSwiftOnMobile: PropTypes.func.isRequired,
   setCannotProcess: PropTypes.func.isRequired,

@@ -14,26 +14,26 @@ function App() {
   const [cannotProcess, setCannotProcess] = useState(null);
 
   return (
-    <div className="wmnds-p-t-lg wmnds-p-b-lg wmnds-grid">
+    <div className="wmnds-p-b-lg wmnds-grid">
       {/* If form isn't started, show intro...else show form */}
       {!isFormStarted && <Introduction setIsFormStarted={setIsFormStarted} />}
-
 
       <FormProvider>
         {!cannotProcess ? (
           <>
             {isFormStarted && formSubmitStatus === null && (
               <Form
-              formSubmitStatus={formSubmitStatus}
-              setFormSubmitStatus={setFormSubmitStatus}
-              setCannotProcess={setCannotProcess}
+                formSubmitStatus={formSubmitStatus}
+                setFormSubmitStatus={setFormSubmitStatus}
+                setCannotProcess={setCannotProcess}
+                setIsFormStarted={setIsFormStarted}
               />
             )}
           </>
         ) : (
           <NoProcessPage />
         )}
-            
+
         {formSubmitStatus && <SuccessPage />}
         {formSubmitStatus === false && <ErrorPage />}
       </FormProvider>

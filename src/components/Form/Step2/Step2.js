@@ -7,10 +7,11 @@ import useStepLogic from 'components/Form/useStepLogic';
 import Radios from 'components/shared/FormElements/Radios/Radios';
 import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo';
 
-const Step2 = ({ currentStep, isPaperTicket, setCannotProcess }) => {
+const Step2 = ({ isPaperTicket, setCannotProcess }) => {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
   const {
     register,
+    formDataState,
     formDataDispatch,
     handleSubmit,
     showGenericError,
@@ -18,11 +19,29 @@ const Step2 = ({ currentStep, isPaperTicket, setCannotProcess }) => {
   } = useStepLogic(formRef, setCannotProcess); // Custom hook for handling continue button (validation, errors etc)
 
   // Update customerType on radio button change
-  const handleRadioChange = (e) =>
+  const handleRadioChange = (e) => {
     formDataDispatch({
       type: 'UPDATE_CUSTOMER_TYPE',
       payload: e.target.value,
     });
+
+    // check if user has reached confirmation before
+    if (formDataState.hasReachedConfirmation) {
+      // set hasReachedConfirmation false to allow user to continue to next question
+      formDataDispatch({
+        type: 'REACHED_CONFIRMATION',
+        payload: false,
+      });
+    }
+
+    // update form data removing unnecessary fields
+    formDataDispatch({
+      type: 'REWRITE_FORM_DATA',
+      payload: {
+        CustomerType: formDataState.Application.CustomerType,
+      },
+    });
+  };
 
   //  Set up default radio options (shown for both paper ticket and swift card)
   const radios = [
@@ -38,7 +57,6 @@ const Step2 = ({ currentStep, isPaperTicket, setCannotProcess }) => {
       text: 'I pay for it through my company',
       value: 'Corporate',
     },
-
     {
       text:
         'I bought it from a West Midlands Network travel shop, railway station ticket office or Payzone shop',
@@ -61,8 +79,8 @@ const Step2 = ({ currentStep, isPaperTicket, setCannotProcess }) => {
   return (
     <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
       <SectionStepInfo
-        section={`Section ${currentStep} of 4`}
-        description="Tell us about your ticket"
+        section="Section 2 of 3"
+        description="About your ticket"
       />
       {/* Show generic error message */}
       {showGenericError}
@@ -83,7 +101,6 @@ const Step2 = ({ currentStep, isPaperTicket, setCannotProcess }) => {
 };
 
 Step2.propTypes = {
-  currentStep: PropTypes.number.isRequired,
   isPaperTicket: PropTypes.bool.isRequired,
   setCannotProcess: PropTypes.func.isRequired,
 };

@@ -9,7 +9,7 @@ export const FormProvider = (props) => {
   const initialState = {
     currentStep: 1,
     CustomerType: '',
-    formData: {},
+    hasReachedConfirmation: false,
     Application: {},
   };
 
@@ -33,6 +33,14 @@ export const FormProvider = (props) => {
       }
 
       // Remove the waypoint by the id
+      case 'REWRITE_FORM_DATA': {
+        return {
+          ...state,
+          Application: action.payload,
+        };
+      }
+
+      // Remove the waypoint by the id
       case 'ADD_FORM_REF': {
         return {
           ...state,
@@ -45,6 +53,13 @@ export const FormProvider = (props) => {
         return {
           ...state,
           currentStep: action.payload,
+        };
+      }
+
+      case 'REACHED_CONFIRMATION': {
+        return {
+          ...state,
+          hasReachedConfirmation: action.payload,
         };
       }
 
