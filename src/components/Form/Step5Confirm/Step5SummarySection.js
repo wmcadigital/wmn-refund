@@ -50,6 +50,23 @@ function Step5SummarySection() {
   const getDateString = (d) => {
     return `${d.split('-')[2]} ${months[d.split('-')[1]]} ${d.split('-')[0]}`;
   };
+
+  // regex fn to spit out phone number in better format
+  const formatPhone = (num) => {
+    let tel;
+    if (num && num.indexOf('+44') === 0) {
+      tel = `0${num.substring(3)}`;
+    } else {
+      tel = num;
+    }
+    if (tel.indexOf('07') === 0) {
+      tel = tel.replace(/(\d{5})(\d{6})/, '$1 $2');
+    } else {
+      tel = tel.replace(/(\d{4})(\d{3})(\d{4})/, '$1 $2 $3');
+    }
+    return tel;
+  };
+
   // return the text for the CustomerType field
   const CustomerTypeText = () => {
     let text;
@@ -237,7 +254,9 @@ function Step5SummarySection() {
           {PhoneNumber && (
             <tr>
               <th scope="row">Phone number</th>
-              <td className={`${style.tableColspan2}`}>{PhoneNumber}</td>
+              <td className={`${style.tableColspan2}`}>
+                {formatPhone(PhoneNumber)}
+              </td>
             </tr>
           )}
           {AddressLine1 && (
