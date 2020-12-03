@@ -137,7 +137,7 @@ function Step5SummarySection() {
           )}
           {CustomerTypeStep2 && (
             <tr>
-              <th scope="row">Purchased via</th>
+              <th scope="row">Paid through</th>
               <td>
                 {CustomerTypeStep2Text()}{' '}
                 {CustomerTypeStep2 === 'Corporate' && `(${CompanyName})`}
