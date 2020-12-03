@@ -17,7 +17,7 @@ const Name = () => {
         label="First name"
         autocomplete="given-name"
         fieldValidation={register({
-          required: 'Enter a first name'
+          required: 'Enter a first name',
         })}
       />
       <Input
@@ -26,7 +26,7 @@ const Name = () => {
         label="Last name"
         autocomplete="family-name"
         fieldValidation={register({
-          required: 'Enter a last name'
+          required: 'Enter a last name',
         })}
       />
     </fieldset>

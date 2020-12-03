@@ -6,7 +6,7 @@ import Input from 'components/shared/FormElements/Input/Input';
 import paperTicketImg from 'assets/images/paper-ticket-example.jpg';
 
 const TicketNumber = () => {
-  const {register} = useFormContext();
+  const { register } = useFormContext();
 
   return (
     <fieldset className="wmnds-fe-fieldset">
@@ -32,8 +32,9 @@ const TicketNumber = () => {
         fieldValidation={register({
           required: 'Enter a ticket number',
           validate: {
-            length: value => value.length === 5 ||  'Ticket number must be 5 digits'
-          }
+            length: (value) =>
+              value.length === 5 || 'Ticket number must be 5 digits',
+          },
         })}
       />
     </fieldset>
