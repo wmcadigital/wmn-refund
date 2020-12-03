@@ -2,19 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'components/shared/Icon/Icon';
 import Title from 'components/shared/Title/Title';
-import WarningText from 'components/shared/WarningText/WarningText';
+// import WarningText from 'components/shared/WarningText/WarningText';
 
 const Introduction = ({ setIsFormStarted }) => {
   const handleClick = () => {
     setIsFormStarted(true);
   };
 
-  const warningMessage = (
-    <p>
-      You can only get a refund using this service if you paid for your ticket
-      by Direct Debit
-    </p>
-  );
+  // const warningMessage = (
+  //   <p>
+  //     You can only get a refund using this service if you paid for your ticket
+  //     by Direct Debit
+  //   </p>
+  // );
 
   return (
     <>
@@ -22,13 +22,11 @@ const Introduction = ({ setIsFormStarted }) => {
       <div className="wmnds-col-1 wmnds-col-md-3-4 wmnds-col-lg-1-2">
         <h2>Use this service to:</h2>
         <ul>
-          <li>
-            Get a refund of your Swift card or paper ticket if you pay by Direct
-            Debit
-          </li>
+          <li>Cancel your Direct Debit</li>
+          <li>Request a refund for unused travel</li>
         </ul>
         <p>This process takes around 5 minutes.</p>
-        <WarningText type="warning" message={warningMessage} />
+        {/* <WarningText type="warning" message={warningMessage} /> */}
         <h2>Before you start</h2>
         <ul>
           <li>You will need your Swift card or paper ticket</li>
@@ -55,7 +53,7 @@ const Introduction = ({ setIsFormStarted }) => {
         <p>
           There is guidance available to show{' '}
           <a
-            href="https://wmnetwork.co.uk/coronavirus/"
+            href="https://wmnetwork.co.uk/refund-workings"
             title="How we will work out your refund"
             target="_self"
             className="wmnds-link"
