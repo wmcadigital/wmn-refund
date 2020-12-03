@@ -57,8 +57,11 @@ const DirectDebit = () => {
         </h3>
         <p>
           This is the <strong>6-digit number</strong> beginning with a{' '}
-          <strong>6</strong>.<br /> It is shown next to every payment to WMCA
-          for your Direct Debit on your bank statement.
+          <strong>6</strong>.
+        </p>
+        <p>
+          It is shown next to every payment to WMCA for your Direct Debit on
+          your bank statement.
         </p>
       </legend>
       <Input
