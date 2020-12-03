@@ -37,6 +37,7 @@ function Step5Confirm({ setFormSubmitStatus }) {
         <Button
           isFetching={isFetching}
           disabled={isFetching}
+          type="submit"
           text="Submit application"
           btnClass="wmnds-btn--start wmnds-btn--disabled wmnds-m-t-md"
           iconRight="general-chevron-right"
