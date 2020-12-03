@@ -68,7 +68,7 @@ const DirectDebit = () => {
         disabled={noDDNumber}
       />
       <div className="wmnds-fe-group">
-        <details className="wmnds-details" open={noDDNumber !== null}>
+        <details className="wmnds-details">
           <summary className="wmnds-link">
             I can&rsquo;t find my Direct Debit reference
           </summary>
