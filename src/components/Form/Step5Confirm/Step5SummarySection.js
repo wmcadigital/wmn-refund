@@ -92,7 +92,7 @@ function Step5SummarySection() {
         <tbody>
           {CustomerType && (
             <tr>
-              <th scope="row">Type of Ticket</th>
+              <th scope="row">Type of ticket</th>
               <td>{CustomerTypeText()}</td>
               <td className="wmnds-text-align-right wmnds-p-r-none">
                 <ChangeLink changeStepTo={1} />
@@ -126,7 +126,7 @@ function Step5SummarySection() {
             <tbody>
               {DirectDebitNumber && (
                 <tr>
-                  <th scope="row">Direct Debit Reference</th>
+                  <th scope="row">Direct Debit reference</th>
                   <td className={`${style.tableColspan2}`}>
                     {DirectDebitNumber === '0'
                       ? `I can't find my Direct Debit reference`
@@ -136,19 +136,19 @@ function Step5SummarySection() {
               )}
               {CardNumber && (
                 <tr>
-                  <th scope="row">Swift Card Number</th>
+                  <th scope="row">Swift card number</th>
                   <td className={`${style.tableColspan2}`}>{CardNumber}</td>
                 </tr>
               )}
               {TicketNumber && (
                 <tr>
-                  <th scope="row">Ticket Number</th>
+                  <th scope="row">Ticket number</th>
                   <td className={`${style.tableColspan2}`}>{TicketNumber}</td>
                 </tr>
               )}
               {LastUsedDate && (
                 <tr>
-                  <th scope="row">Ticket last used</th>
+                  <th scope="row">Photo of ripped ticket</th>
                   <td className={`${style.tableColspan2}`}>{LastUsedDate}</td>
                 </tr>
               )}
@@ -195,13 +195,13 @@ function Step5SummarySection() {
           )}
           {DateOfBirth && (
             <tr>
-              <th scope="row">Date of Birth</th>
+              <th scope="row">Date of birth</th>
               <td className={`${style.tableColspan2}`}>{DateOfBirth}</td>
             </tr>
           )}
           {CompanyName && (
             <tr>
-              <th scope="row">Company Name</th>
+              <th scope="row">Company name</th>
               <td className={`${style.tableColspan2}`}>{CompanyName}</td>
             </tr>
           )}
@@ -213,7 +213,7 @@ function Step5SummarySection() {
           )}
           {PhoneNumber && (
             <tr>
-              <th scope="row">Phone Number</th>
+              <th scope="row">Phone number</th>
               <td className={`${style.tableColspan2}`}>{PhoneNumber}</td>
             </tr>
           )}
