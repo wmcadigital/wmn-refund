@@ -31,6 +31,25 @@ function Step5SummarySection() {
     CovidTravel,
   } = formDataState.Application;
 
+  // used for formatting date
+  const months = {
+    '01': 'January',
+    '02': 'February',
+    '03': 'March',
+    '04': 'April',
+    '05': 'May',
+    '06': 'June',
+    '07': 'July',
+    '08': 'August',
+    '09': 'September',
+    10: 'October',
+    11: 'November',
+    12: 'December',
+  };
+
+  const getDateString = (d) => {
+    return `${d.split('-')[2]} ${months[d.split('-')[1]]} ${d.split('-')[0]}`;
+  };
   // return the text for the CustomerType field
   const CustomerTypeText = () => {
     let text;
@@ -148,8 +167,10 @@ function Step5SummarySection() {
               )}
               {LastUsedDate && (
                 <tr>
-                  <th scope="row">Photo of ripped ticket</th>
-                  <td className={`${style.tableColspan2}`}>{LastUsedDate}</td>
+                  <th scope="row">Ticket last used</th>
+                  <td className={`${style.tableColspan2}`}>
+                    {getDateString(LastUsedDate)}
+                  </td>
                 </tr>
               )}
               {CovidTravel && (
@@ -163,7 +184,7 @@ function Step5SummarySection() {
               )}
               {PhotoBase64 && (
                 <tr>
-                  <th scope="row">Ticket last used</th>
+                  <th scope="row">Photo of ripped ticket</th>
                   <td width="60%">
                     {/* Render image from base64 (generated in file upload step) */}
                     <img
@@ -196,7 +217,9 @@ function Step5SummarySection() {
           {DateOfBirth && (
             <tr>
               <th scope="row">Date of birth</th>
-              <td className={`${style.tableColspan2}`}>{DateOfBirth}</td>
+              <td className={`${style.tableColspan2}`}>
+                {getDateString(DateOfBirth)}
+              </td>
             </tr>
           )}
           {CompanyName && (
