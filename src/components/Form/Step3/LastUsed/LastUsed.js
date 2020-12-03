@@ -20,7 +20,7 @@ const LastUsed = () => {
     },
     validate: {
       lastUsed: (value) =>
-        value > '2020-03-16' ||
+        value >= '2020-03-16' ||
         'We can only issue refunds from the 16 March 2020. If you stopped travelling before this date, please still use 16 March 2020.',
       pastDate: (value) =>
         pastDate(value) || 'Last used date must be today or in the past',
