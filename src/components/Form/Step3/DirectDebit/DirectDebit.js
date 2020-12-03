@@ -5,6 +5,8 @@ import { FormDataContext } from 'globalState/FormDataContext';
 // Import components
 import Input from 'components/shared/FormElements/Input/Input';
 import InputCheckbox from 'components/shared/FormElements/Input/InputCheckbox';
+// Style
+import style from './DirectDebit.module.scss';
 
 const DirectDebit = () => {
   const label = 'Direct Debit reference'; // Used on input and for validation
@@ -60,7 +62,9 @@ const DirectDebit = () => {
         </p>
       </legend>
       <Input
-        className="wmnds-col-1-2 wmnds-col-sm-1-5"
+        className={`wmnds-col-1-2 wmnds-col-sm-1-5 ${
+          noDDNumber && style.disabled
+        }`}
         name="DirectDebitNumber"
         label={label}
         inputmode="numeric"
