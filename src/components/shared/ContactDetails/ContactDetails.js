@@ -30,7 +30,9 @@ function ContactDetails({ socialMedia }) {
 
 ContactDetails.propTypes = {
   socialMedia: PropTypes.bool,
-  telephone: PropTypes.string,
+};
+ContactDetails.defaultProps = {
+  socialMedia: false,
 };
 
 export default ContactDetails;
