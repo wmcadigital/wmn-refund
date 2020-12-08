@@ -1,0 +1,15 @@
+.asLink {
+  display: block;
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  /*optional*/
+  text-decoration: underline;
+  cursor: pointer;
+}
+button.asLink {
+  font-size: 1rem;
+}
+.errorLink {
+  color: #d4351c;
+}
