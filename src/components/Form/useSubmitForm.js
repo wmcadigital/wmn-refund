@@ -25,6 +25,9 @@ const useSubmitForm = (formRef, setFormSubmitStatus) => {
     if (result) {
       formDataDispatch({ type: 'UPDATE_FORM_DATA', payload: getValues() });
 
+      // remove 'Error: ' from title as there are no errors
+      document.title = document.title.replace('Error: ', '');
+
       const dataToSend = {
         CustomerType: formDataState.CustomerType,
         Application: {
@@ -95,6 +98,8 @@ const useSubmitForm = (formRef, setFormSubmitStatus) => {
     // else, errors are true...
     else {
       window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
+      // add 'Error: ' to title as there are errors
+      document.title = `Error: ${document.title}`;
     }
   };
 

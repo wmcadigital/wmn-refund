@@ -32,6 +32,8 @@ const useStepLogic = (formRef, setCannotProcess) => {
     setIsContinuePressed(true);
     // if no errors
     if (result) {
+      // remove 'Error: ' from title as there are no errors
+      document.title = document.title.replace('Error: ', '');
       if (Object.keys(getValues()).includes('UploadTicket')) {
         const payload = getValues();
 
@@ -70,17 +72,18 @@ const useStepLogic = (formRef, setCannotProcess) => {
               break;
             case 'Scratchcard':
             case 'ClassPass':
-              setCannotProcess(true);
+              setCannotProcess(true); // go to cannot process
               setStep(currentStep + 3); // Skip to last steps as payment info isn't needed for scratchcard and classPass
               break;
             default:
-              setCannotProcess(true);
+              setCannotProcess(true); // go to cannot process
               setStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
               break;
           }
         }
+        // if not direct debit, we can't currently process
         if (formDataState.currentStep === 2 && CustomerType !== 'DirectDebit') {
-          setCannotProcess(true);
+          setCannotProcess(true); // go to cannot process
         }
         // if not on step 1...
         else {
@@ -93,6 +96,8 @@ const useStepLogic = (formRef, setCannotProcess) => {
     // else, errors are true...
     else {
       window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
+      // add 'Error: ' to title as there are errors
+      document.title = `Error: ${document.title}`;
     }
   };
 
@@ -106,7 +111,7 @@ const useStepLogic = (formRef, setCannotProcess) => {
   );
 
   const showGenericError = Object.keys(errors).length > 0 &&
-    isContinuePressed && <GenericError />;
+    isContinuePressed && <GenericError errors={errors} />;
 
   return {
     setStep,
