@@ -8,12 +8,9 @@ import Button from 'components/shared/Button/Button';
 
 const useStepLogic = (formRef, setCannotProcess) => {
   const { register, errors, trigger, getValues } = useFormContext(); // Get useForm methods
-
   const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
-
   const [isContinuePressed, setIsContinuePressed] = useState(false); // State for tracking if continue has been pressed
-
-  const { CustomerType } = formDataState;
+  const { CustomerType, currentStep } = formDataState;
 
   // Function for setting the step of the form
   const setStep = (step) => {
@@ -28,7 +25,6 @@ const useStepLogic = (formRef, setCannotProcess) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const result = await trigger();
-    const { currentStep } = formDataState;
     setIsContinuePressed(true);
     // if no errors
     if (result) {
@@ -82,12 +78,12 @@ const useStepLogic = (formRef, setCannotProcess) => {
           }
         }
         // if not direct debit, we can't currently process
-        if (formDataState.currentStep === 2 && CustomerType !== 'DirectDebit') {
+        if (currentStep === 2 && CustomerType !== 'DirectDebit') {
           setCannotProcess(true); // go to cannot process
         }
         // if not on step 1...
         else {
-          setStep(formDataState.currentStep + 1);
+          setStep(currentStep + 1);
         }
       } else {
         setStep(5);
