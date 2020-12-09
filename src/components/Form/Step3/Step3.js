@@ -12,7 +12,7 @@ import SoMTicketNumber from './SoMTicketNumber/SoMTicketNumber';
 import UploadTicket from './UploadTicket/UploadTicket';
 import LastUsed from './LastUsed/LastUsed';
 import HowProcess from './HowProcess/HowProcess';
-import CovidTravel from './CovidTravel/CovidTravel';
+import CovidRefund from './CovidRefund/CovidRefund';
 
 const Step3 = ({ isPaperTicket, isSwiftOnMobile }) => {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
@@ -122,7 +122,7 @@ const Step3 = ({ isPaperTicket, isSwiftOnMobile }) => {
 
       <LastUsed />
 
-      <CovidTravel />
+      <CovidRefund />
 
       {/* Only show this based on the logic set near top of file */}
       {shouldRenderUpload && <UploadTicket />}

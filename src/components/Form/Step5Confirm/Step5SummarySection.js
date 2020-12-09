@@ -28,7 +28,7 @@ function Step5SummarySection() {
     PhotoBase64,
     PhotoBase64Extension,
     PhoneNumber,
-    CovidTravel,
+    CovidRefund,
   } = formDataState.Application;
 
   // used for formatting date
@@ -194,13 +194,15 @@ function Step5SummarySection() {
                   </td>
                 </tr>
               )}
-              {CovidTravel && (
+              {CovidRefund && (
                 <tr>
                   <th scope="row">
                     Did you stop using your ticket to travel because of the
                     coronavirus (COVID-19) pandemic?
                   </th>
-                  <td className={`${style.tableColspan2}`}>{CovidTravel}</td>
+                  <td className={`${style.tableColspan2}`}>
+                    {CovidRefund === 'true' ? 'Yes' : 'No'}
+                  </td>
                 </tr>
               )}
               {PhotoBase64 && (

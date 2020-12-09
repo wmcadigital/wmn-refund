@@ -5,7 +5,7 @@ import { useFormContext } from 'react-hook-form';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
 
-const CovidTravel = () => {
+const CovidRefund = () => {
   const [, formDispatch] = useContext(FormDataContext); // Get the state of form data from FormDataContext
   const { register } = useFormContext();
 
@@ -13,21 +13,21 @@ const CovidTravel = () => {
   const handleRadioChange = (e) =>
     formDispatch({
       type: 'UPDATE_FORM_DATA',
-      payload: { CovidTravel: e.target.value },
+      payload: { CovidRefund: e.target.value },
     });
 
   return (
     <Radios
-      name="CovidTravel"
+      name="CovidRefund"
       label="Did you stop using your ticket to travel because of the coronavirus (COVID-19) pandemic?"
       radios={[
         {
           text: 'Yes',
-          value: 'Yes',
+          value: true,
         },
         {
           text: `No`,
-          value: 'No',
+          value: false,
         },
       ]}
       onChange={handleRadioChange}
@@ -38,4 +38,4 @@ const CovidTravel = () => {
   );
 };
 
-export default CovidTravel;
+export default CovidRefund;
