@@ -168,7 +168,7 @@ function Step5SummarySection() {
                 <tr>
                   <th scope="row">Direct Debit reference</th>
                   <td className={`${style.tableColspan2}`}>
-                    {DirectDebitNumber === '0'
+                    {DirectDebitNumber === 'null'
                       ? `I can't find my Direct Debit reference`
                       : DirectDebitNumber}
                   </td>

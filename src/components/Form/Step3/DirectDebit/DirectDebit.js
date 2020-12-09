@@ -22,7 +22,7 @@ const DirectDebit = () => {
   useEffect(() => {
     // set the Direct debit number value to 0 if checkbox is selected
     if (noDDNumber) {
-      setValue('DirectDebitNumber', '0', { shouldValidate: true });
+      setValue('DirectDebitNumber', 'null', { shouldValidate: true });
     } else {
       setValue('DirectDebitNumber', '');
     }
@@ -31,18 +31,18 @@ const DirectDebit = () => {
   const ddNumValidation = register({
     required: `Enter a valid ${label}`,
     pattern: {
-      value: /^[0-9]+$/,
+      value: !noDDNumber && /^[0-9]+$/,
       message: `${label} must only include numbers`,
     },
     validate: {
       // DirectDebit reference should start with 6
       firstNumberCheck: (value) =>
         value.charAt(0) === '6' ||
-        value === '0' ||
+        value === 'null' ||
         `${label} is a number that begins with '6'`,
       // Must be 6 digits long
       lengthCheck: (value) =>
-        value.length === 6 || value === '0' || `${label} must be 6 digits`,
+        value.length === 6 || value === 'null' || `${label} must be 6 digits`,
     },
   });
 
