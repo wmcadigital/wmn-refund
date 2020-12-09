@@ -6,7 +6,7 @@ import useSubmitForm from '../useSubmitForm';
 import SummarySection from './Step5SummarySection';
 import Consent from './Step5ConsentForm';
 import { FormDataContext } from '../../../globalState/FormDataContext';
-// Inport components
+// Import components
 import Button from '../../shared/Button/Button';
 
 function Step5Confirm({ setFormSubmitStatus }) {

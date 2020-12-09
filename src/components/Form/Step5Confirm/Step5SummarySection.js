@@ -155,8 +155,12 @@ function Step5SummarySection() {
           <div
             className={`wmnds-m-b-sm wmnds-m-t-xl wmnds-grid wmnds-grid--justify-between ${style.serviceAdded}`}
           >
-            <h3 className="wmnds-col-2-3">Ticket Details</h3>
-            <ChangeLink changeStepTo={3} />
+            <div className="wmnds-col-2-3">
+              <h3>Ticket Details</h3>
+            </div>
+            <div className="wmnds-col-1-3 wmnds-text-align-right">
+              <ChangeLink changeStepTo={3} />
+            </div>
           </div>
           <table className="wmnds-table wmnds-m-b-xl wmnds-table--without-header">
             <tbody>
@@ -218,8 +222,12 @@ function Step5SummarySection() {
       <div
         className={`wmnds-m-b-sm wmnds-m-t-xl wmnds-grid wmnds-grid--justify-between ${style.serviceAdded}`}
       >
-        <h3 className="wmnds-col-2-3">Personal Details</h3>
-        <ChangeLink changeStepTo={4} />
+        <div className="wmnds-col-2-3">
+          <h3>Personal Details</h3>
+        </div>
+        <div className="wmnds-col-1-3 wmnds-text-align-right">
+          <ChangeLink changeStepTo={4} />
+        </div>
       </div>
       <table className="wmnds-table wmnds-m-b-xl wmnds-table--without-header">
         <tbody>
