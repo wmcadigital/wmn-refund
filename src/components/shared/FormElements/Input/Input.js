@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import dompurify from 'dompurify';
-import InputMask from 'react-input-mask';
+import InputMask from 'react-maskinput';
 
 // Import contexts
 import { useFormContext } from 'react-hook-form';
@@ -15,15 +15,22 @@ const Input = ({
   inputmode,
   label,
   mask,
-  maskPlaceholder,
+  maskChar,
   name,
   spellcheck,
   disabled,
   type,
   fieldValidation,
 }) => {
-  const { errors } = useFormContext();
+  const { errors, trigger } = useFormContext();
   const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
+  const [inputValue, setInputValue] = useState(formDataState.Application[name]);
+  const [isTouched, setIsTouched] = useState(false);
+
+  // Trigger validation every time input has been updated
+  useEffect(() => {
+    if (isTouched && inputValue) trigger(name);
+  }, [inputValue, name, isTouched, trigger]);
 
   // Set input to render below
   const input = mask ? (
@@ -32,16 +39,15 @@ const Input = ({
         errors[name] ? 'wmnds-fe-input--error' : ''
       }`}
       mask={mask}
-      maskPlaceholder={maskPlaceholder}
-      id={name}
-      name={name}
+      maskChar={maskChar}
       type={type}
-      defaultValue={formDataState.Application[name]}
+      defaultValue={inputValue}
       inputMode={inputmode}
       spellCheck={spellcheck}
       disabled={disabled}
+      onChange={(e) => setInputValue(e.target.value)}
+      onBlur={() => setIsTouched(true)}
       autoComplete={autocomplete}
-      ref={fieldValidation}
     />
   ) : (
     <>
@@ -82,6 +88,16 @@ const Input = ({
         />
       )}
 
+      {mask && (
+        <input
+          id={name}
+          name={name}
+          ref={fieldValidation}
+          value={inputValue || ''}
+          type="hidden"
+        />
+      )}
+
       {/* If className then wrap just input with the className else, just show input as usual */}
       {className ? <div className={className}>{input}</div> : input}
     </div>
@@ -99,7 +115,7 @@ Input.propTypes = {
   type: PropTypes.string,
   fieldValidation: PropTypes.func,
   mask: PropTypes.string,
-  maskPlaceholder: PropTypes.string,
+  maskChar: PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -111,7 +127,7 @@ Input.defaultProps = {
   type: 'text',
   fieldValidation: null,
   mask: null,
-  maskPlaceholder: null,
+  maskChar: null,
 };
 
 export default Input;
