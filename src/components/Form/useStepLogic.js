@@ -64,6 +64,7 @@ const useStepLogic = (formRef, setCannotProcess) => {
           switch (CustomerType) {
             case 'SwiftCard':
             case 'PaperTicket':
+            case 'DirectDebit':
               setStep(currentStep + 1); // Go to next step (2) so we can set customerType
               break;
             case 'Scratchcard':
