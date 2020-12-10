@@ -28,7 +28,7 @@ const GenericError = ({ errors }) => {
         {Object.keys(errors).map((errorName) => {
           return (
             <button
-              className={`${style.asLink} ${style.errorLink} wmnds-link`}
+              className={`${style.errorLink} wmnds-btn wmnds-btn--link`}
               type="button"
               onClick={() => scrollToError(errors[errorName].ref)}
               key={errorName}

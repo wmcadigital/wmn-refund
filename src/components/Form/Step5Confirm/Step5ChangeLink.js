@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 // Context
 import { FormDataContext } from 'globalState/FormDataContext';
 // Style
-import style from './Step5Confirm.module.scss';
 
 const ChangeLink = ({ changeStepTo }) => {
   const [, formDataDispatch] = useContext(FormDataContext);
@@ -18,7 +17,7 @@ const ChangeLink = ({ changeStepTo }) => {
   return (
     <button
       type="button"
-      className={`${style.asLink} wmnds-link`}
+      className="wmnds-btn wmnds-btn-link"
       onClick={() => setStepInContext(changeStepTo)}
     >
       Change
