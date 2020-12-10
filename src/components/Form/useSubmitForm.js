@@ -28,10 +28,20 @@ const useSubmitForm = (formRef, setFormSubmitStatus) => {
       // remove 'Error: ' from title as there are no errors
       document.title = document.title.replace('Error: ', '');
 
+      const applicationData = formDataState.Application;
+
+      if (
+        formDataState.Application.DirectDebitNumber &&
+        formDataState.Application.DirectDebitNumber === 'null'
+      ) {
+        // convert null value from string so api will accept it
+        applicationData.DirectDebitNumber = null;
+      }
+
       const dataToSend = {
         CustomerType: formDataState.CustomerType,
         Application: {
-          ...formDataState.Application,
+          ...applicationData,
           ...getValues(),
         },
       };
@@ -111,6 +121,7 @@ const useSubmitForm = (formRef, setFormSubmitStatus) => {
     isFetching,
     showGenericError,
     formDataState,
+    formDataDispatch,
   };
 };
 

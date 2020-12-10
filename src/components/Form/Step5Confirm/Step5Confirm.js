@@ -1,21 +1,21 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useRef, useEffect, useContext } from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 // Import custom hooks
 import useSubmitForm from '../useSubmitForm';
 import SummarySection from './Step5SummarySection';
 import Consent from './Step5ConsentForm';
-import { FormDataContext } from '../../../globalState/FormDataContext';
 // Import components
 import Button from '../../shared/Button/Button';
 
 function Step5Confirm({ setFormSubmitStatus }) {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
-  const [formDataState, formDataDispatch] = useContext(FormDataContext);
-  const { handleSubmit, isFetching } = useSubmitForm(
-    formRef,
-    setFormSubmitStatus
-  ); // Custom hook for handling continue button (validation, errors etc)
+  const {
+    formDataState,
+    formDataDispatch,
+    handleSubmit,
+    isFetching,
+  } = useSubmitForm(formRef, setFormSubmitStatus); // Custom hook for handling continue button (validation, errors etc)
 
   useEffect(() => {
     if (formDataState.currentStep === 5) {

@@ -20,7 +20,7 @@ const DirectDebit = () => {
   ); // state for setting can't find direct debit number checkbox
 
   useEffect(() => {
-    // set the Direct debit number value to 0 if checkbox is selected
+    // set the Direct debit number value to null if checkbox is selected
     if (noDDNumber) {
       setValue('DirectDebitNumber', 'null', { shouldValidate: true });
     } else {
