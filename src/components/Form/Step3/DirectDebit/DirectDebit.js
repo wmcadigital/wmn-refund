@@ -52,9 +52,9 @@ const DirectDebit = () => {
   return (
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
-        <h3 className="wmnds-fe-question">
+        <h2 className="wmnds-fe-question">
           What is your Direct Debit reference?
-        </h3>
+        </h2>
         <p>
           This is the <strong>6-digit number</strong> beginning with a{' '}
           <strong>6</strong>.
