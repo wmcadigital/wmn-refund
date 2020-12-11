@@ -32,21 +32,21 @@ const FileUpload = ({ name, fieldValidation }) => {
   const handleBlur = () => setIsFileInputFocused(false);
 
   return (
-    <div
-      className={`wmnds-fe-group ${
-        errors[name] ? 'wmnds-fe-group--error' : ''
-      }`}
-    >
-      <fieldset className="wmnds-fe-fieldset">
-        <legend className="wmnds-fe-fieldset__legend">
-          <h2 className="wmnds-fe-question">
-            Upload a photo of the front of the ripped ticket
-          </h2>
-          <p>
-            We need to be able to read the ticket type and expiry date to
-            process the refund
-          </p>
-        </legend>
+    <fieldset className="wmnds-fe-fieldset">
+      <legend className="wmnds-fe-fieldset__legend">
+        <h2 className="wmnds-fe-question">
+          Upload a photo of the front of the ripped ticket
+        </h2>
+        <p>
+          We need to be able to read the ticket type and expiry date to process
+          the refund
+        </p>
+      </legend>
+      <div
+        className={`wmnds-fe-group ${
+          errors[name] ? 'wmnds-fe-group--error' : ''
+        }`}
+      >
         {/* If there is an error, show here */}
         {errors[name] && (
           <span className="wmnds-fe-error-message">{errors[name].message}</span>
@@ -73,8 +73,8 @@ const FileUpload = ({ name, fieldValidation }) => {
             ref={fieldValidation}
           />
         </label>
-      </fieldset>
-    </div>
+      </div>
+    </fieldset>
   );
 };
 

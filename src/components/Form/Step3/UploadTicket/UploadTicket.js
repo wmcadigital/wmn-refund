@@ -45,9 +45,9 @@ const UploadTicket = () => {
             className="wmnds-msg-summary__icon"
             iconName="general-warning-circle"
           />
-          <h2 className="wmnds-msg-summary__title">
+          <h3 className="wmnds-msg-summary__title">
             Rip your paper ticket in half
-          </h2>
+          </h3>
         </div>
       </div>
 
