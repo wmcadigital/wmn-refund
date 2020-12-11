@@ -41,6 +41,7 @@ const FileUpload = ({ name, fieldValidation }) => {
           We need to be able to read the ticket type and expiry date to process
           the refund
         </p>
+        <p>The file must be a JPG, JPEG, or PNG</p>
       </legend>
       <div
         className={`wmnds-fe-group ${
