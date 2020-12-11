@@ -17,7 +17,7 @@ const ChangeLink = ({ changeStepTo }) => {
   return (
     <button
       type="button"
-      className="wmnds-btn wmnds-btn-link"
+      className="wmnds-btn wmnds-btn--link"
       onClick={() => setStepInContext(changeStepTo)}
     >
       Change
