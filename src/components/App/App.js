@@ -36,7 +36,10 @@ function App() {
             )}
           </>
         ) : (
-          <NoProcessPage />
+          <NoProcessPage
+            setIsFormStarted={setIsFormStarted}
+            setCannotProcess={setCannotProcess}
+          />
         )}
 
         {formSubmitStatus && <SuccessPage />}

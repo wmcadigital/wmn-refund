@@ -70,21 +70,19 @@ const useStepLogic = (formRef, setCannotProcess) => {
             case 'Scratchcard':
             case 'ClassPass':
               setCannotProcess(true); // go to cannot process
-              setStep(currentStep + 3); // Skip to last steps as payment info isn't needed for scratchcard and classPass
+              // setStep(currentStep + 3); // Skip to last steps as payment info isn't needed for scratchcard and classPass
               break;
             default:
               setCannotProcess(true); // go to cannot process
-              setStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
+              // setStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
               break;
           }
-        }
-        // if not direct debit, we can't currently process
-        if (currentStep === 2 && CustomerType !== 'DirectDebit') {
-          setCannotProcess(true); // go to cannot process
-        }
-        // if not on step 1...
-        else {
+        } else if (currentStep === 2 && CustomerType === 'DirectDebit') {
           setStep(currentStep + 1);
+        }
+        // if not on step 1 and if not direct debit, we can't currently process
+        else {
+          setCannotProcess(true); // go to cannot process
         }
       } else {
         setStep(5);
