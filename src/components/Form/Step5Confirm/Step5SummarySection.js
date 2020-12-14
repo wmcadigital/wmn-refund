@@ -5,6 +5,7 @@ import { FormDataContext } from 'globalState/FormDataContext';
 import style from './Step5Confirm.module.scss';
 // Components
 import ChangeLink from './Step5ChangeLink';
+import dateValidationHelpers from '../../shared/FormElements/Date/dateValidationHelpers';
 
 function Step5SummarySection() {
   const [formDataState] = useContext(FormDataContext);
@@ -31,25 +32,7 @@ function Step5SummarySection() {
     CovidRefund,
   } = formDataState.Application;
 
-  // used for formatting date
-  const months = {
-    '01': 'January',
-    '02': 'February',
-    '03': 'March',
-    '04': 'April',
-    '05': 'May',
-    '06': 'June',
-    '07': 'July',
-    '08': 'August',
-    '09': 'September',
-    10: 'October',
-    11: 'November',
-    12: 'December',
-  };
-
-  const getDateString = (d) => {
-    return `${d.split('-')[2]} ${months[d.split('-')[1]]} ${d.split('-')[0]}`;
-  };
+  const { getDateFormatted } = dateValidationHelpers;
 
   // regex fn to spit out phone number in better format
   const formatPhone = (num) => {
@@ -190,7 +173,7 @@ function Step5SummarySection() {
                 <tr>
                   <th scope="row">Ticket last used</th>
                   <td className={`${style.tableColspan2}`}>
-                    {getDateString(LastUsedDate)}
+                    {getDateFormatted(LastUsedDate)}
                   </td>
                 </tr>
               )}
@@ -245,7 +228,7 @@ function Step5SummarySection() {
             <tr>
               <th scope="row">Date of birth</th>
               <td className={`${style.tableColspan2}`}>
-                {getDateString(DateOfBirth)}
+                {getDateFormatted(DateOfBirth)}
               </td>
             </tr>
           )}

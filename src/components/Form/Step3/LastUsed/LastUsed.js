@@ -9,7 +9,12 @@ import dateValidationHelpers from 'components/shared/FormElements/Date/dateValid
 const LastUsed = () => {
   const { register } = useFormContext(); // Custom hook for handling continue button (validation, errors etc)
 
-  const { dateRegex, pastDate } = dateValidationHelpers;
+  const {
+    dateRegex,
+    daysFromNow,
+    getDaysFromNow,
+    getDateFormatted,
+  } = dateValidationHelpers;
 
   const dateValidation = register({
     required: 'Enter last used date',
@@ -22,8 +27,11 @@ const LastUsed = () => {
       lastUsed: (value) =>
         value >= '2020-03-16' ||
         'We can only issue refunds from the 16 March 2020. If you stopped travelling before this date, please still use 16 March 2020.',
-      pastDate: (value) =>
-        pastDate(value) || 'Last used date must be today or in the past',
+      daysFromNow: (value) =>
+        (daysFromNow(value, 28) && daysFromNow(value, -28)) ||
+        `Date must be after ${getDateFormatted(
+          getDaysFromNow(-28)
+        )} and before ${getDateFormatted(getDaysFromNow(28))}`,
     },
   });
 
@@ -34,8 +42,20 @@ const LastUsed = () => {
           When did you last use your ticket to travel?
         </h2>
         <p>
-          We can only issue refunds from the 16 March 2020. For example, 16 03
-          2020
+          We’ll use this date to work out when we need to cancel your ticket and
+          if you’re entitled for a refund.
+        </p>
+        <p>
+          The date can be between{' '}
+          <strong>{getDateFormatted(getDaysFromNow(-28), false)}</strong> and{' '}
+          <strong>{getDateFormatted(getDaysFromNow(28), false)}</strong>. We’ll
+          check this against your journey history.
+        </p>
+        <p>
+          For example,{' '}
+          {`${getDaysFromNow(0).split('-')[2]} ${
+            getDaysFromNow(0).split('-')[1]
+          } ${getDaysFromNow(0).split('-')[0]}`}
         </p>
       </legend>
       <DateInput
