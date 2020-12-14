@@ -39,7 +39,7 @@ const LastUsed = () => {
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
         <h2 className="wmnds-fe-question">
-          When did you last use your ticket to travel?
+          When will you stop using your ticket to travel?
         </h2>
         <p>
           We’ll use this date to work out when we need to cancel your ticket and
