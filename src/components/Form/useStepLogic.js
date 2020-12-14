@@ -77,7 +77,7 @@ const useStepLogic = (formRef, setCannotProcess) => {
               // setStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
               break;
           }
-        } else if (currentStep === 2 && CustomerType === 'DirectDebit') {
+        } else if (CustomerType === 'DirectDebit') {
           setStep(currentStep + 1);
         }
         // if not on step 1 and if not direct debit, we can't currently process

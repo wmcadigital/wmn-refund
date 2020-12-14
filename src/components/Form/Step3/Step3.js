@@ -21,7 +21,7 @@ const Step3 = ({ isPaperTicket, isSwiftOnMobile, setCannotProcess }) => {
     handleSubmit,
     showGenericError,
     continueButton,
-  } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
+  } = useStepLogic(formRef, setCannotProcess); // Custom hook for handling continue button (validation, errors etc)
 
   const { CustomerType, Application } = formDataState; // Destructure object
 

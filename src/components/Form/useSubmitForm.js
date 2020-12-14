@@ -7,11 +7,8 @@ import GenericError from 'components/shared/Errors/GenericError';
 
 const useSubmitForm = (formRef, setFormSubmitStatus) => {
   const { errors, trigger, getValues } = useFormContext(); // Get useForm methods
-
   const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
-
   const [isContinuePressed, setIsContinuePressed] = useState(false); // State for tracking if continue has been pressed
-
   const [isFetching, setIsFetching] = useState(false);
 
   // Update the current step to the correct one depending on users selection
