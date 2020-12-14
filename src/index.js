@@ -1,6 +1,7 @@
 // Helpers
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
+import 'polyfill-array-includes';
 import './assets/js/polyfills/details-element-polyfill';
 // import LogRocket from 'logrocket';
 // import setupLogRocketReact from 'logrocket-react';
