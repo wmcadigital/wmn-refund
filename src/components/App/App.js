@@ -9,14 +9,17 @@ import ErrorPage from 'components/ErrorPage/ErrorPage';
 import NoProcessPage from 'components/NoProcessPage/NoProcessPage';
 
 function App() {
-  const [isFormStarted, setIsFormStarted] = useState(false);
+  const [isFormStarted, setIsFormStarted] = useState({
+    isStarted: false,
+    isOnFrontPage: true,
+  });
   const [formSubmitStatus, setFormSubmitStatus] = useState(null);
   const [cannotProcess, setCannotProcess] = useState(null);
 
   return (
     <div className="wmnds-p-b-lg wmnds-grid">
       {/* If form isn't started, show intro...else show form */}
-      {!isFormStarted && (
+      {isFormStarted.isOnFrontPage && (
         <Introduction
           setIsFormStarted={setIsFormStarted}
           setCannotProcess={setCannotProcess}
@@ -26,7 +29,7 @@ function App() {
       <FormProvider>
         {!cannotProcess ? (
           <>
-            {isFormStarted && formSubmitStatus === null && (
+            {!isFormStarted.isOnFrontPage && formSubmitStatus === null && (
               <Form
                 formSubmitStatus={formSubmitStatus}
                 setFormSubmitStatus={setFormSubmitStatus}
@@ -37,6 +40,7 @@ function App() {
           </>
         ) : (
           <NoProcessPage
+            isFormStarted={isFormStarted}
             setIsFormStarted={setIsFormStarted}
             setCannotProcess={setCannotProcess}
           />

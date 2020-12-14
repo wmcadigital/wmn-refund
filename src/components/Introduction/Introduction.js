@@ -7,8 +7,18 @@ import dateValidationHelpers from 'components/shared/FormElements/Date/dateValid
 
 const Introduction = ({ setIsFormStarted, setCannotProcess }) => {
   const handleClick = () => {
-    setIsFormStarted(true);
+    setIsFormStarted({
+      isOnFrontPage: false,
+      isStarted: true,
+    });
     window.scrollTo(0, 0);
+  };
+  const handleCannotProcess = () => {
+    setIsFormStarted({
+      isOnFrontPage: false,
+      isStarted: false,
+    });
+    setCannotProcess(true);
   };
 
   const { getDateFormatted, getDaysFromNow } = dateValidationHelpers;
@@ -52,23 +62,21 @@ const Introduction = ({ setIsFormStarted, setCannotProcess }) => {
           </li>
           <li>
             You can only cancel your Direct Debit online if you stop using your
-            travel pass between: {getDateFormatted(getDaysFromNow(-28))} and{' '}
-            {getDateFormatted(getDaysFromNow(28))}
+            travel pass between:{' '}
+            <strong>{getDateFormatted(getDaysFromNow(-28))}</strong> and{' '}
+            <strong>{getDateFormatted(getDaysFromNow(28))}</strong>
           </li>
           <li>
             You’ll need to{' '}
             <button
               type="button"
               className="wmnds-btn wmnds-btn--link"
-              onClick={() => {
-                setIsFormStarted(true);
-                setCannotProcess(true);
-              }}
+              onClick={handleCannotProcess}
             >
               call us
             </button>{' '}
-            if you stopped using your travel pass before
-            {getDateFormatted(getDaysFromNow(-28))}
+            if you stopped using your travel pass before{' '}
+            <strong>{getDateFormatted(getDaysFromNow(-28))}</strong>
           </li>
         </ul>
         <br />

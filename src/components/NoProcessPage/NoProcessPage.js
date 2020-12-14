@@ -1,17 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Title from 'components/shared/Title/Title';
 import ContactDetails from 'components/shared/ContactDetails/ContactDetails';
-// Import contexts
-import { FormDataContext } from 'globalState/FormDataContext';
 
-const ErrorPage = ({ setIsFormStarted, setCannotProcess }) => {
-  const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
-  const { CustomerType } = formDataState; // Destructure step from state
-
+const ErrorPage = ({ isFormStarted, setIsFormStarted, setCannotProcess }) => {
   const goBack = () => {
-    if (!CustomerType) {
-      setIsFormStarted(false);
+    if (!isFormStarted.isStarted) {
+      setIsFormStarted({ ...isFormStarted, isOnFrontPage: true });
     }
     setCannotProcess(false);
   };
@@ -42,6 +37,10 @@ const ErrorPage = ({ setIsFormStarted, setCannotProcess }) => {
 };
 
 ErrorPage.propTypes = {
+  isFormStarted: PropTypes.shape({
+    isStarted: PropTypes.bool.isRequired,
+    isOnFrontPage: PropTypes.bool.isRequired,
+  }).isRequired,
   setIsFormStarted: PropTypes.func.isRequired,
   setCannotProcess: PropTypes.func.isRequired,
 };

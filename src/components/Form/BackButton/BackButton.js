@@ -26,7 +26,10 @@ const BackButton = ({ setIsFormStarted }) => {
       }
     } else {
       setStep(1);
-      setIsFormStarted(false);
+      setIsFormStarted({
+        isOnFrontPage: true,
+        isStarted: false,
+      });
     }
   };
 
