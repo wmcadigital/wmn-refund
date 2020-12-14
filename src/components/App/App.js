@@ -16,7 +16,12 @@ function App() {
   return (
     <div className="wmnds-p-b-lg wmnds-grid">
       {/* If form isn't started, show intro...else show form */}
-      {!isFormStarted && <Introduction setIsFormStarted={setIsFormStarted} />}
+      {!isFormStarted && (
+        <Introduction
+          setIsFormStarted={setIsFormStarted}
+          setCannotProcess={setCannotProcess}
+        />
+      )}
 
       <FormProvider>
         {!cannotProcess ? (

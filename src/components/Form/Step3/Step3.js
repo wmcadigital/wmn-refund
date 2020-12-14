@@ -14,7 +14,7 @@ import LastUsed from './LastUsed/LastUsed';
 import HowProcess from './HowProcess/HowProcess';
 import CovidRefund from './CovidRefund/CovidRefund';
 
-const Step3 = ({ isPaperTicket, isSwiftOnMobile }) => {
+const Step3 = ({ isPaperTicket, isSwiftOnMobile, setCannotProcess }) => {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
   const {
     formDataState,
@@ -120,7 +120,7 @@ const Step3 = ({ isPaperTicket, isSwiftOnMobile }) => {
       {/* This changes based on switch logic above */}
       {elementsToRender}
 
-      <LastUsed />
+      <LastUsed setCannotProcess={setCannotProcess} />
 
       <CovidRefund />
 
@@ -135,6 +135,7 @@ const Step3 = ({ isPaperTicket, isSwiftOnMobile }) => {
 Step3.propTypes = {
   isPaperTicket: PropTypes.bool.isRequired,
   isSwiftOnMobile: PropTypes.bool.isRequired,
+  setCannotProcess: PropTypes.func.isRequired,
 };
 
 export default Step3;

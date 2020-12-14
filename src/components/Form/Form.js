@@ -67,6 +67,7 @@ const Form = ({
               <Step3
                 isPaperTicket={isPaperTicket}
                 isSwiftOnMobile={isSwiftOnMobile}
+                setCannotProcess={setCannotProcess}
               />
             )}
             {currentStep === 4 && <Step4 />}

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 // Import contexts
 import { useFormContext } from 'react-hook-form';
 // Import components
@@ -6,7 +7,7 @@ import DateInput from 'components/shared/FormElements/Date/Date';
 // Import helper functions
 import dateValidationHelpers from 'components/shared/FormElements/Date/dateValidationHelpers';
 
-const LastUsed = () => {
+const LastUsed = ({ setCannotProcess }) => {
   const { register } = useFormContext(); // Custom hook for handling continue button (validation, errors etc)
 
   const {
@@ -28,10 +29,20 @@ const LastUsed = () => {
         value >= '2020-03-16' ||
         'We can only issue refunds from the 16 March 2020. If you stopped travelling before this date, please still use 16 March 2020.',
       daysFromNow: (value) =>
-        (daysFromNow(value, 28) && daysFromNow(value, -28)) ||
-        `Date must be after ${getDateFormatted(
-          getDaysFromNow(-28)
-        )} and before ${getDateFormatted(getDaysFromNow(28))}`,
+        (daysFromNow(value, 28) && daysFromNow(value, -28)) || (
+          <>
+            Date needs to be between {getDateFormatted(getDaysFromNow(-28))} and{' '}
+            {getDateFormatted(getDaysFromNow(28))} <br />
+            <button
+              type="button"
+              className="wmnds-btn wmnds-btn--link"
+              onClick={() => setCannotProcess(true)}
+            >
+              Call us
+            </button>{' '}
+            if you stopped using your travel pass before 12 November
+          </>
+        ),
     },
   });
 
@@ -43,7 +54,7 @@ const LastUsed = () => {
         </h2>
         <p>
           We’ll use this date to work out when we need to cancel your ticket and
-          if you’re entitled for a refund.
+          if you’re entitled to a refund.
         </p>
         <p>
           The date can be between{' '}
@@ -65,6 +76,10 @@ const LastUsed = () => {
       />
     </fieldset>
   );
+};
+
+LastUsed.propTypes = {
+  setCannotProcess: PropTypes.func.isRequired,
 };
 
 export default LastUsed;

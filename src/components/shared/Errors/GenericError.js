@@ -1,7 +1,11 @@
 import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 import PropTypes from 'prop-types';
+import dompurify from 'dompurify';
 import Icon from '../Icon/Icon';
 import style from './GenericError.module.scss';
+
+const { sanitize } = dompurify;
 
 const GenericError = ({ errors }) => {
   // scroll error field to center of view
@@ -10,6 +14,7 @@ const GenericError = ({ errors }) => {
       block: 'center',
     });
   };
+
   return (
     <div className="wmnds-msg-summary wmnds-msg-summary--error wmnds-m-b-lg">
       <div className="wmnds-msg-summary__header">
@@ -27,14 +32,21 @@ const GenericError = ({ errors }) => {
       <div className="wmnds-msg-summary__info">
         {Object.keys(errors).map((errorName) => {
           return (
-            <button
-              className={`${style.errorLink} wmnds-btn wmnds-btn--link`}
-              type="button"
-              onClick={() => scrollToError(errors[errorName].ref)}
-              key={errorName}
-            >
-              {errors[errorName].message}
-            </button>
+            <div key={errorName}>
+              <button
+                className={`${style.errorLink} wmnds-btn wmnds-btn--link`}
+                type="button"
+                onClick={() => scrollToError(errors[errorName].ref)}
+                dangerouslySetInnerHTML={{
+                  __html: sanitize(
+                    ReactDOMServer.renderToStaticMarkup(
+                      errors[errorName].message
+                    ),
+                    { ALLOWED_TAGS: ['br'], KEEP_CONTENT: true }
+                  ),
+                }}
+              />
+            </div>
           );
         })}
       </div>

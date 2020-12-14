@@ -2,14 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'components/shared/Icon/Icon';
 import Title from 'components/shared/Title/Title';
+import dateValidationHelpers from 'components/shared/FormElements/Date/dateValidationHelpers';
 // import WarningText from 'components/shared/WarningText/WarningText';
 
-const Introduction = ({ setIsFormStarted }) => {
+const Introduction = ({ setIsFormStarted, setCannotProcess }) => {
   const handleClick = () => {
     setIsFormStarted(true);
     window.scrollTo(0, 0);
   };
 
+  const { getDateFormatted, getDaysFromNow } = dateValidationHelpers;
   // const warningMessage = (
   //   <p>
   //     You can only get a refund using this service if you paid for your ticket
@@ -23,8 +25,7 @@ const Introduction = ({ setIsFormStarted }) => {
       <div className="wmnds-col-1 wmnds-col-md-3-4 wmnds-col-lg-1-2">
         <h2>Use this service to:</h2>
         <ul>
-          <li>Cancel your Direct Debit</li>
-          <li>Request a refund for unused travel</li>
+          <li>Cancel your Direct Debit for your travel pass</li>
         </ul>
         <p>This process takes around 5 minutes.</p>
         {/* <WarningText type="warning" message={warningMessage} /> */}
@@ -49,19 +50,36 @@ const Introduction = ({ setIsFormStarted }) => {
             <strong>6</strong> and is shown next to every payment to WMCA on
             your bank statement
           </li>
+          <li>
+            You can only cancel your Direct Debit online if you stop using your
+            travel pass between: {getDateFormatted(getDaysFromNow(-28))} and{' '}
+            {getDateFormatted(getDaysFromNow(28))}
+          </li>
+          <li>
+            You’ll need to{' '}
+            <button
+              type="button"
+              className="wmnds-btn wmnds-btn--link"
+              onClick={() => {
+                setIsFormStarted(true);
+                setCannotProcess(true);
+              }}
+            >
+              call us
+            </button>{' '}
+            if you stopped using your travel pass before
+            {getDateFormatted(getDaysFromNow(-28))}
+          </li>
         </ul>
         <br />
+        <h3>Direct Debit refunds</h3>
         <p>
-          There is guidance available to show{' '}
-          <a
-            href="https://wmnetwork.co.uk/refund-workings"
-            title="How we will work out your refund"
-            target="_self"
-            className="wmnds-link"
-          >
-            how we will work out your refund
-          </a>
-          .
+          If you cancel your Direct Debit before your next payment date, you may
+          be entitled to a refund for any days left.
+        </p>
+        <p>
+          We’ll work this out and send the refund to your original payment
+          method within 28 days.
         </p>
         <br />
         <br />
@@ -83,6 +101,7 @@ const Introduction = ({ setIsFormStarted }) => {
 
 Introduction.propTypes = {
   setIsFormStarted: PropTypes.func.isRequired,
+  setCannotProcess: PropTypes.func.isRequired,
 };
 
 export default Introduction;
