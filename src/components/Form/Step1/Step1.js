@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
@@ -17,10 +17,11 @@ const Step1 = ({ setCannotProcess }) => {
     continueButton,
   } = useStepLogic(formRef, setCannotProcess); // Custom hook for handling continue button (validation, errors etc)
 
+  const [hasChanged, setHasChanged] = useState(false);
+
   // Update customerType on radio button change
   const handleRadioChange = (e) => {
     formDataDispatch({ type: 'UPDATE_CUSTOMER_TYPE', payload: e.target.value });
-
     // function to compare previous and new values to check if we should clear the form data
     const mustRewrite = (previousValue, newValue) => {
       // if switching between Scratchcard & classpass, we don't need to clear the form data as the steps are the same
@@ -31,6 +32,27 @@ const Step1 = ({ setCannotProcess }) => {
     };
 
     if (mustRewrite(formDataState.Application.CustomerType, e.target.value)) {
+      setHasChanged(true);
+    } else {
+      setHasChanged(false);
+    }
+  };
+
+  const radioSubmit = (e) => {
+    formDataDispatch({
+      type: 'UPDATE_FORM_NAV',
+      payload: {
+        isPaperTicket: e.target.value === 'PaperTicket', // If paper ticket chosen set isPaperTicket to true (value used in step 3)
+        isSwiftOnMobile: e.target.value === 'SwiftPortal', // If Swift on Mobile chosen (only one with SwiftPortal val on this step)
+      },
+    });
+
+    if (hasChanged) {
+      // update form data removing unnecessary fields
+      formDataDispatch({
+        type: 'REWRITE_FORM_DATA',
+        payload: {},
+      });
       // check if user has reached confirmation before
       if (formDataState.formStatus.hasReachedConfirmation) {
         // set hasReachedConfirmation false to allow user to continue to next question
@@ -39,25 +61,13 @@ const Step1 = ({ setCannotProcess }) => {
           payload: { hasReachedConfirmation: false },
         });
       }
-
-      // update form data removing unnecessary fields
-      formDataDispatch({
-        type: 'REWRITE_FORM_DATA',
-        payload: {},
-      });
     }
 
-    formDataDispatch({
-      type: 'UPDATE_FORM_NAV',
-      payload: {
-        isPaperTicket: e.target.value === 'PaperTicket', // If paper ticket chosen set isPaperTicket to true (value used in step 3)
-        isSwiftOnMobile: e.target.value === 'SwiftPortal', // If Swift on Mobile chosen (only one with SwiftPortal val on this step)
-      },
-    });
+    handleSubmit(e);
   };
 
   return (
-    <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
+    <form onSubmit={radioSubmit} ref={formRef} autoComplete="on">
       <SectionStepInfo
         section="Section 1 of 3"
         description="Before you start"
