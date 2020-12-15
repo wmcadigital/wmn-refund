@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 // Import contexts
+// Import contexts
+import { FormDataContext } from 'globalState/FormDataContext';
 import { useFormContext } from 'react-hook-form';
 // Import components
 import DateInput from 'components/shared/FormElements/Date/Date';
@@ -8,14 +10,22 @@ import DateInput from 'components/shared/FormElements/Date/Date';
 import dateValidationHelpers from 'components/shared/FormElements/Date/dateValidationHelpers';
 
 const LastUsed = ({ setCannotProcess }) => {
-  const { register } = useFormContext(); // Custom hook for handling continue button (validation, errors etc)
-
+  const { register, getValues } = useFormContext(); // Custom hook for handling continue button (validation, errors etc)
+  const [, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
   const {
     dateRegex,
     daysFromNow,
     getDaysFromNow,
     getDateFormatted,
   } = dateValidationHelpers;
+
+  const handleCannotProcess = () => {
+    formDataDispatch({
+      type: 'UPDATE_FORM_DATA',
+      payload: getValues(),
+    });
+    setCannotProcess(true);
+  };
 
   const dateValidation = register({
     required: 'Enter last used date',
@@ -36,7 +46,7 @@ const LastUsed = ({ setCannotProcess }) => {
             <button
               type="button"
               className="wmnds-btn wmnds-btn--link"
-              onClick={() => setCannotProcess(true)}
+              onClick={handleCannotProcess}
             >
               Call us
             </button>{' '}
