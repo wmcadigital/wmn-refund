@@ -13,6 +13,7 @@ function Step5Confirm({ setFormSubmitStatus }) {
   const {
     formDataState,
     formDataDispatch,
+    showGenericError,
     handleSubmit,
     isFetching,
   } = useSubmitForm(formRef, setFormSubmitStatus); // Custom hook for handling continue button (validation, errors etc)
@@ -28,6 +29,9 @@ function Step5Confirm({ setFormSubmitStatus }) {
 
   return (
     <form onSubmit={handleSubmit} ref={formRef} data-private>
+      {/* Show generic error message */}
+      {showGenericError}
+
       <SummarySection />
 
       <Consent />

@@ -12,6 +12,7 @@ const Step1 = ({ setCannotProcess }) => {
   const {
     register,
     formDataDispatch,
+    formDataState,
     handleSubmit,
     showGenericError,
     continueButton,
@@ -23,8 +24,8 @@ const Step1 = ({ setCannotProcess }) => {
     formDataDispatch({
       type: 'UPDATE_FORM_NAV',
       payload: {
-        isPaperTicket: e.target.value === 'PaperTicket', // If paper ticket chosen set isPaperTicket to true (value used in step 3)
-        isSwiftOnMobile: e.target.value === 'SwiftPortal', // If Swift on Mobile chosen (only one with SwiftPortal val on this step)
+        isPaperTicket: formDataState.CustomerType === 'PaperTicket', // If paper ticket chosen set isPaperTicket to true (value used in step 3)
+        isSwiftOnMobile: formDataState.CustomerType === 'SwiftPortal', // If Swift on Mobile chosen (only one with SwiftPortal val on this step)
       },
     });
     radioSubmit(e, handleSubmit); // do radio submit checks then handlesubmit with useStepLogic
@@ -64,7 +65,7 @@ const Step1 = ({ setCannotProcess }) => {
         fieldValidation={register({
           required: `Select which best describes your ticket`,
         })}
-        onChange={(e) => handleRadioChange(e)}
+        onChange={handleRadioChange}
       />
       {continueButton}
     </form>

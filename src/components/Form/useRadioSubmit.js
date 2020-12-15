@@ -9,7 +9,14 @@ const useRadioSubmit = (name) => {
 
   const { getValues } = useFormContext(); // Get useForm methods
 
-  const [hasChanged, setHasChanged] = useState(false);
+  const [hasChanged, setHasChanged] = useState(false); // keep track of whether the user has made a change that requires more data
+  const [didReachConfirmation, setDidReachConfirmation] = useState(false); // keep track of whether the user had come from the confirmation page
+
+  useEffect(() => {
+    if (formStatus.hasReachedConfirmation) {
+      setDidReachConfirmation(true);
+    }
+  }, [formStatus.hasReachedConfirmation, didReachConfirmation]);
 
   useEffect(() => {
     // make sure customer type is set correctly if user changed customer type
@@ -32,18 +39,27 @@ const useRadioSubmit = (name) => {
   };
 
   // Update customerType on radio button change
-  const handleRadioChange = (e, previousValue) => {
+  const handleRadioChange = (e) => {
     formDataDispatch({ type: 'UPDATE_CUSTOMER_TYPE', payload: e.target.value });
 
-    if (
-      mustRewrite(
-        previousValue || formDataState.Application[e.target.name],
-        e.target.value
-      )
-    ) {
+    if (mustRewrite(formDataState.Application[e.target.name], e.target.value)) {
       setHasChanged(true);
+      if (didReachConfirmation) {
+        // if user has come from confirmation page and changed radio, set hasReached to false so they can continue to next page
+        formDataDispatch({
+          type: 'UPDATE_FORM_NAV',
+          payload: { hasReachedConfirmation: false },
+        });
+      }
     } else {
       setHasChanged(false);
+      if (didReachConfirmation) {
+        // if user has come from confirmation page didn't change radio, set hasReached back to true so they can go back to confirmation
+        formDataDispatch({
+          type: 'UPDATE_FORM_NAV',
+          payload: { hasReachedConfirmation: true },
+        });
+      }
     }
   };
 
@@ -54,14 +70,6 @@ const useRadioSubmit = (name) => {
         type: 'REWRITE_FORM_DATA',
         payload: payload || {},
       });
-      // check if user has reached confirmation before
-      if (formStatus.hasReachedConfirmation) {
-        // set hasReachedConfirmation false to allow user to continue to next question
-        formDataDispatch({
-          type: 'UPDATE_FORM_NAV',
-          payload: { hasReachedConfirmation: false },
-        });
-      }
     }
 
     handleSubmit(e);

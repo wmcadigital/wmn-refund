@@ -1,14 +1,14 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useFormContext } from 'react-hook-form';
 // Import contexts
 import { FormDataContext } from 'globalState/FormDataContext';
 // Import components
-import GenericError from 'components/shared/Errors/GenericError';
+// import GenericError from 'components/shared/Errors/GenericError';
 
 const useSubmitForm = (formRef, setFormSubmitStatus) => {
-  const { errors, trigger, getValues } = useFormContext(); // Get useForm methods
+  const { trigger, getValues } = useFormContext(); // Get useForm methods
   const [formDataState, formDataDispatch] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
-  const [isContinuePressed, setIsContinuePressed] = useState(false); // State for tracking if continue has been pressed
+  // const [isContinuePressed, setIsContinuePressed] = useState(false); // State for tracking if continue has been pressed
   const [isFetching, setIsFetching] = useState(false);
 
   // Update the current step to the correct one depending on users selection
@@ -17,7 +17,7 @@ const useSubmitForm = (formRef, setFormSubmitStatus) => {
 
     const result = await trigger();
 
-    setIsContinuePressed(true);
+    // setIsContinuePressed(true);
     // if no errors
     if (result) {
       formDataDispatch({ type: 'UPDATE_FORM_DATA', payload: getValues() });
@@ -44,8 +44,6 @@ const useSubmitForm = (formRef, setFormSubmitStatus) => {
           ...getValues(),
         },
       };
-
-      console.log(dataToSend);
 
       window.dataLayer = window.dataLayer || []; // Set datalayer (GA thing)
 
@@ -108,19 +106,14 @@ const useSubmitForm = (formRef, setFormSubmitStatus) => {
     }
     // else, errors are true...
     else {
-      window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
       // add 'Error: ' to title as there are errors
       document.title = `Error: ${document.title}`;
     }
   };
 
-  const showGenericError = Object.keys(errors).length > 0 &&
-    isContinuePressed && <GenericError />;
-
   return {
     handleSubmit,
     isFetching,
-    showGenericError,
     formDataState,
     formDataDispatch,
   };
