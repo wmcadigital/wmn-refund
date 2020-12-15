@@ -24,9 +24,12 @@ const DirectDebit = () => {
     if (noDDNumber) {
       setValue('DirectDebitNumber', 'null', { shouldValidate: true });
     } else {
-      setValue('DirectDebitNumber', '');
+      setValue(
+        'DirectDebitNumber',
+        formDataState.Application.DirectDebitNumber || ''
+      );
     }
-  }, [noDDNumber, setValue]);
+  }, [noDDNumber, formDataState.Application.DirectDebitNumber, setValue]);
 
   const ddNumValidation = register({
     required: `Enter a valid ${label}`,
