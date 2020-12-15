@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import LogRocket from 'logrocket';
 
-const useLogRocketTracking = (formState, isSwiftOnMobile) => {
+const useLogRocketTracking = (formState) => {
   // Used to update log rocket with the users customerType
   useEffect(() => {
     LogRocket.identify({
