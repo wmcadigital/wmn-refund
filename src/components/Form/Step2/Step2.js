@@ -7,7 +7,7 @@ import useStepLogic from 'components/Form/useStepLogic';
 import Radios from 'components/shared/FormElements/Radios/Radios';
 import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo';
 
-const Step2 = ({ isPaperTicket, setCannotProcess }) => {
+const Step2 = ({ setCannotProcess }) => {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
   const {
     register,
@@ -29,8 +29,8 @@ const Step2 = ({ isPaperTicket, setCannotProcess }) => {
     if (formDataState.hasReachedConfirmation) {
       // set hasReachedConfirmation false to allow user to continue to next question
       formDataDispatch({
-        type: 'REACHED_CONFIRMATION',
-        payload: false,
+        type: 'UPDATE_FORM_NAV',
+        payload: { hasReachedConfirmation: false },
       });
     }
 
@@ -65,7 +65,7 @@ const Step2 = ({ isPaperTicket, setCannotProcess }) => {
   ];
 
   // If the user has selected something other than paper ticket in step 1
-  if (!isPaperTicket) {
+  if (!formDataState.formStatus.isPaperTicket) {
     const workwise = { text: 'I am on the Workwise scheme', value: 'Workwise' };
     const ticketMachine = {
       text: 'I bought it from a Swift kiosk',
@@ -101,7 +101,6 @@ const Step2 = ({ isPaperTicket, setCannotProcess }) => {
 };
 
 Step2.propTypes = {
-  isPaperTicket: PropTypes.bool.isRequired,
   setCannotProcess: PropTypes.func.isRequired,
 };
 

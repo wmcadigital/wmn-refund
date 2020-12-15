@@ -58,7 +58,7 @@ const useStepLogic = (formRef, setCannotProcess) => {
         formDataDispatch({ type: 'UPDATE_FORM_DATA', payload: getValues() });
       }
 
-      if (!formDataState.hasReachedConfirmation) {
+      if (!formDataState.formStatus.hasReachedConfirmation) {
         // step logic that applies to step 1 only
         if (formDataState.currentStep === 1) {
           switch (CustomerType) {

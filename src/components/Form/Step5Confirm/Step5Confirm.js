@@ -20,8 +20,8 @@ function Step5Confirm({ setFormSubmitStatus }) {
   useEffect(() => {
     if (formDataState.currentStep === 5) {
       formDataDispatch({
-        type: 'REACHED_CONFIRMATION',
-        payload: true,
+        type: 'UPDATE_FORM_NAV',
+        payload: { hasReachedConfirmation: true },
       });
     }
   }, [formDataDispatch, formDataState.currentStep]);

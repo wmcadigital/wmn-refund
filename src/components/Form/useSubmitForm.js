@@ -26,6 +26,8 @@ const useSubmitForm = (formRef, setFormSubmitStatus) => {
       document.title = document.title.replace('Error: ', '');
 
       const applicationData = formDataState.Application;
+      // remove NoDirectDebitNumber key as it's not needed
+      delete applicationData.NoDirectDebitNumber;
 
       if (
         formDataState.Application.DirectDebitNumber &&
@@ -42,6 +44,8 @@ const useSubmitForm = (formRef, setFormSubmitStatus) => {
           ...getValues(),
         },
       };
+
+      console.log(dataToSend);
 
       window.dataLayer = window.dataLayer || []; // Set datalayer (GA thing)
 

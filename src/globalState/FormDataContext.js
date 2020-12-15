@@ -9,7 +9,11 @@ export const FormProvider = (props) => {
   const initialState = {
     currentStep: 1,
     CustomerType: '',
-    hasReachedConfirmation: false,
+    formStatus: {
+      hasReachedConfirmation: false,
+      isPaperTicket: false, // Used to track if a user is using a paper ticket (set in step 1). Then read this value in step 3 to show 'upload proof/photo'
+      isSwiftOnMobile: false, // Used to track if a user has clicked Swift On Mobile (set in step 1). Then read this value in step 3 to show 'different text for swift card number'
+    },
     Application: {},
   };
 
@@ -56,10 +60,10 @@ export const FormProvider = (props) => {
         };
       }
 
-      case 'REACHED_CONFIRMATION': {
+      case 'UPDATE_FORM_NAV': {
         return {
           ...state,
-          hasReachedConfirmation: action.payload,
+          formStatus: { ...state.formStatus, ...action.payload },
         };
       }
 

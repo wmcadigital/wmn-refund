@@ -6,7 +6,7 @@ import useStepLogic from 'components/Form/useStepLogic';
 import Radios from 'components/shared/FormElements/Radios/Radios';
 import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo';
 
-const Step1 = ({ setIsPaperTicket, setIsSwiftOnMobile, setCannotProcess }) => {
+const Step1 = ({ setCannotProcess }) => {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
   const {
     register,
@@ -32,11 +32,11 @@ const Step1 = ({ setIsPaperTicket, setIsSwiftOnMobile, setCannotProcess }) => {
 
     if (mustRewrite(formDataState.Application.CustomerType, e.target.value)) {
       // check if user has reached confirmation before
-      if (formDataState.hasReachedConfirmation) {
+      if (formDataState.formStatus.hasReachedConfirmation) {
         // set hasReachedConfirmation false to allow user to continue to next question
         formDataDispatch({
-          type: 'REACHED_CONFIRMATION',
-          payload: false,
+          type: 'UPDATE_FORM_NAV',
+          payload: { hasReachedConfirmation: false },
         });
       }
 
@@ -47,18 +47,13 @@ const Step1 = ({ setIsPaperTicket, setIsSwiftOnMobile, setCannotProcess }) => {
       });
     }
 
-    // If paper ticket chosen
-    if (e.target.value === 'PaperTicket') {
-      setIsPaperTicket(true); // Then set paper ticket to true (value used in step 3)
-    } else {
-      setIsPaperTicket(false); // Else set to false
-    }
-    // If Swift on Mobile chosen (only one with SwiftPortal val on this step)
-    if (e.target.value === 'SwiftPortal') {
-      setIsSwiftOnMobile(true);
-    } else {
-      setIsSwiftOnMobile(false);
-    }
+    formDataDispatch({
+      type: 'UPDATE_FORM_NAV',
+      payload: {
+        isPaperTicket: e.target.value === 'PaperTicket', // If paper ticket chosen set isPaperTicket to true (value used in step 3)
+        isSwiftOnMobile: e.target.value === 'SwiftPortal', // If Swift on Mobile chosen (only one with SwiftPortal val on this step)
+      },
+    });
   };
 
   return (
@@ -104,8 +99,6 @@ const Step1 = ({ setIsPaperTicket, setIsSwiftOnMobile, setCannotProcess }) => {
 };
 
 Step1.propTypes = {
-  setIsPaperTicket: PropTypes.func.isRequired,
-  setIsSwiftOnMobile: PropTypes.func.isRequired,
   setCannotProcess: PropTypes.func.isRequired,
 };
 
