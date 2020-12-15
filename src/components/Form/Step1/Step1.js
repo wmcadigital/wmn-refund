@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
+import useRadioSubmit from 'components/Form/useRadioSubmit';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
 import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo';
@@ -10,35 +11,15 @@ const Step1 = ({ setCannotProcess }) => {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
   const {
     register,
-    formDataState,
     formDataDispatch,
     handleSubmit,
     showGenericError,
     continueButton,
   } = useStepLogic(formRef, setCannotProcess); // Custom hook for handling continue button (validation, errors etc)
 
-  const [hasChanged, setHasChanged] = useState(false);
+  const { radioSubmit, handleRadioChange } = useRadioSubmit('CustomerType');
 
-  // Update customerType on radio button change
-  const handleRadioChange = (e) => {
-    formDataDispatch({ type: 'UPDATE_CUSTOMER_TYPE', payload: e.target.value });
-    // function to compare previous and new values to check if we should clear the form data
-    const mustRewrite = (previousValue, newValue) => {
-      // if switching between Scratchcard & classpass, we don't need to clear the form data as the steps are the same
-      return !(
-        (previousValue === 'Scratchcard' && newValue === 'ClassPass') ||
-        (previousValue === 'ClassPass' && newValue === 'Scratchcard')
-      );
-    };
-
-    if (mustRewrite(formDataState.Application.CustomerType, e.target.value)) {
-      setHasChanged(true);
-    } else {
-      setHasChanged(false);
-    }
-  };
-
-  const radioSubmit = (e) => {
+  const step1Submit = (e) => {
     formDataDispatch({
       type: 'UPDATE_FORM_NAV',
       payload: {
@@ -46,28 +27,10 @@ const Step1 = ({ setCannotProcess }) => {
         isSwiftOnMobile: e.target.value === 'SwiftPortal', // If Swift on Mobile chosen (only one with SwiftPortal val on this step)
       },
     });
-
-    if (hasChanged) {
-      // update form data removing unnecessary fields
-      formDataDispatch({
-        type: 'REWRITE_FORM_DATA',
-        payload: {},
-      });
-      // check if user has reached confirmation before
-      if (formDataState.formStatus.hasReachedConfirmation) {
-        // set hasReachedConfirmation false to allow user to continue to next question
-        formDataDispatch({
-          type: 'UPDATE_FORM_NAV',
-          payload: { hasReachedConfirmation: false },
-        });
-      }
-    }
-
-    handleSubmit(e);
+    radioSubmit(e, handleSubmit); // do radio submit checks then handlesubmit with useStepLogic
   };
-
   return (
-    <form onSubmit={radioSubmit} ref={formRef} autoComplete="on">
+    <form onSubmit={step1Submit} ref={formRef} autoComplete="on">
       <SectionStepInfo
         section="Section 1 of 3"
         description="Before you start"
@@ -101,7 +64,7 @@ const Step1 = ({ setCannotProcess }) => {
         fieldValidation={register({
           required: `Select which best describes your ticket`,
         })}
-        onChange={handleRadioChange}
+        onChange={(e) => handleRadioChange(e)}
       />
       {continueButton}
     </form>

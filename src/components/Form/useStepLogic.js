@@ -58,34 +58,30 @@ const useStepLogic = (formRef, setCannotProcess) => {
         formDataDispatch({ type: 'UPDATE_FORM_DATA', payload: getValues() });
       }
 
-      if (!formDataState.formStatus.hasReachedConfirmation) {
-        // step logic that applies to step 1 only
-        if (formDataState.currentStep === 1) {
-          switch (CustomerType) {
-            case 'SwiftCard':
-            case 'PaperTicket':
-            case 'DirectDebit':
-              setStep(currentStep + 1); // Go to next step (2) so we can set customerType
-              break;
-            case 'Scratchcard':
-            case 'ClassPass':
-              setCannotProcess(true); // go to cannot process
-              // setStep(currentStep + 3); // Skip to last steps as payment info isn't needed for scratchcard and classPass
-              break;
-            default:
-              setCannotProcess(true); // go to cannot process
-              // setStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
-              break;
-          }
-        } else if (CustomerType === 'DirectDebit') {
-          setStep(currentStep + 1);
+      const { hasReachedConfirmation } = formDataState.formStatus;
+      // step logic that applies to step 1 only
+      if (formDataState.currentStep === 1) {
+        switch (CustomerType) {
+          case 'SwiftCard':
+          case 'PaperTicket':
+          case 'DirectDebit':
+            setStep(!hasReachedConfirmation ? currentStep + 1 : 5); // Go to next step (2) so we can set customerType
+            break;
+          case 'Scratchcard':
+          case 'ClassPass':
+            setCannotProcess(true); // go to cannot process
+            // setStep(currentStep + 3); // Skip to last steps as payment info isn't needed for scratchcard and classPass
+            break;
+          default:
+            setCannotProcess(true); // go to cannot process
+            // setStep(currentStep + 2); // Skip two steps(step 3) as customerType has been set
+            break;
         }
-        // if not on step 1 and if not direct debit, we can't currently process
-        else {
-          setCannotProcess(true); // go to cannot process
-        }
-      } else {
-        setStep(5);
+      } else if (CustomerType === 'DirectDebit') {
+        setStep(!hasReachedConfirmation ? currentStep + 1 : 5);
+      } // if not on step 1 and if not direct debit, we can't currently process
+      else {
+        setCannotProcess(true); // go to cannot process
       }
     }
     // else, errors are true...

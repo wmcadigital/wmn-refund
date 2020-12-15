@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 // Import custom hooks
 import useStepLogic from 'components/Form/useStepLogic';
+import useRadioSubmit from 'components/Form/useRadioSubmit';
 
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
@@ -12,36 +13,14 @@ const Step2 = ({ setCannotProcess }) => {
   const {
     register,
     formDataState,
-    formDataDispatch,
     handleSubmit,
     showGenericError,
     continueButton,
   } = useStepLogic(formRef, setCannotProcess); // Custom hook for handling continue button (validation, errors etc)
 
-  // Update customerType on radio button change
-  const handleRadioChange = (e) => {
-    formDataDispatch({
-      type: 'UPDATE_CUSTOMER_TYPE',
-      payload: e.target.value,
-    });
-
-    // check if user has reached confirmation before
-    if (formDataState.hasReachedConfirmation) {
-      // set hasReachedConfirmation false to allow user to continue to next question
-      formDataDispatch({
-        type: 'UPDATE_FORM_NAV',
-        payload: { hasReachedConfirmation: false },
-      });
-    }
-
-    // update form data removing unnecessary fields
-    formDataDispatch({
-      type: 'REWRITE_FORM_DATA',
-      payload: {
-        CustomerType: formDataState.Application.CustomerType,
-      },
-    });
-  };
+  const { handleRadioChange, radioSubmit } = useRadioSubmit(
+    'CustomerTypeStep2'
+  );
 
   //  Set up default radio options (shown for both paper ticket and swift card)
   const radios = [
@@ -76,8 +55,15 @@ const Step2 = ({ setCannotProcess }) => {
     radios.splice(-1, 0, ticketMachine); // push ticketMachine radio option to last before 1 in radio list
   }
 
+  const step2Submit = (e) => {
+    const payload = {
+      CustomerType: formDataState.Application.CustomerType, // information that should be kept if the data needs to be cleared
+    };
+    radioSubmit(e, handleSubmit, payload);
+  };
+
   return (
-    <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
+    <form onSubmit={step2Submit} ref={formRef} autoComplete="on">
       <SectionStepInfo
         section="Section 2 of 3"
         description="About your ticket"
