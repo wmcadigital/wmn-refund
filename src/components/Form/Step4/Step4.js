@@ -1,29 +1,31 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
-// Import contexts
-import { FormContext } from 'globalState/FormContext';
-import { FormErrorContext } from 'globalState/FormErrorContext';
+import React, { useRef } from 'react';
+// Import custom hooks
+import useStepLogic from 'components/Form/useStepLogic';
 // Import components
-import GenericError from 'components/shared/Errors/GenericError';
+import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo';
 import Company from './Company/Company';
 import DOB from './DOB/DOB';
 import Address from './Address/Address';
 import Email from './Email/Email';
 import Telephone from './Telephone/Telephone';
 import Name from './Name/Name';
-import NHS from './NHS/NHS';
+// import NHS from './NHS/NHS';
 
-const Step4 = ({ isFetching }) => {
-  const [formState] = useContext(FormContext); // Get the state of form data from FormContext
-  const [errorState] = useContext(FormErrorContext);
-  const { CustomerType } = formState; // Destructure customertype
+const Step4 = () => {
+  const formRef = useRef(); // Used so we can keep track of the form DOM element
+  const {
+    handleSubmit,
+    showGenericError,
+    continueButton,
+    formDataState,
+  } = useStepLogic(formRef); // Custom hook for handling continue button (validation, errors etc)
+  const { CustomerType } = formDataState; // Destructure customertype
 
   return (
-    <>
-      <h2>Tell us about yourself</h2>
-      {errorState.errors.length && errorState.continuePressed && (
-        <GenericError />
-      )}
+    <form onSubmit={handleSubmit} ref={formRef} autoComplete="on">
+      <SectionStepInfo section="Section 3 of 3" description="About you" />
+      {/* Show generic error message */}
+      {showGenericError}
       <p>
         We’ll use this information to confirm your identity and contact you if
         we need more information
@@ -45,41 +47,20 @@ const Step4 = ({ isFetching }) => {
         CustomerType !== 'Corporate' &&
         CustomerType !== 'Shop' && <DOB />}
 
-      {/* Only show address and NHS if not scratchcard and not classpass */}
+      {/* Only show address if not scratchcard and not classpass */}
       {CustomerType !== 'Scratchcard' && CustomerType !== 'ClassPass' && (
         <>
           <Address />
-          <NHS />
+          {/* <NHS /> */}
         </>
       )}
 
       <Email />
       <Telephone />
 
-      {/* Button onClick logic is located in parent Form component as it is 'submit' form logic */}
-      <button
-        type="submit"
-        className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        disabled={isFetching} // Disable button so users can't spam submit
-      >
-        Submit application
-        {/* If API is fetching */}
-        {isFetching && (
-          <div
-            className="wmnds-loader wmnds-loader--btn wmnds-btn__icon wmnds-btn__icon--right"
-            role="alert"
-            aria-live="assertive"
-          >
-            <p className="wmnds-loader__content">Content is loading...</p>
-          </div>
-        )}
-      </button>
-    </>
+      {continueButton}
+    </form>
   );
-};
-
-Step4.propTypes = {
-  isFetching: PropTypes.bool.isRequired,
 };
 
 export default Step4;

@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import dompurify from 'dompurify';
+import InputMask from 'react-maskinput';
 
-import useInputValidation from './useInputValidation';
+// Import contexts
+import { useFormContext } from 'react-hook-form';
+import { FormDataContext } from 'globalState/FormDataContext';
 
 const { sanitize } = dompurify;
 
@@ -11,40 +14,66 @@ const Input = ({
   className,
   inputmode,
   label,
+  mask,
+  maskChar,
   name,
   spellcheck,
+  disabled,
   type,
-  customValidation,
-  validation,
+  fieldValidation,
 }) => {
-  // Use custom hook for validating inputs (this controls ALL inputs validation)
-  const { handleChange, handleBlur, error } = useInputValidation(
-    name,
-    label,
-    inputmode,
-    customValidation,
-    validation
-  );
+  const { errors, trigger } = useFormContext();
+  const [formDataState] = useContext(FormDataContext); // Get the state/dispatch of form data from FormDataContext
+  const [inputValue, setInputValue] = useState(formDataState.Application[name]);
+  const [isTouched, setIsTouched] = useState(false);
+
+  // Trigger validation every time input has been updated
+  useEffect(() => {
+    if (isTouched && inputValue) trigger(name);
+  }, [inputValue, name, isTouched, trigger]);
 
   // Set input to render below
-  const input = (
+  const input = mask ? (
+    <InputMask
+      className={`wmnds-fe-input ${
+        errors[name] ? 'wmnds-fe-input--error' : ''
+      }`}
+      mask={mask}
+      maskChar={maskChar}
+      type={type}
+      defaultValue={inputValue}
+      inputMode={inputmode}
+      spellCheck={spellcheck}
+      disabled={disabled}
+      onChange={(e) => setInputValue(e.target.value)}
+      onBlur={() => setIsTouched(true)}
+      autoComplete={autocomplete}
+    />
+  ) : (
     <>
       <input
-        className={`wmnds-fe-input ${error ? 'wmnds-fe-input--error' : ''}`}
+        className={`wmnds-fe-input ${
+          errors[name] ? 'wmnds-fe-input--error' : ''
+        }`}
         id={name}
         name={name}
         type={type}
+        defaultValue={formDataState.Application[name]}
         inputMode={inputmode}
         spellCheck={spellcheck}
-        onChange={handleChange}
-        onBlur={handleBlur}
+        disabled={disabled}
         autoComplete={autocomplete}
+        ref={fieldValidation}
       />
     </>
   );
 
   return (
-    <div className={`wmnds-fe-group ${error ? 'wmnds-fe-group--error' : ''}`}>
+    <div
+      className={`wmnds-fe-group ${
+        errors[name] ? 'wmnds-fe-group--error' : ''
+      }`}
+    >
       {label && (
         <label className="wmnds-fe-label" htmlFor={name}>
           {label}
@@ -52,10 +81,20 @@ const Input = ({
       )}
 
       {/* If there is an error, show here */}
-      {error && (
+      {errors[name] && (
         <span
           className="wmnds-fe-error-message"
-          dangerouslySetInnerHTML={{ __html: sanitize(error) }}
+          dangerouslySetInnerHTML={{ __html: sanitize(errors[name].message) }}
+        />
+      )}
+
+      {mask && (
+        <input
+          id={name}
+          name={name}
+          ref={fieldValidation}
+          value={inputValue || ''}
+          type="hidden"
         />
       )}
 
@@ -72,19 +111,23 @@ Input.propTypes = {
   name: PropTypes.string.isRequired,
   className: PropTypes.string,
   spellcheck: PropTypes.bool,
+  disabled: PropTypes.bool,
   type: PropTypes.string,
-  customValidation: PropTypes.func,
-  validation: PropTypes.bool,
+  fieldValidation: PropTypes.func,
+  mask: PropTypes.string,
+  maskChar: PropTypes.string,
 };
 
 Input.defaultProps = {
   autocomplete: null,
   inputmode: 'text',
+  disabled: false,
   className: '',
   spellcheck: false,
   type: 'text',
-  customValidation: null,
-  validation: true,
+  fieldValidation: null,
+  mask: null,
+  maskChar: null,
 };
 
 export default Input;

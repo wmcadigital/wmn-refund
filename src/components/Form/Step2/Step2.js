@@ -1,35 +1,26 @@
-import React, { useContext } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-// Import contexts
-import { FormContext } from 'globalState/FormContext';
-import { FormErrorContext } from 'globalState/FormErrorContext';
+// Import custom hooks
+import useStepLogic from 'components/Form/useStepLogic';
+import useRadioSubmit from 'components/Form/useRadioSubmit';
+
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
-import GenericError from 'components/shared/Errors/GenericError';
+import SectionStepInfo from 'components/shared/SectionStepInfo/SectionStepInfo';
 
-const Step2 = ({ currentStep, setCurrentStep, isPaperTicket, formRef }) => {
-  const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
-  const [errorState, errorDispatch] = useContext(FormErrorContext); // Get the error state of form data from FormErrorContext
+const Step2 = ({ setCannotProcess }) => {
+  const formRef = useRef(); // Used so we can keep track of the form DOM element
+  const {
+    register,
+    formDataState,
+    handleSubmit,
+    showGenericError,
+    continueButton,
+  } = useStepLogic(formRef, setCannotProcess); // Custom hook for handling continue button (validation, errors etc)
 
-  // Update customerType on radio button change
-  const handleRadioChange = (e) =>
-    formDispatch({
-      type: 'UPDATE_CUSTOMER_TYPE',
-      payload: e.target.value,
-    });
-
-  // Goto next step on continue
-  const handleContinue = () => {
-    // If errors, then don't progress and set continue button to true(halt form and show errors)
-    if (errorState.errors.length) {
-      window.scrollTo(0, formRef.current.offsetTop); // Scroll to top of form
-      errorDispatch({ type: 'CONTINUE_PRESSED', payload: true }); // set continue button pressed to true so errors can show
-    } else {
-      errorDispatch({ type: 'CONTINUE_PRESSED', payload: false }); // Reset submit button pressed before going to next step
-      setCurrentStep(currentStep + 1); // Set to next step in form
-      window.scrollTo(0, 0); // Scroll to top of page
-    }
-  };
+  const { handleRadioChange, radioSubmit } = useRadioSubmit(
+    'CustomerTypeStep2'
+  );
 
   //  Set up default radio options (shown for both paper ticket and swift card)
   const radios = [
@@ -45,15 +36,15 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket, formRef }) => {
       text: 'I pay for it through my company',
       value: 'Corporate',
     },
-
     {
-      text: 'I bought it from a West Midlands Network travel shop, railway station ticket office or Payzone shop',
+      text:
+        'I bought it from a West Midlands Network travel shop, railway station ticket office or Payzone shop',
       value: 'Shop',
     },
   ];
 
   // If the user has selected something other than paper ticket in step 1
-  if (!isPaperTicket) {
+  if (!formDataState.formStatus.isPaperTicket) {
     const workwise = { text: 'I am on the Workwise scheme', value: 'Workwise' };
     const ticketMachine = {
       text: 'I bought it from a Swift kiosk',
@@ -64,40 +55,39 @@ const Step2 = ({ currentStep, setCurrentStep, isPaperTicket, formRef }) => {
     radios.splice(-1, 0, ticketMachine); // push ticketMachine radio option to last before 1 in radio list
   }
 
+  const step2Submit = (e) => {
+    const payload = {
+      CustomerType: formDataState.Application.CustomerType, // information that should be kept if the data needs to be cleared
+    };
+    radioSubmit(e, handleSubmit, payload);
+  };
+
   return (
-    <>
-      <h2>Tell us about your ticket</h2>
-      {errorState.errors.length > 0 && errorState.continuePressed && (
-        <GenericError />
-      )}
+    <form onSubmit={step2Submit} ref={formRef} autoComplete="on">
+      <SectionStepInfo
+        section="Section 2 of 3"
+        description="About your ticket"
+      />
+      {/* Show generic error message */}
+      {showGenericError}
+
       <Radios
         name="CustomerTypeStep2"
         label="How did you buy your ticket?"
         radios={radios}
+        fieldValidation={register({
+          required: `Select how you bought your ticket`,
+        })}
         onChange={handleRadioChange}
       />
 
-      <button
-        type="button"
-        className="wmnds-btn wmnds-btn--disabled wmnds-col-1 wmnds-m-t-md"
-        onClick={() => handleContinue()}
-      >
-        Continue
-      </button>
-    </>
+      {continueButton}
+    </form>
   );
 };
 
 Step2.propTypes = {
-  currentStep: PropTypes.number.isRequired,
-  setCurrentStep: PropTypes.func.isRequired,
-  isPaperTicket: PropTypes.bool.isRequired,
-  formRef: PropTypes.oneOfType([
-    // Either a function
-    PropTypes.func,
-    // Or the instance of a DOM native element (see the note about SSR)
-    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-  ]).isRequired,
+  setCannotProcess: PropTypes.func.isRequired,
 };
 
 export default Step2;

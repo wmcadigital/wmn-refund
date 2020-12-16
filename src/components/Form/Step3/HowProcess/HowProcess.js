@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 // Import contexts
-import { FormContext } from 'globalState/FormContext';
+import { FormDataContext } from 'globalState/FormDataContext';
+import { useFormContext } from 'react-hook-form';
 // Import components
 import Radios from 'components/shared/FormElements/Radios/Radios';
 
 const HowProcess = () => {
-  const [, formDispatch] = useContext(FormContext); // Get the state of form data from FormContext
+  const [, formDispatch] = useContext(FormDataContext); // Get the state of form data from FormDataContext
+  const { register } = useFormContext();
 
   // Update customerType on radio button change
   const handleRadioChange = (e) =>
@@ -32,6 +34,9 @@ const HowProcess = () => {
         },
       ]}
       onChange={handleRadioChange}
+      fieldValidation={register({
+        required: 'Select how we process your application',
+      })}
     />
   );
 };

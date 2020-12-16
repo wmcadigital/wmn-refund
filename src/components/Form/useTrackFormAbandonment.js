@@ -2,19 +2,14 @@
 import { useEffect, useState } from 'react';
 // Import contexts
 
-const useTrackFormAbandonment = (
-  formRef,
-  currentStep,
-  formSubmitStatus,
-  formState
-) => {
+const useTrackFormAbandonment = (currentStep, formSubmitStatus) => {
   const [fieldsChanged, setFieldsChanged] = useState([]); // Track fields the user has touched/changed
 
   window.dataLayer = window.dataLayer || []; // Set datalayer (GA thing)
 
   // This useEffect is used to track form changes and update the fieldsChanged state as the user progresses
   useEffect(() => {
-    const refundForm = formRef.current; // Get DOM node of form
+    const form = document.querySelector('form'); // Get DOM node of form
     // Function to work out last changed element in form
     const lastChangedEle = (e) => {
       // Update fields changed array with step number and last changed field name i.e. Step1: CustomerType > Step3: CardNumber
@@ -24,12 +19,12 @@ const useTrackFormAbandonment = (
       ]);
     };
     // Listen to changes in form and run above function
-    refundForm.addEventListener('change', lastChangedEle);
+    if (form) form.addEventListener('change', lastChangedEle);
     // On unmount, remove listener
     return () => {
-      refundForm.removeEventListener('change', lastChangedEle);
+      if (form) form.removeEventListener('change', lastChangedEle);
     };
-  }, [currentStep, fieldsChanged, formRef]);
+  }, [currentStep, fieldsChanged]);
 
   // Used to update Google Tag Manager
   useEffect(() => {
@@ -40,8 +35,9 @@ const useTrackFormAbandonment = (
         // Push abandoned event to GA/Tag Manager
         window.dataLayer.push({
           event: 'formAbandonment',
-          eventCategory: 'Refund form abandonment',
-          eventAction: fieldsChanged
+          eventCategory: 'wmn-refund',
+          eventAction: 'form abandonded',
+          eventLabel: fieldsChanged
             ? fieldsChanged.join(' > ')
             : 'Clicked start, but abandoned straight away.', // If fieldsChanged (set in first useEffect) is available then use that and join with ' > ' so it logs as 'Step1: ... > Step2: ... >' ELSE the user must of abandoned without updating the form in step 1 so log message
         });
@@ -61,11 +57,12 @@ const useTrackFormAbandonment = (
     if (currentStep) {
       window.dataLayer.push({
         event: 'formAbandonment',
-        eventCategory: 'Refund form started',
-        eventAction: true,
+        eventCategory: 'wmn-refund',
+        eventAction: 'form started',
+        eventLabel: true,
       });
     }
-  }, [currentStep, formState.CustomerType]);
+  }, [currentStep]);
 };
 
 export default useTrackFormAbandonment;

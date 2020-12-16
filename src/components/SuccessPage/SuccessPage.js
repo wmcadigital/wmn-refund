@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 // Import contexts
-import { FormContext } from 'globalState/FormContext';
+import { FormDataContext } from 'globalState/FormDataContext';
 
 // Import components
 import Icon from 'components/shared/Icon/Icon';
 import Title from 'components/shared/Title/Title';
 
 const SuccessPage = () => {
-  const [formState] = useContext(FormContext); // Get the state of form data from FormContext
+  const [formState] = useContext(FormDataContext); // Get the state of form data from FormDataContext
 
   return (
     <>
@@ -87,7 +87,7 @@ const SuccessPage = () => {
         <br />
         <p>
           <a
-            href="https://surveys.hotjar.com/s?siteId=264586&surveyId=154279"
+            href="https://forms.office.com/Pages/ResponsePage.aspx?id=RetZCK7xCk6e-ubWa7tnLz45Weo_RTVDpYxVYcrD8wxURFNVTERKOTVJNEgxMUpVWk0xR1ZIQTQ3US4u"
             title="Service feedback survey"
             target="_blank"
             rel="noopener noreferrer"

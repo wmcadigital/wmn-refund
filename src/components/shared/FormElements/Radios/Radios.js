@@ -1,25 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import dompurify from 'dompurify';
-
+// Import contexts
+import { useFormContext } from 'react-hook-form';
+// Import components
 import Radio from './Radio/Radio';
-import useRadioValidation from './useRadiosValidation';
 
 const { sanitize } = dompurify;
 
-const Radios = ({ name, label, radios, onChange }) => {
-  const { handleBlur, error } = useRadioValidation(name, label); // Use custom hook for validating radios (this controls ALL radios validation)
+const Radios = ({ name, label, radios, fieldValidation, onChange }) => {
+  const { errors } = useFormContext();
 
   return (
-    <div className={`wmnds-fe-group ${error ? 'wmnds-fe-group--error' : ''}`}>
+    <div
+      className={`wmnds-fe-group ${
+        errors[name] ? 'wmnds-fe-group--error' : ''
+      }`}
+    >
       <fieldset className="wmnds-fe-fieldset">
         <legend className="wmnds-fe-fieldset__legend">
-          <h3 className="wmnds-fe-question">{label}</h3>
+          <h2 className="wmnds-fe-question">{label}</h2>
           {/* If there is an error, show here */}
-          {error && (
+          {errors[name] && (
             <span
               className="wmnds-fe-error-message"
-              dangerouslySetInnerHTML={{ __html: sanitize(error) }}
+              dangerouslySetInnerHTML={{
+                __html: sanitize(errors[name].message),
+              }}
             />
           )}
         </legend>
@@ -31,7 +38,7 @@ const Radios = ({ name, label, radios, onChange }) => {
               name={name}
               text={radio.text}
               value={radio.value}
-              onBlur={handleBlur}
+              fieldValidation={fieldValidation}
               onChange={onChange}
             />
           ))}
@@ -47,10 +54,12 @@ Radios.propTypes = {
   radios: PropTypes.arrayOf(
     PropTypes.objectOf(PropTypes.string, PropTypes.string)
   ).isRequired,
+  fieldValidation: PropTypes.func,
   onChange: PropTypes.func,
 };
 
 Radios.defaultProps = {
+  fieldValidation: null,
   onChange: null,
 };
 

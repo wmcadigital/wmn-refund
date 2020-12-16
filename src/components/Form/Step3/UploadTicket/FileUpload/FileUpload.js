@@ -1,36 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 // Import components
 import Icon from 'components/shared/Icon/Icon';
-// Import custom hooks
-import useFileUploadValidation from './useFileUploadValidation';
+// Import contexts
+import { useFormContext } from 'react-hook-form';
 // Import styles
 import s from './FileUpload.module.scss';
 
-const FileUpload = () => {
-  // Use custom hook for validating fileUpload inputs
-  const {
-    handleChange,
-    handleBlur,
-    handleFocus,
-    isFileInputFocused,
-    fileName,
-    error,
-  } = useFileUploadValidation();
+const FileUpload = ({ name, fieldValidation }) => {
+  const { errors } = useFormContext();
+
+  // Local state for controlling file upload
+  const [isFileInputFocused, setIsFileInputFocused] = useState(false); // This is used to emulate the input focus class on the label
+  const [fileName, setFileName] = useState('Upload photo'); // Used to change the name of the input/label button to the users file name
+
+  const handleChange = (e) => {
+    const file = e.target.files[0];
+
+    // If a file exists (user hasn't clicked cancel button or something)
+    if (file) {
+      setFileName(file.name); // Set file name that the user has chosen (this will display in our label)
+    }
+  };
+
+  // HandleFocus (when user joins input)
+  const handleFocus = () => {
+    setIsFileInputFocused(true); // Set input to focus
+  };
+
+  // Handleblur (when user leaves input), set input to unfocus
+  const handleBlur = () => setIsFileInputFocused(false);
 
   return (
-    <div className={`wmnds-fe-group ${error ? 'wmnds-fe-group--error' : ''}`}>
-      <fieldset className="wmnds-fe-fieldset">
-        <legend className="wmnds-fe-fieldset__legend">
-          <h3 className="wmnds-fe-question">
-            Upload a photo of the front of the ripped ticket
-          </h3>
-          <p>
-            We need to be able to read the ticket type and expiry date to
-            process the refund
-          </p>
-        </legend>
+    <fieldset className="wmnds-fe-fieldset">
+      <legend className="wmnds-fe-fieldset__legend">
+        <h2 className="wmnds-fe-question">
+          Upload a photo of the front of the ripped ticket
+        </h2>
+        <p>
+          We need to be able to read the ticket type and expiry date to process
+          the refund
+        </p>
+        <p>The file must be a JPG, JPEG, or PNG</p>
+      </legend>
+      <div
+        className={`wmnds-fe-group ${
+          errors[name] ? 'wmnds-fe-group--error' : ''
+        }`}
+      >
         {/* If there is an error, show here */}
-        {error && <span className="wmnds-fe-error-message">{error}</span>}
+        {errors[name] && (
+          <span className="wmnds-fe-error-message">{errors[name].message}</span>
+        )}
         <label
           htmlFor="fileUpload"
           className={`wmnds-btn wmnds-btn--primary ${
@@ -44,17 +65,27 @@ const FileUpload = () => {
           />
           <input
             type="file"
-            name="fileUpload"
+            name={name}
             id="fileUpload"
-            onFocus={handleFocus}
             onBlur={handleBlur}
+            onFocus={handleFocus}
             onChange={handleChange}
             className={s.fileUpload}
+            ref={fieldValidation}
           />
         </label>
-      </fieldset>
-    </div>
+      </div>
+    </fieldset>
   );
+};
+
+FileUpload.propTypes = {
+  name: PropTypes.string.isRequired,
+  fieldValidation: PropTypes.func,
+};
+
+FileUpload.defaultProps = {
+  fieldValidation: null,
 };
 
 export default FileUpload;
