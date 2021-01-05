@@ -20,10 +20,10 @@ function ContactDetails({ socialMedia }) {
           <br />
         </a>
       </p>
-      Monday to Tuesday and Thursday to Friday, 9am - 5pm, <br />
-      Wednesday, 9.30am - 5pm
+      Monday to Tuesday and Thursday to Friday, 9am - 6pm, <br />
+      Wednesday, 10am - 6pm, Saturday, 9am - 1pm
       <br />
-      Saturday and Sunday, closed
+      Sunday, closed
     </div>
   );
 }
