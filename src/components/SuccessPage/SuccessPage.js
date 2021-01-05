@@ -71,7 +71,7 @@ const SuccessPage = () => {
               If you have any questions regarding your refund, or you would like
               to know how we will calculate your refund, there is{' '}
               <a
-                href="https://wmnetwork.co.uk/coronavirus"
+                href="https://wmnetwork.co.uk/refund-workings/"
                 title="Guidance about how we will calculate your refund"
                 target="_blank"
                 rel="noopener noreferrer"
