@@ -21,9 +21,9 @@ function ContactDetails({ socialMedia }) {
         </a>
       </p>
       Monday to Tuesday and Thursday to Friday, 9am - 6pm, <br />
-      Wednesday, 10am - 6pm
+      Wednesday, 10am - 6pm,
       <br />
-      Saturday, 9am - 1pm
+      Saturday, 9am - 1pm,
       <br />
       Sunday, closed
     </div>
