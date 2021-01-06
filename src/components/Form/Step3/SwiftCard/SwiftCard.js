@@ -20,16 +20,20 @@ const SwiftCard = () => {
     validate: {
       // ensure first 10 digits don't match 6335970112 NXCard
       nxCard: (value) =>
-        removeSpaces(value).substr(0, 10) !== '6335970112' ||
-        `${label} is managed by National Express West Midlands and there is a
-      <a
-        href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
-        title="National Express West Midlands ticket refund process"
-        target="_blank"
-        className="wmnds-link"
-      >
-        separate refund process
-      </a>`,
+        removeSpaces(value).substr(0, 10) !== '6335970112' || (
+          <>
+            {label} is managed by National Express West Midlands and there is a{' '}
+            <a
+              href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
+              title="National Express West Midlands ticket refund process"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="wmnds-link"
+            >
+              separate refund process
+            </a>
+          </>
+        ),
       // ensure first 10 digits match 6335970107 or 6335970319
       firstTenValid: (value) =>
         removeSpaces(value).substr(0, 10) === '6335970107' ||
