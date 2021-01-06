@@ -1,13 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import dompurify from 'dompurify';
 import InputMask from 'react-maskinput';
 
 // Import contexts
 import { useFormContext } from 'react-hook-form';
 import { FormDataContext } from 'globalState/FormDataContext';
-
-const { sanitize } = dompurify;
 
 const Input = ({
   autocomplete,
@@ -82,10 +79,7 @@ const Input = ({
 
       {/* If there is an error, show here */}
       {errors[name] && (
-        <span
-          className="wmnds-fe-error-message"
-          dangerouslySetInnerHTML={{ __html: sanitize(errors[name].message) }}
-        />
+        <span className="wmnds-fe-error-message">{errors[name].message}</span>
       )}
 
       {mask && (
