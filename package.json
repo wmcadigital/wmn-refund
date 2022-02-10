@@ -12,7 +12,7 @@
     "dompurify": "^2.2.2",
     "logrocket": "^1.0.14",
     "logrocket-react": "^4.0.1",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.1",
     "polyfill-array-includes": "^2.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
