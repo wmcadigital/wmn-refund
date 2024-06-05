@@ -78,6 +78,7 @@ const Introduction = ({ setIsFormStarted, setCannotProcess }) => {
             if you stopped using your travel pass before{' '}
             <strong>{getDateFormatted(getDaysFromNow(-28))}</strong>
           </li>
+          <li>Your refund may be subject to a £5.50 administration fee</li>
         </ul>
         <br />
         <h3>Direct Debit refunds</h3>

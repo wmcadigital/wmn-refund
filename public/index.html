@@ -67,10 +67,9 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <!-- WMN Style links-->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/wmn-design-system@1.1.0/build/css/wmnds.min.css"
-    />
+
+  <!-- design system CSS -->
+  <link rel="stylesheet" href="assets/css/wmnds.min.css" />
 
     <title>Cancel my Direct Debit - West Midlands Network</title>
 
@@ -166,13 +165,13 @@
             <!-- Logo -->
             <a
               class="wmnds-header__logo-link"
-              href="//wmnetwork.co.uk"
-              title="West Midlands Network Home"
+              href="https://www,tfwm.org.uk"
+              title="Transport for West Midlands Home"
             >
               <img
                 class="wmnds-header__logo"
-                alt="West Midlands Network logo"
-                src="//wmnetwork.netlify.com/img/logo.svg"
+                alt="Transport for West Midlands logo"
+                src="https://unpkg.com/wmn-design-system@2.2.0/build/img/logo.svg"
               />
             </a>
           </div>
@@ -215,24 +214,32 @@
       <nav aria-label="Breadcrumb" class="wmnds-breadcrumb">
         <ol class="wmnds-breadcrumb__list">
           <li class="wmnds-breadcrumb__list-item">
-            <a href="//wmnetwork.co.uk" class="wmnds-breadcrumb__link">
+            <a href="//tfwm.org.uk" class="wmnds-breadcrumb__link">
               Home
             </a>
           </li>
           <li class="wmnds-breadcrumb__list-item">
             <a
-              href="//wmnetwork.co.uk/get-in-touch/"
+              href="//tfwm.org.uk/swift-and-tickets/"
               class="wmnds-breadcrumb__link"
             >
-              Get in touch
+              Swift and tickets
             </a>
           </li>
           <li class="wmnds-breadcrumb__list-item">
             <a
-              href="//wmnetwork.co.uk/get-in-touch/refunds/"
+              href="//tfwm.org.uk/swift-and-tickets/manage-a-ticket/"
               class="wmnds-breadcrumb__link"
             >
-              Refunds
+              Manage a ticket
+            </a>
+          </li>
+          <li class="wmnds-breadcrumb__list-item">
+            <a
+              href="//tfwm.org.uk/swift-and-tickets/manage-a-ticket/set-up-cancel-or-update-a-direct-debit/"
+              class="wmnds-breadcrumb__link"
+            >
+              Set up, cancel or update a Direct Debit
             </a>
           </li>
           <li class="wmnds-breadcrumb__list-item">
@@ -241,7 +248,7 @@
               class="wmnds-breadcrumb__link wmnds-breadcrumb__link--current"
               aria-current="page"
             >
-              Cancel my Direct Debit
+              Cancel Direct Debit
             </a>
           </li>
         </ol>
@@ -258,17 +265,41 @@
     <footer class="wmnds-footer wmnds-footer--mobile-app">
       <div class="wmnds-container wmnds-grid">
         <div class="wmnds-col-1 wmnds-col-md-1-2">
-          Copyright West Midlands Network &copy; 2020
+          &copy; West Midlands Combined Authority 2024
         </div>
         <div class="wmnds-col-1 wmnds-col-md-1-2">
-          <a
-            href="https://www.networkwestmidlands.com/privacy-cookies-policy/"
-            title="Privacy and cookies policy"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="wmnds-footer__link wmnds-link"
-            >Privacy & Cookies Policy</a
-          >
+          <ul class="wmnds-footer__bottom-menu">
+            <li>
+              <a
+              href="https://www.tfwm.org.uk/policies/accessibility-statement/"
+              title="Accessibility statement"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="wmnds-footer__link"
+              >Accessibility statement</a
+            >
+            </li>
+            <li>
+              <a
+              href="https://www.tfwm.org.uk/terms-and-conditions/"
+              title="Terms and conditions"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="wmnds-footer__link"
+              >Terms and conditions</a
+            >
+            </li>
+            <li>
+              <a
+              href="https://www.tfwm.org.uk/policies/"
+              title="Policies"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="wmnds-footer__link"
+              >Policies</a
+            >
+            </li>
+          </ul>
         </div>
       </div>
     </footer>
@@ -277,7 +308,7 @@
     <!-- Ajax SVG in, SVGS are referenced in app (Icon component) -->
     <script>
       const ajax = new XMLHttpRequest();
-      ajax.open('GET', '%PUBLIC_URL%/icons/wmnds-svg-sprite.min.svg', true);
+      ajax.open('GET', 'assets/img/wmnds-icons.min.svg', true);
       ajax.send();
       ajax.onload = function () {
         const div = document.createElement('div');
