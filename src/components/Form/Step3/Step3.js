@@ -12,7 +12,7 @@ import SoMTicketNumber from './SoMTicketNumber/SoMTicketNumber';
 import UploadTicket from './UploadTicket/UploadTicket';
 import LastUsed from './LastUsed/LastUsed';
 import HowProcess from './HowProcess/HowProcess';
-import CovidRefund from './CovidRefund/CovidRefund';
+import CovidRefund from './CovidRefund/CovidRefund'; // Keep the import for automatic field setting
 
 const Step3 = ({ setCannotProcess }) => {
   const formRef = useRef(); // Used so we can keep track of the form DOM element
@@ -117,12 +117,13 @@ const Step3 = ({ setCannotProcess }) => {
       {/* Show generic error message */}
       {showGenericError}
 
+      {/* Automatically set CovidRefund to false */}
+      <CovidRefund />
+
       {/* This changes based on switch logic above */}
       {elementsToRender}
 
       <LastUsed setCannotProcess={setCannotProcess} />
-
-      <CovidRefund />
 
       {/* Only show this based on the logic set near top of file */}
       {shouldRenderUpload && <UploadTicket />}

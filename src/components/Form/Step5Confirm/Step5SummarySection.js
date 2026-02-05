@@ -29,7 +29,7 @@ function Step5SummarySection() {
     PhotoBase64,
     PhotoBase64Extension,
     PhoneNumber,
-    CovidRefund,
+    // CovidRefund, // This field is no longer displayed in the summary but remains in the form data for backend processing.
   } = formDataState.Application;
 
   const { getDateFormatted } = dateValidationHelpers;
@@ -177,17 +177,7 @@ function Step5SummarySection() {
                   </td>
                 </tr>
               )}
-              {CovidRefund && (
-                <tr>
-                  <th scope="row">
-                    Did you stop using your ticket to travel because of the
-                    coronavirus (COVID-19) pandemic?
-                  </th>
-                  <td className={`${style.tableColspan2}`}>
-                    {CovidRefund === 'true' ? 'Yes' : 'No'}
-                  </td>
-                </tr>
-              )}
+              {/* Removed the CovidRefund row */}
               {PhotoBase64 && (
                 <tr>
                   <th scope="row">Photo of ripped ticket</th>
