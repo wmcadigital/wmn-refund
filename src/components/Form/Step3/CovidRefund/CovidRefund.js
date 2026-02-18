@@ -14,7 +14,7 @@ const CovidRefund = () => {
 
   // NOTE: This component previously rendered a question to the user about Covid-related refunds.
   // The question has been removed, and the field is now permanently set to "false" to preserve
-  // downstream data processing. If necessary, this component can be updated to reintroduce the 
+  // downstream data processing. If necessary, this component can be updated to reintroduce the
   // question to the user.
 
   // Do not render anything
