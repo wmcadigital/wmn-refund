@@ -48,7 +48,7 @@ const LastUsed = ({ setCannotProcess }) => {
               className="wmnds-btn wmnds-btn--link"
               onClick={handleCannotProcess}
             >
-              Call us
+              Contact us
             </button>{' '}
             if you stopped using your travel pass before 12 November
           </>
