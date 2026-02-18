@@ -5,7 +5,6 @@
   },
   "extends": [
     "react-app",
-    "airbnb",
     "plugin:prettier/recommended",
     "plugin:jsx-a11y/recommended"
   ],
