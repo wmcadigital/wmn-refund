@@ -25,11 +25,9 @@ const ErrorPage = ({ isFormStarted, setIsFormStarted, setCannotProcess }) => {
         </div>
         {/* Error message */}
         <h3>We can&rsquo;t process your refund online yet</h3>
-
         <p>
           You&rsquo;ll need to phone Customer Services to request your refund.
         </p>
-
         <ContactDetails />
       </div>
     </>
