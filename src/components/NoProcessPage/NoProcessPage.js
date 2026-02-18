@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Title from 'components/shared/Title/Title';
+import ContactDetails from 'components/ContactDetails/ContactDetails';
 
 const ErrorPage = ({ isFormStarted, setIsFormStarted, setCannotProcess }) => {
   const goBack = () => {
@@ -23,14 +24,13 @@ const ErrorPage = ({ isFormStarted, setIsFormStarted, setCannotProcess }) => {
           </button>
         </div>
         {/* Error message */}
-        <h3>We can&rsquo;t process your refund using this service</h3>
+        <h3>We can&rsquo;t process your refund online yet</h3>
 
         <p>
-          You&rsquo;ll need to contact Customer Services to request your refund.
+          You&rsquo;ll need to phone Customer Services to request your refund.
         </p>
-        
-        <a className="wmnds-btn" target="_self" title='Contact us - Transport for West Midlands' href="https://www.tfwm.org.uk/get-help/contact-us/">Contact us </a>
 
+        <ContactDetails />
       </div>
     </>
   );

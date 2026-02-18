@@ -73,7 +73,7 @@ const Introduction = ({ setIsFormStarted, setCannotProcess }) => {
               className="wmnds-btn wmnds-btn--link"
               onClick={handleCannotProcess}
             >
-              contact us
+              call us
             </button>{' '}
             if you stopped using your travel pass before{' '}
             <strong>{getDateFormatted(getDaysFromNow(-28))}</strong>

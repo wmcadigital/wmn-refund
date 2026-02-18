@@ -17,13 +17,14 @@ const ErrorPage = () => {
         </p>
 
         <p>
+          Contact the{' '}
           <a
             href="https://www.tfwm.org.uk/get-help/contact-us/"
             title="Contact us - Transport for West Midlands"
             target="_self"
             className="wmnds-link"
           >
-            Contact us
+            Customer Services team
           </a>{' '}
           if you continue to have problems.
         </p>
