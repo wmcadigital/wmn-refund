@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Title from 'components/shared/Title/Title';
-import ContactDetails from 'components/ContactDetails/ContactDetails';
+import ContactDetails from 'components/shared/ContactDetails/ContactDetails';
 
 const ErrorPage = ({ isFormStarted, setIsFormStarted, setCannotProcess }) => {
   const goBack = () => {
