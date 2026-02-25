@@ -4,6 +4,7 @@
   "private": true,
   "author": "WMCA",
   "main": "src/index.js",
+  "engines": {"node": "16.x"},
   "dependencies": {
     "@sentry/browser": "^10.10.0",
     "@testing-library/jest-dom": "^5.16.5",
