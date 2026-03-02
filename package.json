@@ -4,24 +4,26 @@
   "private": true,
   "author": "WMCA",
   "main": "src/index.js",
+  "engines": {"node": "16.x"},
   "dependencies": {
-    "@sentry/browser": "^5.27.6",
-    "@testing-library/jest-dom": "^5.11.6",
-    "@testing-library/react": "^10.4.9",
-    "@testing-library/user-event": "^7.2.1",
-    "dompurify": "^2.2.2",
-    "logrocket": "^1.0.14",
-    "logrocket-react": "^4.0.1",
-    "node-sass": "^4.14.1",
+    "@sentry/browser": "^10.10.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^12.1.5",
+    "@testing-library/user-event": "^12.8.3",
+    "dompurify": "^3.2.6",
+    "install": "^0.13.0",
+    "logrocket": "^3.0.0",
+    "logrocket-react": "^4.0.0",
     "polyfill-array-includes": "^2.0.0",
-    "prop-types": "^15.7.2",
+    "prop-types": "^15.8.1",
     "react": "^16.14.0",
     "react-app-polyfill": "^1.0.6",
     "react-dom": "^16.14.0",
     "react-hook-form": "^6.11.5",
     "react-maskinput": "^3.2.0",
     "react-scripts": "3.4.1",
-    "rewire": "^5.0.0"
+    "rewire": "^9.0.1",
+    "sass": "^1.92.0"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
@@ -56,3 +58,4 @@
     ]
   }
 }
+

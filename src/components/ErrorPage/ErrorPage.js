@@ -19,8 +19,8 @@ const ErrorPage = () => {
         <p>
           Contact the{' '}
           <a
-            href="https://www.wmnetwork.co.uk/get-in-touch/contact-us/"
-            title="Customer Services Team Contact Details"
+            href="https://www.tfwm.org.uk/get-help/contact-us/"
+            title="Contact us - Transport for West Midlands"
             target="_self"
             className="wmnds-link"
           >
