@@ -1,3 +1,5 @@
+require('./ensureNodeCompatibility');
+
 // npm install rewire
 const rewire = require('rewire');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
