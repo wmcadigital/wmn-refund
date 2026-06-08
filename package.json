@@ -4,7 +4,9 @@
   "private": true,
   "author": "WMCA",
   "main": "src/index.js",
-  "engines": {"node": "16.x"},
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "@sentry/browser": "^10.10.0",
     "@testing-library/jest-dom": "^5.16.5",
@@ -14,6 +16,7 @@
     "install": "^0.13.0",
     "logrocket": "^3.0.0",
     "logrocket-react": "^4.0.0",
+    "mini-css-extract-plugin": "^0.9.0",
     "polyfill-array-includes": "^2.0.0",
     "prop-types": "^15.8.1",
     "react": "^16.14.0",
@@ -38,10 +41,10 @@
     "prettier": "^2.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "node ./scripts/runReactScripts.js start",
+    "build": "node ./scripts/runReactScripts.js build",
     "buildStatic": "npx ./scripts/build.js",
-    "test": "react-scripts test",
+    "test": "node ./scripts/runReactScripts.js test",
     "eject": "react-scripts eject"
   },
   "browserslist": {
@@ -58,4 +61,3 @@
     ]
   }
 }
-

@@ -60,12 +60,16 @@ const Address = () => {
         label="Postcode"
         className="wmnds-col-1-2 wmnds-col-sm-1-4"
         autocomplete="postal-code"
+        autocapitalize="characters"
+        onChange={(e) => {
+          e.target.value = e.target.value.toUpperCase();
+        }}
         fieldValidation={register({
           required: 'Enter a postcode',
           pattern: {
             value: postcodeRegex,
             message:
-              'Enter a postcode in the correct format, for example B19 3SD',
+              'Enter a postcode in the correct format, for example: B19 3SD',
           },
         })}
       />
