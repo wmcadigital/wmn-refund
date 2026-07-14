@@ -34,10 +34,11 @@ const SwiftCard = () => {
             </a>
           </>
         ),
-      // ensure first 10 digits match 6335970107 or 6335970319
+      // ensure first 10 digits match 6335970107 or 6335970319 or 6335970114
       firstTenValid: (value) =>
         removeSpaces(value).substr(0, 10) === '6335970107' ||
         removeSpaces(value).substr(0, 10) === '6335970319' ||
+        removeSpaces(value).substr(0, 10) === '6335970114' ||
         `Your ${label} is the long number on the front of the card`,
       // ensure number is 18 digits long
       checkLength: (value) =>
