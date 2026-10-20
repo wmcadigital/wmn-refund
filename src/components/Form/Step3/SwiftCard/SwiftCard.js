@@ -22,16 +22,17 @@ const SwiftCard = () => {
       nxCard: (value) =>
         removeSpaces(value).substr(0, 10) !== '6335970112' || (
           <>
-            {label} is managed by National Express West Midlands and there is a{' '}
+            {label} is managed by National Express West Midlands. Please contact 
             <a
-              href="https://nxbus.co.uk/west-midlands/news/ticket-refunds-due-to-covid19"
-              title="National Express West Midlands ticket refund process"
+              href="https://nxbus.co.uk/west-midlands"
+              title="National Express West Midlands"
               target="_blank"
               rel="noopener noreferrer"
               className="wmnds-link"
             >
-              separate refund process
+              National Express West Midlands
             </a>
+            .
           </>
         ),
       // ensure first 10 digits match 6335970107 or 6335970319

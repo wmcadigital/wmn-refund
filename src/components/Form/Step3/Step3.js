@@ -123,7 +123,7 @@ const Step3 = ({ setCannotProcess }) => {
       {/* This changes based on switch logic above */}
       {elementsToRender}
 
-      <LastUsed setCannotProcess={setCannotProcess} />
+      <LastUsed />
 
       {/* Only show this based on the logic set near top of file */}
       {shouldRenderUpload && <UploadTicket />}

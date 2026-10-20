@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'components/shared/Icon/Icon';
 import Title from 'components/shared/Title/Title';
-import dateValidationHelpers from 'components/shared/FormElements/Date/dateValidationHelpers';
 // import WarningText from 'components/shared/WarningText/WarningText';
 
-const Introduction = ({ setIsFormStarted, setCannotProcess }) => {
+const Introduction = ({ setIsFormStarted }) => {
   const handleClick = () => {
     setIsFormStarted({
       isOnFrontPage: false,
@@ -13,15 +12,6 @@ const Introduction = ({ setIsFormStarted, setCannotProcess }) => {
     });
     window.scrollTo(0, 0);
   };
-  const handleCannotProcess = () => {
-    setIsFormStarted({
-      isOnFrontPage: false,
-      isStarted: false,
-    });
-    setCannotProcess(true);
-  };
-
-  const { getDateFormatted, getDaysFromNow } = dateValidationHelpers;
   // const warningMessage = (
   //   <p>
   //     You can only get a refund using this service if you paid for your ticket
@@ -33,62 +23,106 @@ const Introduction = ({ setIsFormStarted, setCannotProcess }) => {
     <>
       <Title />
       <div className="wmnds-col-1 wmnds-col-md-3-4 wmnds-col-lg-1-2">
-        <h2>Use this service to:</h2>
+        <p>
+          Use this service to cancel the Direct Debit for your travel pass. It
+          takes around 5 minutes.
+        </p>
+        <h2>Check who manages your Swift card</h2>
+        <p>
+          If the long number on your Swift card begins with 633597{' '}
+          <strong>0112</strong>, your card is managed by{' '}
+          <a
+            className="wmnds-link"
+            href="https://nxbus.co.uk/west-midlands"
+            target="_blank"
+            title="National Express West Midlands"
+            rel="noopener noreferrer"
+          >
+            National Express West Midlands
+          </a>
+          . Please contact them directly to cancel.
+        </p>
+        <h2>Notice period</h2>
+        <p>
+          You must give us at least 4 weeks&apos; notice before you leave the
+          Direct Debit scheme. This is part of the terms you agreed to when you
+          joined:
+        </p>
         <ul>
-          <li>Cancel your Direct Debit for your travel pass</li>
-        </ul>
-        <p>This process takes around 5 minutes.</p>
-        {/* <WarningText type="warning" message={warningMessage} /> */}
-        <h2>Before you start</h2>
-        <ul>
-          <li>You will need your Swift card or paper ticket</li>
           <li>
-            If the long number on your Swift card begins with 633597{' '}
-            <strong>0112</strong>, it is managed by{' '}
             <a
-              href="https://nxbus.co.uk/"
-              title="Request a refund for a National Express Swift card"
-              target="_blank"
               className="wmnds-link"
+              href="https://www.tfwm.org.uk/terms-and-conditions/adult-direct-debit/"
+              target="_blank"
+              title="Terms and conditions for adult Direct Debits"
               rel="noopener noreferrer"
             >
-              National Express West Midlands
+              Terms and conditions for adult Direct Debits
             </a>
           </li>
           <li>
-            You will need your Direct Debit reference number. This begins with{' '}
-            <strong>6</strong> and is shown next to every payment to WMCA on
-            your bank statement
-          </li>
-          <li>
-            You can only cancel your Direct Debit online if you stop using your
-            travel pass between:{' '}
-            <strong>{getDateFormatted(getDaysFromNow(-28))}</strong> and{' '}
-            <strong>{getDateFormatted(getDaysFromNow(28))}</strong>
-          </li>
-          <li>
-            You’ll need to{' '}
-            <button
-              type="button"
-              className="wmnds-btn wmnds-btn--link"
-              onClick={handleCannotProcess}
+            <a
+              className="wmnds-link"
+              href="https://www.tfwm.org.uk/terms-and-conditions/child-direct-debit/"
+              target="_blank"
+              title="Terms and conditions for child Direct Debits"
+              rel="noopener noreferrer"
             >
-              call us
-            </button>{' '}
-            if you stopped using your travel pass before{' '}
-            <strong>{getDateFormatted(getDaysFromNow(-28))}</strong>
+              Terms and conditions for child Direct Debits
+            </a>
           </li>
-          <li>Your refund may be subject to a £5.50 administration fee</li>
         </ul>
-        <br />
-        <h3>Direct Debit refunds</h3>
         <p>
-          If you cancel your Direct Debit before your next payment date, you may
-          be entitled to a refund for any days left.
+          <h3>This means:</h3>
+        </p>
+        <ul>
+          <li>
+            the earliest cancellation date you can choose is 4 weeks from the
+            day you submit your request
+          </li>
+          <li>
+            you can&apos;t choose a date in the past or one that gives us less
+            than 4 weeks&apos; notice
+          </li>
+          <li>
+            cancelling your Direct Debit does not automatically entitle you to a
+            refund
+          </li>
+          <li>you can rejoin one month after your last payment</li>
+        </ul>
+        <p>
+          If you joined less than 3 months ago, you may not be able to cancel
+          until your minimum term has ended.
         </p>
         <p>
-          We’ll work this out and send the refund to your original payment
-          method within 28 days.
+          If you have a child Direct Debit and cancel before making 10 payments,
+          you will not receieve your last two tickets free.
+        </p>
+        <h2>Before you start</h2>
+        <h3>You&apos;ll need:</h3>
+        <ul>
+          <li>your Swift card or paper ticket</li>
+          <li>
+            your Direct Debit reference number, which begins with 6 and appears
+            next to every payment to WMCA on your bank statement
+          </li>
+        </ul>
+        <h2>If you need extra help</h2>
+        <p>
+          If you have a long-term sickness or another exceptional
+          circumstance,&nbsp;
+          <a
+            className="wmnds-link"
+            href="https://www.tfwm.org.uk/get-help/contact-us/"
+            target="_blank"
+            title="Contact customer services"
+            rel="noopener noreferrer"
+          >
+            contact Customer Services
+          </a>
+          . We&apos;ll review your request separately under the terms of your
+          Direct Debit and you may need to provide a doctor&apos;s or hospital
+          note.
         </p>
         <br />
         <br />
@@ -110,7 +144,6 @@ const Introduction = ({ setIsFormStarted, setCannotProcess }) => {
 
 Introduction.propTypes = {
   setIsFormStarted: PropTypes.func.isRequired,
-  setCannotProcess: PropTypes.func.isRequired,
 };
 
 export default Introduction;

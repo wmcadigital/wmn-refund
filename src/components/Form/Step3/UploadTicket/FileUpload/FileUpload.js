@@ -35,11 +35,12 @@ const FileUpload = ({ name, fieldValidation }) => {
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
         <h2 className="wmnds-fe-question">
-          Upload a photo of the front of the ripped ticket
+          Upload a photo of the front of the torn ticket
         </h2>
         <p>
-          We need to be able to read the ticket type and expiry date to process
-          the refund
+          We need to see the ticket torn in half but still able to read the
+          ticket type and expiry date. This ensures your ticket cannot be used
+          again for travel.
         </p>
         <p>The file must be a JPG, JPEG, or PNG</p>
       </legend>
