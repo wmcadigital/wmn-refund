@@ -3,10 +3,3 @@
 
 [[plugins]]
 package = "@netlify/plugin-sitemap"
-
-[[plugins]]
-package = "@sentry/netlify-build-plugin"
-
-[plugins.inputs]
-  sentryOrg = "wmca-digital"
-  sentryProject = "wmn-refund"
