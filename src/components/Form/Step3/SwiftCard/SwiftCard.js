@@ -22,7 +22,8 @@ const SwiftCard = () => {
       nxCard: (value) =>
         removeSpaces(value).substr(0, 10) !== '6335970112' || (
           <>
-            {label} is managed by National Express West Midlands. Please contact 
+            {label} is managed by National Express West Midlands. Please
+            contact&nbsp;
             <a
               href="https://nxbus.co.uk/west-midlands"
               title="National Express West Midlands"
