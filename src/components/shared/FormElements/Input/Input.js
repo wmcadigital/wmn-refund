@@ -14,6 +14,7 @@ const Input = ({
   mask,
   maskChar,
   name,
+  onChange,
   spellcheck,
   disabled,
   type,
@@ -60,6 +61,7 @@ const Input = ({
         spellCheck={spellcheck}
         disabled={disabled}
         autoComplete={autocomplete}
+        onChange={onChange}
         ref={fieldValidation}
       />
     </>
@@ -104,6 +106,7 @@ Input.propTypes = {
   inputmode: PropTypes.string,
   name: PropTypes.string.isRequired,
   className: PropTypes.string,
+  onChange: PropTypes.func,
   spellcheck: PropTypes.bool,
   disabled: PropTypes.bool,
   type: PropTypes.string,
@@ -117,6 +120,7 @@ Input.defaultProps = {
   inputmode: 'text',
   disabled: false,
   className: '',
+  onChange: null,
   spellcheck: false,
   type: 'text',
   fieldValidation: null,
