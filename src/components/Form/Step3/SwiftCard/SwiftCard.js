@@ -41,7 +41,7 @@ const SwiftCard = () => {
         removeSpaces(value).substr(0, 10) === '6335970107' ||
         removeSpaces(value).substr(0, 10) === '6335970319' ||
         removeSpaces(value).substr(0, 10) === '6335970114' ||
-        `Your ${label} is the long number on the front of the card`,
+        `We don't recognise this as a valid ${label}. Check the long number on the front of your card and try again.`,
       // ensure number is 18 digits long
       checkLength: (value) =>
         removeSpaces(value).length === 18 ||

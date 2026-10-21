@@ -45,7 +45,7 @@ const Introduction = ({ setIsFormStarted }) => {
         <h2>Notice period</h2>
         <p>
           You must give us at least 4 weeks&apos; notice before you leave the
-          Direct Debit scheme. This is part of the terms you agreed to when you
+          Direct Debit Scheme. This is part of the terms you agreed to when you
           joined:
         </p>
         <ul>
@@ -96,7 +96,7 @@ const Introduction = ({ setIsFormStarted }) => {
         </p>
         <p>
           If you have a child Direct Debit and cancel before making 10 payments,
-          you will not receieve your last two tickets free.
+          you will not receive your last two tickets free.
         </p>
         <h2>Before you start</h2>
         <h3>You&apos;ll need:</h3>
@@ -121,7 +121,7 @@ const Introduction = ({ setIsFormStarted }) => {
             contact Customer Services
           </a>
           . We&apos;ll review your request separately under the terms of your
-          Direct Debit and you may need to provide a doctor&apos;s or hospital
+          Direct Debit, and you may need to provide a doctor&apos;s or hospital
           note.
         </p>
         <br />
