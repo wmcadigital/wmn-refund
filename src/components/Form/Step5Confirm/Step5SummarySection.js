@@ -16,7 +16,7 @@ function Step5SummarySection() {
     CardNumber,
     TicketNumber,
     CompanyName,
-    LastUsedDate,
+    DirectDebitEndDate,
     Firstname,
     Lastname,
     DateOfBirth,
@@ -169,11 +169,11 @@ function Step5SummarySection() {
                   <td className={`${style.tableColspan2}`}>{TicketNumber}</td>
                 </tr>
               )}
-              {LastUsedDate && (
+              {DirectDebitEndDate && (
                 <tr>
-                  <th scope="row">Ticket last used</th>
+                  <th scope="row">Direct Debit end date</th>
                   <td className={`${style.tableColspan2}`}>
-                    {getDateFormatted(LastUsedDate)}
+                    {getDateFormatted(DirectDebitEndDate)}
                   </td>
                 </tr>
               )}

@@ -15,7 +15,7 @@ const getNextWorkingDay = (dateValue) => {
   return date.toISOString().slice(0, 10);
 };
 
-const LastUsed = () => {
+const DirectDebitEnd = () => {
   const { register } = useFormContext();
   const { dateRegex, getDaysFromNow, getDateFormatted } = dateValidationHelpers;
   const minimumWorkingDay = getNextWorkingDay(getDaysFromNow(28));
@@ -27,7 +27,7 @@ const LastUsed = () => {
       message: 'Enter date in the correct format, for example 18 3 2020',
     },
     validate: {
-      lastUsed: (value) =>
+      directDebitEnd: (value) =>
         value >= '2020-03-16' ||
         'We can only issue refunds from the 16 March 2020. If you stopped travelling before this date, please still use 16 March 2020.',
       minimumDate: (value) =>
@@ -67,7 +67,7 @@ const LastUsed = () => {
         </p>
       </legend>
       <DateInput
-        name="LastUsedDate"
+        name="DirectDebitEndDate"
         label="Last used date"
         fieldValidation={dateValidation}
       />
@@ -75,4 +75,4 @@ const LastUsed = () => {
   );
 };
 
-export default LastUsed;
+export default DirectDebitEnd;

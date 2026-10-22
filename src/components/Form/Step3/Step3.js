@@ -10,7 +10,7 @@ import TicketNumber from './TicketNumber/TicketNumber';
 import SoMTicketNumber from './SoMTicketNumber/SoMTicketNumber';
 // import SoMTicketNumber from './SoMTicketNumber/SoMTicketNumber';
 import UploadTicket from './UploadTicket/UploadTicket';
-import LastUsed from './LastUsed/LastUsed';
+import DirectDebitEnd from './DirectDebitEnd/DirectDebitEnd';
 import HowProcess from './HowProcess/HowProcess';
 import CovidRefund from './CovidRefund/CovidRefund'; // Keep the import for automatic field setting
 
@@ -123,7 +123,7 @@ const Step3 = ({ setCannotProcess }) => {
       {/* This changes based on switch logic above */}
       {elementsToRender}
 
-      <LastUsed />
+      <DirectDebitEnd />
 
       {/* Only show this based on the logic set near top of file */}
       {shouldRenderUpload && <UploadTicket />}
