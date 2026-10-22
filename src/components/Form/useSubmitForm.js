@@ -25,24 +25,26 @@ const useSubmitForm = (formRef, setFormSubmitStatus) => {
       // remove 'Error: ' from title as there are no errors
       document.title = document.title.replace('Error: ', '');
 
-      const applicationData = formDataState.Application;
+      const { DirectDebitEndDate, ...applicationData } = {
+        ...formDataState.Application,
+        ...getValues(),
+      };
+
       // remove NoDirectDebitNumber key as it's not needed
       delete applicationData.NoDirectDebitNumber;
 
-      if (
-        formDataState.Application.DirectDebitNumber &&
-        formDataState.Application.DirectDebitNumber === 'null'
-      ) {
+      if (applicationData.DirectDebitNumber === 'null') {
         // convert null value from string so api will accept it
         applicationData.DirectDebitNumber = null;
       }
 
+      if (DirectDebitEndDate !== undefined) {
+        applicationData.LastUsedDate = DirectDebitEndDate;
+      }
+
       const dataToSend = {
         CustomerType: formDataState.CustomerType,
-        Application: {
-          ...applicationData,
-          ...getValues(),
-        },
+        Application: applicationData,
       };
 
       window.dataLayer = window.dataLayer || []; // Set datalayer (GA thing)

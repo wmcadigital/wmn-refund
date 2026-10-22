@@ -20,10 +20,7 @@ function App() {
     <div className="wmnds-p-b-lg wmnds-grid">
       {/* If form isn't started, show intro...else show form */}
       {isFormStarted.isOnFrontPage && (
-        <Introduction
-          setIsFormStarted={setIsFormStarted}
-          setCannotProcess={setCannotProcess}
-        />
+        <Introduction setIsFormStarted={setIsFormStarted} />
       )}
 
       <FormProvider>
