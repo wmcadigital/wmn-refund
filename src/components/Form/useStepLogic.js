@@ -94,11 +94,7 @@ const useStepLogic = (formRef, setCannotProcess) => {
 
   // Continue button
   const continueButton = (
-    <Button
-      btnClass="wmnds-btn wmnds-col-1 wmnds-m-t-md"
-      type="submit"
-      text="Continue"
-    />
+    <Button btnClass="wmnds-m-t-md" type="submit" text="Continue" />
   );
 
   const showGenericError = Object.keys(errors).length > 0 &&

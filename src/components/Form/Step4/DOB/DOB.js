@@ -15,8 +15,7 @@ const DOB = () => {
     required: 'Enter a date of birth',
     pattern: {
       value: dateRegex,
-      message:
-        'Enter last used date in the correct format, for example 18 03 2020',
+      message: 'Enter date in the correct format, for example 18 3 2020',
     },
     validate: {
       pastDate: (value) =>
@@ -27,7 +26,7 @@ const DOB = () => {
     <fieldset className="wmnds-fe-fieldset">
       <legend className="wmnds-fe-fieldset__legend">
         <h2 className="wmnds-fe-question">What is your date of birth?</h2>
-        <p>For example, 31 03 1980</p>
+        <p>For example, 31 3 1980</p>
       </legend>
       <DateInput
         name="DateOfBirth"

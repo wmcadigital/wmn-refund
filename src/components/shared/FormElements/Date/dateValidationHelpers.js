@@ -33,11 +33,26 @@ const validateMonth = (value) => between(dateSplit(value)[1], 1, 12);
 const pastDate = (value, yearsAgo = 0) =>
   d > value && dateSplit(value)[0] <= dateSplit(d)[0] - yearsAgo;
 
+const getLondonDate = (date) => {
+  const year = date.getUTCFullYear();
+  const lastSundayOfMonth = (month) => {
+    const lastDay = new Date(Date.UTC(year, month + 1, 0));
+    return lastDay.getUTCDate() - lastDay.getUTCDay();
+  };
+  // UK daylight saving time starts and ends at 01:00 UTC on these Sundays.
+  const daylightSavingStarts = Date.UTC(year, 2, lastSundayOfMonth(2), 1);
+  const daylightSavingEnds = Date.UTC(year, 9, lastSundayOfMonth(9), 1);
+  const isBritishSummerTime =
+    date.getTime() >= daylightSavingStarts &&
+    date.getTime() < daylightSavingEnds;
+
+  return new Date(date.getTime() + (isBritishSummerTime ? 60 : 0) * 60 * 1000);
+};
+
 const getDaysFromNow = (fromNow) => {
-  const dateFromNow = new Date(); // Now
-  const newDate = () => dateFromNow.toISOString().slice(0, 10);
-  dateFromNow.setDate(dateFromNow.getDate() + fromNow);
-  return newDate();
+  const dateFromNow = getLondonDate(new Date());
+  dateFromNow.setUTCDate(dateFromNow.getUTCDate() + fromNow);
+  return dateFromNow.toISOString().slice(0, 10);
 };
 
 const daysFromNow = (value, fromNow) => {
