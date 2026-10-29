@@ -30,72 +30,10 @@ const SuccessPage = () => {
 
         {/* Success copy */}
         <h3>What happens next</h3>
-
-        {/* If user is scratchcard or classpass show info */}
-        {formState.CustomerType === 'Scratchcard' ||
-        formState.CustomerType === 'ClassPass' ? (
-          <>
-            {/*  <p>We have sent you an email to acknowledge your application.</p>  */}
-            <p>
-              We will send you an email within the next 24 hours to acknowledge
-              your application.
-            </p>
-            <p>
-              Unfortunately, due to logistics, we are unable to process
-              applications for scratchcards and class passes remotely.
-            </p>
-            <p>
-              As soon as the Government advises it is okay to return to the
-              office, we will process your application as a priority.
-            </p>
-          </>
-        ) : (
-          <>
-            {/*  If user is not scratchcard or classpass show info */}
-            {/* <p>
-              We have sent you an email to acknowledge your application. The
-              email also contains more details about how we will process your
-              refund.
-            </p> */}
-
-            <p>
-              We will send you an email within the next 24 hours to acknowledge
-              your application. The email also contains more details about how
-              we will process your refund.
-            </p>
-            <p>
-              If we need any more information to process your refund, we will be
-              in touch.
-            </p>
-            <p>
-              If you have any questions regarding your refund, or you would like
-              to know how we will calculate your refund, there is{' '}
-              <a
-                href="https://wmnetwork.co.uk/refund-workings/"
-                title="Guidance about how we will calculate your refund"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="wmnds-link"
-              >
-                guidance
-              </a>{' '}
-              available on our website.
-            </p>
-          </>
-        )}
-
-        <br />
         <p>
-          <a
-            href="https://forms.office.com/Pages/ResponsePage.aspx?id=RetZCK7xCk6e-ubWa7tnLz45Weo_RTVDpYxVYcrD8wxURFNVTERKOTVJNEgxMUpVWk0xR1ZIQTQ3US4u"
-            title="Service feedback survey"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="wmnds-link"
-          >
-            What did you think of this service?
-          </a>{' '}
-          (takes 30 seconds)
+          We will send you an email within the next 24 hours to acknowledge your
+          application. If we need any more information to process your
+          cancellation, we will be in touch.
         </p>
       </div>
     </>
